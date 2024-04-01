@@ -1,4 +1,4 @@
-# 42_cub3D
+# 42_cub3D ... in progress
 > [!NOTE]
 > This is a note...
 >
