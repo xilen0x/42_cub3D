@@ -1,4 +1,4 @@
-# 42_so_long
+# 42_cub3D
 > [!NOTE]
 > This is a note...
 >
@@ -18,4 +18,4 @@
 > [!CAUTION]
 > This is a CAUTION...
 > 
-# 42_cub3D
+
