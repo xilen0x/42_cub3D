@@ -58,7 +58,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(HEADER)
 	@echo "====================================="
 	@echo "**** Building... $@"
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 	@echo "====================================="
 
 -include $(DEPS)

@@ -10,22 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
-#include "../include/so_long.h"
-#include "../include/window.h"
+#include "cub3d.h"
 
 int	main(int ac, char *av[])
 {
+	(void)av;
 	t_game	game;
 
 	if (ac == 2)
 	{
-		file_is_ber(av[1], &game);
-		open_map(av[1], &game);
-		create_map(game.map_fd, &game, av[1]);
-		parsing_map(&game);
+		//file_is_ber(av[1], &game);
+		//open_map(av[1], &game);
+		//create_map(game.map_fd, &game, av[1]);
+		//parsing_map(&game);
 		init_game(&game);
-		set_images(&game);
+		//set_images(&game);
 		mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
 		mlx_hook(game.mlx_win, X_EVENT_KEY_EXIT, 0, &exit_game, &game);
 		mlx_loop(game.mlx);

@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
-#include "../include/so_long.h"
-#include "../include/window.h"
+#include "cub3d.h"
 
 /*Funcion que asocia las imgs en la estructura*/
 void	set_images(t_game *g)
@@ -93,6 +91,6 @@ void	init_game(t_game *game)
 	if (!game->mlx)
 		ft_errors2(5);
 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, \
-	game->h * TILE_PXL, "so_long");
+	game->h * TILE_PXL, "cub3D");
 	//printf("W: %d\n H: %d", game->w, game->h);
 }

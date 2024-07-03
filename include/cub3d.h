@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
-# include "../libft/libft.h"
+# include "mlx.h"
+# include "window.h"
+# include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-#include "../mlx/mlx.h"
 
 typedef struct s_point
 {
@@ -101,5 +102,4 @@ void	move_left(t_game *g);
 void	move_down(t_game *g);
 int		exit_game(t_game *g);
 void	free_map(t_game *game);
-
 #endif
