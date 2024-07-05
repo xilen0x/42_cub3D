@@ -35,7 +35,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c \
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 DEPS = $(addsuffix .d, $(basename $(OBJ)))
 MK = mkdir -p
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIE
 INCLUDE = -I ./
 CC = cc
 HEADER = libft.h

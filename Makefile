@@ -15,7 +15,7 @@ MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
 # Archivos fuente
 SRCS_DIR = src/
-SRC_FILES = main.c window.c utils_1.c utils_2.c #parsing0.c load_map.c parsing1.c parsing2.c 
+SRC_FILES = main.c window.c utils_1.c utils_2.c load_map.c #parsing0.c parsing1.c parsing2.c 
 #parsing3.c utils_3.c
 
 # Archivos objeto
@@ -69,9 +69,9 @@ subsystems:
 # Regla para crear el ejecutable
 $(NAME): subsystems $(OBJS_DIR) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx $(MLXFLAGS) -o $@
-	@echo
+	@echo " "
 	@echo "$(GREEN)▉▉▉▉▉▉▉▉▉▉ Cub3D successfully compiled! ▉▉▉▉▉▉▉▉▉▉ $(RESET)"
-	@echo
+	@echo " "
 
 # Regla para crear el directorio de los archivos objeto
 $(OBJS_DIR):

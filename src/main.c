@@ -20,8 +20,8 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 	{
 		//file_is_ber(av[1], &game);
-		//open_map(av[1], &game);
-		//create_map(game.map_fd, &game, av[1]);
+		open_map(av[1], &game);
+		create_map(game.map_fd, &game, av[1]);
 		//parsing_map(&game);
 		init_game(&game);
 		//set_images(&game);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "cub3d.h"
 
 /*Funcion que crea y guarda la matriz*/
 void	create_matrix(t_game *game, char *av)
