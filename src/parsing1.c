@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing1.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 16:26:04 by castorga          #+#    #+#             */
-/*   Updated: 2023/12/04 16:26:06 by castorga         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "cub3d.h"
 
 /*Funcion que verifica si el mapa esta rodeado de paredes - continuacion*/
 int	is_surrounded_by_walls2(t_game *game, int q_cols, int q_rows)

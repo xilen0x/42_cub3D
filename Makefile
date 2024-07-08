@@ -15,7 +15,7 @@ MLX = $(addprefix $(MLX_DIR), $(MLX_FILE))
 
 # Archivos fuente
 SRCS_DIR = src/
-SRC_FILES = main.c window.c utils_1.c utils_2.c load_map.c #parsing0.c parsing1.c parsing2.c 
+SRC_FILES = main.c parsing0.c utils_1.c #utils_2.c #load_map.c parsing1.c parsing2.c window.c
 #parsing3.c utils_3.c
 
 # Archivos objeto

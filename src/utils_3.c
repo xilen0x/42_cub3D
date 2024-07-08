@@ -1,6 +1,4 @@
-
-#include "../include/so_long.h"
-#include "../include/window.h"
+#include "cub3d.h"
 
 void	set_open_exit(t_game *game)
 {

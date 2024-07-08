@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing3.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 12:48:40 by castorga          #+#    #+#             */
-/*   Updated: 2023/12/05 12:48:44 by castorga         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../include/so_long.h"
+#include "cub3d.h"
 
 /*Funcion que verifica si hay una ruta valida para todos los coleccionables-2*/
 int	fill2(char **map, t_point cur, int *collectible)
