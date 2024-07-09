@@ -11,47 +11,51 @@
 
 typedef struct s_point
 {
-	int			x;
-	int			y;
+	// int			x;
+	// int			y;
 }	t_point;
 
 typedef struct s_player
 {
-	void	*player_n;
-	void	*player_s;
-	void	*player_e;
-	void	*player_w;
+	// void	*player_n;
+	// void	*player_s;
+	// void	*player_e;
+	// void	*player_w;
 }	t_player;
 
 typedef struct s_img
 {
-	void		*wall;
-	void		*floor;
-	void		*ceiling;
-	void		*exit;
-	void		*open_door;
-	void		*closed_door;
-	int			w;
-	int			h;
+	// void		*wall;
+	// void		*floor;
+	// void		*ceiling;
+	// void		*exit;
+	// void		*open_door;
+	// void		*closed_door;
+	// int			w;
+	// int			h;
 	t_player	player;
 }	t_img;
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*mlx_win;
-	char	**matrix;
-	int		map_fd;
-	int		w;
-	int		h;
-	t_img	imgs;
+	// void	*mlx;
+	// void	*mlx_win;
+	// char	**matrix;
+	int		map_fd;//almacena el fd del mapa original
+	size_t	longest_line;
+	// int		w;
+	// int		h;
+	// t_img	imgs;
 	t_point	position;
 	t_point exit;
 }	t_game;
 
-int		file_is_cub(char *av, t_game *game);
-// int		open_map(char *av, t_game *game);
+int		file_is_cub(char *av);
+int		open_map(char *av, t_game *game);
 int		ft_errors(int n);
+void	search_longest_line(int fd, t_game *game, char *av);
+void	parsing(t_game *game);
+int		elements_exist(t_game *game);
 // void	create_map(int fd, t_game *game, char *av);
 // void	print_matrix(t_game *game);
 // void	set_values(t_game *g);

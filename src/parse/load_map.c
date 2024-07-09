@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 15:44:21 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/09 15:44:23 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /*Funcion que crea y guarda la matriz*/
@@ -39,6 +51,7 @@
 // 	create_matrix(game, av);
 // }
 
+/*search(& save the n)the longest line of the map*/
 void	search_longest_line(int fd, t_game *game, char *av)
 {
 	char	*line;
@@ -57,7 +70,7 @@ void	search_longest_line(int fd, t_game *game, char *av)
 	free(line);
 	close(fd);
 	//create_matrix(game, av);
-	printf("longest line: %ld\n", game->longest_line);
+	// printf("longest line: %ld\n", game->longest_line);
 }
 /*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
 int	open_map(char *av, t_game *game)

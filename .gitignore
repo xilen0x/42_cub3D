@@ -3,3 +3,5 @@ lib/libft/libft.a
 lib/libft/obj/
 objs/*.o
 objs/*.d
+.dep/
+.objs/

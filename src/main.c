@@ -7,9 +7,11 @@ int	main(int ac, char *av[])
 
 	if (ac == 2)
 	{
-		file_is_cub(av[1], &game);
-		// open_map(av[1], &game);
-		// create_map(game.map_fd, &game, av[1]);
+		file_is_cub(av[1]);
+		open_map(av[1], &game);
+		parsing(&game);
+		//search_longest_line(game.map_fd, &game, av[1]);
+		//create_map(game.map_fd, &game, av[1]);
 		// //parsing_map(&game);
 		// init_game(&game);
 		// //set_images(&game);

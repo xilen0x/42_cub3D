@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing0.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 15:44:32 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/09 15:44:35 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
-int	parsing_elements(t_game *game)
+static int	parsing_elements(t_game *game)
 {
-	//Elements exist(in any order)
 	if (elements_exist(game) != 0)
 		ft_errors(3);
 
@@ -14,26 +25,26 @@ int	parsing_elements(t_game *game)
 		SO ./textures/red.xpm
 		EA ./textures/yellow.xpm
 	*/
-	if (expected_syntax_textures(game) != 0)
-		ft_errors(3);
+	// if (expected_syntax_textures(game) != 0)
+	// 	ft_errors(3);
 
-	//F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
-	//F 220,100,0
-	if (expected_syntax_colors(game) != 0)
-		ft_errors(3);
+	// //F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
+	// //F 220,100,0
+	// if (expected_syntax_colors(game) != 0)
+	// 	ft_errors(3);
 	
-	//Information from elements separated by 1 or + spaces
-	if (spaces_handler(game) != 0)
-		ft_errors(3);
+	// //Information from elements separated by 1 or + spaces
+	// if (spaces_handler(game) != 0)
+	// 	ft_errors(3);
 	
-	//Elements separated by 1 or + empty lines
-	if (empty_lines_handler(game) != 0)
-		ft_errors(3);
+	// //Elements separated by 1 or + empty lines
+	// if (empty_lines_handler(game) != 0)
+	// 	ft_errors(3);
 
 	return (0);
 }
 
-// int	parsing_map(t_game *game)
+// static int	parsing_map(t_game *game)
 // {
 // 	if (is_rectangular(game) != 0)
 // 		ft_errors(3);
@@ -52,3 +63,8 @@ int	parsing_elements(t_game *game)
 // 	return (0);
 // }
 
+void	parsing(t_game *game)
+{
+	parsing_elements(game);
+	//parsing_map(&game);
+}
