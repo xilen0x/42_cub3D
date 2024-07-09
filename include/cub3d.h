@@ -41,8 +41,6 @@ typedef struct s_game
 	// void	*mlx;
 	// void	*mlx_win;
 	// char	**matrix;
-	int		map_fd;//almacena el fd del mapa original
-	size_t	longest_line;
 	// int		w;
 	// int		h;
 	// t_img	imgs;
@@ -50,12 +48,25 @@ typedef struct s_game
 	t_point exit;
 }	t_game;
 
+typedef struct s_map
+{
+	int		map_fd;//almacena el fd del mapa original
+	size_t	longest_line;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+}	t_map;
+
 int		file_is_cub(char *av);
-int		open_map(char *av, t_game *game);
+int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
-void	search_longest_line(int fd, t_game *game, char *av);
-void	parsing(t_game *game);
-int		elements_exist(t_game *game);
+void	search_longest_line(int fd, t_map *map);
+void	parsing(t_map *map);
+int		elements_exist(t_map *map);
+void	init_values(t_map *map);
 // void	create_map(int fd, t_game *game, char *av);
 // void	print_matrix(t_game *game);
 // void	set_values(t_game *g);

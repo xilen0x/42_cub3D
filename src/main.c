@@ -3,14 +3,15 @@
 
 int	main(int ac, char *av[])
 {
-	t_game	game;
+	t_map	map;
 
 	if (ac == 2)
 	{
 		file_is_cub(av[1]);
-		open_map(av[1], &game);
-		parsing(&game);
-		//search_longest_line(game.map_fd, &game, av[1]);
+		init_values(&map);
+		open_map(av[1], &map);
+		parsing(&map);
+			//search_longest_line(map.map_fd, &map, av[1]);
 		//create_map(game.map_fd, &game, av[1]);
 		// //parsing_map(&game);
 		// init_game(&game);

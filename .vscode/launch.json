@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/cub3d",
-			"args": ["maps/no_valid/no_permission.cub"],
+			"args": ["maps/valid/new_textures.cub"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

@@ -13,9 +13,9 @@
 
 #include "cub3d.h"
 
-static int	parsing_elements(t_game *game)
+static int	parsing_elements(t_map *map)
 {
-	if (elements_exist(game) != 0)
+	if (elements_exist(map) != 0)
 		ft_errors(3);
 
 	//cant. de elementos o formato debe ser == (XX ./XXXXXXXXXX.xpm)
@@ -63,8 +63,19 @@ static int	parsing_elements(t_game *game)
 // 	return (0);
 // }
 
-void	parsing(t_game *game)
+void	init_values(t_map *map)
 {
-	parsing_elements(game);
-	//parsing_map(&game);
+	map->longest_line = 0;
+	map->no = 0;
+	map->so = 0;
+	map->we = 0;
+	map->ea = 0;
+	map->f = 0;
+	map->c = 0;
+}
+
+void	parsing(t_map *map)
+{
+	parsing_elements(map);
+	//parsing_map(&map);
 }
