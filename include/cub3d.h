@@ -9,6 +9,10 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
+#define CYAN "\033[0;36m"
+#define RESET "\033[0m"
+#define BONUS 0
+
 typedef struct s_point
 {
 	// int			x;
@@ -51,23 +55,26 @@ typedef struct s_game
 typedef struct s_map
 {
 	int		map_fd;//almacena el fd del mapa original
-	size_t	longest_line;
+	// size_t	longest_line;
 	int		no;
 	int		so;
 	int		we;
 	int		ea;
 	int		f;
 	int		c;
+	int		w;
+	int		h;
 }	t_map;
 
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
-void	search_longest_line(int fd, t_map *map);
-void	parsing(t_map *map);
+size_t	search_longest_line(int fd, t_map *map);
+void	parsing(t_map *map, char *av[]);
 int		elements_exist(t_map *map);
 void	init_values(t_map *map);
-// void	create_map(int fd, t_game *game, char *av);
+void	print_controls(void);
+void	width_height_map_file(int fd, t_map *map, char *av);
 // void	print_matrix(t_game *game);
 // void	set_values(t_game *g);
 // int		parsing_map(t_game *game);

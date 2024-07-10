@@ -74,8 +74,12 @@ void	init_values(t_map *map)
 	map->c = 0;
 }
 
-void	parsing(t_map *map)
+void	parsing(t_map *map, char *av[])
 {
+	file_is_cub(av[1]);
+	width_height_map_file(map->map_fd, map, av[1]);
 	parsing_elements(map);
 	//parsing_map(&map);
 }
+
+//search_longest_line(map.map_fd, &map, av[1]);

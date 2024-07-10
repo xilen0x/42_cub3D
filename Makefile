@@ -40,7 +40,7 @@ SRC_FILES = main.c \
 #parse/parsing2.c 
 #parse/parsing3.c 
 #parse/utils_2.c 
-#executor/window.c
+#game/window.c
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)
