@@ -10,7 +10,6 @@ int	main(int ac, char *av[])
 		init_values(&map);
 		open_map(av[1], &map);
 		parsing(&map, av);
-		// print_controls();
 		// init_game(&game);
 		// //set_images(&game);
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
