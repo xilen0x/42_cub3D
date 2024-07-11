@@ -13,15 +13,21 @@
 
 #include "cub3d.h"
 
+/* Funcion que reserva memoria y rellena con ' ' */
 void	*spaced_malloc(size_t count, size_t size)
 {
     void *space_reserved;
 
     space_reserved = malloc(size * count);
     if (!space_reserved)
-        return (0);
-    else {
-        memset(space_reserved, ' ', size * count);
+	{
+		free(space_reserved);
+		space_reserved = NULL;
+        exit(1);
+	}
+    else
+	{
+        ft_memset(space_reserved, ' ', size * count);
         return (space_reserved);
     }
 }
@@ -76,6 +82,19 @@ int	ft_errors(int n)
 	return (1);
 }
 
+void free_matrix(char **matrix)
+{
+    int i = 0;
+    if (matrix != NULL)
+    {
+        while (matrix[i] != NULL)
+        {
+            free(matrix[i]);
+            i++;
+        }
+        free(matrix);
+    }
+}
 
 /*funcion que imprime la matriz*/
 // void	print_matrix(t_game *game)

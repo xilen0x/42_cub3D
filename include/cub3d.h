@@ -35,10 +35,11 @@ typedef struct s_map
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
+void	free_matrix(char **matrix);
 void	parsing(t_map *map, char *av[]);
 int		elements_exist(t_map *map);
 void	init_values(t_map *map);
-void	width_height_map_file(int fd, t_map *map, char *av);
+void	width_height_map_file(t_map *map, char *av[]);
 void	*spaced_malloc(size_t count, size_t size);
 void	create_matrix(t_map *map, char *av);
 

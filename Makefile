@@ -14,7 +14,7 @@ endif
 
 # Compilador y FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 # Makefile
 MKF := Makefile
@@ -32,6 +32,7 @@ MLX_FILE = libmlx.a
 
 # Archivos fuente
 SRC_FILES = main.c \
+			parse/map_init.c \
             parse/map_extension.c \
             parse/map_measurement.c \
 			parse/map_create_matrix.c \

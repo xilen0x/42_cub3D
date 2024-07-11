@@ -39,18 +39,13 @@ void	ft_putnbr2(int nb, int *len)
 }
 
 // ----------- in case of unsigned int-----------
-void	ft_unsigned_int(unsigned int nb, int *len)
+void    ft_unsigned_int(unsigned int nb, int *len)
 {
-	if (nb < 0)
-	{
-		nb = -nb;
-		ft_putchar_len(nb, len);
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr2(nb / 10, len);
-	}
-	ft_putchar_len(nb % 10 + '0', len);
+    if (nb >= 10)
+    {
+        ft_putnbr2(nb / 10, len);
+    }
+    ft_putchar_len(nb % 10 + '0', len);
 }
 
 // ----------- in case of hexadecimal -----------
