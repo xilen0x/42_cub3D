@@ -12,6 +12,38 @@
 
 #include "cub3d.h"
 
+//elimina espacios antes y después de las comas
+void remove_spaces_around_commas(char *line) {
+    int i = 0, j = 0;
+    //int space_before_comma = 0;
+    
+    while (line[i] != '\0') {
+        // Eliminar espacios adicionales
+        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ',')) {
+            i++;
+            continue;
+        }
+        // Eliminar espacio antes de la coma
+        if (line[i] == ' ' && line[i + 1] == ',') {
+            i++;
+        }
+        // Eliminar espacio después de la coma
+        if (line[i] == ',' && line[i + 1] == ' ') {
+            line[j++] = line[i++];
+            while (line[i] == ' ') {
+                i++;
+            }
+        } else {
+            line[j++] = line[i++];
+        }
+    }
+    line[j] = '\0';
+}
+
+
+
+
+
 int	elements_colors_exist(char *av, t_map *map)
 {
 	char	*line;
@@ -23,6 +55,7 @@ int	elements_colors_exist(char *av, t_map *map)
 	line = get_next_line(map->map_fd);
 	while (line)
 	{
+		remove_spaces_around_commas(line);
 		elements = ft_split(line, ' ');
 		i = 0;
 		while (elements[i])
@@ -31,16 +64,11 @@ int	elements_colors_exist(char *av, t_map *map)
 		{
 			if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
 			{
+				colors = ft_split(elements[1], ',');
 				if (ft_strncmp(elements[0], "F", 1) == 0)
-				{
-					colors = ft_split(elements[1], ',');
 					map->f++;
-				}
 				else if (ft_strncmp(elements[0], "C", 1) == 0)
-				{
-					colors = ft_split(elements[1], ',');
 					map->c++;
-				}
 				i = 0;
 				while (colors[i])
 					i++;
