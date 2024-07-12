@@ -35,7 +35,7 @@ static size_t	search_longest_line(t_map *map)
 		map->matrix = spaced_malloc(map->h + 1, sizeof(char *));
 		map->matrix[i] = line;
 		printf("%s", map->matrix[i]);
-        // printf("Length of line: %zu\n", len);
+        //printf("Long de linea: %zu\n", len);
 		if (len > 0 && line[len - 1] == '\n')
 			len--;
 		if (longest_line < len)
@@ -77,3 +77,10 @@ int	open_map(char *av, t_map *map)
 		ft_errors(2);
 	return (0);
 }
+// int	open_matrix(t_map *map)
+// {
+// 	map->map_fd = open(map->matrix, O_RDONLY);
+// 	if (map->map_fd == -1)
+// 		ft_errors(2);
+// 	return (0);
+// }

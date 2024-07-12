@@ -41,6 +41,6 @@ int		elements_exist(t_map *map);
 void	init_values(t_map *map);
 void	width_height_map_file(t_map *map, char *av[]);
 void	*spaced_malloc(size_t count, size_t size);
-void	create_matrix(t_map *map, char *av);
+int		elements_colors_exist(char *av, t_map *map);
 
 #endif
