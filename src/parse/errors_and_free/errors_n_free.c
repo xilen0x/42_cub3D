@@ -54,7 +54,7 @@ int	ft_errors(int n)
 	{
 		write (2, "Error\n", 6);
 		write (2, "Invalid map file!\n", 18);
-		exit(1);
+		return (1);
 	}
 	// else
 	// 	ft_errors2(n);
@@ -74,17 +74,21 @@ void free_matrix(char **matrix)
             i++;
         }
         free(matrix);
-        matrix = NULL; // Esto es opcional y no afecta fuera de esta función
+        matrix = NULL;
     }
 }
 
 
 void	free_xx_path(t_map *map)
 {
-		free(map->no_path);
-		free(map->so_path);
-		free(map->we_path);
-		free(map->ea_path);
+    if (map->no_path)
+        free(map->no_path);
+    if (map->so_path)
+        free(map->so_path);
+    if (map->we_path)
+        free(map->we_path);
+    if (map->ea_path)
+        free(map->ea_path);
 }
 
 /*funcion que imprime la matriz*/

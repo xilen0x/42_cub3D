@@ -17,9 +17,9 @@
 // {
 // 	if (elements_exist(map) != 0)
 // 		ft_errors(3);
-
-// 	if (elements_colors_exist(av, map) != 0)
-// 	 	ft_errors(3);
+// (void)av;
+// 	// if (elements_colors_exist(av, map) != 0)
+// 	//  	ft_errors(3);
 	
 // 	// if (expected_syntax_textures(game) != 0)
 // 	// 	ft_errors(3);
@@ -66,6 +66,7 @@ void	parsing(t_map *map, char *av[])
 	file_is_cub(av[1]);
 	open_map(av[1], map);
 	width_height_map_file(map, av);
+	print_width_height(map);
 	// open_map(av[1], map);
 	// parsing_elements(av[1], map);
 	// open_map(av[1], map);

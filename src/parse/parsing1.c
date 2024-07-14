@@ -102,8 +102,19 @@ int	elements_colors_exist(char *av, t_map *map)
 	}
 	return (0);
 }
+void	free_elements(char **elements)
+{
+	int i;
 
-//Elements exist(in any order)
+	i = 0;
+	while (elements[i])
+	{
+		free(elements[i]);
+		i++;
+	}
+	free(elements);
+}
+//Check if elements exist(in any order)
 int	elements_exist(t_map *map)
 {
 	char	*line;
@@ -140,17 +151,28 @@ int	elements_exist(t_map *map)
 				map->ea_path = ft_strdup(elements[1]);
 			}
 		}
+		else
+		{
+			printf("Error de sintaxis en elementos!\n");
+			close(map->map_fd);
+			free(line);
+			free_elements(elements);
+			free_xx_path(map);
+			return (1);
+		}
+		free_elements(elements);
+        free(line);
 		if (map->no && map->so && map->we && map->ea)
 		{
         	close(map->map_fd);
 			printf("All cardinal directions exist\n");
         	return (0);
     	}
-		free(line);
-		free(elements);
 		line = get_next_line(map->map_fd);
     }
-	printf("Error de elementos!\n");
+
+	printf("algun otro Error\n");
 	close(map->map_fd);
+	free_xx_path(map);
 	return (1);
 }

@@ -52,3 +52,19 @@ void spaced_malloc(t_map *map, size_t count, size_t size)
 // 	// 	move_right(game);
 // 	return (0);
 // }
+
+/*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
+int	open_map(char *av, t_map *map)
+{
+	map->map_fd = open(av, O_RDONLY);
+	if (map->map_fd == -1)
+		ft_errors(2);
+	return (0);
+}
+// int	open_matrix(t_map *map)
+// {
+// 	map->map_fd = open(map->matrix, O_RDONLY);
+// 	if (map->map_fd == -1)
+// 		ft_errors(2);
+// 	return (0);
+// }

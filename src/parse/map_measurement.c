@@ -12,47 +12,72 @@
 
 #include "cub3d.h"
 
-/*
-	Search(& save)the longest(num) line of the map.
-	Reserve memory and store the map in the matrix.
-*/
+void reserve_memory(size_t *longest_line, int *i, t_map *map, char *line)
+{
+    size_t len;
+    size_t old_size;
+    size_t new_size;
+
+    len = ft_strlen(line);
+    old_size = sizeof(char *) * (*i + 1);
+    new_size = sizeof(char *) * (*i + 2);
+    map->matrix = ft_realloc(map->matrix, old_size, new_size); // Ajusta el tamaño de matrix
+    if (!map->matrix)
+    {
+        write(2, "Memory allocation error!\n", 25);
+        free(line);
+        exit(1);
+    }
+    map->matrix[*i] = line;
+    map->matrix[*i + 1] = NULL;
+    printf("%s", map->matrix[*i]);
+    if (len > 0 && line[len - 1] == '\n')
+        len--;
+    if (*longest_line < len)
+        *longest_line = len;
+    (*i)++;
+}
+
 static size_t search_longest_line(t_map *map)
 {
-	char	*line;
-    size_t	longest_line;
-    size_t	len;
-    int		i;
-
-	longest_line = 0;
-	i = 0;
-    line = get_next_line(map->map_fd);
+    char *line;
+    size_t longest_line;
+    int i;
+	size_t len;
+	
+    longest_line = 0;
+    i = 0;
+	line = get_next_line(map->map_fd);
     if (!line)
-	{
+    {
         write(2, "Invalid map!\n", 13);
         return 0;
     }
     while (line)
-	{
-        len = ft_strlen(line);
-        map->matrix = realloc(map->matrix, sizeof(char *) * (i + 2)); // Ajusta el tamaño de matrix
-        map->matrix[i] = line; // Guarda la línea en matrix
-        map->matrix[i + 1] = NULL; // Asegúrate de que el próximo elemento es NULL
-        printf("%s", map->matrix[i]);
-        if (len > 0 && line[len - 1] == '\n')
+    {
+		len = ft_strlen(line);
+        // reserve_memory(&longest_line, &i, map, line);
+		//printf("%s", line);
+		//if que salta los posibles espacios en blanco y saltos de linea
+		if (line[0] == '\0')
 		{
-            len--;
-        }
-        if (longest_line < len)
-		{
-            longest_line = len;
-        }
-        i++;
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
+    	if (len > 0 && line[len - 1] == '\n')
+	        len--;
+	    if (longest_line < len)
+			longest_line = len;
+		free(line);
         line = get_next_line(map->map_fd);
+    	i++;
     }
     close(map->map_fd);
     map->h = i; // Actualiza la altura de la matriz
-    return longest_line;
+    return (longest_line);
 }
+
 
 /*Funcion que calcula long. de columnas(w) & filas(h)*/
 void width_height_map_file(t_map *map, char *av[])
@@ -67,6 +92,7 @@ void width_height_map_file(t_map *map, char *av[])
         write(2, "Invalid map!\n", 13);
         return;
     }
+	map->h = 0;
     while (line)
 	{
         map->h++;
@@ -77,18 +103,9 @@ void width_height_map_file(t_map *map, char *av[])
     close(map->map_fd);
 }
 
-/*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
-int	open_map(char *av, t_map *map)
+/*funcion que imprime ancho y largo del fichero*/
+void print_width_height(t_map *map)
 {
-	map->map_fd = open(av, O_RDONLY);
-	if (map->map_fd == -1)
-		ft_errors(2);
-	return (0);
+	printf("Width: %d\n", map->w);
+	printf("Height: %d\n", map->h);
 }
-// int	open_matrix(t_map *map)
-// {
-// 	map->map_fd = open(map->matrix, O_RDONLY);
-// 	if (map->map_fd == -1)
-// 		ft_errors(2);
-// 	return (0);
-// }
