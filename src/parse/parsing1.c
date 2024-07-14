@@ -40,10 +40,6 @@ void remove_spaces_around_commas(char *line) {
     line[j] = '\0';
 }
 
-
-
-
-
 int	elements_colors_exist(char *av, t_map *map)
 {
 	char	*line;
