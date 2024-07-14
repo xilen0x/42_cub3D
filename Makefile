@@ -32,15 +32,16 @@ MLX_FILE = libmlx.a
 
 # Archivos fuente
 SRC_FILES = main.c \
+			parse/map_init.c \
             parse/map_extension.c \
             parse/map_measurement.c \
 			parse/map_create_matrix.c \
             parse/parsing0.c \
             parse/parsing1.c \
-            parse/utils_1.c
+            parse/errors_and_free/errors_n_free.c \
+			parse/utils_0.c 
 #parse/parsing2.c 
 #parse/parsing3.c 
-#parse/utils_2.c 
 #game/window.c
 
 # Archivos objeto

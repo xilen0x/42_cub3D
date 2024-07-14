@@ -13,18 +13,14 @@
 
 #include "cub3d.h"
 
-// static int	parsing_elements(t_map *map)
+// static int	parsing_elements(char *av, t_map *map)
 // {
 // 	if (elements_exist(map) != 0)
 // 		ft_errors(3);
 
-// 	//cant. de elementos o formato debe ser == (XX ./XXXXXXXXXX.xpm)
-// 	/*
-// 		NO ./textures/blue.xpm
-// 		WE ./textures/green.xpm
-// 		SO ./textures/red.xpm
-// 		EA ./textures/yellow.xpm
-// 	*/
+// 	if (elements_colors_exist(av, map) != 0)
+// 	 	ft_errors(3);
+	
 // 	// if (expected_syntax_textures(game) != 0)
 // 	// 	ft_errors(3);
 
@@ -63,33 +59,24 @@
 // 	return (0);
 // }
 
-/*Inicializacion de valores structura map*/
-void	init_values(t_map *map)
-{
-	map->no = 0;
-	map->so = 0;
-	map->we = 0;
-	map->ea = 0;
-	map->f = 0;
-	map->c = 0;
-	map->w = 0;
-	map->h = 0;
-}
-
 void	parsing(t_map *map, char *av[])
 {
-	int	i;
+	// int	i;
 
 	file_is_cub(av[1]);
-	width_height_map_file(map->map_fd, map, av[1]);
-	create_matrix(map, *av);
-	i = 0;
-	while (map->matrix[i] != NULL)
-	{
-		printf("%s\n", map->matrix[i]);
-		i++;
-	}
-	
+	open_map(av[1], map);
+	width_height_map_file(map, av);
+	// open_map(av[1], map);
+	// parsing_elements(av[1], map);
+	// open_map(av[1], map);
+
+	// i = 0;
+	// while (map->matrix[i] != NULL)
+	// {
+	// 	printf("line %d: %s\n", i, map->matrix[i]);
+	// 	i++;
+	// }
+	//printf("firt line: %s\n", map->matrix[0]);
 	// parsing_elements(map);
 	//parsing_map(&map);
 }

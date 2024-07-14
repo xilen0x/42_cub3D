@@ -12,52 +12,145 @@
 
 #include "cub3d.h"
 
+//elimina espacios antes y después de las comas
+void remove_spaces_around_commas(char *line)
+{
+    int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+    while (line[i] != '\0')
+	{
+        // Eliminar espacios adicionales
+        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ','))
+		{
+            i++;
+            continue;
+        }
+        // Eliminar espacio antes de la coma
+        if (line[i] == ' ' && line[i + 1] == ',')
+		{
+            i++;
+        }
+        // Eliminar espacio después de la coma
+        if (line[i] == ',' && line[i + 1] == ' ')
+		{
+            line[j++] = line[i++];
+            while (line[i] == ' ')
+			{
+                i++;
+            }
+        }
+		else
+		{
+            line[j++] = line[i++];
+        }
+    }
+    line[j] = '\0';
+}
+
+int	elements_colors_exist(char *av, t_map *map)
+{
+	char	*line;
+	char	**elements;
+	int		i;
+	char	**colors;
+
+	open_map(av, map);
+	line = get_next_line(map->map_fd);
+	while (line)
+	{
+		remove_spaces_around_commas(line);
+		elements = ft_split(line, ' ');
+		i = 0;
+		while (elements[i])
+			i++;
+		if (i == 2)
+		{
+			if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
+			{
+				colors = ft_split(elements[1], ',');
+				if (ft_strncmp(elements[0], "F", 1) == 0)
+					map->f++;
+				else if (ft_strncmp(elements[0], "C", 1) == 0)
+					map->c++;
+				i = 0;
+				while (colors[i])
+					i++;
+				if (i != 3)
+				{
+					printf("Error de sintaxis en colores!\n");
+					return (1);
+				}
+			}
+		}
+		free(line);
+		line = get_next_line(map->map_fd);
+    }
+	if (map->f && map->c)
+	{
+        close(map->map_fd);
+		printf("All colors exist\n");
+        return (0);
+    }
+	else
+	{
+		close(map->map_fd);
+		printf("algo falla!\n");
+		return (1);
+	}
+	return (0);
+}
+
 //Elements exist(in any order)
 int	elements_exist(t_map *map)
 {
 	char	*line;
+	char	**elements;
 	int		i;
 
-	i = 0;
-	while (line && i != 4)
+	line = get_next_line(map->map_fd);
+	while (line)
 	{
+		elements = ft_split(line, ' ');
+		i = 0;
+		while (elements[i])
+			i++;
+		if (i == 2)
+		{
+			if (ft_strncmp(elements[0], "NO", 2) == 0)
+			{
+				map->no++;
+				map->no_path = ft_strdup(elements[1]);
+			}
+			else if (ft_strncmp(elements[0], "SO", 2) == 0)
+			{
+				map->so++;
+				map->so_path = ft_strdup(elements[1]);
+			}
+			else if (ft_strncmp(elements[0], "WE", 2) == 0)
+			{
+				map->we++;
+				map->we_path = ft_strdup(elements[1]);
+			}
+			else if (ft_strncmp(elements[0], "EA", 2) == 0)
+			{
+				map->ea++;
+				map->ea_path = ft_strdup(elements[1]);
+			}
+		}
+		if (map->no && map->so && map->we && map->ea)
+		{
+        	close(map->map_fd);
+			printf("All cardinal directions exist\n");
+        	return (0);
+    	}
+		free(line);
+		free(elements);
 		line = get_next_line(map->map_fd);
-		if (ft_strncmp(line, "NO", 2) == 0)
-		{
-			map->no++;
-			i++;
-		}
-		else if (ft_strncmp(line, "SO", 2) == 0)
-		{
-			map->so++;
-			i++;
-		}
-		else if (ft_strncmp(line, "WE", 2) == 0)
-		{
-			map->we++;
-			i++;
-		}
-		else if (ft_strncmp(line, "EA", 2) == 0)
-		{
-			map->ea++;
-			i++;
-		}
-	}	
-	if (map->no && map->so && map->we && map->ea && i == 4)
-	{
-		printf("All cardinal directions exist\n");
-		return (0);
-	}
-	else
-	{
-		printf("Some elements are missing\n");
-		printf("NO: %d\n", map->no);
-		printf("SO: %d\n", map->so);
-		printf("WE: %d\n", map->we);
-		printf("EA: %d\n", map->ea);
-		printf("F: %d\n", map->f);
-		printf("C: %d\n", map->c);
-		return (1);
-	}
+    }
+	printf("Error de elementos!\n");
+	close(map->map_fd);
 	return (1);
 }

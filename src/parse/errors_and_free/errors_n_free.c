@@ -13,21 +13,6 @@
 
 #include "cub3d.h"
 
-void	*spaced_malloc(size_t count, size_t size)
-{
-    void *space_reserved;
-
-    space_reserved = malloc(size * count);
-    if (!space_reserved)
-        return (0);
-    else {
-        memset(space_reserved, ' ', size * count);
-        return (space_reserved);
-    }
-}
-
-
-
 // int	ft_errors2(int n)
 // {
 // 	if (n == 4)
@@ -76,6 +61,31 @@ int	ft_errors(int n)
 	return (1);
 }
 
+void free_matrix(char **matrix)
+{
+    int i;
+
+	i = 0;
+    if (matrix)
+	{
+        while (matrix[i])
+		{
+            free(matrix[i]);
+            i++;
+        }
+        free(matrix);
+        matrix = NULL; // Esto es opcional y no afecta fuera de esta función
+    }
+}
+
+
+void	free_xx_path(t_map *map)
+{
+		free(map->no_path);
+		free(map->so_path);
+		free(map->we_path);
+		free(map->ea_path);
+}
 
 /*funcion que imprime la matriz*/
 // void	print_matrix(t_game *game)
