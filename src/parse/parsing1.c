@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+void	free_elements(char **elements)
+{
+	int i;
+
+	i = 0;
+	while (elements[i])
+	{
+		free(elements[i]);
+		i++;
+	}
+	free(elements);
+}
+
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)
 {
@@ -50,70 +63,82 @@ void remove_spaces_around_commas(char *line)
     line[j] = '\0';
 }
 
-int	elements_colors_exist(char *av, t_map *map)
+int elements_colors_exist(char *av, t_map *map)
 {
-	char	*line;
-	char	**elements;
-	int		i;
-	char	**colors;
+    char *line;
+    char **elements;
+    char **colors;
+    int i;
 
-	open_map(av, map);
-	line = get_next_line(map->map_fd);
-	while (line)
-	{
-		remove_spaces_around_commas(line);
-		elements = ft_split(line, ' ');
-		i = 0;
-		while (elements[i])
-			i++;
-		if (i == 2)
-		{
-			if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
-			{
-				colors = ft_split(elements[1], ',');
-				if (ft_strncmp(elements[0], "F", 1) == 0)
-					map->f++;
-				else if (ft_strncmp(elements[0], "C", 1) == 0)
-					map->c++;
-				i = 0;
-				while (colors[i])
-					i++;
-				if (i != 3)
-				{
-					printf("Error de sintaxis en colores!\n");
-					return (1);
-				}
-			}
-		}
-		free(line);
-		line = get_next_line(map->map_fd);
+    open_map(av, map);  // Abre el archivo del mapa
+    line = get_next_line(map->map_fd);  // Lee la primera línea del archivo
+    
+    while (line)
+    {
+        elements = ft_split(line, ' ');  // Divide la línea en elementos usando espacios como delimitadores
+        if (!elements)
+        {
+            free(line);
+            printf("Error al dividir la línea en elementos!\n");
+            return (1);
+        }
+        
+        i = 0;
+        while (elements[i])
+            i++;
+        
+        if (i == 2)
+        {
+            if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0)
+            {
+                colors = ft_split(elements[1], ',');  // Divide el segundo elemento por comas
+                if (!colors)
+                {
+                    free_elements(elements);  // Libera `elements` antes de salir
+                    free(line);
+                    printf("Error al dividir los colores!\n");
+                    return (1);
+                }
+
+                if (ft_strncmp(elements[0], "F", 1) == 0)
+                    map->f++;
+                else if (ft_strncmp(elements[0], "C", 1) == 0)
+                    map->c++;
+
+                i = 0;
+                while (colors[i])
+                    i++;
+                
+                if (i != 3)
+                {
+                    printf("Error de sintaxis en colores!\n");
+                    free_elements(colors);  // Libera `colors` antes de salir
+                    free_elements(elements);
+                    free(line);
+                    return (1);
+                }
+                free_elements(colors);  // Libera `colors` después de usarlo
+            }
+        }
+        free_elements(elements);  // Libera `elements` después de usarlo
+        free(line);  // Libera `line` después de usarlo
+        line = get_next_line(map->map_fd);  // Lee la siguiente línea del archivo
     }
-	if (map->f && map->c)
-	{
-        close(map->map_fd);
-		printf("All colors exist\n");
+
+    close(map->map_fd);  // Cierra el archivo del mapa
+    
+    if (map->f && map->c)
+    {
+        printf("All colors exist\n");
         return (0);
     }
-	else
-	{
-		close(map->map_fd);
-		printf("algo falla!\n");
-		return (1);
-	}
-	return (0);
+    else
+    {
+        printf("Error: Faltan colores!\n");
+        return (1);
+    }
 }
-void	free_elements(char **elements)
-{
-	int i;
 
-	i = 0;
-	while (elements[i])
-	{
-		free(elements[i]);
-		i++;
-	}
-	free(elements);
-}
 //Check if elements exist(in any order)
 int	elements_exist(t_map *map)
 {
@@ -153,19 +178,20 @@ int	elements_exist(t_map *map)
 		}
 		else
 		{
-			printf("Error de sintaxis en elementos!\n");
+			printf("Error de sintaxis en elementos!\n");//la linea vacia al inicio la da como error aparentemente
 			close(map->map_fd);
 			free(line);
 			free_elements(elements);
 			free_xx_path(map);
 			return (1);
 		}
-		free_elements(elements);
         free(line);
+		free_elements(elements);
 		if (map->no && map->so && map->we && map->ea)
 		{
         	close(map->map_fd);
 			printf("All cardinal directions exist\n");
+			free_xx_path(map);
         	return (0);
     	}
 		line = get_next_line(map->map_fd);

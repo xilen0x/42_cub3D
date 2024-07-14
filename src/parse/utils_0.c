@@ -68,3 +68,10 @@ int	open_map(char *av, t_map *map)
 // 		ft_errors(2);
 // 	return (0);
 // }
+
+/*funcion que imprime ancho y largo del fichero*/
+void print_width_height(t_map *map)
+{
+	printf("Width: %d\n", map->w);
+	printf("Height: %d\n", map->h);
+}

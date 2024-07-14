@@ -102,10 +102,3 @@ void width_height_map_file(t_map *map, char *av[])
     free(line);
     close(map->map_fd);
 }
-
-/*funcion que imprime ancho y largo del fichero*/
-void print_width_height(t_map *map)
-{
-	printf("Width: %d\n", map->w);
-	printf("Height: %d\n", map->h);
-}

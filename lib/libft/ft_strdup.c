@@ -36,7 +36,7 @@ char	*ft_strdup(const char *s1)
 	len = ft_strlen(s1);
 	space_reserved = malloc(len + 1);
 	if (!space_reserved)
-		return (0);
+		return (NULL);
 	else
 	{
 		while (*s1)

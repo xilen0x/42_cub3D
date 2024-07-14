@@ -13,32 +13,31 @@
 
 #include "cub3d.h"
 
-// static int	parsing_elements(char *av, t_map *map)
-// {
-// 	if (elements_exist(map) != 0)
-// 		ft_errors(3);
-// (void)av;
-// 	// if (elements_colors_exist(av, map) != 0)
-// 	//  	ft_errors(3);
+static int	parsing_elements(char *av, t_map *map)
+{
+	if (elements_exist(map) != 0)
+		ft_errors(3);
+	if (elements_colors_exist(av, map) != 0)
+	  	ft_errors(3);
 	
-// 	// if (expected_syntax_textures(game) != 0)
-// 	// 	ft_errors(3);
+	// if (expected_syntax_textures(game) != 0)
+	// 	ft_errors(3);
 
-// 	// //F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
-// 	// //F 220,100,0
-// 	// if (expected_syntax_colors(game) != 0)
-// 	// 	ft_errors(3);
+	// //F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
+	// //F 220,100,0
+	// if (expected_syntax_colors(game) != 0)
+	// 	ft_errors(3);
 	
-// 	// //Information from elements separated by 1 or + spaces
-// 	// if (spaces_handler(game) != 0)
-// 	// 	ft_errors(3);
+	//Information from elements separated by 1 or + spaces
+	// if (spaces_handler(game) != 0)
+	// 	ft_errors(3);
 	
-// 	// //Elements separated by 1 or + empty lines
-// 	// if (empty_lines_handler(game) != 0)
-// 	// 	ft_errors(3);
+	// //Elements separated by 1 or + empty lines
+	// if (empty_lines_handler(game) != 0)
+	// 	ft_errors(3);
 
-// 	return (0);
-// }
+	return (0);
+}
 
 // static int	parsing_map(t_game *game)
 // {
@@ -66,9 +65,8 @@ void	parsing(t_map *map, char *av[])
 	file_is_cub(av[1]);
 	open_map(av[1], map);
 	width_height_map_file(map, av);
-	print_width_height(map);
-	// open_map(av[1], map);
-	// parsing_elements(av[1], map);
+	open_map(av[1], map);
+	parsing_elements(av[1], map);
 	// open_map(av[1], map);
 
 	// i = 0;
@@ -80,6 +78,7 @@ void	parsing(t_map *map, char *av[])
 	//printf("firt line: %s\n", map->matrix[0]);
 	// parsing_elements(map);
 	//parsing_map(&map);
+	print_width_height(map);
 }
 
 //search_longest_line(map.map_fd, &map, av[1]);
