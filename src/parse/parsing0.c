@@ -15,12 +15,11 @@
 
 static int	parsing_elements(char *av, t_map *map)
 {
-	//Elements separated by 1 or + empty lines
-	// empty_lines_handler(map);
 	if (elements_exist(map) != 0)
 		ft_errors(3);
 	if (elements_colors_exist(av, map) != 0)
 	  	ft_errors(3);
+	
 	
 	// if (expected_syntax_textures(game) != 0)
 	// 	ft_errors(3);
@@ -30,9 +29,6 @@ static int	parsing_elements(char *av, t_map *map)
 	// if (expected_syntax_colors(game) != 0)
 	// 	ft_errors(3);
 	
-	//Information from elements separated by 1 or + spaces
-	// if (spaces_handler(game) != 0)
-	// 	ft_errors(3);
 	
 
 	return (0);
@@ -77,7 +73,7 @@ void	parsing(t_map *map, char *av[])
 	//printf("firt line: %s\n", map->matrix[0]);
 	// parsing_elements(map);
 	//parsing_map(&map);
-	print_width_height(map);
+	//print_width_height(map);
 }
 
 //search_longest_line(map.map_fd, &map, av[1]);

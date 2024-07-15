@@ -1,4 +1,6 @@
 // #include "cub3d.h"
+#include "window.h"
+#include "cub3d.h"
 
 // /*Funcion que asocia las imgs en la estructura*/
 // void	set_images(t_game *g)
@@ -47,25 +49,19 @@
 // 		{
 // 			//set_images_to_win_bonus(g);
 // 			if (g->matrix[y][x] == '1')
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.wall, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.wall, x * 32, y * 32);
 // 			else if (g->matrix[y][x] == 'x')
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.black, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.black, x * 32, y * 32);
 // 			else if (g->matrix[y][x] == 'C')
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.coll, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.coll, x * 32, y * 32);
 // 			else if (g->matrix[y][x] == 'P')
 // 				set_player(g, x, y, dir);
 // 			else if (g->matrix[y][x] == 'E')
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.exit, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.exit, x * 32, y * 32);
 // 			else if (g->matrix[y][x] == '@')
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.player.barrer_a, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.player.barrer_a, x * 32, y * 32);
 // 			else
-// 				mlx_put_image_to_window(g->mlx, \
-// 						g->mlx_win, g->imgs.floor, x * 32, y * 32);
+// 				mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.floor, x * 32, y * 32);
 // 			x++;
 // 		}
 // 		y++;
@@ -78,7 +74,6 @@
 // 	game->mlx = mlx_init();
 // 	if (!game->mlx)
 // 		ft_errors2(5);
-// 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, \
-// 	game->h * TILE_PXL, "cub3D");
+// 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, game->h * TILE_PXL, "cub3D");
 // 	//printf("W: %d\n H: %d", game->w, game->h);
 // }

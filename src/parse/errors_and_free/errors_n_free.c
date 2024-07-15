@@ -13,27 +13,27 @@
 
 #include "cub3d.h"
 
-// int	ft_errors2(int n)
-// {
-// 	if (n == 4)
-// 	{
-// 		write (2, "Error\n", 6);
-// 		write (2, "Invalid route in map!\n", 22);
-// 		exit(1);
-// 	}
-// 	else if (n == 5)
-// 	{
-// 		write (2, "Error\n", 6);
-// 		write (2, "It was not possible to initialize the program!\n", 47);
-// 		exit(1);
-// 	}
-// 	else
-// 	{
-// 		write (2, "Error\n", 6);
-// 		exit(1);
-// 	}
-// 	return (1);
-// }
+int	ft_errors2(int n)
+{
+	if (n == 4)
+	{
+		write (2, "Error\n", 6);
+		write (2, "Invalid route in map!\n", 22);
+		exit(1);
+	}
+	else if (n == 5)
+	{
+		write (2, "Error\n", 6);
+		write (2, "It was not possible to initialize the program!\n", 47);
+		exit(1);
+	}
+	else
+	{
+		write (2, "Error\n", 6);
+		exit(1);
+	}
+	return (1);
+}
 
 /*Funcion que muestra mensajes de error*/
 int	ft_errors(int n)

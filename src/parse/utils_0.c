@@ -1,28 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 15:45:18 by castorga          #+#    #+#             */
-/*   Updated: 2024/07/09 15:45:20 by castorga         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   utils_2.c                                          :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2024/07/09 15:45:18 by castorga          #+#    #+#             */
+// /*   Updated: 2024/07/09 15:45:20 by castorga         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* Funcion que reserva memoria y rellena con ' ' */
-void spaced_malloc(t_map *map, size_t count, size_t size)
-{
-    map->matrix = malloc(size * count);
-    if (!map->matrix)
-	{
-        perror("malloc");
-        exit(1);
-    }
-    ft_memset(map->matrix, ' ', size * count);
-}
+// z
+// /* Funcion que reserva memoria y rellena con ' ' */
+// void spaced_malloc(t_map *map, size_t count, size_t size)
+// {
+//     map->matrix = malloc(size * count);
+//     if (!map->matrix)
+// 	{
+//         perror("malloc");
+//         exit(1);
+//     }
+//     ft_memset(map->matrix, ' ', size * count);
+// }
 
 
 // int	exit_game(t_game *g)

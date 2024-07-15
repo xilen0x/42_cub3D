@@ -15,38 +15,39 @@
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)
 {
-    int i;
-	int j;
-	
-	i = 0;
-	j = 0;
-    while (line[i] != '\0')
-	{
+    int i = 0;
+    int j = 0;
+
+    while (line[i])
+    {
         // Eliminar espacios adicionales
-        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ','))
-		{
+        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ',' || line[j - 1] == ','))
+        {
             i++;
             continue;
         }
         // Eliminar espacio antes de la coma
         if (line[i] == ' ' && line[i + 1] == ',')
-		{
+        {
             i++;
+            continue;
         }
         // Eliminar espacio después de la coma
         if (line[i] == ',' && line[i + 1] == ' ')
-		{
+        {
             line[j++] = line[i++];
             while (line[i] == ' ')
-			{
                 i++;
-            }
         }
-		else
-		{
+        else
+        {
             line[j++] = line[i++];
         }
     }
+    // Eliminar espacios al final de la línea
+    while (j > 0 && line[j - 2] == ' ')
+        j--;
+
     line[j] = '\0';
 }
 
@@ -63,11 +64,12 @@ int elements_colors_exist(char *av, t_map *map)
     {
 		if (line[0] == '\n')
 		{
-			printf("empty line found2\n");
+			// printf("empty line found2\n");
 			free(line);
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
+		remove_spaces_around_commas(line);
         elements = ft_split(line, ' ');  // Divide la línea en elementos usando espacios como delimitadores
         if (!elements)
         {
@@ -78,15 +80,15 @@ int elements_colors_exist(char *av, t_map *map)
         i = 0;
         while (elements[i])
             i++;
-        
         if (i == 2)
         {
+			//remove_spaces_around_commas(elements[1]);
             if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0)
             {
-                colors = ft_split(elements[1], ',');  // Divide el segundo elemento por comas
+                colors = ft_split(elements[1], ',');
                 if (!colors)
                 {
-                    free_elements(elements);  // Libera `elements` antes de salir
+                    free_elements(elements);
                     free(line);
                     printf("Error al dividir los colores!\n");
                     return (1);

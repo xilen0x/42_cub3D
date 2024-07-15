@@ -57,7 +57,7 @@ static size_t search_longest_line(t_map *map)
     {
 		len = ft_strlen(line);
         // reserve_memory(&longest_line, &i, map, line);
-		//printf("%s", line);
+		printf("%s", line);
 		//if que salta los posibles espacios en blanco y saltos de linea
 		if (line[0] == '\0')
 		{
