@@ -16,7 +16,7 @@
 static int	parsing_elements(char *av, t_map *map)
 {
 	//Elements separated by 1 or + empty lines
-	empty_lines_handler(map);//aki voy!!!
+	// empty_lines_handler(map);
 	if (elements_exist(map) != 0)
 		ft_errors(3);
 	if (elements_colors_exist(av, map) != 0)

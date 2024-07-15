@@ -52,7 +52,7 @@ void	width_height_map_file(t_map *map, char *av[]);
 void	spaced_malloc(t_map *map, size_t count, size_t size);
 int		elements_colors_exist(char *av, t_map *map);
 void 	print_width_height(t_map *map);
-int		empty_lines_handler(t_map *map);
+// int		empty_lines_handler(t_map *map);
 
 
 /*-------------- GAME --------------*/

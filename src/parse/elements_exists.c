@@ -59,9 +59,15 @@ int elements_colors_exist(char *av, t_map *map)
 
     open_map(av, map);  // Abre el archivo del mapa
     line = get_next_line(map->map_fd);  // Lee la primera línea del archivo
-    
     while (line)
     {
+		if (line[0] == '\n')
+		{
+			printf("empty line found2\n");
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
         elements = ft_split(line, ' ');  // Divide la línea en elementos usando espacios como delimitadores
         if (!elements)
         {
@@ -69,7 +75,6 @@ int elements_colors_exist(char *av, t_map *map)
             printf("Error al dividir la línea en elementos!\n");
             return (1);
         }
-        
         i = 0;
         while (elements[i])
             i++;
@@ -86,16 +91,13 @@ int elements_colors_exist(char *av, t_map *map)
                     printf("Error al dividir los colores!\n");
                     return (1);
                 }
-
                 if (ft_strncmp(elements[0], "F", 1) == 0)
                     map->f++;
                 else if (ft_strncmp(elements[0], "C", 1) == 0)
                     map->c++;
-
                 i = 0;
                 while (colors[i])
                     i++;
-                
                 if (i != 3)
                 {
                     printf("Error de sintaxis en colores!\n");
@@ -111,9 +113,7 @@ int elements_colors_exist(char *av, t_map *map)
         free(line);  // Libera `line` después de usarlo
         line = get_next_line(map->map_fd);  // Lee la siguiente línea del archivo
     }
-
     close(map->map_fd);  // Cierra el archivo del mapa
-    
     if (map->f && map->c)
     {
         printf("All colors exist\n");
@@ -136,6 +136,13 @@ int	elements_exist(t_map *map)
 	line = get_next_line(map->map_fd);
 	while (line)
 	{
+		if (line[0] == '\n')
+		{
+			printf("empty line found1\n");
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
 		elements = ft_split(line, ' ');
 		i = 0;
 		while (elements[i])
