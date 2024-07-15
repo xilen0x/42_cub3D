@@ -91,6 +91,19 @@ void	free_xx_path(t_map *map)
         free(map->ea_path);
 }
 
+void	free_elements(char **elements)
+{
+	int i;
+
+	i = 0;
+	while (elements[i])
+	{
+		free(elements[i]);
+		i++;
+	}
+	free(elements);
+}
+
 /*funcion que imprime la matriz*/
 // void	print_matrix(t_game *game)
 // {

@@ -1,3 +1,4 @@
+
 EA ./textures/using/ventana.xpm
 NO ./textures/using/enredadera.xpm
 WE ./textures/using/brickrosa.xpm
@@ -5,6 +6,7 @@ SO ./textures/using/brickamarillo.xpm
 
 F 214,194,133
 C 152,245,239
+
 1111111111111111111111111111
 1000000000000000000000000001
 1000000000000000000000000001

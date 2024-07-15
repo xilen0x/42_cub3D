@@ -12,19 +12,6 @@
 
 #include "cub3d.h"
 
-void	free_elements(char **elements)
-{
-	int i;
-
-	i = 0;
-	while (elements[i])
-	{
-		free(elements[i]);
-		i++;
-	}
-	free(elements);
-}
-
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)
 {

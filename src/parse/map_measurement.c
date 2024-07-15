@@ -12,31 +12,31 @@
 
 #include "cub3d.h"
 
-void reserve_memory(size_t *longest_line, int *i, t_map *map, char *line)
-{
-    size_t len;
-    size_t old_size;
-    size_t new_size;
+// void reserve_memory(size_t *longest_line, int *i, t_map *map, char *line)
+// {
+//     size_t len;
+//     size_t old_size;
+//     size_t new_size;
 
-    len = ft_strlen(line);
-    old_size = sizeof(char *) * (*i + 1);
-    new_size = sizeof(char *) * (*i + 2);
-    map->matrix = ft_realloc(map->matrix, old_size, new_size); // Ajusta el tamaño de matrix
-    if (!map->matrix)
-    {
-        write(2, "Memory allocation error!\n", 25);
-        free(line);
-        exit(1);
-    }
-    map->matrix[*i] = line;
-    map->matrix[*i + 1] = NULL;
-    printf("%s", map->matrix[*i]);
-    if (len > 0 && line[len - 1] == '\n')
-        len--;
-    if (*longest_line < len)
-        *longest_line = len;
-    (*i)++;
-}
+//     len = ft_strlen(line);
+//     old_size = sizeof(char *) * (*i + 1);
+//     new_size = sizeof(char *) * (*i + 2);
+//     map->matrix = ft_realloc(map->matrix, old_size, new_size); // Ajusta el tamaño de matrix
+//     if (!map->matrix)
+//     {
+//         write(2, "Memory allocation error!\n", 25);
+//         free(line);
+//         exit(1);
+//     }
+//     map->matrix[*i] = line;
+//     map->matrix[*i + 1] = NULL;
+//     printf("%s", map->matrix[*i]);
+//     if (len > 0 && line[len - 1] == '\n')
+//         len--;
+//     if (*longest_line < len)
+//         *longest_line = len;
+//     (*i)++;
+// }
 
 static size_t search_longest_line(t_map *map)
 {
