@@ -12,6 +12,29 @@
 
 #include "cub3d.h"
 
+void remove_tabs(char **elements)
+{
+    int i, j, k;
+
+    i = 0;
+    while (elements[i])
+    {
+        j = 0;
+        k = 0;
+        while (elements[i][j])
+        {
+            if (elements[i][j] != '\t')
+            {
+                elements[i][k] = elements[i][j];
+                k++;
+            }
+            j++;
+        }
+        elements[i][k] = '\0'; // Terminar la cadena
+        i++;
+    }
+}
+
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)
 {
@@ -71,6 +94,7 @@ int elements_colors_exist(char *av, t_map *map)
 		}
 		remove_spaces_around_commas(line);
         elements = ft_split(line, ' ');  // Divide la línea en elementos usando espacios como delimitadores
+		remove_tabs(elements);
         if (!elements)
         {
             free(line);
@@ -127,24 +151,7 @@ int elements_colors_exist(char *av, t_map *map)
         return (1);
     }
 }
-void	remove_tabs(char **elements)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while (elements[i])
-	{
-		j = 0;
-		while (elements[i][j])
-		{
-			if (elements[i][j] == '\t')
-				elements[i][j]++;//aki voy....debo corregir esta linea
-			j++;
-		}
-		i++;
-	}
-}
 //Check if elements exist(in any order)
 int	elements_exist(t_map *map)
 {
