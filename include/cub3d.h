@@ -49,12 +49,11 @@ void	parsing(t_map *map, char *av[]);
 int		elements_exist(t_map *map);
 void	init_values(t_map *map);
 void	width_height_map_file(t_map *map, char *av[]);
-void	spaced_malloc(t_map *map, size_t count, size_t size);
 int		elements_colors_exist(char *av, t_map *map);
 void 	print_width_height(t_map *map);
-void remove_spaces_around_commas(char *line);
-
-
+void	remove_spaces_around_commas(char *line);
+void	remove_tabs(char **elements);
+void	texture_path_extension_is_valid(char	*elements);
 /* ---------------------------- GAME ----------------------------*/
 
 

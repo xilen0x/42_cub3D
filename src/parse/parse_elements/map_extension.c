@@ -29,3 +29,17 @@ int	file_is_cub(char *av)
 	}
 	return (0);
 }
+void	texture_path_extension_is_valid(char *elements)
+{
+	int i;
+
+	i = 0;
+	while (elements[i])
+		i++;
+	if (elements[i - 2] != 'm' || elements[i - 3] != 'p' || elements[i - 4] != 'x' || elements[i - 5] != '.')
+	{
+		write (2, "Error\n", 6);
+		write (2, "The texture path is not valid.\n", 31);
+		exit(1);
+	}
+}

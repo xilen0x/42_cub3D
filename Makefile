@@ -32,18 +32,17 @@ MLX_FILE = libmlx.a
 
 # Archivos fuente
 SRC_FILES = main.c \
-			parse/map_init.c \
-            parse/map_extension.c \
-            parse/map_measurement.c \
-			parse/map_create_matrix.c \
-            parse/parsing0.c \
-            parse/elements_exists.c \
-			parse/empty_lines_spaces.c \
+			parse/parse_elements/map_init.c \
+            parse/parse_elements/map_extension.c \
+            parse/parse_elements/map_measurement.c \
+            parse/parse_elements/parsing_menu.c \
+            parse/parse_elements/elements_exists.c \
+			parse/parse_elements/rm_spaces_n_tabs.c \
             parse/errors_and_free/errors_n_free.c \
 			parse/utils_0.c \
+			parse/parse_map/map_create_matrix.c \
+			parse/parse_map/empty_lines_spaces.c \
 			game/window.c
-#parse/parsing2.c 
-#parse/parsing3.c 
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)

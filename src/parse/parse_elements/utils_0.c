@@ -35,23 +35,6 @@
 // 	exit(0);
 // }
 
-// int	press_key(int keycode, t_game *game)
-// {
-// 	(void)keycode;
-// 	(void)game;
-// 	printf("test\n");
-// 	// if (keycode == KEY_ESC)
-// 	// 	exit_game(game);
-// 	// else if (keycode == KEY_W || keycode == KEY_UP)
-// 	// 	move_up(game);
-// 	// else if (keycode == KEY_A || keycode == KEY_LEFT)
-// 	// 	move_left(game);
-// 	// else if (keycode == KEY_S || keycode == KEY_DOWN)
-// 	// 	move_down(game);
-// 	// else if (keycode == KEY_D || keycode == KEY_RIGHT)
-// 	// 	move_right(game);
-// 	return (0);
-// }
 
 /*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
 int	open_map(char *av, t_map *map)

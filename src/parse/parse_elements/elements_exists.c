@@ -12,68 +12,6 @@
 
 #include "cub3d.h"
 
-void remove_tabs(char **elements)
-{
-    int i, j, k;
-
-    i = 0;
-    while (elements[i])
-    {
-        j = 0;
-        k = 0;
-        while (elements[i][j])
-        {
-            if (elements[i][j] != '\t')
-            {
-                elements[i][k] = elements[i][j];
-                k++;
-            }
-            j++;
-        }
-        elements[i][k] = '\0'; // Terminar la cadena
-        i++;
-    }
-}
-
-//elimina espacios antes y después de las comas
-void remove_spaces_around_commas(char *line)
-{
-    int i = 0;
-    int j = 0;
-
-    while (line[i])
-    {
-        // Eliminar espacios adicionales
-        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ',' || line[j - 1] == ','))
-        {
-            i++;
-            continue;
-        }
-        // Eliminar espacio antes de la coma
-        if (line[i] == ' ' && line[i + 1] == ',')
-        {
-            i++;
-            continue;
-        }
-        // Eliminar espacio después de la coma
-        if (line[i] == ',' && line[i + 1] == ' ')
-        {
-            line[j++] = line[i++];
-            while (line[i] == ' ')
-                i++;
-        }
-        else
-        {
-            line[j++] = line[i++];
-        }
-    }
-    // Eliminar espacios al final de la línea
-    while (j > 0 && line[j - 2] == ' ')
-        j--;
-
-    line[j] = '\0';
-}
-
 int elements_colors_exist(char *av, t_map *map)
 {
     char *line;
@@ -106,7 +44,6 @@ int elements_colors_exist(char *av, t_map *map)
             i++;
         if (i == 2)
         {
-			//remove_spaces_around_commas(elements[1]);
             if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0)
             {
                 colors = ft_split(elements[1], ',');
@@ -171,6 +108,7 @@ int	elements_exist(t_map *map)
 		}
 		elements = ft_split(line, ' ');
 		remove_tabs(elements);
+		texture_path_extension_is_valid(elements[1]);
 		i = 0;
 		while (elements[i])
 			i++;

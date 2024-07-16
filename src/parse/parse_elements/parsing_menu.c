@@ -9,8 +9,6 @@
 /*   Updated: 2024/07/09 15:44:35 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 #include "cub3d.h"
 
 static int	parsing_elements(char *av, t_map *map)
@@ -19,39 +17,14 @@ static int	parsing_elements(char *av, t_map *map)
 		ft_errors(3);
 	if (elements_colors_exist(av, map) != 0)
 	  	ft_errors(3);
-	
-	
-	// if (expected_syntax_textures(game) != 0)
-	// 	ft_errors(3);
+	//texture_path_extension_is_valid(map);//corregir luego los mensajes de error
 
 	// //F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
 	// //F 220,100,0
 	// if (expected_syntax_colors(game) != 0)
 	// 	ft_errors(3);
-	
-	
-
 	return (0);
 }
-
-// static int	parsing_map(t_game *game)
-// {
-// 	if (is_rectangular(game) != 0)
-// 		ft_errors(3);
-// 	if (is_surrounded_by_walls(game) != 0)
-// 		ft_errors(3);
-// 	if (is_initial_position(game) != 1)
-// 		ft_errors(3);
-// 	if (has_only_one_exit(game) != 1)
-// 		ft_errors(3);
-// 	if (valid_path_to_exit(game) == 0)
-// 		ft_errors(4);
-// 	if (valid_path_to_collectables(game) != 0)
-// 		ft_errors(4);
-// 	if (q_collectible(game) < 1)
-// 		ft_errors(3);
-// 	return (0);
-// }
 
 void	parsing(t_map *map, char *av[])
 {
@@ -63,7 +36,6 @@ void	parsing(t_map *map, char *av[])
 	open_map(av[1], map);
 	parsing_elements(av[1], map);
 	// open_map(av[1], map);
-
 	// i = 0;
 	// while (map->matrix[i] != NULL)
 	// {
@@ -75,5 +47,3 @@ void	parsing(t_map *map, char *av[])
 	//parsing_map(&map);
 	//print_width_height(map);
 }
-
-//search_longest_line(map.map_fd, &map, av[1]);

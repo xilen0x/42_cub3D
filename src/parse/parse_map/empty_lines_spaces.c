@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_create_matrix.c                                :+:      :+:    :+:   */
+/*   empty_lines_spaces.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 19:04:02 by castorga          #+#    #+#             */
-/*   Updated: 2024/07/10 19:04:05 by castorga         ###   ########.fr       */
+/*   Created: 2024/07/16 15:33:55 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/16 15:33:58 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
 
-/*Crea y guarda el mapa en una matriz*/
-// void	create_matrix(t_map *map, char *av)
+/*FUNCION QUE SALTA LAS LINEAS VACIAS del map almacenado en av[1]*/
+// int	empty_lines_handler(t_map *map)
 // {
-// 	int	i;
 // 	char	*line;
-// (void)av;
-// 	i = 0;
-// 	// open_map(av, map);
-// 	map->matrix = spaced_malloc(map->h + 1, sizeof(char *));
-// 	// while (i < map->h)
-// 	// {
-// 	// 	map->matrix[i] = get_next_line(map->map_fd);
-// 	// 	i++;
-// 	// }
+// 	size_t	len;
+
 // 	line = get_next_line(map->map_fd);
-// 	if (!line)
-// 		write (2, "Invalid map!\n", 13);
 // 	while (line)
 // 	{
-// 		map->matrix[i] = line;
+// 		len = ft_strlen(line);
+// 		if (line[0] == '\0')
+// 		{
+// 			printf("empty line found\n");
+// 			free(line);
+// 			line = get_next_line(map->map_fd);
+// 			continue ;
+// 		}
+// 		if (len > 0 && line[len - 1] == '\n')
+// 			len--;
 // 		free(line);
 // 		line = get_next_line(map->map_fd);
 // 	}
-// 	map->matrix[map->h] = NULL;
-// 	close(map->map_fd);
+// 	return (0);
 // }
