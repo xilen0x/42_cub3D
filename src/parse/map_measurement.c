@@ -38,6 +38,7 @@
 //     (*i)++;
 // }
 
+/*busqueda de linea mas larga en el mapa(incluyendo elementos)*/
 static size_t search_longest_line(t_map *map)
 {
     char *line;

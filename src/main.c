@@ -9,7 +9,6 @@ int	main(int ac, char *av[])
 
 	if (ac == 2)
 	{
-		(void)av;
 		init_values(&map);
 		parsing(&map, av);
 		//init_game(&game);

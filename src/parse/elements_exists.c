@@ -118,7 +118,7 @@ int elements_colors_exist(char *av, t_map *map)
     close(map->map_fd);  // Cierra el archivo del mapa
     if (map->f && map->c)
     {
-        printf("All colors exist\n");
+        printf("\nAll colors exist\n");
         return (0);
     }
     else
@@ -127,7 +127,24 @@ int elements_colors_exist(char *av, t_map *map)
         return (1);
     }
 }
+void	remove_tabs(char **elements)
+{
+	int	i;
+	int	j;
 
+	i = 0;
+	while (elements[i])
+	{
+		j = 0;
+		while (elements[i][j])
+		{
+			if (elements[i][j] == '\t')
+				elements[i][j]++;//aki voy....debo corregir esta linea
+			j++;
+		}
+		i++;
+	}
+}
 //Check if elements exist(in any order)
 int	elements_exist(t_map *map)
 {
@@ -140,12 +157,13 @@ int	elements_exist(t_map *map)
 	{
 		if (line[0] == '\n')
 		{
-			printf("empty line found1\n");
+			//printf("\nempty line found1\n");
 			free(line);
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
 		elements = ft_split(line, ' ');
+		remove_tabs(elements);
 		i = 0;
 		while (elements[i])
 			i++;
@@ -186,7 +204,7 @@ int	elements_exist(t_map *map)
 		if (map->no && map->so && map->we && map->ea)
 		{
         	close(map->map_fd);
-			printf("All cardinal directions exist\n");
+			printf("\nAll cardinal directions exist\n");
 			free_xx_path(map);
         	return (0);
     	}
