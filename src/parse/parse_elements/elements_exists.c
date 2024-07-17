@@ -53,6 +53,15 @@ int elements_colors_exist(char *av, t_map *map)
                     printf("Error al dividir los colores!\n");
                     return (1);
                 }
+				i = 0;
+				// while (colors[i])
+				// {
+				// 	if (ft_isdigit(ft_atoi(colors[i])))
+				// 		printf("Estan todos los valores numericos!\n");	
+				// 	else
+				// 		printf("Faltan valores numericos!\n");
+				// 	i++;
+				// }
                 if (ft_strncmp(elements[0], "F", 1) == 0)
                     map->f++;
                 else if (ft_strncmp(elements[0], "C", 1) == 0)
@@ -68,7 +77,7 @@ int elements_colors_exist(char *av, t_map *map)
                     free(line);
                     return (1);
                 }
-				else if (i == 3)
+				else if (i == 3 && !ft_strrchr(colors[i - 1], '\n'))
 				{
 					if (ft_strncmp(elements[0], "F", 1) == 0)
                     {

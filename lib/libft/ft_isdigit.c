@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Returns 1 if the input is a number in the ASCII table*/
+/*Returns 1 if the input is a digit in the ASCII table*/
 
 int	ft_isdigit(int num)
 {
