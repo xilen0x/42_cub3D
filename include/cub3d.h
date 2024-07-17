@@ -18,6 +18,9 @@
 #define EAST 2
 #define WEST 3
 
+#define MAX_COLOR_VALUE 255
+#define MIN_COLOR_VALUE 0
+
 typedef struct s_map
 {
 	int		map_fd;//almacena el fd del mapa original

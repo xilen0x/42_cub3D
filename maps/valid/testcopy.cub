@@ -3,8 +3,8 @@ EA ./textures/yellow.xpm
 WE ./textures/green.xpm
 NO ./textures/blue.xpm
 
-F 255,255,20
-C 255,255,20
+F 22,1,     1
+C 255,33,1
 
 0000000000000
 01111111111100

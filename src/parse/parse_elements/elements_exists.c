@@ -12,8 +12,7 @@
 
 #include "cub3d.h"
 
-int elements_colors_exist(char *av, t_map *map)
-{
+int elements_colors_exist(char *av, t_map *map) {
     char *line;
     char **elements;
     char **colors;
@@ -21,79 +20,65 @@ int elements_colors_exist(char *av, t_map *map)
 
     open_map(av, map);
     line = get_next_line(map->map_fd);
-    while (line)
-    {
-		if (line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(map->map_fd);
-			continue ;
-		}
-		remove_spaces_around_commas(line);
+    while (line) {
+        if (line[0] == '\n') {
+            free(line);
+            line = get_next_line(map->map_fd);
+            continue;
+        }
+        remove_spaces_around_commas(line);
         elements = ft_split(line, ' ');
-		remove_tabs(elements);
-        if (!elements)
-        {
+        remove_tabs(elements);
+        if (!elements) {
             free(line);
             printf("Error al dividir la línea en elementos!\n");
-            return (1);
+            return 1;
         }
         i = 0;
         while (elements[i])
             i++;
-        if (i == 2)
-        {
-            if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0)
-            {
-                colors = ft_split(elements[1], ',');
-                if (!colors)
-                {
+        if (i == 2) {
+            if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0) {
+                char *trimmed_element = ft_strtrim(elements[1], "\n");
+                colors = ft_split(trimmed_element, ',');
+                free(trimmed_element); // Free the trimmed string as it's no longer needed
+                if (!colors) {
                     free_elements(elements);
                     free(line);
                     printf("Error al dividir los colores!\n");
-                    return (1);
+                    return 1;
                 }
-				i = 0;
-				// while (colors[i])
-				// {
-				// 	if (ft_isdigit(ft_atoi(colors[i])))
-				// 		printf("Estan todos los valores numericos!\n");	
-				// 	else
-				// 		printf("Faltan valores numericos!\n");
-				// 	i++;
-				// }
-                if (ft_strncmp(elements[0], "F", 1) == 0)
-                    map->f++;
-                else if (ft_strncmp(elements[0], "C", 1) == 0)
-                    map->c++;
                 i = 0;
+                int valid_colors = 1;
                 while (colors[i])
+				{
+                    int color_value = ft_atoi(colors[i]);
+                    if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
+					{
+                        valid_colors = 0;
+                        break;
+                    }
                     i++;
-                if (i != 3)
-                {
+                }
+                if (!valid_colors || i != 3)
+				{
                     printf("Error de sintaxis en colores!\n");
                     free_elements(colors);
                     free_elements(elements);
                     free(line);
-                    return (1);
+                    return 1;
                 }
-				else if (i == 3 && !ft_strrchr(colors[i - 1], '\n'))
-				{
-					if (ft_strncmp(elements[0], "F", 1) == 0)
-                    {
-						map->f_color[0] = ft_atoi(colors[0]);
-						map->f_color[1] = ft_atoi(colors[1]);
-						map->f_color[2] = ft_atoi(colors[2]);
-						elements_colors_range(map, elements[0]);
-					}
-                	else if (ft_strncmp(elements[0], "C", 1) == 0)
-					{
-						map->c_color[0] = ft_atoi(colors[0]);
-						map->c_color[1] = ft_atoi(colors[1]);
-						map->c_color[2] = ft_atoi(colors[2]);
-						elements_colors_range(map, elements[0]);
-					}
-				}
+                if (ft_strncmp(elements[0], "F", 1) == 0) {
+                    map->f_color[0] = ft_atoi(colors[0]);
+                    map->f_color[1] = ft_atoi(colors[1]);
+                    map->f_color[2] = ft_atoi(colors[2]);
+                    map->f++;
+                } else if (ft_strncmp(elements[0], "C", 1) == 0) {
+                    map->c_color[0] = ft_atoi(colors[0]);
+                    map->c_color[1] = ft_atoi(colors[1]);
+                    map->c_color[2] = ft_atoi(colors[2]);
+                    map->c++;
+                }
                 free_elements(colors);
             }
         }
@@ -102,15 +87,12 @@ int elements_colors_exist(char *av, t_map *map)
         line = get_next_line(map->map_fd);
     }
     close(map->map_fd);
-    if (map->f && map->c)
-    {
+    if (map->f && map->c) {
         printf("\nAll colors exist\n");
-        return (0);
-    }
-    else
-    {
+        return 0;
+    } else {
         printf("Error: Faltan colores!\n");
-        return (1);
+        return 1;
     }
 }
 
