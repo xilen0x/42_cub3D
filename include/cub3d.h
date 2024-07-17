@@ -36,6 +36,9 @@ typedef struct s_map
 	int		w;
 	int		h;
 	char	**matrix;
+	// 	int r;
+	// int g;
+	// int b;
 }	t_map;
 
 /* ---------------------------- PARSING ----------------------------*/
@@ -54,6 +57,7 @@ void 	print_width_height(t_map *map);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
 void	texture_path_extension_is_valid(char	*elements);
+int		elements_colors_range(t_map *map, char *element);
 /* ---------------------------- GAME ----------------------------*/
 
 

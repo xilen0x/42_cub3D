@@ -29,6 +29,7 @@ int	file_is_cub(char *av)
 	}
 	return (0);
 }
+/*Funcion que verifica la extension .xpm del texture path*/
 void	texture_path_extension_is_valid(char *elements)
 {
 	int i;

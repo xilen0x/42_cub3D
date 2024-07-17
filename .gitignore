@@ -6,3 +6,4 @@ objs/*.d
 .dep/
 .objs/
 menu
+docs

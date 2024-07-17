@@ -19,19 +19,18 @@ int elements_colors_exist(char *av, t_map *map)
     char **colors;
     int i;
 
-    open_map(av, map);  // Abre el archivo del mapa
-    line = get_next_line(map->map_fd);  // Lee la primera línea del archivo
+    open_map(av, map);
+    line = get_next_line(map->map_fd);
     while (line)
     {
 		if (line[0] == '\n')
 		{
-			// printf("empty line found2\n");
 			free(line);
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
 		remove_spaces_around_commas(line);
-        elements = ft_split(line, ' ');  // Divide la línea en elementos usando espacios como delimitadores
+        elements = ft_split(line, ' ');
 		remove_tabs(elements);
         if (!elements)
         {
@@ -64,19 +63,36 @@ int elements_colors_exist(char *av, t_map *map)
                 if (i != 3)
                 {
                     printf("Error de sintaxis en colores!\n");
-                    free_elements(colors);  // Libera `colors` antes de salir
+                    free_elements(colors);
                     free_elements(elements);
                     free(line);
                     return (1);
                 }
-                free_elements(colors);  // Libera `colors` después de usarlo
+				else if (i == 3)
+				{
+					if (ft_strncmp(elements[0], "F", 1) == 0)
+                    {
+						map->f_color[0] = ft_atoi(colors[0]);
+						map->f_color[1] = ft_atoi(colors[1]);
+						map->f_color[2] = ft_atoi(colors[2]);
+						elements_colors_range(map, elements[0]);
+					}
+                	else if (ft_strncmp(elements[0], "C", 1) == 0)
+					{
+						map->c_color[0] = ft_atoi(colors[0]);
+						map->c_color[1] = ft_atoi(colors[1]);
+						map->c_color[2] = ft_atoi(colors[2]);
+						elements_colors_range(map, elements[0]);
+					}
+				}
+                free_elements(colors);
             }
         }
-        free_elements(elements);  // Libera `elements` después de usarlo
-        free(line);  // Libera `line` después de usarlo
-        line = get_next_line(map->map_fd);  // Lee la siguiente línea del archivo
+        free_elements(elements);
+        free(line);
+        line = get_next_line(map->map_fd);
     }
-    close(map->map_fd);  // Cierra el archivo del mapa
+    close(map->map_fd);
     if (map->f && map->c)
     {
         printf("\nAll colors exist\n");
