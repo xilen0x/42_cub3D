@@ -41,6 +41,7 @@ typedef struct s_elem
 	char	*we_path;
 }	t_elem;
 
+
 typedef struct s_colors
 {
 	int		f;

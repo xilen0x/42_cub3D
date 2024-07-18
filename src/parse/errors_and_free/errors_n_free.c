@@ -80,21 +80,22 @@ void free_matrix(char **matrix)
 
 void	free_xx_element(t_elem *elem)
 {
-    if (elem->no_path)
-        free(elem->no_path);
-    if (elem->so_path)
-        free(elem->so_path);
-    if (elem->we_path)
-        free(elem->we_path);
-    if (elem->ea_path)
-        free(elem->ea_path);
+	free(elem->no);
+	free(elem->so);
+	free(elem->we);
+	free(elem->ea);
+    free(elem->no_path);
+    free(elem->so_path);
+    free(elem->we_path);
+    free(elem->ea_path);
 }
 
 void	free_elements(char **elements)
 {
-	int i;
+	int i = 0;
 
-	i = 0;
+	if (!elements)
+		return;
 	while (elements[i])
 	{
 		free(elements[i]);

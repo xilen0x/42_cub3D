@@ -15,14 +15,14 @@
 /*Inicializacion de valores estructura t_elem*/
 void	init_elem_values(t_elem *elem)
 {
-	elem->no = 0;
-	elem->so = 0;
-	elem->ea = 0;
-	elem->we = 0;
-	elem->no_path = NULL;
-	elem->so_path = NULL;
-	elem->we_path = NULL;
-	elem->ea_path = NULL;
+    elem->no = NULL;
+    elem->no_path = NULL;
+    elem->so = NULL;
+    elem->so_path = NULL;
+    elem->ea = NULL;
+    elem->ea_path = NULL;
+    elem->we = NULL;
+    elem->we_path = NULL;
 }
 
 /*Inicializacion de valores structura t_colors*/

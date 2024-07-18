@@ -23,48 +23,57 @@ void	print_elements(t_elem *elem)
 	printf("WE_PATH: %s\n", elem->we_path);
 }
 
-void	save_elements(t_elem *elem, t_map *map)
+void save_elements(t_elem *elem, t_map *map)
 {
-	char	*line;
-	char	**elements;
+    char *line;
+    char **elements;
+    char *temp;
 
-	line = get_next_line(map->map_fd);
-	while (line)
+    line = get_next_line(map->map_fd);
+    while (line)
 	{
-		if (line[0] == '\n')
+        if (line[0] == '\n')
 		{
-			free(line);
-			line = get_next_line(map->map_fd);
-			continue ;
-		}
-		elements = ft_split(line, ' ');
-		if (ft_strncmp(line, "NO", 2) == 0)
+            free(line);
+            line = get_next_line(map->map_fd);
+            continue ;
+        }
+        elements = ft_split(line, ' ');
+        if (ft_strncmp(line, "NO", 2) == 0)
 		{
-			elem->no = ft_strtrim(elements[0], " ");
-			elem->no_path = ft_strtrim(elements[1], " ");
-		}
+            temp = ft_strtrim(elements[0], " ");
+            elem->no = temp;
+            temp = ft_strtrim(elements[1], " ");
+            elem->no_path = temp;
+        }
 		else if (ft_strncmp(line, "SO", 2) == 0)
 		{
-			elem->so = ft_strtrim(elements[0], " ");
-			elem->so_path = ft_strtrim(elements[1], " ");
-		}
+			temp = ft_strtrim(elements[0], " ");
+			elem->so = temp;
+			temp = ft_strtrim(elements[1], " ");
+			elem->so_path = temp;
+        }
 		else if (ft_strncmp(line, "EA", 2) == 0)
 		{
-			elem->ea = ft_strtrim(elements[0], " ");
-			elem->ea_path = ft_strtrim(elements[1], " ");
+			temp = ft_strtrim(elements[0], " ");
+			elem->ea = temp;
+			temp = ft_strtrim(elements[1], " ");
+			elem->ea_path = temp;
 		}
 		else if (ft_strncmp(line, "WE", 2) == 0)
 		{
-			elem->we = ft_strtrim(elements[0], " ");
-			elem->we_path = ft_strtrim(elements[1], " ");
+			temp = ft_strtrim(elements[0], " ");
+			elem->we = temp;
+			temp = ft_strtrim(elements[1], " ");
+			elem->we_path = temp;
 		}
-		free(line);
-		line = get_next_line(map->map_fd);
-	}
-	// free_elements(elements);
-	free(line);
-	close(map->map_fd);
+        free_elements(elements);
+        free(line);
+        line = get_next_line(map->map_fd);
+    }
+    close(map->map_fd);
 }
+
 
 //void	save_colors()
 
@@ -73,7 +82,7 @@ void	save_components(t_elem *elem, t_colors *colors, t_map *map)
 {
 	(void)colors;
 	save_elements(elem, map);
-	//print_elements(elem);
+	print_elements(elem);
 	//save_colors(colors, map);
 	// save_map(map);
 }
