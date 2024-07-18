@@ -78,17 +78,16 @@ void free_matrix(char **matrix)
     }
 }
 
-
-void	free_xx_path(t_map *map)
+void	free_xx_element(t_elem *elem)
 {
-    if (map->no_path)
-        free(map->no_path);
-    if (map->so_path)
-        free(map->so_path);
-    if (map->we_path)
-        free(map->we_path);
-    if (map->ea_path)
-        free(map->ea_path);
+    if (elem->no_path)
+        free(elem->no_path);
+    if (elem->so_path)
+        free(elem->so_path);
+    if (elem->we_path)
+        free(elem->we_path);
+    if (elem->ea_path)
+        free(elem->ea_path);
 }
 
 void	free_elements(char **elements)

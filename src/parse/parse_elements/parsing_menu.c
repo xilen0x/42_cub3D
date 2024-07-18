@@ -13,13 +13,13 @@
 
 void	print_elements(t_elem *elem)
 {
-	printf("NO: %s\n", elem->no);
+	printf("\nNO: %s\n", elem->no);
 	printf("NO_PATH: %s\n", elem->no_path);
-	printf("\nSO: %s\n", elem->so);
+	printf("SO: %s\n", elem->so);
 	printf("SO_PATH: %s\n", elem->so_path);
 	printf("\nEA: %s\n", elem->ea);
 	printf("EA_PATH: %s\n", elem->ea_path);
-	printf("\nWE: %s\n", elem->we);
+	printf("WE: %s\n", elem->we);
 	printf("WE_PATH: %s\n", elem->we_path);
 }
 
@@ -28,7 +28,6 @@ void	save_elements(t_elem *elem, t_map *map)
 	char	*line;
 	char	**elements;
 
-	elements = NULL;
 	line = get_next_line(map->map_fd);
 	while (line)
 	{
@@ -62,16 +61,20 @@ void	save_elements(t_elem *elem, t_map *map)
 		free(line);
 		line = get_next_line(map->map_fd);
 	}
+	// free_elements(elements);
+	free(line);
+	close(map->map_fd);
 }
+
+//void	save_colors()
 
 /*funcion que guarda en */
 void	save_components(t_elem *elem, t_colors *colors, t_map *map)
 {
-	(void)elem;
 	(void)colors;
 	save_elements(elem, map);
-	print_elements(elem);
-	// save_colors(colors, map);
+	//print_elements(elem);
+	//save_colors(colors, map);
 	// save_map(map);
 }
 
