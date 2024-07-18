@@ -32,8 +32,7 @@ static size_t search_longest_line(t_map *map)
     {
 		len = ft_strlen(line);
         // reserve_memory(&longest_line, &i, map, line);
-		printf("%s", line);
-		//if que salta los posibles espacios en blanco y saltos de linea
+		//printf("%s", line);
 		if (line[0] == '\0')
 		{
 			free(line);
@@ -49,7 +48,7 @@ static size_t search_longest_line(t_map *map)
     	i++;
     }
     close(map->map_fd);
-    map->h = i; // Actualiza la altura de la matriz
+    map->h = i;
     return (longest_line);
 }
 

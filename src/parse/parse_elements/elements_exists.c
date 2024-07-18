@@ -12,7 +12,8 @@
 
 #include "cub3d.h"
 
-int elements_colors_exist(char *av, t_map *map) {
+int elements_colors_exist(char *av, t_map *map)
+{
     char *line;
     char **elements;
     char **colors;
@@ -20,16 +21,19 @@ int elements_colors_exist(char *av, t_map *map) {
 
     open_map(av, map);
     line = get_next_line(map->map_fd);
-    while (line) {
-        if (line[0] == '\n') {
+    while (line)
+	{
+        if (line[0] == '\n')
+		{
             free(line);
             line = get_next_line(map->map_fd);
-            continue;
+            continue ;
         }
         remove_spaces_around_commas(line);
         elements = ft_split(line, ' ');
-        remove_tabs(elements);
-        if (!elements) {
+		remove_tabs_and_spaces(elements);
+        if (!elements)
+		{
             free(line);
             printf("Error al dividir la línea en elementos!\n");
             return 1;
@@ -37,11 +41,13 @@ int elements_colors_exist(char *av, t_map *map) {
         i = 0;
         while (elements[i])
             i++;
-        if (i == 2) {
-            if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0) {
+        if (i == 2)
+		{
+            if (ft_strncmp(elements[0], "F", 1) == 0 || ft_strncmp(elements[0], "C", 1) == 0)
+			{
                 char *trimmed_element = ft_strtrim(elements[1], "\n");
                 colors = ft_split(trimmed_element, ',');
-                free(trimmed_element); // Free the trimmed string as it's no longer needed
+                free(trimmed_element);
                 if (!colors) {
                     free_elements(elements);
                     free(line);
@@ -68,12 +74,14 @@ int elements_colors_exist(char *av, t_map *map) {
                     free(line);
                     return 1;
                 }
-                if (ft_strncmp(elements[0], "F", 1) == 0) {
+                if (ft_strncmp(elements[0], "F", 1) == 0)
+				{
                     map->f_color[0] = ft_atoi(colors[0]);
                     map->f_color[1] = ft_atoi(colors[1]);
                     map->f_color[2] = ft_atoi(colors[2]);
                     map->f++;
-                } else if (ft_strncmp(elements[0], "C", 1) == 0) {
+                } else if (ft_strncmp(elements[0], "C", 1) == 0)
+				{
                     map->c_color[0] = ft_atoi(colors[0]);
                     map->c_color[1] = ft_atoi(colors[1]);
                     map->c_color[2] = ft_atoi(colors[2]);
@@ -97,74 +105,74 @@ int elements_colors_exist(char *av, t_map *map) {
 }
 
 //Check if elements exist(in any order)
-int	elements_exist(t_map *map)
+int elements_exist(t_map *map)
 {
-	char	*line;
-	char	**elements;
-	int		i;
+    char *line;
+    char **elements;
+    int i;
 
-	line = get_next_line(map->map_fd);
-	while (line)
-	{
-		if (line[0] == '\n')
-		{
-			//printf("\nempty line found1\n");
-			free(line);
-			line = get_next_line(map->map_fd);
-			continue ;
-		}
-		elements = ft_split(line, ' ');
-		remove_tabs(elements);
-		texture_path_extension_is_valid(elements[1]);
-		i = 0;
-		while (elements[i])
-			i++;
-		if (i == 2)
-		{
-			if (ft_strncmp(elements[0], "NO", 2) == 0)
-			{
-				map->no++;
-				map->no_path = ft_strdup(elements[1]);
-			}
-			else if (ft_strncmp(elements[0], "SO", 2) == 0)
-			{
-				map->so++;
-				map->so_path = ft_strdup(elements[1]);
-			}
-			else if (ft_strncmp(elements[0], "WE", 2) == 0)
-			{
-				map->we++;
-				map->we_path = ft_strdup(elements[1]);
-			}
-			else if (ft_strncmp(elements[0], "EA", 2) == 0)
-			{
-				map->ea++;
-				map->ea_path = ft_strdup(elements[1]);
-			}
-		}
-		else
-		{
-			printf("Error de sintaxis en elementos!\n");//la linea vacia al inicio la da como error aparentemente
-			close(map->map_fd);
-			free(line);
-			free_elements(elements);
-			free_xx_path(map);
-			return (1);
-		}
+    line = get_next_line(map->map_fd);
+    while (line)
+    {
+        if (line[0] == '\n')
+        {
+            free(line);
+            line = get_next_line(map->map_fd);
+            continue;
+        }
+
+        elements = ft_split(line, ' ');
+        remove_tabs_and_spaces(elements);
+        texture_path_extension_is_valid(elements[1]);
+        i = 0;
+        while (elements[i])
+            i++;
+        if (i == 2)
+        {
+            if (ft_strncmp(elements[0], "NO", 2) == 0)
+            {
+                map->no++;
+                map->no_path = ft_strdup(elements[1]);
+            }
+            else if (ft_strncmp(elements[0], "SO", 2) == 0)
+            {
+                map->so++;
+                map->so_path = ft_strdup(elements[1]);
+            }
+            else if (ft_strncmp(elements[0], "WE", 2) == 0)
+            {
+                map->we++;
+                map->we_path = ft_strdup(elements[1]);
+            }
+            else if (ft_strncmp(elements[0], "EA", 2) == 0)
+            {
+                map->ea++;
+                map->ea_path = ft_strdup(elements[1]);
+            }
+        }
+        else
+        {
+            printf("Error de sintaxis en elementos!\n");
+            close(map->map_fd);
+            free(line);
+            free_elements(elements);
+            free_xx_path(map);
+            return (1);
+        }
         free(line);
-		free_elements(elements);
-		if (map->no && map->so && map->we && map->ea)
-		{
-        	close(map->map_fd);
-			printf("\nAll cardinal directions exist\n");
-			free_xx_path(map);
-        	return (0);
-    	}
-		line = get_next_line(map->map_fd);
+        free_elements(elements);
+        if (map->no && map->so && map->we && map->ea)
+        {
+            close(map->map_fd);
+            printf("\nAll cardinal directions exist\n");
+            free_xx_path(map);
+            return (0);
+        }
+        line = get_next_line(map->map_fd);
     }
 
-	printf("algun otro Error\n");
-	close(map->map_fd);
-	free_xx_path(map);
-	return (1);
+    printf("algun otro Error\n");
+    close(map->map_fd);
+    free_xx_path(map);
+    return (1);
 }

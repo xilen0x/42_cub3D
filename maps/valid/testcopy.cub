@@ -1,10 +1,10 @@
-SO ./textures/red.xpm
+SO ./textures/red.xpm 
 EA ./textures/yellow.xpm
 WE ./textures/green.xpm
 NO ./textures/blue.xpm
 
-F 22,1,     1
-C 255,33,1
+F 10,100,25 	
+C 255,33,1	 	
 
 0000000000000
 01111111111100

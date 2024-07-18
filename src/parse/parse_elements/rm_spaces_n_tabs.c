@@ -12,28 +12,54 @@
 
 #include "cub3d.h"
 
-void remove_tabs(char **elements)
+void remove_tabs_and_spaces(char **lines)
 {
     int i, j, k;
 
     i = 0;
-    while (elements[i])
+    while (lines[i])
     {
         j = 0;
         k = 0;
-        while (elements[i][j])
+        while (lines[i][j])
         {
-            if (elements[i][j] != '\t')
+            if (lines[i][j] != '\t' && lines[i][j] != ' ')
             {
-                elements[i][k] = elements[i][j];
+                lines[i][k] = lines[i][j];
                 k++;
             }
             j++;
         }
-        elements[i][k] = '\0'; // Terminar la cadena
+        while (k > 0 && (lines[i][k - 1] == ' ' || lines[i][k - 1] == '\t'))
+            k--;
+        lines[i][k] = '\0';
         i++;
     }
 }
+
+
+// void remove_tabs(char **line)
+// {
+//     int i, j, k;
+
+//     i = 0;
+//     while (line[i])
+//     {
+//         j = 0;
+//         k = 0;
+//         while (line[i][j])
+//         {
+//             if ((line[i][j] != '\t'))
+//             {
+//                 line[i][k] = line[i][j];
+//                 k++;
+//             }
+//             j++;
+//         }
+//         line[i][k] = '\0';
+//         i++;
+//     }
+// }
 
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)
@@ -68,8 +94,7 @@ void remove_spaces_around_commas(char *line)
         }
     }
     // Eliminar espacios al final de la línea
-    while (j > 0 && line[j - 2] == ' ')
+   while ((j > 0) && ((line[j - 2] == ' ') || (line[j - 2] == '\t')))
         j--;
-
     line[j] = '\0';
 }

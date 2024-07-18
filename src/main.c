@@ -15,13 +15,15 @@
 
 int	main(int ac, char *av[])
 {
-	t_map	map;
+	t_elem		elem;
+	t_colors	colors;
+	t_map		map;
 	//t_game	game;
 
 	if (ac == 2)
 	{
-		init_values(&map);
-		parsing(&map, av);
+		init_values(&elem, &colors, &map);
+		parsing(&elem, &colors, &map, av);
 		//init_game(&game);
 		// set_images(&game);
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
