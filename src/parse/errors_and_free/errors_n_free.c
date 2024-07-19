@@ -89,13 +89,23 @@ void	free_xx_element(t_elem *elem)
     free(elem->we_path);
     free(elem->ea_path);
 }
-
+void	free_xx_element_color(t_colors *colors)
+{
+	colors->f = 0;
+	colors->c = 0;
+	colors->f_color[0] = 0;
+	colors->f_color[1] = 0;
+	colors->f_color[2] = 0;
+	colors->c_color[0] = 0;
+	colors->c_color[1] = 0;
+	colors->c_color[2] = 0;
+}
 void	free_elements(char **elements)
 {
 	int i = 0;
 
 	if (!elements)
-		return;
+		return ;
 	while (elements[i])
 	{
 		free(elements[i]);

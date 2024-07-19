@@ -31,6 +31,7 @@ int	main(int ac, char *av[])
 		// mlx_loop(game.mlx);
 		// free_matrix(map.matrix);
 		free_xx_element(&elem);
+		free_xx_element_color(&colors);//aki voy hay 8 leaks que no se donde estan!
 	}
 	else
 		ft_errors(1);

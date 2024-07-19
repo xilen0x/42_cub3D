@@ -23,6 +23,14 @@ void	print_elements(t_elem *elem)
 	printf("WE_PATH: %s\n", elem->we_path);
 }
 
+void	print_colors(t_colors *colors)
+{
+	printf("\nF: %d\n", colors->f);
+	printf("F_COLOR: %d, %d, %d\n", colors->f_color[0], colors->f_color[1], colors->f_color[2]);
+	printf("\nC: %d\n", colors->c);
+	printf("C_COLOR: %d, %d, %d\n", colors->c_color[0], colors->c_color[1], colors->c_color[2]);
+}
+
 void save_elements(t_elem *elem, t_map *map)
 {
     char *line;
@@ -75,15 +83,77 @@ void save_elements(t_elem *elem, t_map *map)
 }
 
 
-//void	save_colors()
+void	save_colors(t_colors *colors, t_map *map)
+{
+	char *line;
+	char **colors_elem;
+	char **temp;
+    
+	line = get_next_line(map->map_fd);
+	while (line)
+	{
+		if (line[0] == '\n')
+		{
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
+		if ((ft_strncmp(line, "F", 1) == 0) || (ft_strncmp(line, "C", 1) == 0))
+		{
+			colors_elem = ft_split(line, ' ');
+			temp = malloc(sizeof(char *) * 3);
+			if (!temp)
+				ft_errors(2);
+			temp = ft_split(colors_elem[1], ',');
+			if (ft_strncmp(colors_elem[0], "F", 1) == 0)
+			{
+				// temp = ft_strtrim(colors_elem[0], " ");
+				colors->f = 1;
+				
+				temp[0] = ft_strtrim(temp[0], " ");
+				colors->f_color[0] = ft_atoi(temp[0]);
+				
+				temp[1] = ft_strtrim(temp[1], " ");
+				colors->f_color[1] = ft_atoi(temp[1]);
+				
+				temp[2] = ft_strtrim(temp[2], " ");
+				colors->f_color[2] = ft_atoi(temp[2]);
+			}
+			else if (ft_strncmp(colors_elem[0], "C", 1) == 0)
+			{
+				// temp = ft_strtrim(colors_elem[0], " ");
+				colors->c = 1;
+				temp[0] = ft_strtrim(temp[0], " ");
+				colors->c_color[0] = ft_atoi(temp[0]);
+				temp[1] = ft_strtrim(temp[1], " ");
+				colors->c_color[1] = ft_atoi(temp[1]);
+				temp[2] = ft_strtrim(temp[2], " ");
+				colors->c_color[2] = ft_atoi(temp[2]);
+			}
+		}
+		else
+		{
+			// free_colors_elem(colors_elem);
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
+		free_elements(colors_elem);
+		free_elements(temp);
+		free(line);
+		line = get_next_line(map->map_fd);
+	}
+	close(map->map_fd);
+}
 
 /*funcion que guarda en */
-void	save_components(t_elem *elem, t_colors *colors, t_map *map)
+void	save_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
-	(void)colors;
 	save_elements(elem, map);
 	print_elements(elem);
-	//save_colors(colors, map);
+	open_map(av[1], map);
+	save_colors(colors, map);
+	print_colors(colors);
 	// save_map(map);
 }
 
@@ -107,9 +177,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	open_map(av[1], map);
 	width_height_map_file(map, av);
 	open_map(av[1], map);
-	save_components(elem, colors, map);
-	// save_colors(map, av);
-	// save_map(map, av);
+	save_components(elem, colors, map, av);
 	//open_map(av[1], map);
 	//parsing_elements(av[1], map);
 	//parsing_map(&map);

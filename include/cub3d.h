@@ -57,6 +57,7 @@ int		ft_errors(int n);
 void	free_matrix(char **matrix);
 void	free_xx_element(t_elem *elem);
 void	free_elements(char **elements);
+void	free_xx_element_color(t_colors *colors);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
 // int		elements_exist(t_map *map);
 void	init_values(t_elem *elem, t_colors *colors, t_map *map);
