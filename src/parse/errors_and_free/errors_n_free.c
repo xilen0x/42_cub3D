@@ -81,7 +81,7 @@ void free_matrix(char **matrix)
     }
 }
 
-void	free_xx_element(t_elem *elem)
+void	free_element_struct(t_elem *elem)
 {
 	free(elem->no);
 	free(elem->so);
@@ -92,18 +92,19 @@ void	free_xx_element(t_elem *elem)
     free(elem->we_path);
     free(elem->ea_path);
 }
-void	free_elements(char **elements)
+void	free_elements(char **double_pointer)
 {
-	int i = 0;
-
-	if (!elements)
+	int i;
+	
+	 i = 0;
+	if (!double_pointer)
 		return ;
-	while (elements[i])
+	while (double_pointer[i])
 	{
-		free(elements[i]);
+		free(double_pointer[i]);
 		i++;
 	}
-	free(elements);
+	free(double_pointer);
 }
 
 /*funcion que imprime la matriz*/

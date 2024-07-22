@@ -88,6 +88,7 @@ void	save_colors(t_colors *colors, t_map *map)
 	char *line;
 	char **colors_elem;
 	char **temp;
+	char *color;
     
 	line = get_next_line(map->map_fd);
 	while (line)
@@ -107,28 +108,34 @@ void	save_colors(t_colors *colors, t_map *map)
 				// temp = ft_strtrim(colors_elem[0], " ");
 				colors->f = 1;
 				
-				temp[0] = ft_strtrim(temp[0], " ");
-				colors->f_color[0] = ft_atoi(temp[0]);
+				color = ft_strtrim(temp[0], " ");
+				colors->f_color[0] = ft_atoi(color);
+				free(color);
 				
-				temp[1] = ft_strtrim(temp[1], " ");
-				colors->f_color[1] = ft_atoi(temp[1]);
+				color = ft_strtrim(temp[1], " ");
+				colors->f_color[1] = ft_atoi(color);
+				free(color);
 				
-				temp[2] = ft_strtrim(temp[2], " ");
-				colors->f_color[2] = ft_atoi(temp[2]);
+				color = ft_strtrim(temp[2], " ");
+				colors->f_color[2] = ft_atoi(color);
+				free(color);
 			}
 			else if (ft_strncmp(colors_elem[0], "C", 1) == 0)
 			{
 				// temp = ft_strtrim(colors_elem[0], " ");
 				colors->c = 1;
 
-				temp[0] = ft_strtrim(temp[0], " ");
-				colors->c_color[0] = ft_atoi(temp[0]);
+				color = ft_strtrim(temp[0], " ");
+				colors->c_color[0] = ft_atoi(color);
+				free(color);
+
+				color = ft_strtrim(temp[1], " ");
+				colors->c_color[1] = ft_atoi(color);
+				free(color);
 				
-				temp[1] = ft_strtrim(temp[1], " ");
-				colors->c_color[1] = ft_atoi(temp[1]);
-				
-				temp[2] = ft_strtrim(temp[2], " ");
-				colors->c_color[2] = ft_atoi(temp[2]);
+				color = ft_strtrim(temp[2], " ");
+				colors->c_color[2] = ft_atoi(color);
+				free(color);
 			}
 		}
 		else
@@ -140,12 +147,9 @@ void	save_colors(t_colors *colors, t_map *map)
 		}
 		free_elements(colors_elem);
 		free_elements(temp);
-		temp = NULL;
 		free(line);
 		line = get_next_line(map->map_fd);
 	}
-	// if (temp)//aki voy / leaked in 6 allocation(s)*****
-	//  	free_elements(temp);
 	close(map->map_fd);
 }
 
