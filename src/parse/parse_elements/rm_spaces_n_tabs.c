@@ -38,28 +38,28 @@ void remove_tabs_and_spaces(char **lines)
 }
 
 
-// void remove_tabs(char **line)
-// {
-//     int i, j, k;
+void remove_tabs(char **line)
+{
+    int i, j, k;
 
-//     i = 0;
-//     while (line[i])
-//     {
-//         j = 0;
-//         k = 0;
-//         while (line[i][j])
-//         {
-//             if ((line[i][j] != '\t'))
-//             {
-//                 line[i][k] = line[i][j];
-//                 k++;
-//             }
-//             j++;
-//         }
-//         line[i][k] = '\0';
-//         i++;
-//     }
-// }
+    i = 0;
+    while (line[i])
+    {
+        j = 0;
+        k = 0;
+        while (line[i][j])
+        {
+            if ((line[i][j] != '\t'))
+            {
+                line[i][k] = line[i][j];
+                k++;
+            }
+            j++;
+        }
+        line[i][k] = '\0';
+        i++;
+    }
+}
 
 //elimina espacios antes y después de las comas
 void remove_spaces_around_commas(char *line)

@@ -37,6 +37,7 @@ void save_elements(t_elem *elem, t_map *map)
     char **elements;
     char *temp;
 	char *line_trimed;
+	int i;
 
     line = get_next_line(map->map_fd);
     while (line)
@@ -49,33 +50,40 @@ void save_elements(t_elem *elem, t_map *map)
         }
 		line_trimed = ft_strtrim2(line, " ", "\t");
         elements = ft_split(line_trimed, ' ');
-        if (ft_strncmp(line_trimed, "NO", 2) == 0)
+		remove_tabs(elements);
+		i = 0;
+		while (elements[i])
+			i++;
+		if (i == 2)
 		{
-            temp = ft_strtrim(elements[0], " ");
-            elem->no = temp;
-            temp = ft_strtrim(elements[1], " ");
-            elem->no_path = temp;
-        }
-		else if (ft_strncmp(line_trimed, "SO", 2) == 0)
-		{
-			temp = ft_strtrim(elements[0], " ");
-			elem->so = temp;
-			temp = ft_strtrim(elements[1], " ");
-			elem->so_path = temp;
-        }
-		else if (ft_strncmp(line_trimed, "EA", 2) == 0)
-		{
-			temp = ft_strtrim(elements[0], " ");
-			elem->ea = temp;
-			temp = ft_strtrim(elements[1], " ");
-			elem->ea_path = temp;
-		}
-		else if (ft_strncmp(line_trimed, "WE", 2) == 0)
-		{
-			temp = ft_strtrim(elements[0], " ");
-			elem->we = temp;
-			temp = ft_strtrim(elements[1], " ");
-			elem->we_path = temp;
+			if (ft_strncmp(line_trimed, "NO", 2) == 0)
+			{
+				temp = ft_strtrim(elements[0], " ");
+				elem->no = temp;
+				temp = ft_strtrim(elements[1], " ");
+				elem->no_path = temp;
+			}
+			else if (ft_strncmp(line_trimed, "SO", 2) == 0)
+			{
+				temp = ft_strtrim(elements[0], " ");
+				elem->so = temp;
+				temp = ft_strtrim(elements[1], " ");
+				elem->so_path = temp;
+			}
+			else if (ft_strncmp(line_trimed, "EA", 2) == 0)
+			{
+				temp = ft_strtrim(elements[0], " ");
+				elem->ea = temp;
+				temp = ft_strtrim(elements[1], " ");
+				elem->ea_path = temp;
+			}
+			else if (ft_strncmp(line_trimed, "WE", 2) == 0)
+			{
+				temp = ft_strtrim(elements[0], " ");
+				elem->we = temp;
+				temp = ft_strtrim(elements[1], " ");
+				elem->we_path = temp;
+			}
 		}
         free_elements(elements);
         free(line);

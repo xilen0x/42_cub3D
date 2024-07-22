@@ -65,7 +65,7 @@ void	width_height_map_file(t_map *map, char *av[]);
 int		elements_colors_exist(char *av, t_map *map);
 void 	print_width_height(t_map *map);
 void	remove_spaces_around_commas(char *line);
-//void	remove_tabs(char **elements);
+void	remove_tabs(char **elements);
 void	remove_tabs_and_spaces(char **lines);
 void	texture_path_extension_is_valid(char	*elements);
 int		elements_colors_range(t_map *map, char *element);
