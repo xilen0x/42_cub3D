@@ -36,6 +36,7 @@ void save_elements(t_elem *elem, t_map *map)
     char *line;
     char **elements;
     char *temp;
+	char *line_trimed;
 
     line = get_next_line(map->map_fd);
     while (line)
@@ -46,29 +47,30 @@ void save_elements(t_elem *elem, t_map *map)
             line = get_next_line(map->map_fd);
             continue ;
         }
-        elements = ft_split(line, ' ');
-        if (ft_strncmp(line, "NO", 2) == 0)
+		line_trimed = ft_strtrim2(line, " ", "\t");
+        elements = ft_split(line_trimed, ' ');
+        if (ft_strncmp(line_trimed, "NO", 2) == 0)
 		{
             temp = ft_strtrim(elements[0], " ");
             elem->no = temp;
             temp = ft_strtrim(elements[1], " ");
             elem->no_path = temp;
         }
-		else if (ft_strncmp(line, "SO", 2) == 0)
+		else if (ft_strncmp(line_trimed, "SO", 2) == 0)
 		{
 			temp = ft_strtrim(elements[0], " ");
 			elem->so = temp;
 			temp = ft_strtrim(elements[1], " ");
 			elem->so_path = temp;
         }
-		else if (ft_strncmp(line, "EA", 2) == 0)
+		else if (ft_strncmp(line_trimed, "EA", 2) == 0)
 		{
 			temp = ft_strtrim(elements[0], " ");
 			elem->ea = temp;
 			temp = ft_strtrim(elements[1], " ");
 			elem->ea_path = temp;
 		}
-		else if (ft_strncmp(line, "WE", 2) == 0)
+		else if (ft_strncmp(line_trimed, "WE", 2) == 0)
 		{
 			temp = ft_strtrim(elements[0], " ");
 			elem->we = temp;
@@ -77,6 +79,7 @@ void save_elements(t_elem *elem, t_map *map)
 		}
         free_elements(elements);
         free(line);
+		free(line_trimed);
         line = get_next_line(map->map_fd);
     }
     close(map->map_fd);

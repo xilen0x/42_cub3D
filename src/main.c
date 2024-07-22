@@ -29,7 +29,8 @@ int	main(int ac, char *av[])
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_EXIT, 0, &exit_game, &game);
 		// mlx_loop(game.mlx);
-		//free_xx_element_color(&colors);//leaks
+
+		//free_xx_element_color(&colors);
 		//free_elements(av);
 	}
 	else

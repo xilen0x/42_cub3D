@@ -11,7 +11,6 @@
 // /* ************************************************************************** */
 
 #include "cub3d.h"
-// z
 
 
 /*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
@@ -27,6 +26,45 @@ void print_width_height(t_map *map)
 {
 	printf("Width: %d\n", map->w);
 	printf("Height: %d\n", map->h);
+}
+/* F. que verifica si un carácter está presente en un conjunto de caracteres.*/
+static int	ft_isset2(char c, const char *set)
+{
+	while (*set)
+	{
+		if (*set == c)
+			return (1);
+		set++;
+	}
+	return (0);
+}
+
+char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
+{
+	unsigned int	len;
+	unsigned int	i;
+	const char		*start;
+	const char		*end;
+	char			*reserved;
+
+	i = 0;
+	start = s1;
+	end = s1 + ft_strlen(s1) - 1;
+	while (ft_isset2(*start, set) || ft_isset2(*start, tabs))
+		start++;
+	while (start <= end && ft_isset2(*end, set))
+		end--;
+	len = end - start + 1;
+	reserved = (char *)malloc((len + 1) * sizeof(char));
+	if (reserved == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		reserved[i] = start[i];
+		i++;
+	}
+	reserved[len] = '\0';
+	return (reserved);
 }
 // /* Funcion que reserva memoria y rellena con ' ' */
 // void spaced_malloc(t_map *map, size_t count, size_t size)
