@@ -70,7 +70,7 @@ void	remove_tabs_and_spaces(char **lines);
 void	texture_path_extension_is_valid(char	*elements);
 int		elements_colors_range(t_map *map, char *element);
 char	*ft_strtrim2(char const *s1, char const *set, char const *tabs);
-
+char **ft_split2(const char *str);
 /* ---------------------------- GAME ----------------------------*/
 
 
