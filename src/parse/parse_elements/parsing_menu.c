@@ -124,6 +124,7 @@ void save_elements(t_elem *elem, t_map *map)
 void	save_colors(t_colors *colors, t_map *map)
 {
 	char *line;
+	char *line_trimed;
 	char **colors_elem;
 	char **temp;
 	char *color;
@@ -137,9 +138,11 @@ void	save_colors(t_colors *colors, t_map *map)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
-		if ((ft_strncmp(line, "F", 1) == 0) || (ft_strncmp(line, "C", 1) == 0))
+		line_trimed = ft_strtrim2(line, " ", "\t");
+		colors_elem = ft_split2(line_trimed);
+		if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
 		{
-			colors_elem = ft_split(line, ' ');
+			// colors_elem = ft_split(colors_elem[1], ' ');
 			temp = ft_split(colors_elem[1], ',');
 			if (ft_strncmp(colors_elem[0], "F", 1) == 0)
 			{
@@ -175,17 +178,29 @@ void	save_colors(t_colors *colors, t_map *map)
 				colors->c_color[2] = ft_atoi(color);
 				free(color);
 			}
+			if (colors->f && colors->c)
+			{
+				free_elements(colors_elem);
+				free_elements(temp);
+				free(line);
+				free(line_trimed);
+				close(map->map_fd);
+				return ;
+			}
+			
 		}
 		else
 		{
-			// free_colors_elem(colors_elem);
+			free_elements(colors_elem);
 			free(line);
+			free(line_trimed);
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
 		free_elements(colors_elem);
 		free_elements(temp);
 		free(line);
+		free(line_trimed);
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
