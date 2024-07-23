@@ -125,10 +125,11 @@ void	save_colors(t_colors *colors, t_map *map)
 {
 	char *line;
 	char *line_trimed;
-	char **colors_elem;
+	//char **colors_elem;
 	char **temp;
 	char *color;
-    
+    int i;
+
 	line = get_next_line(map->map_fd);
 	while (line)
 	{
@@ -139,65 +140,76 @@ void	save_colors(t_colors *colors, t_map *map)
 			continue ;
 		}
 		line_trimed = ft_strtrim2(line, " ", "\t");
-		colors_elem = ft_split2(line_trimed);
-		if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
-		{
-			temp = ft_split(colors_elem[1], ',');
-			if (ft_strncmp(colors_elem[0], "F", 1) == 0)
+		temp = ft_split(line_trimed, ',');
+		i = 0;
+		while (temp[i])
+			i++;
+		if (i == 3)
+		{		
+			if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
 			{
-				colors->f = 1;
-				
-				color = ft_strtrim(temp[0], " ");
-				colors->f_color[0] = ft_atoi(color);
-				free(color);
-				
-				color = ft_strtrim(temp[1], " ");
-				colors->f_color[1] = ft_atoi(color);
-				free(color);
-				
-				color = ft_strtrim(temp[2], " ");
-				colors->f_color[2] = ft_atoi(color);
-				free(color);
-			}
-			else if (ft_strncmp(colors_elem[0], "C", 1) == 0)
-			{
-				colors->c = 1;
+				if (ft_strncmp(temp[0], "F", 1) == 0)
+				{
+					colors->f = 1;
+					
+					color = ft_strtrim(temp[0], " ");
+					colors->f_color[0] = ft_atoi(color);
+					free(color);
+					
+					color = ft_strtrim(temp[1], " ");
+					colors->f_color[1] = ft_atoi(color);
+					free(color);
+					
+					color = ft_strtrim(temp[2], " ");
+					colors->f_color[2] = ft_atoi(color);
+					free(color);
+				}
+				else if (ft_strncmp(temp[0], "C", 1) == 0)
+				{
+					colors->c = 1;
 
-				color = ft_strtrim(temp[0], " ");
-				colors->c_color[0] = ft_atoi(color);
-				free(color);
+					color = ft_strtrim(temp[0], " ");
+					colors->c_color[0] = ft_atoi(color);
+					free(color);
 
-				color = ft_strtrim(temp[1], " ");
-				colors->c_color[1] = ft_atoi(color);
-				free(color);
-				
-				color = ft_strtrim(temp[2], " ");
-				colors->c_color[2] = ft_atoi(color);
-				free(color);
+					color = ft_strtrim(temp[1], " ");
+					colors->c_color[1] = ft_atoi(color);
+					free(color);
+					
+					color = ft_strtrim(temp[2], " ");
+					colors->c_color[2] = ft_atoi(color);
+					free(color);
+				}
+				if (colors->f && colors->c)
+				{
+					free_elements(temp);
+					free(line);
+					free(line_trimed);
+					close(map->map_fd);
+					return ;
+				}	
 			}
-			if (colors->f && colors->c)
+			else
 			{
-				free_elements(colors_elem);
 				free_elements(temp);
 				free(line);
 				free(line_trimed);
-				close(map->map_fd);
-				return ;
+				line = get_next_line(map->map_fd);
+				continue ;
 			}
-			
 		}
 		else
 		{
-			free_elements(colors_elem);
+			printf("\nError de sintaxis en colores!\n");
 			free(line);
 			free(line_trimed);
-			line = get_next_line(map->map_fd);
-			continue ;
+			free_elements(temp);
+			close(map->map_fd);
+			return ;
 		}
-		free_elements(colors_elem);
+		free(line_trimed);
 		free_elements(temp);
 		free(line);
-		free(line_trimed);
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
