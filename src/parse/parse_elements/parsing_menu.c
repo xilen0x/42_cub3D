@@ -125,8 +125,9 @@ void	save_colors(t_colors *colors, t_map *map)
 {
 	char *line;
 	char *line_trimed;
-	//char **colors_elem;
+	int	color_value;
 	char **temp;
+	char **temp2;
 	char *color;
     int i;
 
@@ -140,27 +141,44 @@ void	save_colors(t_colors *colors, t_map *map)
 			continue ;
 		}
 		line_trimed = ft_strtrim2(line, " ", "\t");
-		temp = ft_split(line_trimed, ',');
+		temp = ft_split(line_trimed, ' ');
+		temp2 = ft_split(temp[1], ',');
 		i = 0;
-		while (temp[i])
+		while (temp2[i])
 			i++;
 		if (i == 3)
 		{		
 			if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
 			{
+				i = 0;
+				while (temp2[i])
+				{
+					color_value = ft_atoi(temp2[i]);
+					if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
+					{
+						printf("\nError de rango en colores!\n");
+						free_elements(temp);
+						free_elements(temp2);
+						free(line);
+						free(line_trimed);
+						close(map->map_fd);
+						return ;
+					}
+					i++;
+				}
 				if (ft_strncmp(temp[0], "F", 1) == 0)
 				{
 					colors->f = 1;
 					
-					color = ft_strtrim(temp[0], " ");
+					color = ft_strtrim(temp2[0], " ");
 					colors->f_color[0] = ft_atoi(color);
 					free(color);
 					
-					color = ft_strtrim(temp[1], " ");
+					color = ft_strtrim(temp2[1], " ");
 					colors->f_color[1] = ft_atoi(color);
 					free(color);
 					
-					color = ft_strtrim(temp[2], " ");
+					color = ft_strtrim(temp2[2], " ");
 					colors->f_color[2] = ft_atoi(color);
 					free(color);
 				}
@@ -168,21 +186,22 @@ void	save_colors(t_colors *colors, t_map *map)
 				{
 					colors->c = 1;
 
-					color = ft_strtrim(temp[0], " ");
+					color = ft_strtrim(temp2[0], " ");
 					colors->c_color[0] = ft_atoi(color);
 					free(color);
 
-					color = ft_strtrim(temp[1], " ");
+					color = ft_strtrim(temp2[1], " ");
 					colors->c_color[1] = ft_atoi(color);
 					free(color);
 					
-					color = ft_strtrim(temp[2], " ");
+					color = ft_strtrim(temp2[2], " ");
 					colors->c_color[2] = ft_atoi(color);
 					free(color);
 				}
 				if (colors->f && colors->c)
 				{
 					free_elements(temp);
+					free_elements(temp2);
 					free(line);
 					free(line_trimed);
 					close(map->map_fd);
@@ -192,6 +211,7 @@ void	save_colors(t_colors *colors, t_map *map)
 			else
 			{
 				free_elements(temp);
+				free_elements(temp2);
 				free(line);
 				free(line_trimed);
 				line = get_next_line(map->map_fd);
@@ -204,11 +224,13 @@ void	save_colors(t_colors *colors, t_map *map)
 			free(line);
 			free(line_trimed);
 			free_elements(temp);
+			free_elements(temp2);
 			close(map->map_fd);
 			return ;
 		}
 		free(line_trimed);
 		free_elements(temp);
+		free_elements(temp2);
 		free(line);
 		line = get_next_line(map->map_fd);
 	}
