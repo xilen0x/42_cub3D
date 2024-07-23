@@ -13,21 +13,24 @@
 
 void	print_elements(t_elem *elem)
 {
-	printf("\nNO: %s\n", elem->no);
+	printf("\nNO     : %s\n", elem->no);
 	printf("NO_PATH: %s\n", elem->no_path);
-	printf("SO: %s\n", elem->so);
+	
+	printf("\nSO     : %s\n", elem->so);
 	printf("SO_PATH: %s\n", elem->so_path);
-	printf("\nEA: %s\n", elem->ea);
+	
+	printf("\nEA     : %s\n", elem->ea);
 	printf("EA_PATH: %s\n", elem->ea_path);
-	printf("WE: %s\n", elem->we);
+
+	printf("\nWE     : %s\n", elem->we);
 	printf("WE_PATH: %s\n", elem->we_path);
 }
 
 void	print_colors(t_colors *colors)
 {
-	printf("\nF: %d\n", colors->f);
+	printf("\nF      : %d\n", colors->f);
 	printf("F_COLOR: %d, %d, %d\n", colors->f_color[0], colors->f_color[1], colors->f_color[2]);
-	printf("\nC: %d\n", colors->c);
+	printf("\nC      : %d\n", colors->c);
 	printf("C_COLOR: %d, %d, %d\n", colors->c_color[0], colors->c_color[1], colors->c_color[2]);
 }
 
@@ -51,7 +54,7 @@ void save_elements(t_elem *elem, t_map *map)
         }
 		line_trimed = ft_strtrim2(line, " ", "\t");
         elements = ft_split2(line_trimed);
-		// line_trimed = ft_split(elements[0], ' ');
+		texture_path_extension_is_valid(elements[1]);
 		remove_tabs(elements);
 		i = 0;
 		while (elements[i])
@@ -199,20 +202,6 @@ void	save_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	// save_map(map);
 }
 
-// static int	parsing_elements(char *av, t_map *map)
-// {
-// 	(void)av;
-// 	if (elements_exist(map) != 0)
-// 		ft_errors(3);
-// 	// if (elements_colors_exist(av, map) != 0)
-// 	//   	ft_errors(3);//corregir(si procede) luego los mensajes de error
-// 	// //F: cant. de elementos o formato debe ser == (X XXX,XXX,XXX)
-// 	// //F 220,100,0
-// 	// if (elements_colors_range(map) != 0)
-// 	// 	ft_errors(3);	
-// 	return (0);
-// }
-
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
 	file_is_cub(av[1]);
@@ -220,6 +209,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	width_height_map_file(map, av);
 	open_map(av[1], map);
 	save_components(elem, colors, map, av);
+	
 	//open_map(av[1], map);
 	//parsing_elements(av[1], map);
 	//parsing_map(&map);

@@ -49,7 +49,7 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
 
 	i = 0;
 	start = s1;
-	end = s1 + ft_strlen(s1) - 1;
+	end = s1 + ft_strlen(s1) - 2;
 	while (ft_isset2(*start, set) || ft_isset2(*start, tabs))
 		start++;
 	while (start <= end && ft_isset2(*end, set))
