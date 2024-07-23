@@ -37,7 +37,7 @@ void	texture_path_extension_is_valid(char *elements)
 	i = 0;
 	while (elements[i])
 		i++;
-	if (elements[i - 2] != 'm' || elements[i - 3] != 'p' || elements[i - 4] != 'x' || elements[i - 5] != '.')
+	if (elements[i - 1] != 'm' || elements[i - 2] != 'p' || elements[i - 3] != 'x' || elements[i - 4] != '.')
 	{
 		write (2, "Error\n", 6);
 		write (2, "The texture path is not valid.\n", 31);
