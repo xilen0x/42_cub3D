@@ -1,7 +1,7 @@
 
 
 
-	SO 	 ./textures/red.xpm
+	SO 	./textures/red.xpm
                EA ./textures/yellow.xpm
 WE    ./textures/green.xpm
 

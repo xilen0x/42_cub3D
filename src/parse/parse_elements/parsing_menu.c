@@ -142,11 +142,9 @@ void	save_colors(t_colors *colors, t_map *map)
 		colors_elem = ft_split2(line_trimed);
 		if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
 		{
-			// colors_elem = ft_split(colors_elem[1], ' ');
 			temp = ft_split(colors_elem[1], ',');
 			if (ft_strncmp(colors_elem[0], "F", 1) == 0)
 			{
-				// temp = ft_strtrim(colors_elem[0], " ");
 				colors->f = 1;
 				
 				color = ft_strtrim(temp[0], " ");
@@ -163,7 +161,6 @@ void	save_colors(t_colors *colors, t_map *map)
 			}
 			else if (ft_strncmp(colors_elem[0], "C", 1) == 0)
 			{
-				// temp = ft_strtrim(colors_elem[0], " ");
 				colors->c = 1;
 
 				color = ft_strtrim(temp[0], " ");
