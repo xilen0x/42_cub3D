@@ -30,6 +30,12 @@ void	print_colors(t_colors *colors)
 	printf("\nC: %d\n", colors->c);
 	printf("C_COLOR: %d, %d, %d\n", colors->c_color[0], colors->c_color[1], colors->c_color[2]);
 }
+/*
+NOTE:
+error al poner espacio/tab al final de la linea
+de elementos
+y colores seguramente tambien
+*/
 
 void save_elements(t_elem *elem, t_map *map)
 {
