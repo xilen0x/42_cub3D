@@ -146,13 +146,23 @@ void	save_colors(t_colors *colors, t_map *map)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
-		remove_tabs_and_spaces(line);//
+		remove_tabs_and_spaces(line);
+		remove_spaces_around_commas(line);//*********************
 		line_trimed = ft_strtrim2(line, " ", "\t");
 		temp = ft_split(line_trimed, ' ');
 		temp2 = ft_split(temp[1], ',');
 		// remove_tabs_and_spaces(temp2);
+		if (!temp2)
+		{
+			printf("\nError de sintaxis en colores!******1\n");
+			free(line);
+			free(line_trimed);
+			free_elements(temp);
+			close(map->map_fd);
+			return ;
+		}
 		i = 0;
-		while (temp2[i])
+		while (temp2[i])//SEGV
 			i++;
 		if (i == 3)
 		{		
