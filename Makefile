@@ -41,9 +41,11 @@ SRC_FILES = main.c \
 			parse/parse_elements/elements_colors_range.c \
 			parse/parse_elements/utils_0.c \
 			parse/parse_elements/utils_1.c \
+			parse/parse_elements/parsing_colors.c \
+			parse/parse_elements/parsing_elements.c \
             parse/errors_and_free/errors_n_free.c \
 			parse/parse_map/map_create_matrix.c \
-			parse/parse_map/empty_lines_spaces.c \
+			parse/parse_map/parsing_map.c \
 			game/window.c
 
 # Archivos objeto

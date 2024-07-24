@@ -57,21 +57,21 @@ int		ft_errors(int n);
 void	free_matrix(char **matrix);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
-void	free_xx_element_color(t_colors *colors);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
-// int		elements_exist(t_map *map);
+void	parsing_colors(t_colors *colors, t_map *map);
+void	parsing_elements(t_elem *elem, t_map *map);
+void	parsing_map(t_map *map);
 void	init_values(t_elem *elem, t_colors *colors, t_map *map);
 void	width_height_map_file(t_map *map, char *av[]);
-int		elements_colors_exist(char *av, t_map *map);
-void 	print_width_height(t_map *map);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
 void	remove_tabs_and_spaces(char *lines);
 void	texture_path_extension_is_valid(char	*elements);
-int		elements_colors_range(t_map *map, char *element);
 char	*ft_strtrim2(char const *s1, char const *set, char const *tabs);
-char **ft_split2(const char *str);
+char 	**ft_split2(const char *str);
+void 	print_width_height(t_map *map);
+void	print_elements(t_elem *elem);
+void	print_colors(t_colors *colors);
 /* ---------------------------- GAME ----------------------------*/
-
 
 #endif
