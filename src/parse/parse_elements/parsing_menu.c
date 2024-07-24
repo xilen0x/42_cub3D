@@ -146,9 +146,11 @@ void	save_colors(t_colors *colors, t_map *map)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
+		remove_tabs_and_spaces(line);//
 		line_trimed = ft_strtrim2(line, " ", "\t");
 		temp = ft_split(line_trimed, ' ');
 		temp2 = ft_split(temp[1], ',');
+		// remove_tabs_and_spaces(temp2);
 		i = 0;
 		while (temp2[i])
 			i++;
