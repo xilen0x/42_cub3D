@@ -35,7 +35,6 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 			parsing_elements(elem, map);
 			free_elements(elements);
 			free(line_trimed);
-//			free(line);
 			return ;
 		}
 		else
@@ -54,19 +53,6 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	}
 }
 
-/*funcion que guarda en */
-// void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
-// {
-// 	parsing_elements(elem, map);
-// 	//print_elements(elem);
-// 	open_map(av[1], map);
-// 	parsing_colors(colors, map);
-// 	//print_colors(colors);
-// 	// open_map(av[1], map);
-// 	// parsing_map(map);
-// 	// save_map(av[1], map);
-// }
-
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
 	file_is_cub(av[1]);
@@ -76,8 +62,8 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	parsing_components(elem, colors, map, av);
 	//open_map(av[1], map);
 	//parsing_elements(av[1], map);
-	//parsing_map(&map);
-	print_elements(elem);
-	print_colors(colors);
+	parsing_map(map);
+	// print_elements(elem);
+	// print_colors(colors);
 	//print_width_height(map);
 }

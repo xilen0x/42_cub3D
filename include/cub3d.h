@@ -13,20 +13,22 @@
 // #define RESET "\033[0m"
 // #define BONUS 0
 
-#define NORTH 0
-#define SOUTH 1
-#define EAST 2
-#define WEST 3
+// #define NORTH 0
+// #define SOUTH 1
+// #define EAST 2
+// #define WEST 3
 
 #define MAX_COLOR_VALUE 255
 #define MIN_COLOR_VALUE 0
 
 typedef struct s_map
 {
-	int		map_fd;//almacena el fd del mapa original
-	int		w;
-	int		h;
-	char	**matrix;
+	int				map_fd;//almacena el fd del mapa original
+	int				w;
+	int				h;
+	char			**matrix;
+	void			*content;
+	struct s_map	*next;
 }	t_map;
 
 typedef struct s_elem
@@ -74,6 +76,9 @@ char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
+t_map	*ft_newnode(void *content);
+void	ft_add_back(t_map **lst, t_map *new);
+t_map	*ft_lastnode(t_map *node);
 /* ---------------------------- GAME ----------------------------*/
 
 #endif

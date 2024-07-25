@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_elements.c                                    :+:      :+:    :+:   */
+/*   parsing_elements2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 15:24:45 by castorga          #+#    #+#             */
-/*   Updated: 2024/07/24 15:24:48 by castorga         ###   ########.fr       */
+/*   Created: 2024/07/25 16:57:52 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/25 16:57:54 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void parsing_elements(t_elem *elem, t_map *map)
+void parsing_elements2(t_elem *elem, t_map *map, char *line)
 {
-    char *line;
-	char **elements;
+    char **elements;
     char *temp;
 	char *line_trimed;
 	int i;
 	int j;
 
-	line = get_next_line(map->map_fd);
+	// line = get_next_line(map->map_fd);
     while (line)
 	{
         if (line[0] == '\n')
@@ -98,4 +97,3 @@ void parsing_elements(t_elem *elem, t_map *map)
     }
     close(map->map_fd);
 }
-

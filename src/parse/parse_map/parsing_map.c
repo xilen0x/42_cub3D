@@ -15,6 +15,7 @@
 void	parsing_map(t_map *map)
 {
 	char	*line;
+	t_map	*node;
 
 	line = get_next_line(map->map_fd);
 	while (line)
@@ -27,7 +28,11 @@ void	parsing_map(t_map *map)
 		}
 		if ((line[0] == '0') || (line[0] == '1'))
 		{
-			printf("%s", line);
+			// printf("%s", line);
+			node = ft_newnode(line);
+			ft_add_back(&map, node);
+			printf("%s", (char *)node->content);
+		
 			free(line);
 			line = get_next_line(map->map_fd);
 			continue ;

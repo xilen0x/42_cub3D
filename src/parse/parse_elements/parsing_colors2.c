@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_colors.c                                      :+:      :+:    :+:   */
+/*   parsing_colors2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 15:22:12 by castorga          #+#    #+#             */
-/*   Updated: 2024/07/24 15:22:15 by castorga         ###   ########.fr       */
+/*   Created: 2024/07/25 16:56:37 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/25 16:56:39 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	parsing_colors(t_colors *colors, t_map *map)
+void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 {
 	char	*line_trimed;
 	int		color_value;
@@ -20,9 +20,7 @@ void	parsing_colors(t_colors *colors, t_map *map)
 	char 	**temp2;
 	char 	*color;
     int 	i;
-	char	*line;
 
-	line = get_next_line(map->map_fd);
 	while (line)
 	{
 		if (line[0] == '\n')
@@ -138,4 +136,3 @@ void	parsing_colors(t_colors *colors, t_map *map)
 	}
 	close(map->map_fd);
 }
-
