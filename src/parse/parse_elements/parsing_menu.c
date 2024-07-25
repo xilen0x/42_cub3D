@@ -18,7 +18,7 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
     char *line_trimed;
 
 	line = get_next_line(map->map_fd);
-	while (line)
+	while (1)
 	{
 		if (line[0] == '\n')
 		{
@@ -30,18 +30,27 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
         elements = ft_split2(line_trimed);
 		if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
 		{
-			parsing_colors(colors, map, line);
+			parsing_colors2(colors, map, line);
 			open_map(av[1], map);
 			parsing_elements(elem, map);
+			free_elements(elements);
+			free(line_trimed);
+//			free(line);
+			return ;
 		}
 		else
 		{
-			parsing_elements(elem, map);
+			parsing_elements2(elem, map, line);
 			open_map(av[1], map);
-			parsing_colors(colors, map, line);
+			parsing_colors(colors, map);
+			free_elements(elements);
+			free(line_trimed);
+			return ;
 		}
-		//free(line);
-		line = get_next_line(map->map_fd);
+		free_elements(elements);
+		free(line_trimed);
+		free(line);
+		return ;
 	}
 }
 
@@ -65,9 +74,10 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	width_height_map_file(map, av);
 	open_map(av[1], map);
 	parsing_components(elem, colors, map, av);
-	
 	//open_map(av[1], map);
 	//parsing_elements(av[1], map);
 	//parsing_map(&map);
+	print_elements(elem);
+	print_colors(colors);
 	//print_width_height(map);
 }
