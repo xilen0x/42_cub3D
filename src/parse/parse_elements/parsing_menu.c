@@ -11,18 +11,59 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-/*funcion que guarda en */
 void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
-	parsing_elements(elem, map);
-	//print_elements(elem);
-	open_map(av[1], map);
-	parsing_colors(colors, map);
-	//print_colors(colors);
-	open_map(av[1], map);
-	parsing_map(map);
-	// save_map(av[1], map);
+	char *line;
+    char **elements;
+    char *line_trimed;
+
+	line = get_next_line(map->map_fd);
+	while (line)
+	{
+		if (line[0] == '\n')
+		{
+            free(line);
+            line = get_next_line(map->map_fd);
+            continue ;
+        }
+		line_trimed = ft_strtrim2(line, " ", "\t");
+        elements = ft_split2(line_trimed);
+		if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
+		{
+			parsing_colors(colors, map);
+			parsing_elements(elem, map);
+		}
+		else
+		{
+			parsing_elements(elem, map);
+			parsing_colors(colors, map);
+		}
+		else//aki voy
+		{
+			printf("\nError de sintaxis en colores!******1\n");
+			free(line);
+			free(line_trimed);
+			free_elements(elements);
+			close(map->map_fd);
+			return ;
+		}
+		free(line);
+		line = get_next_line(map->map_fd);
+	}
 }
+
+/*funcion que guarda en */
+// void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
+// {
+// 	parsing_elements(elem, map);
+// 	//print_elements(elem);
+// 	open_map(av[1], map);
+// 	parsing_colors(colors, map);
+// 	//print_colors(colors);
+// 	// open_map(av[1], map);
+// 	// parsing_map(map);
+// 	// save_map(av[1], map);
+// }
 
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
