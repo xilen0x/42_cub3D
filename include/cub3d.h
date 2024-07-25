@@ -58,7 +58,7 @@ void	free_matrix(char **matrix);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
-void	parsing_colors(t_colors *colors, t_map *map);
+void	parsing_colors(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void	parsing_map(t_map *map);
 void	init_values(t_elem *elem, t_colors *colors, t_map *map);

@@ -32,7 +32,7 @@ void parsing_elements(t_elem *elem, t_map *map)
         }
 		line_trimed = ft_strtrim2(line, " ", "\t");
         elements = ft_split2(line_trimed);			
-		texture_path_extension_is_valid(elements[1]);
+		texture_path_extension_is_valid(elements[1]);//SEGV*******************
 		remove_tabs(elements);
 		i = 0;
 		while (elements[i])

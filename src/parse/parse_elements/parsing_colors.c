@@ -12,9 +12,8 @@
 
 #include "cub3d.h"
 
-void	parsing_colors(t_colors *colors, t_map *map)
+void	parsing_colors(t_colors *colors, t_map *map, char *line)
 {
-	char	*line;
 	char	*line_trimed;
 	int		color_value;
 	char 	**temp;
@@ -22,7 +21,6 @@ void	parsing_colors(t_colors *colors, t_map *map)
 	char 	*color;
     int 	i;
 
-	line = get_next_line(map->map_fd);
 	while (line)
 	{
 		if (line[0] == '\n')
