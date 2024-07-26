@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 /*Inicializacion de valores estructura t_elem*/
-void	init_elem_values(t_elem *elem)
+static void	init_elem_values(t_elem *elem)
 {
     elem->no = NULL;
     elem->no_path = NULL;
@@ -26,7 +26,7 @@ void	init_elem_values(t_elem *elem)
 }
 
 /*Inicializacion de valores structura t_colors*/
-void	init_colors_values(t_colors *colors)
+static void	init_colors_values(t_colors *colors)
 {
 	colors->f = 0;
 	colors->c = 0;
@@ -39,18 +39,23 @@ void	init_colors_values(t_colors *colors)
 }
 
 /*Inicialización de valores estructura t_map*/
-void	init_map_values(t_map *map)
+static void	init_map_values(t_map *map)
 {
 	map->map_fd = 0;
 	map->w = 0;
 	map->h = 0;
 	map->matrix = NULL;
 }
-
+static void	init_t_lmap(t_lmap *lmap)
+{
+	lmap->content = 0;
+	lmap->next = NULL;
+}
 /*Inicializacion de valores*/
-void	init_values(t_elem *elem, t_colors *colors, t_map *map)
+void	init_values(t_elem *elem, t_colors *colors, t_map *map, t_lmap *lmap)
 {
 	init_elem_values(elem);
 	init_colors_values(colors);
 	init_map_values(map);
+	init_t_lmap(lmap);
 }

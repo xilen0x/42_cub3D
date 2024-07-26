@@ -18,12 +18,13 @@ int	main(int ac, char *av[])
 	t_elem		elem;
 	t_colors	colors;
 	t_map		map;
+	t_lmap		lmap;
 	//t_game	game;
 
 	if (ac == 2)
 	{
-		init_values(&elem, &colors, &map);
-		parsing(&elem, &colors, &map, av);
+		init_values(&elem, &colors, &map, &lmap);
+		parsing(&elem, &colors, &map, av, &lmap);
 		//init_game(&game);
 		// set_images(&game);
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
@@ -34,6 +35,7 @@ int	main(int ac, char *av[])
 		ft_errors(1);
 	//free_matrix(map.matrix);
 	free_element_struct(&elem);
+	exit(0);
 	return (0);
 }
  

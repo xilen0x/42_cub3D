@@ -53,7 +53,7 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	}
 }
 
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
+void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lmap)
 {
 	file_is_cub(av[1]);
 	open_map(av[1], map);
@@ -62,7 +62,8 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	parsing_components(elem, colors, map, av);
 	//open_map(av[1], map);
 	//parsing_elements(av[1], map);
-	parsing_map(map);
+	parsing_map(map, lmap);
+	//ft_print_list(map);
 	// print_elements(elem);
 	// print_colors(colors);
 	//print_width_height(map);

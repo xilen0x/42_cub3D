@@ -8,6 +8,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdint.h>
 
 // #define CYAN "\033[0;36m"
 // #define RESET "\033[0m"
@@ -27,9 +28,13 @@ typedef struct s_map
 	int				w;
 	int				h;
 	char			**matrix;
-	void			*content;
-	struct s_map	*next;
 }	t_map;
+
+typedef struct s_list_x_map
+{
+	char				content;
+	struct s_list_x_map	*next;
+}	t_lmap;
 
 typedef struct s_elem
 {
@@ -59,13 +64,13 @@ int		ft_errors(int n);
 void	free_matrix(char **matrix);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
+void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lmap);
 void	parsing_colors(t_colors *colors, t_map *map);
 void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void 	parsing_elements2(t_elem *elem, t_map *map, char *line);
-void	parsing_map(t_map *map);
-void	init_values(t_elem *elem, t_colors *colors, t_map *map);
+void	parsing_map(t_map *map, t_lmap *lmap);
+void	init_values(t_elem *elem, t_colors *colors, t_map *map, t_lmap *lmap);
 void	width_height_map_file(t_map *map, char *av[]);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
@@ -76,9 +81,11 @@ char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
-t_map	*ft_newnode(void *content);
-void	ft_add_back(t_map **lst, t_map *new);
-t_map	*ft_lastnode(t_map *node);
+void	ft_print_list(t_lmap *lmap);
+t_lmap	*ft_newnode(int c);
+void	ft_add_back(t_lmap **lst, t_lmap *new);
+t_lmap	*ft_lastnode(t_lmap *node);
+void ft_del_one(t_lmap *lst, void (*del)(void*));
 /* ---------------------------- GAME ----------------------------*/
 
 #endif

@@ -12,18 +12,30 @@
 
 #include "cub3d.h"
 
-t_map	*ft_lastnode(t_map *node)
+void ft_del_one(t_lmap *lst, void (*del)(void*))
 {
-	if (!node)
-		return (NULL);
-	while (node->next != NULL)//Exception has occurred: Signal SIGSEGV: address not mapped to object (fault address: 0x10007fff8003)
-		node = node->next;
-	return (node);
+    if (lst)
+    {
+        del((void *)(uintptr_t)lst->content);
+        free(lst);
+    }
 }
 
-void	ft_add_back(t_map **lst, t_map *new)
+
+
+t_lmap *ft_lastnode(t_lmap *node)
 {
-	t_map	*lastnode;
+    if (!node)
+        return (NULL);
+    while (node->next != NULL)
+        node = node->next;
+    return (node);
+}
+
+
+void	ft_add_back(t_lmap **lst, t_lmap *new)
+{
+	t_lmap	*lastnode;
 
 	if (lst != 0)
 	{
@@ -35,14 +47,14 @@ void	ft_add_back(t_map **lst, t_map *new)
 	}
 }
 
-t_map	*ft_newnode(void *content)
+t_lmap	*ft_newnode(int c)
 {
-	t_map	*new_node;
+	t_lmap	*new_node;
 
-	new_node = (t_map *)malloc(sizeof(t_map));
+	new_node = (t_lmap *)malloc(sizeof(t_lmap));
 	if (new_node)
 	{
-		new_node->content = content;
+		new_node->content = c;
 		new_node->next = NULL;
 	}
 	else

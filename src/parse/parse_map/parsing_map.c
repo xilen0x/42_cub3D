@@ -12,10 +12,11 @@
 
 # include "cub3d.h"
 
-void	parsing_map(t_map *map)
+void	create_list(t_map *map, t_lmap *lmap)
 {
 	char	*line;
-	t_map	*node;
+	t_lmap	*node;
+	int		i;
 
 	line = get_next_line(map->map_fd);
 	while (line)
@@ -28,19 +29,46 @@ void	parsing_map(t_map *map)
 		}
 		if ((line[0] == '0') || (line[0] == '1'))
 		{
-			// printf("%s", line);
-			node = ft_newnode(line);
-			ft_add_back(&map, node);
-			printf("%s", (char *)node->content);
-		
-			free(line);
-			line = get_next_line(map->map_fd);
-			continue ;
+			printf("%s", line);
+			i = 0;
+			while (line[i])
+			{
+				node = ft_newnode(line[i]);
+				ft_add_back(&lmap, node);
+				// printf("%s", (char *)node->content);
+				i++;
+			}		
+			// free(line);
+			// // ft_del_one(map, free);
+			// line = get_next_line(map->map_fd);
+			// continue ;
 		}
 		free(line);
 		line = get_next_line(map->map_fd);
 	}
+//	ft_del_one(map, &free);
 	close(map->map_fd);
+	printf("\n");
+}
+
+void	ft_print_list(t_lmap *lmap)
+{
+	int	data;
+
+	while (lmap != NULL)
+	{
+		data = lmap->content;
+		printf("%d ", data);
+		lmap = lmap->next;
+	}
+	printf("\n");
+}
+void	parsing_map(t_map *map, t_lmap *lmap)
+{
+	create_list(map, lmap);
+	ft_print_list(lmap);
+	// create_matrix(map);
+	// parsing_map(map);	
 }
 
 // void	save_map(char *av, t_map *map)//no utilizada aun y esta incompleta
