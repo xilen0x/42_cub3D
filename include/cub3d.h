@@ -81,11 +81,11 @@ char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
-void	ft_print_list(t_lmap *lmap);
-t_lmap	*ft_newnode(int c);
+void	print_list(t_lmap *lmap);
+t_lmap	*ft_newnode(char c);
 void	ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap	*ft_lastnode(t_lmap *node);
-void ft_del_one(t_lmap *lst, void (*del)(void*));
+void 	ft_del_one(t_lmap *lst, void (*del)(void*));
 /* ---------------------------- GAME ----------------------------*/
 
 #endif

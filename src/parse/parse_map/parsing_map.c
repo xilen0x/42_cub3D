@@ -27,46 +27,50 @@ void	create_list(t_map *map, t_lmap *lmap)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
-		if ((line[0] == '0') || (line[0] == '1'))
+		i = 0;
+		// while (line[i] == '\0')
+		// 	i++;
+		if ((line[i] == '0') || (line[i] == '1'))
 		{
-			printf("%s", line);
+			//printf("%s", line);
 			i = 0;
 			while (line[i])
 			{
 				node = ft_newnode(line[i]);
 				ft_add_back(&lmap, node);
-				// printf("%s", (char *)node->content);
 				i++;
-			}		
-			// free(line);
-			// // ft_del_one(map, free);
-			// line = get_next_line(map->map_fd);
-			// continue ;
+			}
 		}
 		free(line);
 		line = get_next_line(map->map_fd);
 	}
-//	ft_del_one(map, &free);
 	close(map->map_fd);
 	printf("\n");
 }
 
-void	ft_print_list(t_lmap *lmap)
+// void print_list(t_lmap *lmap)
+// {
+//     while (lmap)
+//     {
+//         printf("%c ", lmap->content);
+//         lmap = lmap->next;
+//     }
+//     printf("\n");
+// }
+void print_list(t_lmap *lmap)
 {
-	int	data;
-
-	while (lmap != NULL)
-	{
-		data = lmap->content;
-		printf("%d ", data);
-		lmap = lmap->next;
-	}
-	printf("\n");
+    while (lmap)
+    {
+        printf("%c ", lmap->content);
+        lmap = lmap->next;
+    }
+    printf("\n");
 }
+
 void	parsing_map(t_map *map, t_lmap *lmap)
 {
 	create_list(map, lmap);
-	ft_print_list(lmap);
+	print_list(lmap);
 	// create_matrix(map);
 	// parsing_map(map);	
 }

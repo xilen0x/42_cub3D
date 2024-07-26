@@ -47,17 +47,33 @@ void	ft_add_back(t_lmap **lst, t_lmap *new)
 	}
 }
 
-t_lmap	*ft_newnode(int c)
-{
-	t_lmap	*new_node;
+// t_lmap	*ft_newnode(int c)
+// {
+// 	t_lmap	*new_node;
 
-	new_node = (t_lmap *)malloc(sizeof(t_lmap));
-	if (new_node)
-	{
-		new_node->content = c;
-		new_node->next = NULL;
-	}
-	else
-		return (NULL);
-	return (new_node);
+// 	new_node = (t_lmap *)malloc(sizeof(t_lmap));
+// 	if (new_node)
+// 	{
+// 		new_node->content = c;
+// 		new_node->next = NULL;
+// 	}
+// 	else
+// 		return (NULL);
+// 	return (new_node);
+// }
+
+
+t_lmap *ft_newnode(char c)
+{
+    t_lmap *new_node;
+
+    new_node = (t_lmap *)malloc(sizeof(t_lmap));
+    if (new_node)
+    {
+        new_node->content = c;
+        new_node->next = NULL;
+    }
+    else
+        return (NULL);
+    return (new_node);
 }

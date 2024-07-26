@@ -61,7 +61,6 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lma
 	open_map(av[1], map);
 	parsing_components(elem, colors, map, av);
 	//open_map(av[1], map);
-	//parsing_elements(av[1], map);
 	parsing_map(map, lmap);
 	//ft_print_list(map);
 	// print_elements(elem);
