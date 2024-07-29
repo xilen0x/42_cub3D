@@ -28,8 +28,8 @@ void	create_list(t_map *map, t_lmap *lmap)
 			continue ;
 		}
 		i = 0;
-		// while (line[i] == '\0')
-		// 	i++;
+		while (line[i] == ' ')			
+			i++;
 		if ((line[i] == '0') || (line[i] == '1'))
 		{
 			//printf("%s", line);
