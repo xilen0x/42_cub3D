@@ -57,7 +57,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lma
 {
 	file_is_cub(av[1]);
 	open_map(av[1], map);
-	width_height_map_file(map, av);
+	// width_height_map_file(map, av);
 	open_map(av[1], map);
 	parsing_components(elem, colors, map, av);
 	parsing_map(map, lmap);

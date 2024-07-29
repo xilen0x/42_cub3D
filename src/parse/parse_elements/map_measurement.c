@@ -75,3 +75,25 @@ void width_height_map_file(t_map *map, char *av[])
     free(line);
     close(map->map_fd);
 }
+/*Funcion que calcula long. de lista*/
+void width_height_map_list(t_lmap *lmap, t_map *map)
+{
+	t_lmap *tmp;
+	unsigned int len;
+	unsigned int i;
+
+	i = 0;
+	tmp = lmap;
+	len = lst_size(tmp);
+	while (lmap)
+	{
+		if (lmap->content == '\n')
+			break;
+		i++;
+		lmap = lmap->next;
+	}
+	map->h = i - 1;
+	map->w = len / map->h;
+	// printf("H(i): %d\n", map->h);
+	// printf("W(len): %d\n", map->w);
+}

@@ -2,6 +2,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+/* ====================== LIBRARIES ====================== */
 # include "mlx.h"
 # include "window.h"
 # include "libft.h"
@@ -10,6 +11,7 @@
 # include <fcntl.h>
 # include <stdint.h>
 
+/* ====================== MACROS ====================== */
 // #define CYAN "\033[0;36m"
 // #define RESET "\033[0m"
 // #define BONUS 0
@@ -22,6 +24,7 @@
 #define MAX_COLOR_VALUE 255
 #define MIN_COLOR_VALUE 0
 
+/* ====================== STRUCTURES ====================== */
 typedef struct s_map
 {
 	int				map_fd;//almacena el fd del mapa original
@@ -57,7 +60,7 @@ typedef struct s_colors
 	int		c_color[3];
 }	t_colors;
 
-/* ---------------------------- PARSING ELEMENTS----------------------------*/
+/* ====================== PARSING ====================== */
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
@@ -81,7 +84,7 @@ void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
 
-/* ---------------------------- LIST ----------------------------*/
+/* ------------- LIST ------------- */
 void	print_list(t_lmap *lmap);
 t_lmap	*ft_newnode(char c);
 void	ft_add_back(t_lmap **lst, t_lmap *new);
@@ -89,13 +92,14 @@ t_lmap	*ft_lastnode(t_lmap *node);
 void 	ft_del_one(t_lmap *lst, void (*del)(void*));
 int		lst_size(t_lmap *lmap);
 
-/* ---------------------------- MATRIX ----------------------------*/
+/* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
+void	print_matrix(t_map *map);
 void	free_matrix(char **matrix);
+void	*p_malloc(size_t size);
+void 	width_height_map_list(t_lmap *lmap, t_map *map);
 
 
-
-
-/* ---------------------------- GAME ----------------------------*/
+/* ====================== GAME ====================== */
 
 #endif

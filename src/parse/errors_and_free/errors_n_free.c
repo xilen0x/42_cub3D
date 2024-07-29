@@ -108,17 +108,17 @@ void	free_elements(char **double_pointer)
 }
 
 /*funcion que imprime la matriz*/
-// void	print_matrix(t_game *game)
-// {
-// 	int	i;
+void	print_matrix(t_map *map)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (i < game->h)
-// 	{
-// 		ft_printf("%s", game->matrix[i]);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	while (i < map->h)
+	{
+		printf("%s", map->matrix[i]);
+		i++;
+	}
+}
 
 // /*funcion que libera la mem. de los mapas*/
 // void	free_map(t_game *game)
