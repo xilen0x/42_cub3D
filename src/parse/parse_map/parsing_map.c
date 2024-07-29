@@ -71,7 +71,7 @@ void	parsing_map(t_map *map, t_lmap *lmap)
 {
 	create_list(map, lmap);
 	print_list(lmap);
-	// create_matrix(map);
+	create_matrix(map, lmap);
 	// parsing_map(map);	
 }
 

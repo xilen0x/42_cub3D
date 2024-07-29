@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+int	lst_size(t_lmap *lmap)
+{
+	int	len;
+
+	len = 0;
+	while (lmap != NULL)
+	{
+		len++;
+		lmap = lmap->next;
+	}
+	return (len);
+}
+
 void ft_del_one(t_lmap *lst, void (*del)(void*))
 {
     if (lst)
@@ -20,8 +33,6 @@ void ft_del_one(t_lmap *lst, void (*del)(void*))
         free(lst);
     }
 }
-
-
 
 t_lmap *ft_lastnode(t_lmap *node)
 {

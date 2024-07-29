@@ -12,32 +12,27 @@
 
 # include "cub3d.h"
 
-/*Crea y guarda el mapa en una matriz*/
-// void	create_matrix(t_map *map, char *av)
-// {
-// 	int	i;
-// 	char	*line;
-// (void)av;
-// 	i = 0;
-// 	// open_map(av, map);
-// 	map->matrix = spaced_malloc(map->h + 1, sizeof(char *));
-// 	// while (i < map->h)
-// 	// {
-// 	// 	map->matrix[i] = get_next_line(map->map_fd);
-// 	// 	i++;
-// 	// }
-// 	line = get_next_line(map->map_fd);
-// 	if (!line)
-// 		write (2, "Invalid map!\n", 13);
-// 	while (line)
-// 	{
-// 		map->matrix[i] = line;
-// 		free(line);
-// 		line = get_next_line(map->map_fd);
-// 	}
-// 	map->matrix[map->h] = NULL;
-// 	close(map->map_fd);
-// }
+/* Funcion que reserva memoria y rellena con ' ' */
+void spaced_malloc(t_map *map, size_t count, size_t size)
+{
+    map->matrix = malloc(size * count);
+    if (!map->matrix)
+	{
+        perror("malloc");
+        exit(1);
+    }
+    ft_memset(map->matrix, ' ', size * count);
+}
+
+
+void	create_matrix(t_map *map, t_lmap *lmap)
+{
+	unsigned int len;
+	
+	(void)map;
+	len = lst_size(lmap);
+	printf("len: %d\n", len);
+}
 
 // void reserve_memory(size_t *longest_line, int *i, t_map *map, char *line)
 // {

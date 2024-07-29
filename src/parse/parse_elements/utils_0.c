@@ -66,17 +66,7 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
 	reserved[len] = '\0';
 	return (reserved);
 }
-// /* Funcion que reserva memoria y rellena con ' ' */
-// void spaced_malloc(t_map *map, size_t count, size_t size)
-// {
-//     map->matrix = malloc(size * count);
-//     if (!map->matrix)
-// 	{
-//         perror("malloc");
-//         exit(1);
-//     }
-//     ft_memset(map->matrix, ' ', size * count);
-// }
+
 
 // int	exit_game(t_game *g)
 // {

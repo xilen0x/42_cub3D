@@ -57,11 +57,10 @@ typedef struct s_colors
 	int		c_color[3];
 }	t_colors;
 
-/* ---------------------------- PARSING ----------------------------*/
+/* ---------------------------- PARSING ELEMENTS----------------------------*/
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
-void	free_matrix(char **matrix);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lmap);
@@ -81,11 +80,22 @@ char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
+
+/* ---------------------------- LIST ----------------------------*/
 void	print_list(t_lmap *lmap);
 t_lmap	*ft_newnode(char c);
 void	ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap	*ft_lastnode(t_lmap *node);
 void 	ft_del_one(t_lmap *lst, void (*del)(void*));
+int		lst_size(t_lmap *lmap);
+
+/* ---------------------------- MATRIX ----------------------------*/
+void	create_matrix(t_map *map, t_lmap *lmap);
+void	free_matrix(char **matrix);
+
+
+
+
 /* ---------------------------- GAME ----------------------------*/
 
 #endif
