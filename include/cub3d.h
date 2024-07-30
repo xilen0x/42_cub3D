@@ -35,7 +35,7 @@ typedef struct s_map
 
 typedef struct s_list_x_map
 {
-	char				content;
+	char				*content;
 	struct s_list_x_map	*next;
 }	t_lmap;
 
@@ -66,13 +66,13 @@ int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap *lmap);
+void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap **lmap);
 void	parsing_colors(t_colors *colors, t_map *map);
 void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void 	parsing_elements2(t_elem *elem, t_map *map, char *line);
-void	parsing_map(t_map *map, t_lmap *lmap);
-void	init_values(t_elem *elem, t_colors *colors, t_map *map, t_lmap *lmap);
+void	parsing_map(t_map *map, t_lmap **lmap);
+void	init_values(t_elem *elem, t_colors *colors, t_map *map);
 void	width_height_map_file(t_map *map, char *av[]);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
@@ -86,7 +86,7 @@ void	print_colors(t_colors *colors);
 
 /* ------------- LIST ------------- */
 void	print_list(t_lmap *lmap);
-t_lmap	*ft_newnode(char zc);
+t_lmap	*ft_newnode(char *c);
 void	ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap	*ft_lastnode(t_lmap *node);
 void 	ft_del_one(t_lmap *lst, void (*del)(void*));

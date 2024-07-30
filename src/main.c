@@ -18,12 +18,12 @@ int	main(int ac, char *av[])
 	t_elem		elem;
 	t_colors	colors;
 	t_map		map;
-	t_lmap		lmap;
+	t_lmap		*lmap;
 	//t_game	game;
-
+	lmap = NULL;
 	if (ac == 2)
 	{
-		init_values(&elem, &colors, &map, &lmap);
+		init_values(&elem, &colors, &map);
 		parsing(&elem, &colors, &map, av, &lmap);
 		//init_game(&game);
 		// set_images(&game);

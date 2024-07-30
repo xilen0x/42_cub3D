@@ -48,7 +48,7 @@ void	ft_add_back(t_lmap **lst, t_lmap *new)
 {
 	t_lmap	*lastnode;
 
-	if (lst != 0)
+	if (*lst != 0)
 	{
 		lastnode = ft_lastnode(*lst);
 		if (!lastnode)
@@ -56,6 +56,8 @@ void	ft_add_back(t_lmap **lst, t_lmap *new)
 		else
 			lastnode->next = new;
 	}
+	else
+		*lst = new;
 }
 
 // t_lmap	*ft_newnode(int c)
@@ -74,7 +76,7 @@ void	ft_add_back(t_lmap **lst, t_lmap *new)
 // }
 
 
-t_lmap *ft_newnode(char c)
+t_lmap *ft_newnode(char *c)
 {
     t_lmap *new_node;
 

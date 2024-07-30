@@ -88,8 +88,7 @@ void width_height_map_list(t_lmap *lmap, t_map *map)
 	len = lst_size(tmp);
 	while (lmap)
 	{
-		if (lmap->content == '\n')
-			i++;
+		i++;
 		lmap = lmap->next;
 	}
 	map->h = i;

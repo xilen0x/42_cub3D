@@ -46,16 +46,15 @@ static void	init_map_values(t_map *map)
 	map->h = 0;
 	map->matrix = NULL;
 }
-static void	init_t_lmap(t_lmap *lmap)
-{
-	lmap->content = 0;
-	lmap->next = NULL;
-}
+// static void	init_t_lmap(t_lmap **lmap)
+// {
+// 	*lmap = NULL;
+// }
 /*Inicializacion de valores*/
-void	init_values(t_elem *elem, t_colors *colors, t_map *map, t_lmap *lmap)
+void	init_values(t_elem *elem, t_colors *colors, t_map *map)
 {
 	init_elem_values(elem);
 	init_colors_values(colors);
 	init_map_values(map);
-	init_t_lmap(lmap);
+	// init_t_lmap(lmap);
 }
