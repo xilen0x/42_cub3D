@@ -58,6 +58,7 @@ void	create_matrix(t_map *map, t_lmap *lmap)
 	map->matrix = p_malloc(sizeof(char *) * (map->h + 1));
 	while (lmap)
 	{
+		map->w = ft_strlen(lmap->content);
 		map->matrix[i] = ft_strdup(lmap->content);
 		lmap = lmap->next;
 		i++;

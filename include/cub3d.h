@@ -72,8 +72,9 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void 	parsing_elements2(t_elem *elem, t_map *map, char *line);
 void	parsing_map(t_map *map, t_lmap **lmap);
+int		valid_map(t_map *map);
 void	init_values(t_elem *elem, t_colors *colors, t_map *map);
-void	width_height_map_file(t_map *map, char *av[]);
+// void	width_height_map_file(t_map *map, char *av[]);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
 void	remove_tabs_and_spaces(char *lines);
@@ -98,6 +99,7 @@ void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);
 void	free_matrix(char **matrix);
 void	*p_malloc(size_t size);
+int	starts_and_ends_with_1(t_map *map);
 // void 	width_height_map_list(t_lmap *lmap, t_map *map);
 
 

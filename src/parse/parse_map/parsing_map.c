@@ -59,6 +59,6 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	// width_height_map_list(*lmap, map);
 	create_matrix(map, *lmap);
 	print_matrix(map);
-	// parsing_map(map);
+	valid_map(map);
 // 	lst_clear(lmap, &free);
 }
