@@ -12,17 +12,17 @@
 
 #include "cub3d.h"
 
-int	lst_size(t_lmap *lmap)
+unsigned int lst_size(t_lmap *lmap)
 {
-	int	len;
+	unsigned int i;
 
-	len = 0;
-	while (lmap != NULL)
+	i = 0;
+	while (lmap)
 	{
-		len++;
+		i++;
 		lmap = lmap->next;
 	}
-	return (len);
+	return (i);
 }
 
 void ft_del_one(t_lmap *lst, void (*del)(void*))

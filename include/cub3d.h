@@ -86,11 +86,11 @@ void	print_colors(t_colors *colors);
 
 /* ------------- LIST ------------- */
 void	print_list(t_lmap *lmap);
-t_lmap	*ft_newnode(char c);
+t_lmap	*ft_newnode(char zc);
 void	ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap	*ft_lastnode(t_lmap *node);
 void 	ft_del_one(t_lmap *lst, void (*del)(void*));
-int		lst_size(t_lmap *lmap);
+unsigned int lst_size(t_lmap *lmap);
 
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
