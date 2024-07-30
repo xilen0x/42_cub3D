@@ -75,5 +75,5 @@
 // 	if (!game->mlx)
 // 		ft_errors2(5);
 // 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, game->h * TILE_PXL, "cub3D");
-// 	//printf("W: %d\n H: %d", game->w, game->h);
+// 	//ft_printf("W: %d\n H: %d", game->w, game->h);
 // }

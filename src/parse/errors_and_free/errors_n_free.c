@@ -115,7 +115,7 @@ void	print_matrix(t_map *map)
 	i = 0;
 	while (i < map->h)
 	{
-		printf("%s", map->matrix[i]);
+		ft_printf("%s", map->matrix[i]);
 		i++;
 	}
 }

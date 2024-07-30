@@ -49,25 +49,18 @@
 /* Funcion que crea la matriz a partir de la lista*/
 void	create_matrix(t_map *map, t_lmap *lmap)
 {
-	int		i;
-	int		j;
-	t_lmap	*tmp;
+	int				i;
+	t_lmap			*tmp;
 
 	i = 0;
-	j = 0;
 	tmp = lmap;
-	map->matrix = p_malloc(sizeof(char **) * (map->h + 1));
-	while (i < map->h)
+	map->h = lst_size(tmp);
+	map->matrix = p_malloc(sizeof(char *) * (map->h + 1));
+	while (lmap)
 	{
-		map->matrix[i] = p_malloc(sizeof(char *) * (map->w + 1));
-		j = 0;
-		while (j < map->w)
-		{
-			map->matrix[i][j] = tmp->content;
-			tmp = tmp->next;
-			j++;
-		}
-		map->matrix[i][j] = '\0';
+		map->matrix[i] = ft_strdup(lmap->content);
+		lmap = lmap->next;
 		i++;
 	}
+	map->matrix[i] = NULL;
 }

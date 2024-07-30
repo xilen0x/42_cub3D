@@ -74,23 +74,23 @@ char **ft_split2(const char *str)
 }
 void	print_elements(t_elem *elem)
 {
-	printf("\nNO     : %s\n", elem->no);
-	printf("NO_PATH: %s\n", elem->no_path);
+	ft_printf("\nNO     : %s\n", elem->no);
+	ft_printf("NO_PATH: %s\n", elem->no_path);
 	
-	printf("\nSO     : %s\n", elem->so);
-	printf("SO_PATH: %s\n", elem->so_path);
+	ft_printf("\nSO     : %s\n", elem->so);
+	ft_printf("SO_PATH: %s\n", elem->so_path);
 	
-	printf("\nEA     : %s\n", elem->ea);
-	printf("EA_PATH: %s\n", elem->ea_path);
+	ft_printf("\nEA     : %s\n", elem->ea);
+	ft_printf("EA_PATH: %s\n", elem->ea_path);
 
-	printf("\nWE     : %s\n", elem->we);
-	printf("WE_PATH: %s\n", elem->we_path);
+	ft_printf("\nWE     : %s\n", elem->we);
+	ft_printf("WE_PATH: %s\n", elem->we_path);
 }
 
 void	print_colors(t_colors *colors)
 {
-	printf("\nF      : %d\n", colors->f);
-	printf("F_COLOR: %d, %d, %d\n", colors->f_color[0], colors->f_color[1], colors->f_color[2]);
-	printf("\nC      : %d\n", colors->c);
-	printf("C_COLOR: %d, %d, %d\n", colors->c_color[0], colors->c_color[1], colors->c_color[2]);
+	ft_printf("\nF      : %d\n", colors->f);
+	ft_printf("F_COLOR: %d, %d, %d\n", colors->f_color[0], colors->f_color[1], colors->f_color[2]);
+	ft_printf("\nC      : %d\n", colors->c);
+	ft_printf("C_COLOR: %d, %d, %d\n", colors->c_color[0], colors->c_color[1], colors->c_color[2]);
 }

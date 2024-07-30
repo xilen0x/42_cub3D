@@ -20,7 +20,7 @@
 // 			(map->f_color[1] < 0 || map->f_color[1] > 255) ||
 // 			(map->f_color[2] < 0 || map->f_color[2] > 255))
 // 		{
-// 			printf("Error\nColor range error(F)!\n");
+// 			ft_printf("Error\nColor range error(F)!\n");
 // 			return (1);
 // 		}
 // 	}
@@ -30,7 +30,7 @@
 // 			(map->c_color[1] < 0 || map->c_color[1] > 255) ||
 // 			(map->c_color[2] < 0 || map->c_color[2] > 255))
 // 		{
-// 			printf("Error\nColor range error(C)!\n");
+// 			ft_printf("Error\nColor range error(C)!\n");
 // 			return (1);
 // 		}
 // 	}

@@ -24,8 +24,8 @@ int	open_map(char *av, t_map *map)
 /*funcion que imprime ancho y largo del fichero*/
 void print_width_height(t_map *map)
 {
-	printf("Width: %d\n", map->w);
-	printf("Height: %d\n", map->h);
+	ft_printf("Width: %d\n", map->w);
+	ft_printf("Height: %d\n", map->h);
 }
 /* F. que verifica si un carácter está presente en un conjunto de caracteres.*/
 static int	ft_isset2(char c, const char *set)

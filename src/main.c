@@ -19,7 +19,7 @@ int	main(int ac, char *av[])
 	t_colors	colors;
 	t_map		map;
 	t_lmap		*lmap;
-	//t_game	game;
+
 	lmap = NULL;
 	if (ac == 2)
 	{
@@ -33,9 +33,10 @@ int	main(int ac, char *av[])
 	}
 	else
 		ft_errors(1);
-	//free_matrix(map.matrix);
+	free_matrix(map.matrix);
+	lst_clear(&lmap, &free);
 	free_element_struct(&elem);
-	exit(0);
+	// exit(0);
 	return (0);
 }
  

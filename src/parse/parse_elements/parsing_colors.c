@@ -38,7 +38,7 @@ void	parsing_colors(t_colors *colors, t_map *map)
 		temp2 = ft_split(temp[1], ',');
 		if (!temp2)
 		{
-			printf("\nError de sintaxis en colores!******1\n");
+			ft_printf("\nError de sintaxis en colores!******1\n");
 			free(line);
 			free(line_trimed);
 			free_elements(temp);
@@ -58,7 +58,7 @@ void	parsing_colors(t_colors *colors, t_map *map)
 					color_value = ft_atoi(temp2[i]);
 					if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
 					{
-						printf("\nError de rango en colores!\n");
+						ft_printf("\nError de rango en colores!\n");
 						free_elements(temp);
 						free_elements(temp2);
 						free(line);
@@ -122,7 +122,7 @@ void	parsing_colors(t_colors *colors, t_map *map)
 		}
 		else
 		{
-			printf("\nError de sintaxis en colores!\n");
+			ft_printf("\nError de sintaxis en colores!\n");
 			free(line);
 			free(line_trimed);
 			free_elements(temp);

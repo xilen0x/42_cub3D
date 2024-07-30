@@ -91,13 +91,14 @@ void	ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap	*ft_lastnode(t_lmap *node);
 void 	ft_del_one(t_lmap *lst, void (*del)(void*));
 unsigned int lst_size(t_lmap *lmap);
+void	lst_clear(t_lmap **lmap, void (*del)(void*));
 
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);
 void	free_matrix(char **matrix);
 void	*p_malloc(size_t size);
-void 	width_height_map_list(t_lmap *lmap, t_map *map);
+// void 	width_height_map_list(t_lmap *lmap, t_map *map);
 
 
 /* ====================== GAME ====================== */

@@ -84,7 +84,7 @@ void parsing_elements(t_elem *elem, t_map *map)
 		}
 		else
 		{
-			printf("Error de sintaxis en elementos!\n");
+			ft_printf("Error de sintaxis en elementos!\n");
 			free_elements(elements);
 			free(line);
 			close(map->map_fd);

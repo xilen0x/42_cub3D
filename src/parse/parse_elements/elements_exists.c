@@ -35,7 +35,7 @@
 //         if (!elements)
 // 		{
 //             free(line);
-//             printf("Error al dividir la línea en elementos!\n");
+//             ft_printf("Error al dividir la línea en elementos!\n");
 //             return 1;
 //         }
 //         i = 0;
@@ -51,7 +51,7 @@
 //                 if (!colors) {
 //                     free_elements(elements);
 //                     free(line);
-//                     printf("Error al dividir los colores!\n");
+//                     ft_printf("Error al dividir los colores!\n");
 //                     return 1;
 //                 }
 //                 i = 0;
@@ -68,7 +68,7 @@
 //                 }
 //                 if (!valid_colors || i != 3)
 // 				{
-//                     printf("Error de sintaxis en colores!\n");
+//                     ft_printf("Error de sintaxis en colores!\n");
 //                     free_elements(colors);
 //                     free_elements(elements);
 //                     free(line);
@@ -96,10 +96,10 @@
 //     }
 //     close(map->map_fd);
 //     if (map->f && map->c) {
-//         printf("\nAll colors exist\n");
+//         ft_printf("\nAll colors exist\n");
 //         return 0;
 //     } else {
-//         printf("Error: Faltan colores!\n");
+//         ft_printf("Error: Faltan colores!\n");
 //         return 1;
 //     }
 // }
@@ -152,7 +152,7 @@
 //         }
 //         else
 //         {
-//             printf("Error de sintaxis en elementos!\n");
+//             ft_printf("Error de sintaxis en elementos!\n");
 //             close(map->map_fd);
 //             free(line);
 //             free_elements(elements);
@@ -164,14 +164,14 @@
 //         if (map->no && map->so && map->we && map->ea)
 //         {
 //             close(map->map_fd);
-//             printf("\nAll cardinal directions exist\n");
+//             ft_printf("\nAll cardinal directions exist\n");
 //             free_xx_path(map);
 //             return (0);
 //         }
 //         line = get_next_line(map->map_fd);
 //     }
 
-//     printf("algun otro Error\n");
+//     ft_printf("algun otro Error\n");
 //     close(map->map_fd);
 //     free_xx_path(map);
 //     return (1);
