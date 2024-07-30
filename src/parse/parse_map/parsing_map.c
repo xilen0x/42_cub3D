@@ -34,14 +34,14 @@ void	create_list(t_map *map, t_lmap *lmap)
 		{
 			// printf("%s", line);
 			i = 0;
-			while (line[i] && line[i] != '\n')//linea modificada
+			while (line[i] && line[i] != '\n')
 			{
 				node = ft_newnode(line[i]);
 				ft_add_back(&lmap, node);
 				i++;
 			}
-			node = ft_newnode('\n');//linea agregada
-			ft_add_back(&lmap, node);//linea agregada
+			node = ft_newnode('\n');
+			ft_add_back(&lmap, node);
 		}
 		free(line);
 		line = get_next_line(map->map_fd);
@@ -63,7 +63,7 @@ void print_list(t_lmap *lmap)
 void	parsing_map(t_map *map, t_lmap *lmap)
 {
 	create_list(map, lmap);
-	// print_list(lmap);
+	print_list(lmap);
 	width_height_map_list(lmap, map);
 	create_matrix(map, lmap);
 	print_matrix(map);

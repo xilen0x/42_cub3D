@@ -75,7 +75,6 @@ void width_height_map_file(t_map *map, char *av[])
     free(line);
     close(map->map_fd);
 }
-/*funcion que calcula altura y ancho de una lista(para luego poder reservar memoria con estos datos)*/
 
 /*Funcion que calcula long. de lista*/
 void width_height_map_list(t_lmap *lmap, t_map *map)
@@ -95,7 +94,7 @@ void width_height_map_list(t_lmap *lmap, t_map *map)
 	}
 	map->h = i;
 	map->w = len / i;
-	// printf("len: \n%d\n", len);
-	// printf("h: %d\n", map->h);
-	// printf("w: %d\n", map->w);
+	printf("\nlen: %d\n", len);
+	printf("h: %d\n", map->h);
+	printf("w: %d\n", map->w);
 }

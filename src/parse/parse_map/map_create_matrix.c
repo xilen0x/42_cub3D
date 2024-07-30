@@ -56,10 +56,10 @@ void	create_matrix(t_map *map, t_lmap *lmap)
 	i = 0;
 	j = 0;
 	tmp = lmap;
-	map->matrix = p_malloc(sizeof(char *) * (map->h + 1));
+	map->matrix = p_malloc(sizeof(char **) * (map->h + 1));
 	while (i < map->h)
 	{
-		map->matrix[i] = p_malloc(sizeof(char) * (map->w + 1));
+		map->matrix[i] = p_malloc(sizeof(char *) * (map->w + 1));
 		j = 0;
 		while (j < map->w)
 		{
