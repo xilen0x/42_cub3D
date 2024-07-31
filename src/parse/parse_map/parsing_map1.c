@@ -12,47 +12,33 @@
 
 #include "cub3d.h"
 
-int	starts_and_ends_with_1(t_map *map)
+int	horizontal_check(t_lmap *lmap)
 {
-	int	i;
-	int	j;
+	unsigned int	last;
 
-	i = 0;
-	j = 0;
-	while (i < map->w)
+	while (lmap)
 	{
-		if (map->matrix[0][i] != '1')
+		while (*lmap->content == ' ')
+			lmap->content++;
+		last = ft_strlen(lmap->content) - 2;
+		if (*lmap->content != '1' || lmap->content[last] != '1')
 			return (1);
-		i++;
-	}
-	while (j < map->h)
-	{
-		if (map->matrix[j][0] != '1')
-			return (1);
-		j++;
-	}
-	i = 0;
-	j = 0;
-	while (i < map->w)
-	{
-		if (map->matrix[map->h - 1][i] != '1')
-			return (1);
-		i++;
-	}
-	while (j < map->h)
-	{
-		if (map->matrix[j][map->w - 1] != '1')
-			return (1);
-		j++;
+		lmap = lmap->next;
 	}
 	return (0);
 }
 
 
-int	valid_map(t_map *map)
+int	valid_map(t_map *map, t_lmap *lmap)
 {
-	if (starts_and_ends_with_1(map) != 0)
+	(void)map;
+	if (horizontal_check(lmap) != 0)
 		ft_errors(3);
+	else
+	{
+		ft_printf("\nHorizontal check: OK\n");
+		exit(0);
+	}
 	// if (is_surrounded_by_walls(game) != 0)
 	// 	ft_errors(3);
 	// if (is_initial_position(game) != 1)
