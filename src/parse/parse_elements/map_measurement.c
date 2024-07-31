@@ -12,44 +12,26 @@
 
 #include "cub3d.h"
 
-/*busqueda de linea mas larga en el mapa(incluyendo elementos)*/
-// static size_t search_longest_line(t_map *map)
-// {
-//     char *line;
-//     size_t longest_line;
-//     int i;
-// 	size_t len;
+/*busqueda de linea mas larga en el mapa(list)*/
+size_t search_longest_line(t_lmap *lmap)
+{
+    size_t longest_line;
+	size_t len;
 	
-//     longest_line = 0;
-//     i = 0;
-// 	line = get_next_line(map->map_fd);
-//     if (!line)
-//     {
-//         write(2, "Invalid map!\n", 13);
-//         return 0;
-//     }
-//     while (line)
-//     {
-// 		len = ft_strlen(line);
-//         // reserve_memory(&longest_line, &i, map, line);
-// 		if (line[0] == '\0')
-// 		{
-// 			free(line);
-// 			line = get_next_line(map->map_fd);
-// 			continue ;
-// 		}
-//     	if (len > 0 && line[len - 1] == '\n')
-// 	        len--;
-// 	    if (longest_line < len)
-// 			longest_line = len;
-// 		free(line);
-//         line = get_next_line(map->map_fd);
-//     	i++;
-//     }
-//     close(map->map_fd);
-//     map->h = i;
-//     return (longest_line);
-// }
+    longest_line = 0;
+	while (lmap)
+    {
+		len = ft_strlen(lmap->content);
+		if (len > 0 && lmap->content[len - 1] == '\n')
+	        len--;
+	    if (longest_line < len)
+			longest_line = len;
+		
+        lmap = lmap->next;
+    }
+	//printf("longest_line: %ld\n", longest_line);
+    return (longest_line + 2);
+}
 
 
 // /*Funcion que calcula long. de columnas(w) & filas(h)*/

@@ -27,7 +27,7 @@
 /* ====================== STRUCTURES ====================== */
 typedef struct s_map
 {
-	int				map_fd;//almacena el fd del mapa original
+	int				map_fd;
 	int				w;
 	int				h;
 	char			**matrix;
@@ -85,21 +85,23 @@ void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
 
 /* ------------- LIST ------------- */
-void	print_list(t_lmap *lmap);
-t_lmap	*ft_newnode(char *c);
-void	ft_add_back(t_lmap **lst, t_lmap *new);
-t_lmap	*ft_lastnode(t_lmap *node);
-void 	ft_del_one(t_lmap *lst, void (*del)(void*));
+void		print_list(t_lmap *lmap);
+t_lmap		*ft_newnode(char *c);
+void		ft_add_back(t_lmap **lst, t_lmap *new);
+t_lmap		*ft_lastnode(t_lmap *node);
+void 		ft_del_one(t_lmap *lst, void (*del)(void*));
 unsigned int lst_size(t_lmap *lmap);
-void	lst_clear(t_lmap **lmap, void (*del)(void*));
+void		lst_clear(t_lmap **lmap, void (*del)(void*));
+size_t		search_longest_line(t_lmap *lmap);
 
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);
-void	free_matrix(char **matrix);
+// void	free_matrix(char **matrix);
+void free_matrix(char **matrix, size_t rows);
 void	*p_malloc(size_t size);
 int		horizontal_check(t_lmap *lmap);
-
+char *ft_strncpy_2(char *dst, const char *src, size_t len);
 
 /* ====================== GAME ====================== */
 

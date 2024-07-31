@@ -57,8 +57,11 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	create_list(map, lmap);
 	// print_list(*lmap);
 	// width_height_map_list(*lmap, map);
+	// search_longest_line(*lmap);
 	create_matrix(map, *lmap);
+	printf("\n");
 	print_matrix(map);
-	valid_map(map, *lmap);
+	//free_matrix(map->matrix, map->h);
+	//valid_map(map, *lmap);
 // 	lst_clear(lmap, &free);
 }

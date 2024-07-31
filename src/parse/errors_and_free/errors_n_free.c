@@ -61,24 +61,32 @@ int	ft_errors(int n)
 	return (1);
 }
 
-void free_matrix(char **matrix)
+// void free_matrix(char **matrix)
+// {
+//     int i;
+
+// 	i = 0;
+
+// 	if (!matrix)
+// 		return ;
+//     if (matrix)
+// 	{
+//         while (matrix[i])
+// 		{
+//             free(matrix[i]);
+//             i++;
+//         }
+//         free(matrix);
+//         matrix = NULL;
+//     }
+// }
+void free_matrix(char **matrix, size_t rows)
 {
-    int i;
+    size_t i;
 
-	i = 0;
-
-	if (!matrix)
-		return ;
-    if (matrix)
-	{
-        while (matrix[i])
-		{
-            free(matrix[i]);
-            i++;
-        }
-        free(matrix);
-        matrix = NULL;
-    }
+    for (i = 0; i < rows; i++)
+        free(matrix[i]);
+    free(matrix);
 }
 
 void	free_element_struct(t_elem *elem)

@@ -13,53 +13,45 @@
 # include "cub3d.h"
 
 /* Funcion que reserva memoria y rellena con ' ' */
-// void spaced_malloc(t_map *map, size_t count, size_t size)
-// {
-//     map->matrix = malloc(size * count);
-//     if (!map->matrix)
-// 	{
-//         perror("malloc");
-//         exit(1);
-//     }
-//     ft_memset(map->matrix, ' ', size * count);
-// }
+void space_malloc(size_t rows, size_t cols, t_map *map)
+{
+	size_t i;
 
-/*convert the env(list) to an array(char **)*/
-// int	list_to_array(t_map *map)
-// {
-// 	int		len;
-// 	// t_env	*current;
-
-// 	len = 0;
-// 	current = env;
-// 	while (current)
-// 	{
-// 		len++;
-// 		current = current->next;
-// 	}
-// 	exe->new_array = (char **)malloc(sizeof(char *) * (len + 1));
-// 	if (exe->new_array == NULL)
-// 		return (-1);
-// 	current = env;
-// 	allocate_memory(current, len, exe);
-// 	exe->new_array[len] = NULL;
-// 	return (0);
+	i = 0;
+	// matrix_temp = p_malloc(sizeof(char *) * (rows + 1));
+	map->matrix = p_malloc(sizeof(char *) * rows);
+	// map->matrix = matrix_temp;
+	while (i < rows)
+	{
+		map->matrix[i] = p_malloc(sizeof(char) * (cols + 2));
+		ft_memset(map->matrix[i], '*', cols);
+		map->matrix[i][cols] = '\0';
+		i++;
+	}
+	// 
 // }
+    // map->matrix = p_malloc(sizeof(char *) * size);
+    // ft_memset(map->matrix, '*', size);
+}
 
 /* Funcion que crea la matriz a partir de la lista*/
 void	create_matrix(t_map *map, t_lmap *lmap)
 {
 	int				i;
 	t_lmap			*tmp;
+	size_t			max_line;
 
 	i = 0;
 	tmp = lmap;
 	map->h = lst_size(tmp);
-	map->matrix = p_malloc(sizeof(char *) * (map->h + 1));
+	max_line = search_longest_line(tmp);
+	space_malloc(map->h + 1, max_line, map);
 	while (lmap)
 	{
 		map->w = ft_strlen(lmap->content);
-		map->matrix[i] = ft_strdup(lmap->content);
+		ft_printf("map->w: %d\n", map->w);
+		ft_strncpy_2(map->matrix[i], lmap->content, map->w);
+		map->matrix[i][max_line] = '\0';
 		lmap = lmap->next;
 		i++;
 	}

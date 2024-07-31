@@ -33,9 +33,9 @@ int	main(int ac, char *av[])
 	}
 	else
 		ft_errors(1);
-	free_matrix(map.matrix);
-	lst_clear(&lmap, &free);
+	lst_clear(&lmap, &free); //volver a activar luego
 	free_element_struct(&elem);
+	free_matrix(map.matrix, map.h);
 	// exit(0);
 	return (0);
 }

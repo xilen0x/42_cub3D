@@ -32,7 +32,7 @@ concatenación de ’s1’ y ’s2’.
 
 #include "libft.h"
 
-static char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 {
 	unsigned int	i;
 
