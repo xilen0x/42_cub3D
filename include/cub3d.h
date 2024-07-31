@@ -101,7 +101,6 @@ void	print_matrix(t_map *map);
 void free_matrix(char **matrix, size_t rows);
 void	*p_malloc(size_t size);
 int		horizontal_check(t_lmap *lmap);
-char *ft_strncpy_2(char *dst, const char *src, size_t len);
 
 /* ====================== GAME ====================== */
 

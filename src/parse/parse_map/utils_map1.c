@@ -26,20 +26,3 @@ void	*p_malloc(size_t size)
 	}
 	return (ptr);
 }
-char *ft_strncpy_2(char *dst, const char *src, size_t len)
-{
-    size_t i;
-
-    i = 0;
-    while (i < len && src[i] != '\0')
-    {
-        dst[i] = src[i];
-        i++;
-    }
-    while (i < len)
-    {
-        dst[i] = '*'; // Llena el resto con asteriscos
-        i++;
-    }
-    return dst;
-}

@@ -84,7 +84,7 @@ void free_matrix(char **matrix, size_t rows)
 {
     size_t i;
 
-    for (i = 0; i < rows; i++)
+    for (i = 0; i < rows; i++)//cambiar a while
         free(matrix[i]);
     free(matrix);
 }
@@ -104,7 +104,7 @@ void	free_elements(char **double_pointer)
 {
 	int i;
 	
-	 i = 0;
+	i = 0;
 	if (!double_pointer)
 		return ;
 	while (double_pointer[i])
