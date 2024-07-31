@@ -30,7 +30,7 @@ size_t search_longest_line(t_lmap *lmap)
         lmap = lmap->next;
     }
 	//printf("longest_line: %ld\n", longest_line);
-    return (longest_line + 2);
+    return (longest_line + 1);
 }
 
 

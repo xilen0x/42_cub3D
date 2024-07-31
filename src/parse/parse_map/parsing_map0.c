@@ -12,6 +12,22 @@
 
 # include "cub3d.h"
 
+void	remove_newline(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+		{
+			line[i] = '\0';
+			break ;
+		}
+		i++;
+	}
+}
+
 void	create_list(t_map *map, t_lmap **lmap)
 {
 	char	*line;
@@ -27,6 +43,7 @@ void	create_list(t_map *map, t_lmap **lmap)
 			continue ;
 		}
 		// ft_printf("%s", line);
+		remove_newline(line);
 		node = malloc(sizeof(t_lmap));
 		node->content = line;
 		node->next = NULL;
@@ -34,7 +51,7 @@ void	create_list(t_map *map, t_lmap **lmap)
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
-	ft_printf("\n");
+	// ft_printf("\n");
 }
 
 void print_list(t_lmap *lmap)
@@ -57,7 +74,6 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	create_list(map, lmap);
 	// print_list(*lmap);
 	// width_height_map_list(*lmap, map);
-	// search_longest_line(*lmap);
 	create_matrix(map, *lmap);
 	printf("\n");
 	print_matrix(map);
