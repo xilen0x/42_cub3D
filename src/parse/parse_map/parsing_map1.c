@@ -12,33 +12,48 @@
 
 #include "cub3d.h"
 
-int	horizontal_check(t_lmap *lmap)
-{
-	unsigned int	last;
+// int	horizontal_check(t_lmap *lmap)
+// {
+// 	unsigned int	last;
 
-	while (lmap)
-	{
-		while (*lmap->content == ' ')
-			lmap->content++;
-		last = ft_strlen(lmap->content) - 2;
-		if (*lmap->content != '1' || lmap->content[last] != '1')
-			return (1);
-		lmap = lmap->next;
-	}
+// 	while (lmap)
+// 	{
+// 		while (*lmap->content == ' ')
+// 			lmap->content++;
+// 		// last = ft_strlen(lmap->content) - 2;
+// 		last = ft_strlen(lmap->content) - 1;
+// 		if (*lmap->content != '1' || lmap->content[last] != '1')
+// 			return (1);
+// 		lmap = lmap->next;
+// 	}
+// 	return (0);
+// }
+
+int	parsing_not_square_map(t_lmap *lmap)
+{
+	(void)lmap;
 	return (0);
 }
 
-
-int	valid_map(t_map *map, t_lmap *lmap)
+int	is_square_map(t_lmap *lmap)
 {
-	(void)map;
-	if (horizontal_check(lmap) != 0)
-		ft_errors(3);
-	else
+	unsigned int	next;
+	unsigned int	current;
+
+	while (lmap)
 	{
-		ft_printf("\nHorizontal check: OK\n");
-		exit(0);
+		current = ft_strlen(lmap->content);
+		if (lmap->next)
+			next = ft_strlen(lmap->next->content);
+		if (current != next)
+			return (0);
+		lmap = lmap->next;
 	}
+	return (1);
+}
+void	parsing_square_map(t_lmap *lmap)
+{
+	(void)lmap;
 	// if (is_surrounded_by_walls(game) != 0)
 	// 	ft_errors(3);
 	// if (is_initial_position(game) != 1)
@@ -51,5 +66,16 @@ int	valid_map(t_map *map, t_lmap *lmap)
 	// 	ft_errors(4);
 	// if (q_collectible(game) < 1)
 	// 	ft_errors(3);
-	return (0);
+}
+
+void	valid_map(t_map *map, t_lmap *lmap)
+{
+	(void)map;
+
+	if (is_square_map(lmap))
+		printf("Square map\n");
+		// parsing_square_map(lmap);
+	else
+		// parsing_not_square_map(lmap);
+		printf("Not square map\n");
 }

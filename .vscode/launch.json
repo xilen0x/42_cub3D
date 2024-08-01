@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/cub3d",
-			"args": ["maps/valid/map-triangle.cub"],
+			"args": ["maps/valid/normal_map.cub"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

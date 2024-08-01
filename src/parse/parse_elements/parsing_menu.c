@@ -63,5 +63,5 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap **lm
 	parsing_map(map, lmap);
 	// print_elements(elem);
 	// print_colors(colors);
-	//print_width_height(map);
+	// print_width_height(map);
 }
