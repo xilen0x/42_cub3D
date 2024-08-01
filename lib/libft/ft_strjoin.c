@@ -44,7 +44,7 @@ char	*ft_strncpy(char *dest, const char *src, unsigned int n)
 	}
 	while (i < n)
 	{
-		dest[i] = '*';
+		dest[i] = ' ';
 		i++;
 	}
 	return (dest);

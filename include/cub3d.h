@@ -30,6 +30,8 @@ typedef struct s_map
 	int				map_fd;
 	int				w;
 	int				h;
+	int				x;
+	int				y;
 	char			**matrix;
 }	t_map;
 
@@ -72,7 +74,7 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void 	parsing_elements2(t_elem *elem, t_map *map, char *line);
 void	parsing_map(t_map *map, t_lmap **lmap);
-void	valid_map(t_map *map, t_lmap *lmap);
+void	valid_map(t_map *map);
 void	init_values(t_elem *elem, t_colors *colors, t_map *map);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
@@ -100,7 +102,7 @@ void	print_matrix(t_map *map);
 // void	free_matrix(char **matrix);
 void free_matrix(char **matrix, size_t rows);
 void	*p_malloc(size_t size);
-int		horizontal_check(t_lmap *lmap);
+// int		horizontal_check(t_lmap *lmap);
 
 /* ====================== GAME ====================== */
 

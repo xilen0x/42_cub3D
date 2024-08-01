@@ -77,6 +77,6 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	printf("\n");
 	print_matrix(map);
 	//free_matrix(map->matrix, map->h);
-	valid_map(map, *lmap);
+	valid_map(map);
 // 	lst_clear(lmap, &free);
 }
