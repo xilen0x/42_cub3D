@@ -26,32 +26,13 @@ void	*p_malloc(size_t size)
 	}
 	return (ptr);
 }
-// char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
-// {
-// 	unsigned int	i;
-// 	unsigned int	j;
 
-// 	i = 1;
-// 	j = 0;
-// 	while (src[i] != '\0' && i < n)
-// 	{
-// 		dest[j] = src[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	while (i < n)
-// 	{
-// 		dest[j] = '.';
-// 		j++;
-// 	}
-// 	return (dest);
-// }
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
 {
 	unsigned int	i;
 	unsigned int	j;
 
-	dest[0] = '.';
+	dest[0] = ' ';
 	i = 0;
 	j = 1;
 	while (src[i] != '\0' && j < n)
@@ -62,8 +43,47 @@ char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
 	}
 	while (j < n)
 	{
-		dest[j] = '\0';
+		dest[j] = ' ';
 		j++;
 	}
 	return dest;
 }
+// int	horizontal_check(t_lmap *lmap)
+// {
+// 	unsigned int	last;
+
+// 	while (lmap)
+// 	{
+// 		while (*lmap->content == ' ')
+// 			lmap->content++;
+// 		// last = ft_strlen(lmap->content) - 2;
+// 		last = ft_strlen(lmap->content) - 1;
+// 		if (*lmap->content != '1' || lmap->content[last] != '1')
+// 			return (1);
+// 		lmap = lmap->next;
+// 	}
+// 	return (0);
+// }
+
+// int	parsing_not_square_map(t_lmap *lmap)
+// {
+// 	(void)lmap;
+// 	return (0);
+// }
+
+// int	is_square_map(t_lmap *lmap)
+// {
+// 	unsigned int	next;
+// 	unsigned int	current;
+
+// 	while (lmap)
+// 	{
+// 		current = ft_strlen(lmap->content);
+// 		if (lmap->next)
+// 			next = ft_strlen(lmap->next->content);
+// 		if (current != next)
+// 			return (0);
+// 		lmap = lmap->next;
+// 	}
+// 	return (1);
+// }

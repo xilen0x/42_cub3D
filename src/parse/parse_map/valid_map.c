@@ -12,45 +12,7 @@
 
 #include "cub3d.h"
 
-// int	horizontal_check(t_lmap *lmap)
-// {
-// 	unsigned int	last;
 
-// 	while (lmap)
-// 	{
-// 		while (*lmap->content == ' ')
-// 			lmap->content++;
-// 		// last = ft_strlen(lmap->content) - 2;
-// 		last = ft_strlen(lmap->content) - 1;
-// 		if (*lmap->content != '1' || lmap->content[last] != '1')
-// 			return (1);
-// 		lmap = lmap->next;
-// 	}
-// 	return (0);
-// }
-
-// int	parsing_not_square_map(t_lmap *lmap)
-// {
-// 	(void)lmap;
-// 	return (0);
-// }
-
-// int	is_square_map(t_lmap *lmap)
-// {
-// 	unsigned int	next;
-// 	unsigned int	current;
-
-// 	while (lmap)
-// 	{
-// 		current = ft_strlen(lmap->content);
-// 		if (lmap->next)
-// 			next = ft_strlen(lmap->next->content);
-// 		if (current != next)
-// 			return (0);
-// 		lmap = lmap->next;
-// 	}
-// 	return (1);
-// }
 // void	parsing_square_map(t_lmap *lmap)
 // {
 // 	(void)lmap;
@@ -99,12 +61,6 @@ int any_zero_or_space(t_map *map)
 
 void	valid_map(t_map *map)
 {
-	// if (is_square_map(lmap))
-	// 	printf("Square map\n");
-	// 	// parsing_square_map(lmap);
-	// else
-	// 	// parsing_not_square_map(lmap);
-	// 	printf("Not square map\n");
 	if (any_zero_or_space(map) == 1)
 	{
 		ft_printf("Error\n");

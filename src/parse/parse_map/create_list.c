@@ -54,21 +54,6 @@ void	create_list(t_map *map, t_lmap **lmap)
 	// ft_printf("\n");
 }
 
-void print_list(t_lmap *lmap)
-{
-	int i;
-
-	i = 0;
-    while (lmap)
-    {
-		ft_printf("%s", lmap->content);
-        lmap = lmap->next;
-		i++;
-    }
-	ft_printf("\n\n");
-	ft_printf("Longitud de la lista: %d\n", i);
-}
-
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
 	create_list(map, lmap);

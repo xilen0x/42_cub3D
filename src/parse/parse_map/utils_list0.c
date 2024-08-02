@@ -25,15 +25,6 @@ unsigned int lst_size(t_lmap *lmap)
 	return (i);
 }
 
-void ft_del_one(t_lmap *lst, void (*del)(void*))
-{
-    if (lst)
-    {
-        del((void *)(uintptr_t)lst->content);
-        free(lst);
-    }
-}
-
 t_lmap *ft_lastnode(t_lmap *node)
 {
     if (!node)

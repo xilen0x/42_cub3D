@@ -46,11 +46,12 @@ SRC_FILES = main.c \
 			parse/parse_elements/parsing_elements.c \
 			parse/parse_elements/parsing_elements2.c \
             parse/errors_and_free/errors_n_free.c \
-			parse/parse_map/map_create_matrix.c \
-			parse/parse_map/parsing_map0.c \
-			parse/parse_map/utils_map0.c \
+			parse/parse_map/create_matrix.c \
+			parse/parse_map/create_list.c \
+			parse/parse_map/utils_list0.c \
+			parse/parse_map/utils_list1.c \
 			parse/parse_map/utils_map1.c \
-			parse/parse_map/parsing_map1.c \
+			parse/parse_map/valid_map.c \
 			game/window.c
 
 # Archivos objeto
