@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 void	remove_newline(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
@@ -51,7 +51,6 @@ void	create_list(t_map *map, t_lmap **lmap)
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
-	// ft_printf("\n");
 }
 
 void	parsing_map(t_map *map, t_lmap **lmap)

@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-
 // void	parsing_square_map(t_lmap *lmap)
 // {
 // 	(void)lmap;
@@ -30,34 +29,28 @@
 // 	// 	ft_errors(3);
 // }
 
-int any_zero_or_space(t_map *map)
+int	any_zero_or_space(t_map *map)
 {
 	while (map->matrix[map->y])
-    {
-        map->x = 0;
-        while (map->matrix[map->y][map->x])
-        {
-            if ((map->matrix[map->y][map->x] == '0') && 
-                ((map->matrix[map->y - 1][map->x] == ' ') || 
-                 (map->matrix[map->y + 1][map->x] == ' ') || 
-                 (map->matrix[map->y][map->x - 1] == ' ') || 
-                 (map->matrix[map->y][map->x + 1] == ' ')))
-            {
-                return (1);
-            }
-			// printf("y, x = %c\n", map->matrix[map->y][map->x]);
-            map->x++;
-        }
-		if ((map->y + 1) < map->h)
+	{
+		map->x = 0;
+		while (map->matrix[map->y][map->x])
 		{
-        	map->y++;
+			if ((map->matrix[map->y][map->x] == '0') &&
+				((map->matrix[map->y - 1][map->x] == ' ') ||
+				(map->matrix[map->y + 1][map->x] == ' ') ||
+				(map->matrix[map->y][map->x - 1] == ' ') ||
+				(map->matrix[map->y][map->x + 1] == ' ')))
+				return (1);
+			map->x++;
 		}
+		if ((map->y + 1) < map->h)
+			map->y++;
 		else
 			break ;
-    }
-    return (0);
+	}
+	return (0);
 }
-
 
 void	valid_map(t_map *map)
 {
@@ -67,7 +60,5 @@ void	valid_map(t_map *map)
 		ft_errors(3);
 	}
 	else
-	{
 		ft_printf("Map is valid\n");
-	}
 }

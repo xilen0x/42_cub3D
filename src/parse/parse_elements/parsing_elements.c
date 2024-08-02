@@ -12,26 +12,26 @@
 
 #include "cub3d.h"
 
-void parsing_elements(t_elem *elem, t_map *map)
+void	parsing_elements(t_elem *elem, t_map *map)
 {
-    char *line;
-	char **elements;
-    char *temp;
-	char *line_trimed;
-	int i;
-	int j;
+	char	*line;
+	char	**elements;
+	char	*temp;
+	char	*line_trimed;
+	int		i;
+	int		j;
 
 	line = get_next_line(map->map_fd);
-    while (line)
+	while (line)
 	{
-        if (line[0] == '\n')
+		if (line[0] == '\n')
 		{
-            free(line);
-            line = get_next_line(map->map_fd);
-            continue ;
-        }
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
 		line_trimed = ft_strtrim2(line, " ", "\t");
-        elements = ft_split2(line_trimed);
+		elements = ft_split2(line_trimed);
 		if (ft_strncmp(elements[0], "NO", 2) == 0 || ft_strncmp(elements[0], "SO", 2) == 0 || ft_strncmp(elements[0], "EA", 2) == 0 || ft_strncmp(elements[0], "WE", 2) == 0)
 			texture_path_extension_is_valid(elements[1]);
 		remove_tabs(elements);
@@ -91,11 +91,10 @@ void parsing_elements(t_elem *elem, t_map *map)
 			free(line_trimed);
 			return ;
 		}
-        free_elements(elements);
-        free(line);
+		free_elements(elements);
+		free(line);
 		free(line_trimed);
-        line = get_next_line(map->map_fd);
-    }
-    close(map->map_fd);
+		line = get_next_line(map->map_fd);
+	}
+	close(map->map_fd);
 }
-

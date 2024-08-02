@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-unsigned int lst_size(t_lmap *lmap)
+unsigned int	lst_size(t_lmap *lmap)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (lmap)
@@ -25,15 +25,14 @@ unsigned int lst_size(t_lmap *lmap)
 	return (i);
 }
 
-t_lmap *ft_lastnode(t_lmap *node)
+t_lmap	*ft_lastnode(t_lmap *node)
 {
-    if (!node)
-        return (NULL);
-    while (node->next != NULL)
-        node = node->next;
-    return (node);
+	if (!node)
+		return (NULL);
+	while (node->next != NULL)
+		node = node->next;
+	return (node);
 }
-
 
 void	ft_add_back(t_lmap **lst, t_lmap *new)
 {
@@ -67,18 +66,17 @@ void	lst_clear(t_lmap **lmap, void (*del)(void*))
 	*lmap = NULL;
 }
 
-
-t_lmap *ft_newnode(char *str)
+t_lmap	*ft_newnode(char *str)
 {
-    t_lmap *new_node;
+	t_lmap	*new_node;
 
-    new_node = (t_lmap *)malloc(sizeof(t_lmap));
-    if (new_node)
-    {
-        new_node->content = str;
-        new_node->next = NULL;
-    }
-    else
-        return (NULL);
-    return (new_node);
+	new_node = (t_lmap *)malloc(sizeof(t_lmap));
+	if (new_node)
+	{
+		new_node->content = str;
+		new_node->next = NULL;
+	}
+	else
+		return (NULL);
+	return (new_node);
 }

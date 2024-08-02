@@ -14,15 +14,17 @@
 
 void	remove_tabs_and_spaces(char *line)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	while (line[i])
 	{
 		if (line[i] == ' ' && (j == 0 || line[i + 1] == ' '))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (line[i] == '\t')
 		{
@@ -64,64 +66,62 @@ void	remove_tabs_and_spaces(char *line)
 //     }
 // }
 
-
-void remove_tabs(char **line)
+void	remove_tabs(char **line)
 {
-    int i, j, k;
+	int	i;
+	int	j;
+	int	k;
 
-    i = 0;
-    while (line[i])
-    {
-        j = 0;
-        k = 0;
-        while (line[i][j])
-        {
-            if ((line[i][j] != '\t'))
-            {
-                line[i][k] = line[i][j];
-                k++;
-            }
-            j++;
-        }
-        line[i][k] = '\0';
-        i++;
-    }
+	i = 0;
+	while (line[i])
+	{
+		j = 0;
+		k = 0;
+		while (line[i][j])
+		{
+			if ((line[i][j] != '\t'))
+			{
+				line[i][k] = line[i][j];
+				k++;
+			}
+			j++;
+		}
+		line[i][k] = '\0';
+		i++;
+	}
 }
 
 //elimina espacios antes y después de las comas
-void remove_spaces_around_commas(char *line)
+void	remove_spaces_around_commas(char *line)
 {
-    int i = 0;
-    int j = 0;
+	int	i;
+	int	j;
 
-    while (line[i])
-    {
-        // Eliminar espacios adicionales
-        if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' || line[i + 1] == ',' || line[j - 1] == ','))
-        {
-            i++;
-            continue;
-        }
-        // Eliminar espacio antes de la coma
-        if (line[i] == ' ' && line[i + 1] == ',')
-        {
-            i++;
-            continue;
-        }
-        // Eliminar espacio después de la coma
-        if (line[i] == ',' && line[i + 1] == ' ')
-        {
-            line[j++] = line[i++];
-            while (line[i] == ' ')
-                i++;
-        }
-        else
-        {
-            line[j++] = line[i++];
-        }
-    }
-    // Eliminar espacios al final de la línea
-   while ((j > 0) && ((line[j - 2] == ' ') || (line[j - 2] == '\t')))
-        j--;
-    line[j] = '\0';
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ' && (j == 0 || line[i + 1] == ' ' \
+		|| line[i + 1] == ',' || line[j - 1] == ','))
+		{
+			i++;
+			continue ;
+		}
+		if (line[i] == ' ' && line[i + 1] == ',')
+		{
+			i++;
+			continue ;
+		}
+		if (line[i] == ',' && line[i + 1] == ' ')
+		{
+			line[j++] = line[i++];
+			while (line[i] == ' ')
+				i++;
+		}
+		else
+			line[j++] = line[i++];
+	}
+	while ((j > 0) && ((line[j - 2] == ' ') || (line[j - 2] == '\t')))
+		j--;
+	line[j] = '\0';
 }

@@ -36,7 +36,5 @@ int	main(int ac, char *av[])
 	lst_clear(&lmap, &free);
 	free_element_struct(&elem);
 	free_matrix(map.matrix, map.h);
-	// exit(0);
 	return (0);
 }
- 

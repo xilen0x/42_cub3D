@@ -1,4 +1,3 @@
-// #include "cub3d.h"
 #include "window.h"
 #include "cub3d.h"
 

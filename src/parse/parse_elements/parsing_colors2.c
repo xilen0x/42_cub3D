@@ -16,10 +16,10 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 {
 	char	*line_trimed;
 	int		color_value;
-	char 	**temp;
-	char 	**temp2;
-	char 	*color;
-    int 	i;
+	char	**temp;
+	char	**temp2;
+	char	*color;
+	int		i;
 
 	while (line)
 	{
@@ -47,7 +47,7 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 		while (temp2[i])
 			i++;
 		if (i == 3)
-		{		
+		{
 			if ((ft_strncmp(line_trimed, "F", 1) == 0) || (ft_strncmp(line_trimed, "C", 1) == 0))
 			{
 				i = 0;
@@ -69,15 +69,12 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 				if (ft_strncmp(temp[0], "F", 1) == 0)
 				{
 					colors->f = 1;
-					
 					color = ft_strtrim(temp2[0], " ");
 					colors->f_color[0] = ft_atoi(color);
 					free(color);
-					
 					color = ft_strtrim(temp2[1], " ");
 					colors->f_color[1] = ft_atoi(color);
 					free(color);
-					
 					color = ft_strtrim(temp2[2], " ");
 					colors->f_color[2] = ft_atoi(color);
 					free(color);
@@ -85,15 +82,12 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 				else if (ft_strncmp(temp[0], "C", 1) == 0)
 				{
 					colors->c = 1;
-
 					color = ft_strtrim(temp2[0], " ");
 					colors->c_color[0] = ft_atoi(color);
 					free(color);
-
 					color = ft_strtrim(temp2[1], " ");
 					colors->c_color[1] = ft_atoi(color);
 					free(color);
-					
 					color = ft_strtrim(temp2[2], " ");
 					colors->c_color[2] = ft_atoi(color);
 					free(color);
@@ -106,7 +100,7 @@ void	parsing_colors2(t_colors *colors, t_map *map, char *line)
 					free(line_trimed);
 					close(map->map_fd);
 					return ;
-				}	
+				}
 			}
 			else
 			{

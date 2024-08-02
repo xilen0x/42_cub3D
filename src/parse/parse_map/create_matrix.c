@@ -10,49 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 /* Funcion que reserva memoria y rellena con ' ' */
-void space_malloc(size_t rows, size_t cols, t_map *map)
+void	space_malloc(size_t rows, size_t cols, t_map *map)
 {
-    size_t i;
+	size_t	i;
 
-    map->matrix = p_malloc(sizeof(char *) * rows);
-    i = 0;
+	map->matrix = p_malloc(sizeof(char *) * rows);
+	i = 0;
 	map->matrix[i] = p_malloc(sizeof(char) * (cols + 2));
 	ft_memset(map->matrix[i], ' ', cols + 2);
 	map->matrix[i][cols + 1] = '\0';
 	i++;
-    while (i < rows)
-    {
-        map->matrix[i] = p_malloc(sizeof(char) * (cols + 3));
-        ft_memset(map->matrix[i], ' ', cols + 3);
-        map->matrix[i][cols] = '\0';
-        i++;
-    }
+	while (i < rows)
+	{
+		map->matrix[i] = p_malloc(sizeof(char) * (cols + 3));
+		ft_memset(map->matrix[i], ' ', cols + 3);
+		map->matrix[i][cols] = '\0';
+		i++;
+	}
 }
 
 /* Funcion que crea la matriz a partir de la lista*/
-void create_matrix(t_map *map, t_lmap *lmap)
+void	create_matrix(t_map *map, t_lmap *lmap)
 {
-    int     i;
-    t_lmap  *tmp;
-    size_t  max_line;
+	int		i;
+	t_lmap	*tmp;
+	size_t	max_line;
 
-    i = 0;
-    tmp = lmap;
-    map->h = lst_size(tmp) + 2;
-    max_line = search_longest_line(tmp);
-    space_malloc(map->h, max_line + 1, map);
+	i = 0;
+	tmp = lmap;
+	map->h = lst_size(tmp) + 2;
+	max_line = search_longest_line(tmp);
+	space_malloc(map->h, max_line + 1, map);
 	map->w = ft_strlen(lmap->content);
-    // map->matrix[i][max_line] = '\0';
 	i++;
-    while (lmap)
-    {
-        map->w = ft_strlen(lmap->content);
-        ft_strncpy2(map->matrix[i], lmap->content, max_line);
-        map->matrix[i][max_line + 1] = '\0';
-        lmap = lmap->next;
-        i++;
-    }
+	while (lmap)
+	{
+		map->w = ft_strlen(lmap->content);
+		ft_strncpy2(map->matrix[i], lmap->content, max_line);
+		map->matrix[i][max_line + 1] = '\0';
+		lmap = lmap->next;
+		i++;
+	}
 }

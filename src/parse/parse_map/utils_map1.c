@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 /* Allocates 'size' bytes of memory and returns a pointer to it.
 Exits properly if memory allocation fails.*/
@@ -46,7 +46,7 @@ char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
 		dest[j] = ' ';
 		j++;
 	}
-	return dest;
+	return (dest);
 }
 // int	horizontal_check(t_lmap *lmap)
 // {

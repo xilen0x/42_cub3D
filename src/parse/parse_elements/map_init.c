@@ -15,14 +15,14 @@
 /*Inicializacion de valores estructura t_elem*/
 static void	init_elem_values(t_elem *elem)
 {
-    elem->no = NULL;
-    elem->no_path = NULL;
-    elem->so = NULL;
-    elem->so_path = NULL;
-    elem->ea = NULL;
-    elem->ea_path = NULL;
-    elem->we = NULL;
-    elem->we_path = NULL;
+	elem->no = NULL;
+	elem->no_path = NULL;
+	elem->so = NULL;
+	elem->so_path = NULL;
+	elem->ea = NULL;
+	elem->ea_path = NULL;
+	elem->we = NULL;
+	elem->we_path = NULL;
 }
 
 /*Inicializacion de valores structura t_colors*/
@@ -48,15 +48,11 @@ static void	init_map_values(t_map *map)
 	map->y = 0;
 	map->matrix = NULL;
 }
-// static void	init_t_lmap(t_lmap **lmap)
-// {
-// 	*lmap = NULL;
-// }
+
 /*Inicializacion de valores*/
 void	init_values(t_elem *elem, t_colors *colors, t_map *map)
 {
 	init_elem_values(elem);
 	init_colors_values(colors);
 	init_map_values(map);
-	// init_t_lmap(lmap);
 }

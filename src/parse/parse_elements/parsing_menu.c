@@ -13,21 +13,21 @@
 
 void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
-	char *line;
-    char **elements;
-    char *line_trimed;
+	char	*line;
+	char	**elements;
+	char	*line_trimed;
 
 	line = get_next_line(map->map_fd);
 	while (1)
 	{
 		if (line[0] == '\n')
 		{
-            free(line);
-            line = get_next_line(map->map_fd);
-            continue ;
-        }
+			free(line);
+			line = get_next_line(map->map_fd);
+			continue ;
+		}
 		line_trimed = ft_strtrim2(line, " ", "\t");
-        elements = ft_split2(line_trimed);
+		elements = ft_split2(line_trimed);
 		if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
 		{
 			parsing_colors2(colors, map, line);
@@ -56,8 +56,6 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap **lmap)
 {
 	file_is_cub(av[1]);
-	//open_map(av[1], map);
-	// width_height_map_file(map, av);//si habilito esta linea, debo habilitar la anterior
 	open_map(av[1], map);
 	parsing_components(elem, colors, map, av);
 	parsing_map(map, lmap);

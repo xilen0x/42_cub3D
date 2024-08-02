@@ -13,26 +13,23 @@
 #include "cub3d.h"
 
 /*busqueda de linea mas larga en el mapa(list)*/
-size_t search_longest_line(t_lmap *lmap)
+size_t	search_longest_line(t_lmap *lmap)
 {
-    size_t longest_line;
-	size_t len;
-	
-    longest_line = 0;
+	size_t	longest_line;
+	size_t	len;
+
+	longest_line = 0;
 	while (lmap)
-    {
+	{
 		len = ft_strlen(lmap->content);
 		if (len > 0 && lmap->content[len - 1] == '\n')
-	        len--;
-	    if (longest_line < len)
+			len--;
+		if (longest_line < len)
 			longest_line = len;
-		
-        lmap = lmap->next;
-    }
-	//printf("longest_line: %ld\n", longest_line);
-    return (longest_line + 1);
+		lmap = lmap->next;
+	}
+	return (longest_line + 1);
 }
-
 
 // /*Funcion que calcula long. de columnas(w) & filas(h)*/
 // void width_height_map_file(t_map *map, char *av[])

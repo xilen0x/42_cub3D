@@ -1,17 +1,16 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   utils_2.c                                          :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2024/07/09 15:45:18 by castorga          #+#    #+#             */
-// /*   Updated: 2024/07/09 15:45:20 by castorga         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/09 15:45:18 by castorga          #+#    #+#             */
+/*   Updated: 2024/07/09 15:45:20 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 /*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
 int	open_map(char *av, t_map *map)
@@ -21,12 +20,14 @@ int	open_map(char *av, t_map *map)
 		ft_errors(2);
 	return (0);
 }
+
 /*funcion que imprime ancho y largo del fichero*/
-void print_width_height(t_map *map)
+void	print_width_height(t_map *map)
 {
 	ft_printf("Width: %d\n", map->w);
 	ft_printf("Height: %d\n", map->h);
 }
+
 /* F. que verifica si un carácter está presente en un conjunto de caracteres.*/
 static int	ft_isset2(char c, const char *set)
 {
@@ -67,7 +68,6 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
 	return (reserved);
 }
 
-
 // int	exit_game(t_game *g)
 // {
 // 	write (1, "####################\n", 21);
@@ -83,5 +83,30 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
 // 	map->map_fd = open(map->matrix, O_RDONLY);
 // 	if (map->map_fd == -1)
 // 		ft_errors(2);
+// 	return (0);
+// }
+
+// int	elements_colors_range(t_map *map, char *element)
+// {
+// 	if (ft_strncmp(element, "F", 1) == 0)
+// 	{
+// 		if ((map->f_color[0] < 0 || map->f_color[0] > 255) ||
+// 			(map->f_color[1] < 0 || map->f_color[1] > 255) ||
+// 			(map->f_color[2] < 0 || map->f_color[2] > 255))
+// 		{
+// 			ft_printf("Error\nColor range error(F)!\n");
+// 			return (1);
+// 		}
+// 	}
+// 	else if (ft_strncmp(element, "C", 1) == 0)
+// 	{
+// 		if ((map->c_color[0] < 0 || map->c_color[0] > 255) ||
+// 			(map->c_color[1] < 0 || map->c_color[1] > 255) ||
+// 			(map->c_color[2] < 0 || map->c_color[2] > 255))
+// 		{
+// 			ft_printf("Error\nColor range error(C)!\n");
+// 			return (1);
+// 		}
+// 	}
 // 	return (0);
 // }

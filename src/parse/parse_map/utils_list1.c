@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
-void print_list(t_lmap *lmap)
+void	print_list(t_lmap *lmap)
 {
-	int i;
+	int	i;
 
 	i = 0;
-    while (lmap)
-    {
+	while (lmap)
+	{
 		ft_printf("%s", lmap->content);
-        lmap = lmap->next;
+		lmap = lmap->next;
 		i++;
-    }
+	}
 	ft_printf("\n\n");
 	ft_printf("Longitud de la lista: %d\n", i);
 }
