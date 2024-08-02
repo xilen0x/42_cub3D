@@ -87,14 +87,15 @@ void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
 /* ------------- LIST ------------- */
-void		print_list(t_lmap *lmap);
-t_lmap		*ft_newnode(char *c);
-void		ft_add_back(t_lmap **lst, t_lmap *new);
-t_lmap		*ft_lastnode(t_lmap *node);
-void 		ft_del_one(t_lmap *lst, void (*del)(void*));
-unsigned int lst_size(t_lmap *lmap);
-void		lst_clear(t_lmap **lmap, void (*del)(void*));
-size_t		search_longest_line(t_lmap *lmap);
+void			print_list(t_lmap *lmap);
+t_lmap			*ft_newnode(char *c);
+void			ft_add_back(t_lmap **lst, t_lmap *new);
+t_lmap			*ft_lastnode(t_lmap *node);
+// void 		ft_del_one(t_lmap *lst, void (*del)(void*));
+unsigned int 	lst_size(t_lmap *lmap);
+void			lst_clear(t_lmap **lmap, void (*del)(void*));
+size_t			search_longest_line(t_lmap *lmap);
+size_t			spaces_to_zeros(t_lmap *lmap);
 
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);

@@ -12,6 +12,38 @@
 
 #include "cub3d.h"
 
+int	ft_strcmp(char c1, char c2)
+{
+	if (c1 > c2)
+		return (1);
+	else if (c1 == c2)
+		return (0);
+	else
+		return (-1);
+}
+
+size_t	spaces_to_zeros(t_lmap *lmap)
+{
+	size_t	i;
+
+	i = 0;
+	while (lmap)
+	{
+		i = 0;
+		while (lmap->content[i])
+		{
+			if (lmap->content[i] == ' ')
+			{
+				if (ft_strcmp(lmap->content[i], ' ') == 0)
+					lmap->content[i] = '0';
+			}
+			i++;
+		}
+		lmap = lmap->next;
+	}
+	return (0);
+}
+
 /*busqueda de linea mas larga en el mapa(list)*/
 size_t	search_longest_line(t_lmap *lmap)
 {
