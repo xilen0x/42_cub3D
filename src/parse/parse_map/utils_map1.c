@@ -26,3 +26,44 @@ void	*p_malloc(size_t size)
 	}
 	return (ptr);
 }
+// char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
+// {
+// 	unsigned int	i;
+// 	unsigned int	j;
+
+// 	i = 1;
+// 	j = 0;
+// 	while (src[i] != '\0' && i < n)
+// 	{
+// 		dest[j] = src[i];
+// 		i++;
+// 		j++;
+// 	}
+// 	while (i < n)
+// 	{
+// 		dest[j] = '.';
+// 		j++;
+// 	}
+// 	return (dest);
+// }
+char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	dest[0] = '.';
+	i = 0;
+	j = 1;
+	while (src[i] != '\0' && j < n)
+	{
+		dest[j] = src[i];
+		i++;
+		j++;
+	}
+	while (j < n)
+	{
+		dest[j] = '\0';
+		j++;
+	}
+	return dest;
+}

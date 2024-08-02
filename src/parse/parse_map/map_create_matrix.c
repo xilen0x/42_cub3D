@@ -19,14 +19,14 @@ void space_malloc(size_t rows, size_t cols, t_map *map)
 
     map->matrix = p_malloc(sizeof(char *) * rows);
     i = 0;
-	map->matrix[i] = p_malloc(sizeof(char) * (cols + 1));
-	ft_memset(map->matrix[i], ' ', cols);
-	map->matrix[i][cols] = '\0';
+	map->matrix[i] = p_malloc(sizeof(char) * (cols + 2));
+	ft_memset(map->matrix[i], '8', cols + 1);
+	map->matrix[i][cols + 1] = '\0';
 	i++;
     while (i < rows)
     {
-        map->matrix[i] = p_malloc(sizeof(char) * (cols + 1));
-        ft_memset(map->matrix[i], ' ', cols);
+        map->matrix[i] = p_malloc(sizeof(char) * (cols + 2));
+        ft_memset(map->matrix[i], '+', cols + 1);
         map->matrix[i][cols] = '\0';
         i++;
     }
@@ -45,14 +45,14 @@ void create_matrix(t_map *map, t_lmap *lmap)
     max_line = search_longest_line(tmp);
     space_malloc(map->h, max_line, map);
 	map->w = ft_strlen(lmap->content);
-    ft_strncpy(map->matrix[i], " ", map->w);
-    map->matrix[i][max_line] = '\0';
+    // ft_strncpy(map->matrix[i], "*", map->w);
+    // map->matrix[i][max_line] = '\0';
 	i++;
     while (lmap)
     {
         map->w = ft_strlen(lmap->content);
-        ft_strncpy(map->matrix[i], lmap->content, map->w);
-        map->matrix[i][max_line] = '\0';
+        ft_strncpy2(map->matrix[i], lmap->content, max_line);
+        map->matrix[i][max_line + 1] = '\0';
         lmap = lmap->next;
         i++;
     }

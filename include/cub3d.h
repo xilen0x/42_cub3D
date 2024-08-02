@@ -85,7 +85,7 @@ char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
-
+char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
 /* ------------- LIST ------------- */
 void		print_list(t_lmap *lmap);
 t_lmap		*ft_newnode(char *c);
