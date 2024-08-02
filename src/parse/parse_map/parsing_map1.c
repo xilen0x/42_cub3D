@@ -68,31 +68,32 @@
 // 	// 	ft_errors(3);
 // }
 
-int any_zero_or_space(t_map **map)
+int any_zero_or_space(t_map *map)
 {
-	char **tmp;
-
-	tmp = (*map)->matrix;
-    // while (tmp->matrix[tmp->y])
-	while (tmp[tmp->y])
+	while (map->matrix[map->y])
     {
-        tmp->x = 0;
-        while (tmp->matrix[tmp->y][tmp->x])
+        map->x = 0;
+        while (map->matrix[map->y][map->x])
         {
-            if ((tmp->matrix[tmp->y][tmp->x] == '0') && 
-                ((tmp->matrix[tmp->y - 1][tmp->x] == ' ') || 
-                 (tmp->matrix[tmp->y + 1][tmp->x] == ' ') || 
-                 (tmp->matrix[tmp->y][tmp->x - 1] == ' ') || 
-                 (tmp->matrix[tmp->y][tmp->x + 1] == ' ')))
+            if ((map->matrix[map->y][map->x] == '0') && 
+                ((map->matrix[map->y - 1][map->x] == ' ') || 
+                 (map->matrix[map->y + 1][map->x] == ' ') || 
+                 (map->matrix[map->y][map->x - 1] == ' ') || 
+                 (map->matrix[map->y][map->x + 1] == ' ')))
             {
-                return 1;
+                return (1);
             }
-            tmp->x++;
+			// printf("y, x = %c\n", map->matrix[map->y][map->x]);
+            map->x++;
         }
-        tmp->y++;
+		if ((map->y + 1) < map->h)
+		{
+        	map->y++;
+		}
+		else
+			break ;
     }
-
-    return 0;
+    return (0);
 }
 
 
@@ -104,7 +105,7 @@ void	valid_map(t_map *map)
 	// else
 	// 	// parsing_not_square_map(lmap);
 	// 	printf("Not square map\n");
-	if (any_zero_or_space(&map) == 1)
+	if (any_zero_or_space(map) == 1)
 	{
 		ft_printf("Error\n");
 		ft_errors(3);
