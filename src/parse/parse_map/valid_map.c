@@ -43,8 +43,8 @@ void	valid_map(t_map *map)
 		ft_printf("Error\n");
 		ft_errors(3);
 	}
-	// else
-	// 	ft_printf("Map is valid\n");
+	else
+		ft_printf("Map is valid\n");
 	// if (is_initial_position(game) != 1)
 
 }

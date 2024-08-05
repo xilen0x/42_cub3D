@@ -30,12 +30,14 @@ size_t	spaces_to_zeros(t_lmap *lmap)
 	while (lmap)
 	{
 		i = 0;
+		while (lmap->content[i] == ' ' || lmap->content[i] == '\t')
+			i++;
 		while (lmap->content[i])
 		{
 			if (lmap->content[i] == ' ')
 			{
 				if (ft_strcmp(lmap->content[i], ' ') == 0)
-					lmap->content[i] = '0';
+					lmap->content[i] = '1';
 			}
 			i++;
 		}
