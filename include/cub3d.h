@@ -51,6 +51,7 @@ typedef struct s_elem
 	char	*so_path;
 	char	*ea_path;
 	char	*we_path;
+	char	**av;
 }	t_elem;
 
 
@@ -63,19 +64,19 @@ typedef struct s_colors
 }	t_colors;
 
 /* ====================== PARSING ====================== */
+void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
+void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap);
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map *map);
 int		ft_errors(int n);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap **lmap);
 void	parsing_colors(t_colors *colors, t_map *map);
 void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 void	parsing_elements(t_elem *elem, t_map *map);
 void 	parsing_elements2(t_elem *elem, t_map *map, char *line);
 void	parsing_map(t_map *map, t_lmap **lmap);
 void	valid_map(t_map *map);
-void	init_values(t_elem *elem, t_colors *colors, t_map *map);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
 void	remove_tabs_and_spaces(char *lines);
@@ -86,13 +87,14 @@ void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
+
 /* ------------- LIST ------------- */
 void			print_list(t_lmap *lmap);
 t_lmap			*ft_newnode(char *c);
 void			ft_add_back(t_lmap **lst, t_lmap *new);
 t_lmap			*ft_lastnode(t_lmap *node);
 // void 		ft_del_one(t_lmap *lst, void (*del)(void*));
-unsigned int 	lst_size(t_lmap *lmap);
+unsigned int	lst_size(t_lmap *lmap);
 void			lst_clear(t_lmap **lmap, void (*del)(void*));
 size_t			search_longest_line(t_lmap *lmap);
 size_t			spaces_to_ones(t_lmap *lmap);
@@ -101,7 +103,7 @@ size_t			spaces_to_ones(t_lmap *lmap);
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);
 // void	free_matrix(char **matrix);
-void free_matrix(char **matrix, size_t rows);
+void	free_matrix(char **matrix, size_t rows);
 void	*p_malloc(size_t size);
 // int		horizontal_check(t_lmap *lmap);
 

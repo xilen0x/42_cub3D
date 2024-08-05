@@ -23,8 +23,9 @@ int	main(int ac, char *av[])
 	lmap = NULL;
 	if (ac == 2)
 	{
-		init_values(&elem, &colors, &map);
-		parsing(&elem, &colors, &map, av, &lmap);
+		elem.av = av;
+		init_values(&elem, &colors, &map, av);
+		parsing(&elem, &colors, &map, &lmap);
 		//init_game(&game);
 		// set_images(&game);
 		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);

@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
+// void	parsing_components_p2(t_elem *elem, t_colors *colors, t_map *map, char *av[])
+// {
+// 	instructions1();
+// }
+
 void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 {
 	char	*line;
@@ -53,11 +58,11 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map, char *av[])
 	}
 }
 
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, char *av[], t_lmap **lmap)
+void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
-	file_is_cub(av[1]);
-	open_map(av[1], map);
-	parsing_components(elem, colors, map, av);
+	file_is_cub(elem->av[1]);
+	open_map(elem->av[1], map);
+	parsing_components(elem, colors, map, elem->av);
 	parsing_map(map, lmap);
 	// print_elements(elem);
 	// print_colors(colors);
