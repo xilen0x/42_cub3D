@@ -22,7 +22,7 @@ int	ft_strcmp(char c1, char c2)
 		return (-1);
 }
 
-size_t	spaces_to_zeros(t_lmap *lmap)
+size_t	spaces_to_ones(t_lmap *lmap)
 {
 	size_t	i;
 
