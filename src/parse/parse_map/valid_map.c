@@ -51,7 +51,8 @@ int	only_characters_allowed(t_map	*map)
 				map->matrix[map->y][map->x] != 'N' &&
 				map->matrix[map->y][map->x] != 'S' &&
 				map->matrix[map->y][map->x] != 'E' &&
-				map->matrix[map->y][map->x] != 'W')
+				map->matrix[map->y][map->x] != 'W' &&
+				map->matrix[map->y][map->x] != '\t')
 				return (1);
 			map->x++;
 		}
