@@ -24,6 +24,7 @@ static void	init_elem_values(t_elem *elem, char *av[])
 	elem->we = NULL;
 	elem->we_path = NULL;
 	elem->av = av;
+	elem->line = NULL;
 }
 
 /*Inicializacion de valores structura t_colors*/
