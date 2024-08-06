@@ -52,6 +52,7 @@ typedef struct s_elem
 	char	*ea_path;
 	char	*we_path;
 	char	**av;
+	char	*line;
 }	t_elem;
 
 typedef struct s_colors
@@ -62,13 +63,13 @@ typedef struct s_colors
 	int		c_color[3];
 }	t_colors;
 
-typedef struct s_params
-{
-    t_elem *elem;
-    t_colors *colors;
-    t_map *map;
-    char *av;
-} t_params;
+// typedef struct s_params
+// {
+//     t_elem *elem;
+//     t_colors *colors;
+//     t_map *map;
+//     char *av;
+// } t_params;
 
 /* ====================== PARSING ====================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);

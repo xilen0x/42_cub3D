@@ -31,7 +31,7 @@ char	*ft_strjoin3(char *s1, char const *s2, size_t len)
 	return (join);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
 	char		*line;
@@ -47,7 +47,6 @@ char *get_next_line(int fd)
 	}
 	if (ft_strlen(line) == 0)
 		return (free(line), NULL);
-
 	newline = ft_strchr(line, '\n');
 	if (newline != NULL)
 	{

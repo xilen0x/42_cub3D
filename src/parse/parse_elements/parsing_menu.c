@@ -38,6 +38,8 @@ void	parsing_comp2(t_elem *elem, t_colors *colors, t_map *map, char *line)
 	}
 	free_elements(elements);
 	free(line_trimed);
+	free(line);
+	return ;
 }
 
 void	parsing_components(t_elem *elem, t_colors *colors, t_map *map)
@@ -45,26 +47,27 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map)
 	char	*line;
 
 	line = get_next_line(map->map_fd);
-	while (1)
+	elem->line = line; //Stack-buffer-overflow here!!!!*****************
+	while (elem->line)
 	{
-		if (line[0] == '\n')//SEGFAULT HERE*****************************************
+		if (elem->line[0] == '\n')
 		{
-			free(line);
-			line = get_next_line(map->map_fd);
+			free(elem->line);
+			elem->line = get_next_line(map->map_fd);
 			continue ;
 		}
-		parsing_comp2(elem, colors, map, line);
+		parsing_comp2(elem, colors, map, elem->line);
+		free(elem->line);
+		elem->line = NULL;
 	}
-	free(line);
-	return ;
 }
 
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
-	(void)lmap;
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	parsing_components(elem, colors, map);
+	(void)lmap;
 	//parsing_map(map, lmap);
 	// print_elements(elem);
 	// print_colors(colors);
