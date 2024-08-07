@@ -5,7 +5,7 @@
 
 			SO ./textures/red.xpm		
 EA    ./textures/yellow.xpm
-WE 				./textures/green.xpm
+  	 WE 				./textures/green.xpm
 NO ./textures/blue.xpm 
 
 			F  	116,212,100   

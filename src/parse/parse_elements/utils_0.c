@@ -54,12 +54,10 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs)
 	end = s1 + ft_strlen(s1) - 1;
 	while (ft_isset2(*start, set) || ft_isset2(*start, tabs))
 		start++;
-	while (start <= end && ft_isset2(*end, set))
+	while (start <= end && (ft_isset2(*end, set) || ft_isset2(*end, tabs)))
 		end--;
 	len = end - start + 1;
-	reserved = (char *)malloc((len + 1) * sizeof(char));
-	if (reserved == NULL)
-		return (NULL);
+	reserved = (char *)p_malloc((len + 1) * sizeof(char));
 	while (i < len)
 	{
 		reserved[i] = start[i];
