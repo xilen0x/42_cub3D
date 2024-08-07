@@ -43,10 +43,10 @@ typedef struct s_list_x_map
 
 typedef struct s_elem
 {
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
+	// char	*no;
+	// char	*so;
+	// char	*ea;
+	// char	*we;
 	char	*no_path;
 	char	*so_path;
 	char	*ea_path;
@@ -88,7 +88,8 @@ void	valid_map(t_map *map);
 void	remove_spaces_around_commas(char *line);
 void	remove_tabs(char **elements);
 void	remove_tabs_and_spaces(char *lines);
-void	texture_path_extension_is_valid(char	*elements);
+// void	texture_path_extension_is_valid(char	*elements);
+void	texture_path_extension_is_valid(t_lmap *lmap);
 char	*ft_strtrim2(char const *s1, char const *set, char const *tabs);
 char 	**ft_split2(const char *str);
 void 	print_width_height(t_map *map);

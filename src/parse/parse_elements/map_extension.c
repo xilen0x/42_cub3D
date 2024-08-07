@@ -29,19 +29,56 @@ int	file_is_cub(char *av)
 	return (0);
 }
 
-/*Funcion que verifica la extension .xpm del texture path*/
-void	texture_path_extension_is_valid(char *elements)
-{
-	int	i;
+// /*Funcion que verifica la extension .xpm del texture path*/
+// void	texture_path_extension_is_valid(char *elements)
+// {
+// 	int	i;
 
-	i = 0;
-	while (elements[i])
-		i++;
-	if (elements[i - 1] != 'm' || elements[i - 2] != 'p' \
-	|| elements[i - 3] != 'x' || elements[i - 4] != '.')
+// 	i = 0;
+// 	while (elements[i])
+// 		i++;
+// 	if (elements[i - 1] != 'm' || elements[i - 2] != 'p' 
+// 	|| elements[i - 3] != 'x' || elements[i - 4] != '.')
+// 	{
+// 		write (2, "Error\n", 6);
+// 		write (2, "The texture path is not valid.\n", 31);
+// 		exit(1);
+// 	}
+// }
+
+
+/* Funcion que verifica la extension .xpm del texture path */
+void	texture_path_extension_is_valid(t_lmap *lmap)
+{
+	char	*line;
+	int		len;
+	int		temp;
+
+	temp = 0;
+	while (lmap)
 	{
-		write (2, "Error\n", 6);
-		write (2, "The texture path is not valid.\n", 31);
-		exit(1);
-	}
+		line = lmap->content;
+        len = ft_strlen(line);
+		if (line[0] == '\n')
+        {
+            lmap = lmap->next;
+            continue;
+        }
+		if ((ft_strncmp(lmap->content, "SO", 2) == 0) || (ft_strncmp(lmap->content, "NO", 2) == 0) ||
+			(ft_strncmp(lmap->content, "WE", 2) == 0) || (ft_strncmp(lmap->content, "EA", 2) == 0))
+			temp++;
+        
+		
+		// Verificar si la línea tiene al menos 4 caracteres para la extensión .xpm
+        if (len < 4 || line[len - 1] != 'm' || line[len - 2] != 'p' ||
+            line[len - 3] != 'x' || line[len - 4] != '.')
+        {
+            write(2, "Error\n", 6);
+            write(2, "The texture path is not valid.\n", 31);
+            exit(1);
+        }
+        lmap = lmap->next;
+		if (temp == 4)
+			break ;
+    }
 }

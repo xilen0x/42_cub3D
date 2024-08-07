@@ -15,13 +15,13 @@
 /*Inicializacion de valores estructura t_elem*/
 static void	init_elem_values(t_elem *elem, char *av[])
 {
-	elem->no = NULL;
+	// elem->no = NULL;
+	// elem->so = NULL;
+	// elem->ea = NULL;
+	// elem->we = NULL;
 	elem->no_path = NULL;
-	elem->so = NULL;
 	elem->so_path = NULL;
-	elem->ea = NULL;
 	elem->ea_path = NULL;
-	elem->we = NULL;
 	elem->we_path = NULL;
 	elem->av = av;
 	elem->line = NULL;

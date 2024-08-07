@@ -32,8 +32,10 @@ void	create_list(t_map *map, t_lmap **lmap)
 {
 	char	*line;
 	t_lmap	*node;
+	// int		len;
 
 	line = get_next_line(map->map_fd);
+	// len = ft_strlen(line);
 	while (line)
 	{
 		if (line[0] == '\n')
@@ -44,7 +46,7 @@ void	create_list(t_map *map, t_lmap **lmap)
 		}
 		// ft_printf("%s", line);
 		remove_newline(line);
-		node = malloc(sizeof(t_lmap));
+		node = p_malloc(sizeof(t_lmap));
 		node->content = line;
 		node->next = NULL;
 		ft_add_back(lmap, node);

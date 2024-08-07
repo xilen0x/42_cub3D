@@ -71,6 +71,11 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map)
 		elem->line = NULL;
 	}
 }
+						/******* OLD ********/
+
+/******************************************************************************/
+
+						/******* NEW ********/
 
 void	remove_tabs_spaces_elem(t_lmap *lmap)
 {
@@ -85,21 +90,70 @@ void	remove_tabs_spaces_elem(t_lmap *lmap)
 	}
 }
 
+int	split_chain_elem(t_lmap *lmap, t_elem *elem)
+{
+	char	**elements;
+	char	*line;
+	int		i;
+	int		temp;
+
+
+	temp = 0;
+	while (lmap)
+	{
+		line = lmap->content;
+		elements = ft_split2(line);
+		i = 0;
+		while (elements[i])
+		{
+			if (ft_strncmp(elements[i], "SO", 2) == 0)
+			{
+				elem->so_path = elements[i + 1];
+				temp++;
+			}
+			else if (ft_strncmp(elements[i], "NO", 2) == 0)
+			{
+				elem->no_path = elements[i + 1];
+				temp++;
+			}
+			else if (ft_strncmp(elements[i], "EA", 2) == 0)
+			{
+				elem->ea_path = elements[i + 1];
+				temp++;
+			}
+			else if (ft_strncmp(elements[i], "WE", 2) == 0)
+			{
+				elem->we_path = elements[i + 1];
+				temp++;
+			}
+			// printf("%s\n", elements[i]);
+			i++;
+		}
+		free_elements(elements);
+		if (temp == 4)
+		{
+			// free_elements(elements);
+			break ;
+		}
+		lmap = lmap->next;
+	}
+		ft_printf("NO_PATH: %s\n", elem->no_path);
+		ft_printf("SO_PATH: %s\n", elem->so_path);
+		ft_printf("EA_PATH: %s\n", elem->ea_path);
+		ft_printf("WE_PATH: %s\n", elem->we_path);
+	return (0);
+}
+
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
-	t_lmap	*list_map;
-	t_lmap	*head;
-
 	(void)elem;
-	list_map = lmap;
-	head = list_map;
-	while (list_map)
-	{
-		remove_tabs_spaces_elem(lmap);
-		// printf("%s\n", list_map->content);
-		list_map = list_map->next;
-	}
-	list_map = head;
+	remove_tabs_spaces_elem(lmap);
+	// ft_printf("\n\nAfter removing tabs and spaces\n\n");
+	// if (split_chain_elem(lmap, elem) == 1)
+	// {
+	// 	write(1, "Error split chain\n", 18);
+	// 	exit(1);
+	// }
 }
 
 
@@ -113,6 +167,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	// parsing_components(elem, colors, map);
 	// parsing_map(map, lmap);
 	parse_elems(elem, *lmap);
+	texture_path_extension_is_valid(*lmap);
 	// parse_rgb(colors, lmap);
 	print_list(*lmap);
 	// print_elements(elem);
