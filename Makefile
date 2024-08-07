@@ -36,7 +36,6 @@ SRC_FILES = main.c \
             parse/parse_elements/map_extension.c \
             parse/parse_elements/map_measurement.c \
             parse/parse_elements/parsing_menu.c \
-            parse/parse_elements/elements_exists.c \
 			parse/parse_elements/rm_spaces_n_tabs.c \
 			parse/parse_elements/utils_0.c \
 			parse/parse_elements/utils_1.c \

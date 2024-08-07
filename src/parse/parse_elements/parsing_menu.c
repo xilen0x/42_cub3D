@@ -11,20 +11,21 @@
 /* ************************************************************************** */
 #include "cub3d.h"
 
-void	parsing_comp3()
+void	free_elem1(char **elements, char *line_trimed)
 {
-	
+	free_elements(elements);
+	free(line_trimed);
 }
 
-void	parsing_comp2(t_elem *elem, t_colors *colors, t_map *map, char *line)
+void	if_f_or_c(t_elem *elem, t_colors *colors, t_map *map, char *line)
 {
 	char	*line_trimed;
 	char	**elements;
 
 	line_trimed = ft_strtrim2(line, " ", "\t");
 	elements = ft_split2(line_trimed);
-	parsing_comp3();
-	if ((ft_strncmp(elements[0], "F", 1) == 0) || (ft_strncmp(elements[0], "C", 1) == 0))
+	if ((ft_strncmp(elements[0], "F", 1) == 0) || \
+		(ft_strncmp(elements[0], "C", 1) == 0))
 	{
 		parsing_colors2(colors, map, line);
 		open_map(elem->av[1], map);
@@ -42,9 +43,13 @@ void	parsing_comp2(t_elem *elem, t_colors *colors, t_map *map, char *line)
 		free(line_trimed);
 		return ;
 	}
-	free_elements(elements);
-	free(line_trimed);
-	free(line);
+	free_elem1(elements, line_trimed);
+}
+
+void	parsing_comp2(t_elem *elem, t_colors *colors, t_map *map, char *line)
+{
+	if_f_or_c(elem, colors, map, line);
+	// free(line);
 	return ;
 }
 
