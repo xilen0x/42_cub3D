@@ -49,7 +49,7 @@ void	if_f_or_c(t_elem *elem, t_colors *colors, t_map *map, char *line)
 void	parsing_comp2(t_elem *elem, t_colors *colors, t_map *map, char *line)
 {
 	if_f_or_c(elem, colors, map, line);
-	// free(line);
+	free(line);
 	return ;
 }
 
