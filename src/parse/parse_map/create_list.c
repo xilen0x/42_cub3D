@@ -48,6 +48,7 @@ void	create_list(t_map *map, t_lmap **lmap)
 		node->content = line;
 		node->next = NULL;
 		ft_add_back(lmap, node);
+		// free(line);
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);

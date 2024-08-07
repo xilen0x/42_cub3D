@@ -106,7 +106,7 @@ unsigned int	lst_size(t_lmap *lmap);
 void			lst_clear(t_lmap **lmap, void (*del)(void*));
 size_t			search_longest_line(t_lmap *lmap);
 size_t			spaces_to_ones(t_lmap *lmap);
-
+void	create_list(t_map *map, t_lmap **lmap);
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);

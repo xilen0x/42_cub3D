@@ -72,13 +72,49 @@ void	parsing_components(t_elem *elem, t_colors *colors, t_map *map)
 	}
 }
 
+void	remove_tabs_spaces_elem(t_lmap *lmap)
+{
+	char	*line;
+
+	while (lmap)
+	{
+		line = ft_strtrim2(lmap->content, " ", "\t");
+		free(lmap->content);
+		lmap->content = line;
+		lmap = lmap->next;
+	}
+}
+
+void	parse_elems(t_elem *elem, t_lmap *lmap)
+{
+	t_lmap	*list_map;
+	t_lmap	*head;
+
+	(void)elem;
+	list_map = lmap;
+	head = list_map;
+	while (list_map)
+	{
+		remove_tabs_spaces_elem(lmap);
+		// printf("%s\n", list_map->content);
+		list_map = list_map->next;
+	}
+	list_map = head;
+}
+
+
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
 	// (void)lmap;
+	(void)colors;
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
-	parsing_components(elem, colors, map);
-	parsing_map(map, lmap);
+	create_list(map, lmap);
+	// parsing_components(elem, colors, map);
+	// parsing_map(map, lmap);
+	parse_elems(elem, *lmap);
+	// parse_rgb(colors, lmap);
+	print_list(*lmap);
 	// print_elements(elem);
 	// print_colors(colors);
 	// print_width_height(map);
