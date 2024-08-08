@@ -26,9 +26,16 @@ int	ft_errors2(int n)
 		write (2, "It was not possible to initialize the program!\n", 47);
 		exit(1);
 	}
-	else
+	else if (n == 6)
 	{
 		write (2, "Error\n", 6);
+		write (2, "The file does not have a .cub extension.\n", 41);
+		exit(1);
+	}
+	else if (n == 7)
+	{
+		write (2, "Error\n", 6);
+		write (2, "The texture path is not valid.\n", 31);
 		exit(1);
 	}
 	return (1);

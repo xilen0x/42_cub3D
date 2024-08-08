@@ -90,66 +90,64 @@ void	remove_tabs_spaces_elem(t_lmap *lmap)
 	}
 }
 
-int	split_chain_elem(t_lmap *lmap, t_elem *elem)
+int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 {
 	char	**elements;
-	char	*line;
 	int		i;
 	int		temp;
-
 
 	temp = 0;
 	while (lmap)
 	{
-		line = lmap->content;
-		elements = ft_split2(line);
+		if (lmap->content[0] == '\n')
+		{
+			lmap = lmap->next;
+			continue;
+		}
+		elements = ft_split2(lmap->content);
 		i = 0;
 		while (elements[i])
 		{
+			if (ft_strncmp(elements[i], "NO", 2) == 0)
+			{
+				elem->no_path = ft_strdup(elements[i + 1]);
+				temp++;
+			}
 			if (ft_strncmp(elements[i], "SO", 2) == 0)
 			{
-				elem->so_path = elements[i + 1];
+				elem->so_path = ft_strdup(elements[i + 1]);
 				temp++;
 			}
-			else if (ft_strncmp(elements[i], "NO", 2) == 0)
+			if (ft_strncmp(elements[i], "EA", 2) == 0)
 			{
-				elem->no_path = elements[i + 1];
+				elem->ea_path = ft_strdup(elements[i + 1]);
 				temp++;
 			}
-			else if (ft_strncmp(elements[i], "EA", 2) == 0)
+			if (ft_strncmp(elements[i], "WE", 2) == 0)
 			{
-				elem->ea_path = elements[i + 1];
+				elem->we_path = ft_strdup(elements[i + 1]);
 				temp++;
 			}
-			else if (ft_strncmp(elements[i], "WE", 2) == 0)
-			{
-				elem->we_path = elements[i + 1];
-				temp++;
-			}
-			// printf("%s\n", elements[i]);
 			i++;
 		}
 		free_elements(elements);
-		if (temp == 4)
-		{
-			// free_elements(elements);
-			break ;
-		}
 		lmap = lmap->next;
+		if (temp == 4)
+			break ;
 	}
-		ft_printf("NO_PATH: %s\n", elem->no_path);
-		ft_printf("SO_PATH: %s\n", elem->so_path);
-		ft_printf("EA_PATH: %s\n", elem->ea_path);
-		ft_printf("WE_PATH: %s\n", elem->we_path);
 	return (0);
 }
 
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
-	(void)elem;
+	// (void)elem;
 	remove_tabs_spaces_elem(lmap);
 	// ft_printf("\n\nAfter removing tabs and spaces\n\n");
-	// if (split_chain_elem(lmap, elem) == 1)
+	save_path_chain_to_elem_struct(lmap, elem);
+	ft_printf("NO_PATH: %s\n", elem->no_path);
+	ft_printf("SO_PATH: %s\n", elem->so_path);
+	ft_printf("EA_PATH: %s\n", elem->ea_path);
+	ft_printf("WE_PATH: %s\n", elem->we_path);
 	// {
 	// 	write(1, "Error split chain\n", 18);
 	// 	exit(1);
@@ -164,10 +162,10 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
+	parse_elems(elem, *lmap);
+	texture_path_extension_is_valid(elem);
 	// parsing_components(elem, colors, map);
 	// parsing_map(map, lmap);
-	parse_elems(elem, *lmap);
-	texture_path_extension_is_valid(*lmap);
 	// parse_rgb(colors, lmap);
 	print_list(*lmap);
 	// print_elements(elem);
