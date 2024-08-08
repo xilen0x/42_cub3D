@@ -34,7 +34,7 @@ void	free_element_struct(t_elem *elem)
 	if (elem->we_path)
 		free(elem->we_path);
 	if (elem->ea_path)
-		free(elem->ea_path);	
+		free(elem->ea_path);
 }
 
 void	free_elements(char **double_pointer)

@@ -58,12 +58,14 @@ void	create_list(t_map *map, t_lmap **lmap)
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
-	create_list(map, lmap);
-	print_list(*lmap);
-	spaces_to_ones(*lmap);
-	print_list(*lmap);
-	create_matrix(map, *lmap);
-	print_matrix(map);
-	valid_map(map);
+	(void)map;
+	(void)lmap;
+	// create_list(map, lmap);
+	// print_list(*lmap);
+	// spaces_to_ones(*lmap);
+	// print_list(*lmap);
+	// create_matrix(map, *lmap);
+	// print_matrix(map);
+	// valid_map(map);
 // 	lst_clear(lmap, &free);
 }

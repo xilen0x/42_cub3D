@@ -43,10 +43,7 @@ typedef struct s_list_x_map
 
 typedef struct s_elem
 {
-	// char	*no;
-	// char	*so;
-	// char	*ea;
-	// char	*we;
+	char	all_elem_found;
 	char	*no_path;
 	char	*so_path;
 	char	*ea_path;

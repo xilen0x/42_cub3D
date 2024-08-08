@@ -33,25 +33,25 @@ MLX_FILE = libmlx.a
 # Archivos fuente
 SRC_FILES = main.c \
 			parse/parse_elements/map_init.c \
-            parse/parse_elements/map_extension.c \
-            parse/parse_elements/map_measurement.c \
             parse/parse_elements/parsing_menu.c \
-			parse/parse_elements/rm_spaces_n_tabs.c \
-			parse/parse_elements/utils_0.c \
-			parse/parse_elements/utils_1.c \
-			parse/parse_elements/parsing_colors.c \
-			parse/parse_elements/parsing_colors2.c \
-			parse/parse_elements/parsing_elements.c \
-			parse/parse_elements/parsing_elements2.c \
             parse/errors_and_free/errors_msgs.c \
 			parse/errors_and_free/free_functions.c \
-			parse/parse_map/create_matrix.c \
+            parse/parse_elements/map_extension.c \
+			parse/parse_elements/utils_0.c \
+			parse/parse_elements/utils_1.c \
 			parse/parse_map/create_list.c \
 			parse/parse_map/utils_list0.c \
 			parse/parse_map/utils_list1.c \
-			parse/parse_map/utils_map1.c \
-			parse/parse_map/valid_map.c \
-			game/window.c
+			parse/parse_map/utils_map1.c
+# parse/parse_map/valid_map.c 
+# parse/parse_map/create_matrix.c 
+# parse/parse_elements/rm_spaces_n_tabs.c 
+# parse/parse_elements/parsing_colors.c 
+# parse/parse_elements/parsing_colors2.c 
+# parse/parse_elements/parsing_elements.c 
+# parse/parse_elements/parsing_elements2.c
+# parse/parse_elements/map_measurement.c 
+# game/window.c
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)

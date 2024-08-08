@@ -66,13 +66,9 @@ char	**ft_split2(const char *str)
 
 void	print_elements(t_elem *elem)
 {
-	ft_printf("\nNO     : %s\n", elem->no);
 	ft_printf("NO_PATH: %s\n", elem->no_path);
-	ft_printf("\nSO     : %s\n", elem->so);
 	ft_printf("SO_PATH: %s\n", elem->so_path);
-	ft_printf("\nEA     : %s\n", elem->ea);
 	ft_printf("EA_PATH: %s\n", elem->ea_path);
-	ft_printf("\nWE     : %s\n", elem->we);
 	ft_printf("WE_PATH: %s\n", elem->we_path);
 }
 
