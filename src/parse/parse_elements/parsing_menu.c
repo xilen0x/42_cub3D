@@ -90,19 +90,19 @@ void	remove_tabs_spaces_elem(t_lmap *lmap)
 	}
 }
 
-void	save3(t_elem *elem, char *line, char *option)
+void	save_path3(t_elem *elem, char *line, char *option)
 {
 	if (ft_strncmp(option, "NO", 2) == 0)
-		elem->no_path = line;
+		elem->no_path = ft_strdup(line);
 	else if (ft_strncmp(option, "SO", 2) == 0)
-		elem->so_path = line;
+		elem->so_path = ft_strdup(line);
 	else if (ft_strncmp(option, "EA", 2) == 0)
-		elem->ea_path = line;
+		elem->ea_path = ft_strdup(line);
 	else if (ft_strncmp(option, "WE", 2) == 0)
-		elem->we_path = line;
+		elem->we_path = ft_strdup(line);
 }
 
-static void	save_path_chain_to_elem_struct2(t_elem *elem, char **elements, int i, int temp)
+static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 {
 	char	*line;
 	char	*option;
@@ -115,11 +115,13 @@ static void	save_path_chain_to_elem_struct2(t_elem *elem, char **elements, int i
 			if (ft_strncmp(elements[i], option, 2) == 0)//option = NO, SO, EA, WE
 			{
 				line = ft_strdup(elements[i + 1]);
-				save3(elem, line, option);
-				free(line);//bug con este free!!!!!!!!
+				save_path3(elem, line, option);
+				free(line);//!!!!!!!!
 				temp++;
 			}
 		}
+		if (temp == 4)
+			break ;
 		i++;
 	}
 }
@@ -140,11 +142,11 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 		}
 		elements = ft_split2(lmap->content);
 		i = 0;
-		save_path_chain_to_elem_struct2(elem, elements, i, temp);
+		save_path2(elem, elements, i, temp);
 		free_elements(elements);
 		lmap = lmap->next;
-		if (temp == 4)
-			break ;
+		// if (temp == 4)
+		// 	break ;
 	}
 	return (0);
 }
@@ -153,11 +155,12 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
 	remove_tabs_spaces_elem(lmap);
 	save_path_chain_to_elem_struct(lmap, elem);
+
 	ft_printf("\nNO     : %s\n", elem->no_path);
 	ft_printf("SO     : %s\n", elem->so_path);
 	ft_printf("EA     : %s\n", elem->ea_path);
 	ft_printf("WE     : %s\n", elem->we_path);
-	ft_printf("\n");
+	ft_printf("\n************************************\n");
 }
 
 
@@ -169,7 +172,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
 	parse_elems(elem, *lmap);
-	texture_path_extension_is_valid(elem);
+	// texture_path_extension_is_valid(elem);
 	// parsing_components(elem, colors, map);
 	// parsing_map(map, lmap);
 	// parse_rgb(colors, lmap);

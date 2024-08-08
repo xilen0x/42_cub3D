@@ -27,14 +27,14 @@ void	free_matrix(char **matrix, size_t rows)
 
 void	free_element_struct(t_elem *elem)
 {
-	free(elem->no);
-	free(elem->so);
-	free(elem->we);
-	free(elem->ea);
-	free(elem->no_path);
-	free(elem->so_path);
-	free(elem->we_path);
-	free(elem->ea_path);
+	if (elem->no_path)
+		free(elem->no_path);
+	if (elem->so_path)
+		free(elem->so_path);
+	if (elem->we_path)
+		free(elem->we_path);
+	if (elem->ea_path)
+		free(elem->ea_path);	
 }
 
 void	free_elements(char **double_pointer)
