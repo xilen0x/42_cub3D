@@ -78,22 +78,9 @@ int	file_is_cub(char *av)
 
 void	texture_path_extension_is_valid(t_elem *elem)
 {
-	// while (lmap)
-	// {
-	// 	line = lmap->content;
-    //     len = ft_strlen(line);
-	// 	if (line[0] == '\n')
-    //     {
-    //         lmap = lmap->next;
-    //         continue;
-    //     }
-	if ((ft_strncmp(elem->so_path, ".xpm", 4) != 0) || (ft_strncmp(elem->no_path, ".xpm", 4) != 0) ||
-		(ft_strncmp(elem->we_path, ".xpm", 4) != 0) || (ft_strncmp(elem->ea_path, ".xpm", 4) != 0))
-	// 		temp++;
-    // if (len < 4 || line[len - 1] != 'm' || line[len - 2] != 'p' ||
-    //         line[len - 3] != 'x' || line[len - 4] != '.')
-			ft_errors2(7);
-        // lmap = lmap->next;
-		// if (temp == 4)
-		// 	break ;
+	if ((ft_strnstr(elem->so_path, ".xpm", ft_strlen(elem->so_path)) == NULL) || (ft_strnstr(elem->no_path, ".xpm", ft_strlen(elem->no_path)) == NULL) ||
+		(ft_strnstr(elem->we_path, ".xpm", ft_strlen(elem->we_path)) == NULL) || (ft_strnstr(elem->ea_path, ".xpm", ft_strlen(elem->ea_path)) == NULL))
+		ft_errors2(7);
+	else
+		printf("Extension .xpm is valid\n");
 }

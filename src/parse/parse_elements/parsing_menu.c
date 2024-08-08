@@ -90,6 +90,40 @@ void	remove_tabs_spaces_elem(t_lmap *lmap)
 	}
 }
 
+void	save3(t_elem *elem, char *line, char *option)
+{
+	if (ft_strncmp(option, "NO", 2) == 0)
+		elem->no_path = line;
+	else if (ft_strncmp(option, "SO", 2) == 0)
+		elem->so_path = line;
+	else if (ft_strncmp(option, "EA", 2) == 0)
+		elem->ea_path = line;
+	else if (ft_strncmp(option, "WE", 2) == 0)
+		elem->we_path = line;
+}
+
+static void	save_path_chain_to_elem_struct2(t_elem *elem, char **elements, int i, int temp)
+{
+	char	*line;
+	char	*option;
+
+	while (elements[i])
+	{
+		if (ft_strlen(elements[i]) == 2)
+		{
+			option = elements[i];
+			if (ft_strncmp(elements[i], option, 2) == 0)//option = NO, SO, EA, WE
+			{
+				line = ft_strdup(elements[i + 1]);
+				save3(elem, line, option);
+				free(line);//bug con este free!!!!!!!!
+				temp++;
+			}
+		}
+		i++;
+	}
+}
+
 int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 {
 	char	**elements;
@@ -106,30 +140,7 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 		}
 		elements = ft_split2(lmap->content);
 		i = 0;
-		while (elements[i])
-		{
-			if (ft_strncmp(elements[i], "NO", 2) == 0)
-			{
-				elem->no_path = ft_strdup(elements[i + 1]);
-				temp++;
-			}
-			if (ft_strncmp(elements[i], "SO", 2) == 0)
-			{
-				elem->so_path = ft_strdup(elements[i + 1]);
-				temp++;
-			}
-			if (ft_strncmp(elements[i], "EA", 2) == 0)
-			{
-				elem->ea_path = ft_strdup(elements[i + 1]);
-				temp++;
-			}
-			if (ft_strncmp(elements[i], "WE", 2) == 0)
-			{
-				elem->we_path = ft_strdup(elements[i + 1]);
-				temp++;
-			}
-			i++;
-		}
+		save_path_chain_to_elem_struct2(elem, elements, i, temp);
 		free_elements(elements);
 		lmap = lmap->next;
 		if (temp == 4)
@@ -140,18 +151,13 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
-	// (void)elem;
 	remove_tabs_spaces_elem(lmap);
-	// ft_printf("\n\nAfter removing tabs and spaces\n\n");
 	save_path_chain_to_elem_struct(lmap, elem);
-	ft_printf("NO_PATH: %s\n", elem->no_path);
-	ft_printf("SO_PATH: %s\n", elem->so_path);
-	ft_printf("EA_PATH: %s\n", elem->ea_path);
-	ft_printf("WE_PATH: %s\n", elem->we_path);
-	// {
-	// 	write(1, "Error split chain\n", 18);
-	// 	exit(1);
-	// }
+	ft_printf("\nNO     : %s\n", elem->no_path);
+	ft_printf("SO     : %s\n", elem->so_path);
+	ft_printf("EA     : %s\n", elem->ea_path);
+	ft_printf("WE     : %s\n", elem->we_path);
+	ft_printf("\n");
 }
 
 
