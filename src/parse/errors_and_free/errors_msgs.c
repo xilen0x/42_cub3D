@@ -48,6 +48,7 @@ int	ft_errors(int n)
 	{
 		write (2, "Error\n", 6);
 		write (2, "Use: ./cub3d <map.cub>\n", 23);
+		
 		exit(1);
 	}
 	else if (n == 2)

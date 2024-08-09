@@ -85,11 +85,200 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 	return (0);
 }
 
+int	exist_colors(t_lmap *lmap)
+{
+	char	**elements;
+	int		i;
+	int		temp;
+
+	temp = 0;
+	while (lmap)
+	{
+		elements = ft_split2(lmap->content);
+		i = 0;
+		while (elements[i] && temp < 2)
+		{
+			if (ft_strlen(elements[i]) == 1)
+			{
+				if (ft_strncmp(elements[i], "F", 1) == 0)
+					temp++;
+				else if (ft_strncmp(elements[i], "C", 1) == 0)
+					temp++;
+			}
+			i++;
+		}
+		free_elements(elements);
+		lmap = lmap->next;
+	}
+	if (temp != 2)
+		return (1);
+	return (0);
+}
+
+int	exist_elements(t_lmap *lmap)
+{
+	char	**elements;
+	int		i;
+	int		temp;
+
+	temp = 0;
+	while (lmap)
+	{
+		elements = ft_split2(lmap->content);
+		i = 0;
+		while (elements[i] && temp < 4)
+		{
+			if (ft_strlen(elements[i]) == 2)
+			{
+				if (ft_strncmp(elements[i], "NO", 2) == 0)
+					temp++;
+				else if (ft_strncmp(elements[i], "SO", 2) == 0)
+					temp++;
+				else if (ft_strncmp(elements[i], "EA", 2) == 0)
+					temp++;
+				else if (ft_strncmp(elements[i], "WE", 2) == 0)
+					temp++;
+			}
+			i++;
+		}
+		free_elements(elements);
+		lmap = lmap->next;
+	}
+	if (temp != 4)
+		return (1);
+	return (0);
+}
+
+int	exist_path_elements(t_lmap *lmap)
+{
+	char	**elements;
+	int		i;
+	int		temp;
+
+	temp = 0;
+	while (lmap)
+	{
+		elements = ft_split2(lmap->content);
+		i = 0;
+		while (elements[i] && temp < 4)
+		{
+			if (ft_strlen(elements[i]) > 3)
+			{
+				if (ft_strnstr(elements[i], ".xpm", ft_strlen(elements[i])) != NULL)
+					temp++;
+				if (temp == 4)
+				{
+					free_elements(elements);
+					return (0);
+				}
+			}
+			i++;
+		}
+		free_elements(elements);
+		lmap = lmap->next;
+	}
+	return (1);
+}
+
+
+int	exist_path_colors(t_lmap *lmap)
+{
+	char	**line;
+	int		i;
+	int		color_value;
+	char	**colors;
+
+	while (lmap)
+	{
+		line = ft_split2(lmap->content);
+		if ((ft_strncmp(line[0], "F", 1) == 0) || (ft_strncmp(line[0], "C", 1) == 0))
+		{
+			colors = ft_split(line[1], ',');
+			if (!colors)
+			{
+				ft_printf("\nError de sintaxis en colores!******1\n");
+				free_elements(line);
+				free_elements(colors);
+				return (1);
+			}
+			i = 0;
+			while (colors[i])
+				i++;
+			if (i == 3)
+			{
+				i = 0;
+				while (colors[i])
+				{
+					color_value = ft_atoi(colors[i]);
+					if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
+					{
+						ft_printf("\nError de rango en colores!\n");
+						free_elements(line);
+						free_elements(colors);
+						return (1);
+					}
+					i++;
+				}
+			}
+			else
+			{
+				ft_printf("\nError de sintaxis en colores!******2\n");
+				free_elements(line);
+				free_elements(colors);
+				return (1);
+			}
+			free_elements(line);
+			free_elements(colors);
+		}
+		lmap = lmap->next;
+	}
+	return (0);
+}
+
+void remove_empty_lines(t_lmap *lmap)
+{
+	t_lmap	*temp;
+	t_lmap	*prev;
+
+	temp = lmap;
+	prev = NULL;
+	while (temp)
+	{
+		if (temp->content[0] == '\0')
+		{
+			if (prev)
+				prev->next = temp->next;
+			free(temp->content);
+			free(temp);
+			temp = prev;
+		}
+		prev = temp;
+		temp = temp->next;
+	}
+}
+
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
+	(void)elem;
 	remove_tabs_spaces_elem(lmap);
-	save_path_chain_to_elem_struct(lmap, elem);
-	texture_path_extension_is_valid(elem);
+	remove_empty_lines(lmap);
+	if (exist_elements(lmap))
+		ft_errors(3);
+	if (exist_path_elements(lmap))
+		ft_errors(4);		
+	if (exist_colors(lmap))
+		ft_errors(3);
+	if (exist_path_colors(lmap))
+		ft_errors(4);
+	else
+	{
+		ft_printf("All colors numbers found\n");
+	}
+	
+	
+		
+	// save_path_chain_to_elem_struct(lmap, elem);
+	// texture_path_extension_is_valid(elem);
 }
 
 /*Menu parsing*/
