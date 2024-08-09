@@ -35,6 +35,7 @@ static void	save_path3(t_elem *elem, char *line, char *option)
 		elem->ea_path = ft_strdup(line);
 	else if (ft_strncmp(option, "WE", 2) == 0)
 		elem->we_path = ft_strdup(line);
+	free(line);
 }
 
 static void	save_path2(t_elem *elem, char **elements, int i, int temp)
@@ -51,7 +52,7 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 			{
 				line = ft_strdup(elements[i + 1]);
 				save_path3(elem, line, option);
-				free(line);
+				// free(line);
 				temp++;
 			}
 		}

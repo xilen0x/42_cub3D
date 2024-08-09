@@ -1,10 +1,20 @@
+
+
+
 NO ./textures/blue.xpm
 WE ./textures/green.xpm
+
+
 SO ./textures/red.xpm
 EA ./textures/yellow.xpm
 
 F 214,194,133
+
+
 C 152,245,239
+
+
+
 1111111111111111111111111111
 1000000000000000000000000001
 1000000000000000000000000001
