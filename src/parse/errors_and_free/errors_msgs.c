@@ -61,7 +61,7 @@ int	ft_errors(int n)
 	{
 		write (2, "Error\n", 6);
 		write (2, "Invalid map file!\n", 18);
-		return (1);
+		exit(1);
 	}
 	return (1);
 }

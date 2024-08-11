@@ -42,7 +42,8 @@ SRC_FILES = main.c \
 			parse/parse_map/create_list.c \
 			parse/parse_map/utils_list0.c \
 			parse/parse_map/utils_list1.c \
-			parse/parse_map/utils_map1.c
+			parse/parse_map/utils_map1.c \
+			parse/parse_elements/exist_elem.c
 # parse/parse_map/valid_map.c 
 # parse/parse_map/create_matrix.c 
 # parse/parse_elements/rm_spaces_n_tabs.c 
