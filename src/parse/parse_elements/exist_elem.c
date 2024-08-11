@@ -67,7 +67,7 @@ int	looking_for_xpm(char **elements)
 			if (temp == 4)
 			{
 				free_elements(elements);
-				return (0);
+				return (temp);
 			}
 		}
 		i++;
@@ -92,5 +92,5 @@ int	exist_path_elements(t_lmap *lmap)
 	}
 	if (temp != 4)
 		ft_errors(3);
-	return (1);
+	return (0);
 }

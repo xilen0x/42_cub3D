@@ -12,22 +12,6 @@
 
 #include "cub3d.h"
 
-void	remove_newline(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '\n')
-		{
-			line[i] = '\0';
-			break ;
-		}
-		i++;
-	}
-}
-
 void	create_list(t_map *map, t_lmap **lmap)
 {
 	char	*line;

@@ -77,6 +77,7 @@ int		ft_errors(int n);
 int		ft_errors2(int n);
 void	free_element_struct(t_elem *elem);
 void	free_elements(char **double_pointer);
+void	free_data2(char **line, char **colors);
 // void	parsing_colors(t_colors *colors, t_map *map);
 // void	parsing_colors2(t_colors *colors, t_map *map, char *line);
 // void	parsing_elements(t_elem *elem, t_map *map);
@@ -107,9 +108,14 @@ void			lst_clear(t_lmap **lmap, void (*del)(void*));
 // size_t			spaces_to_ones(t_lmap *lmap);
 void			create_list(t_map *map, t_lmap **lmap);
 // void			remove_newline(char *line);
-int	exist_elements(t_lmap *lmap);
-int	exist_path_elements(t_lmap *lmap);
-
+int				exist_elements(t_lmap *lmap);
+int				exist_path_elements(t_lmap *lmap);
+int				exist_colors(t_lmap *lmap);
+int				exist_path_colors(t_lmap *lmap);
+void	remove_tabs_spaces_elem(t_lmap *lmap);
+void	remove_empty_lines(t_lmap *lmap);
+void	remove_newline(char *line);
+int	free_data(char **line, char **colors);
 /* ------------- MATRIX ------------- */
 // void	create_matrix(t_map *map, t_lmap *lmap);
 void	print_matrix(t_map *map);

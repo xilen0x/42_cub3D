@@ -14,7 +14,7 @@ endif
 
 # Compilador y FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 # Makefile
 MKF := Makefile
@@ -43,7 +43,10 @@ SRC_FILES = main.c \
 			parse/parse_map/utils_list0.c \
 			parse/parse_map/utils_list1.c \
 			parse/parse_map/utils_map1.c \
-			parse/parse_elements/exist_elem.c
+			parse/parse_elements/exist_elem.c \
+			parse/parse_elements/exist_colors.c \
+			parse/parse_elements/exist_path_colors.c \
+			parse/parse_elements/remove_spaces_tabs.c
 # parse/parse_map/valid_map.c 
 # parse/parse_map/create_matrix.c 
 # parse/parse_elements/rm_spaces_n_tabs.c 
