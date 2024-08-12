@@ -101,6 +101,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 	(void)elem;
 	remove_tabs_spaces_elem(lmap);
 	remove_empty_lines(lmap);
+	remove_spaces_around_commas(lmap);
 	if (exist_elements(lmap))
 		ft_errors(3);
 	if (exist_path_elements(lmap))
@@ -125,9 +126,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	create_list(map, lmap);
 	parse_elems(elem, *lmap);
 
-	// parsing_components(elem, colors, map);
 	// parsing_map(map, lmap);
-	// parse_rgb(colors, lmap);
 	print_list(*lmap);
 	// print_elements(elem);
 	// print_colors(colors);

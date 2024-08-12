@@ -56,6 +56,30 @@ static int	check_range_values(char **colors, int i, char **line)
 	return (0);
 }
 
+void	remove_spaces_around_commas(t_lmap *lmap)
+{
+	char	*temp;
+	int		i;
+
+	while (lmap)
+	{
+		i = 0;
+		temp = lmap->content;
+		while (temp[i])
+		{
+			if (temp[i] == ',')
+			{
+				if (temp[i - 1] == ' ')
+					temp[i - 1] = ',';
+				if (temp[i + 1] == ' ')
+					temp[i + 1] = ',';
+			}
+			i++;
+		}
+		lmap = lmap->next;
+	}
+}
+
 int	exist_path_colors2(t_lmap *lmap, char **line)
 {
 	char	**colors;
@@ -71,7 +95,7 @@ int	exist_path_colors2(t_lmap *lmap, char **line)
 		if (i == 3)
 		{
 			if (check_range_values(colors, i, line) == 1)
-				return (1);
+				ft_errors(3);
 		}
 		else
 			free_data2(line, colors);
