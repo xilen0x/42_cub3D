@@ -45,9 +45,11 @@ int	exist_elements(t_lmap *lmap)
 	int		count;
 
 	count = 0;
+	// while (lmap && exist_elements_or_colors_anywhere(lmap))
 	while (lmap)
 	{
-		elements = ft_split2(lmap->content);
+		// elements = ft_split2(lmap->content);
+		elements = split_space_tab_comma(lmap->content);
 		temp = exist_cardinals(elements);
 		count = count + temp;
 		if (temp != 1)

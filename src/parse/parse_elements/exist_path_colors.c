@@ -47,8 +47,8 @@ static int	check_range_values(int i, char **line)
 	{
 		if (i == 3)
 			break ;		
-		if (value_isdigit(line[i + 1]))
-			color_value = ft_atoi(line[i + 1]);
+		if (value_isdigit(line[i]))
+			color_value = ft_atoi(line[i]);
 		else
 		{
 			// free_elements(line);
@@ -100,10 +100,16 @@ void	process_line(char *line)
 }
 void	remove_spaces_around_commas(t_lmap *lmap)
 {
+	int		count;
+
+	count = 0;
 	while (lmap)
 	{
 		process_line(lmap->content);
+		count++;
 		lmap = lmap->next;
+		if (count == 2)
+			break ;		
 	}
 }
 
@@ -115,7 +121,7 @@ int	exist_path_colors2(char **line)
 	i = 0;
 	while (line[i])
 		i++;
-	if (i == 4)
+	if (i == 3)
 	{
 		if (check_range_values(i, line) == 1)
 		{
@@ -130,6 +136,7 @@ int	exist_path_colors2(char **line)
 	}
 	return (0);
 }
+
 
 int	exist_path_colors(t_lmap *lmap)
 {

@@ -66,6 +66,7 @@ char **split_space_tab_comma(const char *str)
     char **result;
     int substr_count;
 
+	str++;
     result = allocate_substrings2(str, &substr_count);
     fill_substrings2(result, str);
     return result;

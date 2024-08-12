@@ -95,23 +95,74 @@ int	duplicate_lines(t_lmap *lmap)
 	}
 	return (0);
 }
+int	exist_elements_or_colors_anywhere(t_lmap *lmap)
+{
+	t_lmap	*temp;
+	int		count;
+
+	temp = lmap;
+	while (temp)
+	{
+		if (temp->content[0] == 'S' || temp->content[0] == 'N' || \
+		temp->content[0] == 'E' || temp->content[0] == 'W' || \
+		temp->content[0] == 'F' || temp->content[0] == 'C')
+			count++;
+		temp = temp->next;
+	}
+	if (count != 6)
+	{
+		ft_printf("count: %d\n", count);
+		ft_errors(3);
+	}
+	
+	return (0);
+}
+static void	hub_elements(t_lmap *lmap)
+{
+	while (lmap)
+	{
+		if ((lmap->content[0] == 'N') || (lmap->content[0] == 'S') || \
+		(lmap->content[0] == 'W') || (lmap->content[0] == 'E'))
+		{
+		if (exist_elements(lmap))
+			ft_errors(3);
+		if (exist_path_elements(lmap))
+			ft_errors(3);		
+		if (exist_colors(lmap))
+			ft_errors(3);
+		if (exist_path_colors(lmap))
+			ft_errors(3);
+		remove_spaces_around_commas(lmap);
+		}
+		else if ((lmap->content[0] == 'F') || (lmap->content[0] == 'C'))
+		{
+		if (exist_colors(lmap))//aki voy  - revisar 2da iteracion (lmap.content: C255,255,255)
+			ft_errors(3);
+		if (exist_path_colors_op2(lmap))
+			ft_errors(3);
+		remove_spaces_around_commas(lmap);
+		if (exist_elements2(lmap))
+			ft_errors(3);
+		if (exist_path_elements(lmap))
+			ft_errors(3);		
+		}
+		lmap = lmap->next;
+	}
+	
+}
 
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
 	(void)elem;
 	remove_tabs_spaces_elem(lmap);
 	remove_empty_lines(lmap);
-	if (exist_elements(lmap))
+
+	if(exist_elements_or_colors_anywhere(lmap))
 		ft_errors(3);
-	if (exist_path_elements(lmap))
-		ft_errors(3);		
-	if (exist_colors(lmap))
-		ft_errors(3);
-	if (exist_path_colors(lmap))
-		ft_errors(3);
-	remove_spaces_around_commas(lmap);
-	if (duplicate_lines(lmap))
-		ft_errors(3);
+	
+	hub_elements(lmap);
+	// if (duplicate_lines(lmap))
+	// 	ft_errors(3);
 
 	// save_path_chain_to_elem_struct(lmap, elem);
 }
@@ -128,6 +179,8 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 
 	// parsing_map(map, lmap);
 	print_list(*lmap);
+	ft_printf("\n");
+	
 	// print_elements(elem);
 	// print_colors(colors);
 	// print_width_height(map);

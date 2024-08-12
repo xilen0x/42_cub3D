@@ -96,6 +96,7 @@ void 	print_width_height(t_map *map);
 void	print_elements(t_elem *elem);
 void	print_colors(t_colors *colors);
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
+int	exist_elements_or_colors_anywhere(t_lmap *lmap);
 
 /* ------------- LIST ------------- */
 void			print_list(t_lmap *lmap);
@@ -110,9 +111,12 @@ void			lst_clear(t_lmap **lmap, void (*del)(void*));
 void			create_list(t_map *map, t_lmap **lmap);
 // void			remove_newline(char *line);
 int				exist_elements(t_lmap *lmap);
+int				exist_elements2(t_lmap *lmap);
 int				exist_path_elements(t_lmap *lmap);
 int				exist_colors(t_lmap *lmap);
 int				exist_path_colors(t_lmap *lmap);
+int				exist_path_colors2(char **line);
+int				exist_path_colors_op2(t_lmap *lmap);
 void	remove_tabs_spaces_elem(t_lmap *lmap);
 void	remove_empty_lines(t_lmap *lmap);
 void	remove_newline(char *line);
