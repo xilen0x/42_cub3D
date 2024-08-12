@@ -30,12 +30,12 @@ int	file_is_cub(char *av)
 }
 
 /*Funcion que verifica la extension .xpm del texture path*/
-void	texture_path_extension_is_valid(t_elem *elem)
-{
-	if ((ft_strnstr(elem->so_path, ".xpm", ft_strlen(elem->so_path)) == NULL)
-		|| (ft_strnstr(elem->no_path, ".xpm", ft_strlen(elem->no_path)) == NULL)
-		|| (ft_strnstr(elem->we_path, ".xpm", ft_strlen(elem->we_path)) == NULL)
-		|| (ft_strnstr(elem->ea_path, ".xpm", ft_strlen(elem->ea_path)) == NULL)
-	)
-		ft_errors2(7);
-}
+// void	texture_path_extension_is_valid(t_elem *elem)
+// {
+// 	if ((ft_strnstr(elem->so_path, ".xpm", ft_strlen(elem->so_path)) == NULL)
+// 		|| (ft_strnstr(elem->no_path, ".xpm", ft_strlen(elem->no_path)) == NULL)
+// 		|| (ft_strnstr(elem->we_path, ".xpm", ft_strlen(elem->we_path)) == NULL)
+// 		|| (ft_strnstr(elem->ea_path, ".xpm", ft_strlen(elem->ea_path)) == NULL)
+// 	)
+// 		ft_errors2(7);
+// }

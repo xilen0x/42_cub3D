@@ -70,6 +70,32 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 	return (0);
 }
 
+int	duplicate_lines(t_lmap *lmap)
+{
+	t_lmap	*temp;
+	t_lmap	*temp2;
+
+	temp = lmap;
+	while (temp)
+	{
+		temp2 = temp->next;
+		if (temp->content[0] == 'S' || temp->content[0] == 'N' || \
+		temp->content[0] == 'E' || temp->content[0] == 'W' || \
+		temp->content[0] == 'F' || temp->content[0] == 'C')
+		{
+			while (temp2)
+			{
+				if (ft_strncmp(temp->content, temp2->content, ft_strlen(temp->content)) == 0)
+					return (1);
+				temp2 = temp2->next;
+			}
+			temp = temp->next;
+		}
+		temp = temp->next;
+	}
+	return (0);
+}
+
 void	parse_elems(t_elem *elem, t_lmap *lmap)
 {
 	(void)elem;
@@ -83,8 +109,10 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 		ft_errors(3);
 	if (exist_path_colors(lmap))
 		ft_errors(3);
+	if (duplicate_lines(lmap))
+		ft_errors(3);
+
 	// save_path_chain_to_elem_struct(lmap, elem);
-	// texture_path_extension_is_valid(elem);
 }
 
 /*Menu parsing*/

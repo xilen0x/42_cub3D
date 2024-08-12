@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exist_path_colors.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/12 11:18:56 by castorga          #+#    #+#             */
+/*   Updated: 2024/08/12 11:18:58 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "cub3d.h"
 
@@ -49,7 +61,7 @@ int	exist_path_colors2(t_lmap *lmap, char **line)
 	char	**colors;
 	int		i;
 
-	if ((ft_strcmp(lmap->content[0], 'F') == 0) || 
+	if ((ft_strcmp(lmap->content[0], 'F') == 0) || \
 		(ft_strcmp(lmap->content[0], 'C') == 0))
 	{
 		colors = ft_split(line[1], ',');
@@ -63,6 +75,7 @@ int	exist_path_colors2(t_lmap *lmap, char **line)
 		}
 		else
 			free_data2(line, colors);
+		free_data2(line, colors);
 	}
 	else
 		free_elements(line);
