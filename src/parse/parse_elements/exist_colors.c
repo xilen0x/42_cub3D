@@ -32,7 +32,7 @@ int	exist_colors(t_lmap *lmap)
 	count = 0;
 	while (lmap)
 	{
-		elements = ft_split2(lmap->content);
+		elements = ft_split2(lmap->content);//
 		temp = count_f_c(elements);
 		count = count + temp;
 		free_elements(elements);

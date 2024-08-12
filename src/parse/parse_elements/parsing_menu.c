@@ -101,7 +101,6 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 	(void)elem;
 	remove_tabs_spaces_elem(lmap);
 	remove_empty_lines(lmap);
-	remove_spaces_around_commas(lmap);
 	if (exist_elements(lmap))
 		ft_errors(3);
 	if (exist_path_elements(lmap))
@@ -110,6 +109,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 		ft_errors(3);
 	if (exist_path_colors(lmap))
 		ft_errors(3);
+	remove_spaces_around_commas(lmap);
 	if (duplicate_lines(lmap))
 		ft_errors(3);
 

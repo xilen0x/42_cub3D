@@ -39,6 +39,7 @@ SRC_FILES = main.c \
             parse/parse_elements/map_extension.c \
 			parse/parse_elements/utils_0.c \
 			parse/parse_elements/utils_1.c \
+			parse/parse_elements/utils_2.c \
 			parse/parse_map/create_list.c \
 			parse/parse_map/utils_list0.c \
 			parse/parse_map/utils_list1.c \

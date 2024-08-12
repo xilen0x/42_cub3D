@@ -38,63 +38,91 @@ int	value_isdigit(char *num)
 	return (1);
 }
 
-static int	check_range_values(char **colors, int i, char **line)
+static int	check_range_values(int i, char **line)
 {
 	int		color_value;
 
 	i = 0;
-	while (colors[i])
+	while (line[i])
 	{
-		if (value_isdigit(colors[i]))
-			color_value = ft_atoi(colors[i]);
+		if (i == 3)
+			break ;		
+		if (value_isdigit(line[i + 1]))
+			color_value = ft_atoi(line[i + 1]);
 		else
-			return (free_data(line, colors));
+		{
+			// free_elements(line);
+			return (1);
+		}
 		if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
-			return (free_data(line, colors));
+		{
+			// free_elements(line);
+			return (1);
+		}
 		i++;
 	}
 	return (0);
 }
+void	remove_leading_spaces(char *line, int *i, int *j)
+{
+    // Eliminar espacios o tabulaciones antes de la coma
+	if ((line[*i] == ' ' || line[*i] == '\t') && line[*i + 1] == ',')
+	{
+		(*i)++; // Saltar el espacio/tabulación
+		return ;
+	}
+    // Eliminar espacios o tabulaciones después de la coma
+	if (line[*i] == ',' && (line[*i + 1] == ' ' || line[*i + 1] == '\t'))
+	{
+		line[(*j)++] = line[(*i)++]; // Copiar la coma
+		while (line[*i] == ' ' || line[*i] == '\t')
+			(*i)++; // Saltar los espacios/tabulaciones
+		return ;
+	}
+	// Eliminar espacios o tabulaciones antes de la coma
+	if ((line[*i] == ' ' || line[*i] == '\t') && (line[*j - 1] != ','))
+	{
+		(*i)++; // Saltar el espacio/tabulación
+		return ;
+	}
+	// Copiar el carácter normalmente
+	line[(*j)++] = line[(*i)++];
+}
+void	process_line(char *line)
+{
+	int i = 0, j = 0;
 
+	while (line[i])
+		remove_leading_spaces(line, &i, &j);
+	while ((j > 0) && (line[j - 1] == ' ' || line[j - 1] == '\t'))
+		j--;
+	line[j] = '\0';
+}
 void	remove_spaces_around_commas(t_lmap *lmap)
 {
-	char	*temp;
-	int		i;
-
 	while (lmap)
 	{
-		i = 0;
-		temp = lmap->content;
-		while (temp[i])
-		{
-			if (temp[i] == ',')
-			{
-				if (temp[i - 1] == ' ')
-					temp[i - 1] = ',';
-				if (temp[i + 1] == ' ')
-					temp[i + 1] = ',';
-			}
-			i++;
-		}
+		process_line(lmap->content);
 		lmap = lmap->next;
 	}
 }
 
-int	exist_path_colors2(t_lmap *lmap, char **line)
+
+int	exist_path_colors2(char **line)
 {
 	char	**colors;
 	int		i;
 
-	if ((ft_strcmp(lmap->content[0], 'F') == 0) || \
-		(ft_strcmp(lmap->content[0], 'C') == 0))
+	colors = NULL;
+	if ((ft_strncmp(line[0], "F", 1) == 0) || \
+		(ft_strncmp(line[0], "C", 1) == 0))
 	{
-		colors = ft_split(line[1], ',');
 		i = 0;
-		while (colors[i])
+		while (line[i])
 			i++;
-		if (i == 3)
+		if (i == 4)
 		{
-			if (check_range_values(colors, i, line) == 1)
+			if (check_range_values(i, line) == 1)
 				ft_errors(3);
 		}
 		else
@@ -102,20 +130,25 @@ int	exist_path_colors2(t_lmap *lmap, char **line)
 		free_data2(line, colors);
 	}
 	else
-		free_elements(line);
+		return (1);
+		// free_elements(line);
 	return (0);
 }
 
 int	exist_path_colors(t_lmap *lmap)
 {
-	char	**line;
 	char	*temp;
+	char	**line;
 
 	while (lmap)
 	{
 		temp = lmap->content;
-		line = ft_split(temp, ' ');
-		exist_path_colors2(lmap, line);
+		line = split_space_tab_comma(temp);
+		if (ft_strncmp(line[0], "F", 1) == 0 || \
+			ft_strncmp(line[0], "C", 1) == 0)
+			if (exist_path_colors2(line))
+				ft_errors(3);
+		free_elements(line);
 		lmap = lmap->next;
 	}
 	return (0);

@@ -85,6 +85,7 @@ void	free_data2(char **line, char **colors);
 void	parsing_map(t_map *map, t_lmap **lmap);
 // void	valid_map(t_map *map);
 void	remove_spaces_around_commas(t_lmap *lmap);
+char **split_space_tab_comma(const char *str);
 // void	remove_tabs(char **elements);
 // void	remove_tabs_and_spaces(char *lines);
 // void	texture_path_extension_is_valid(char	*elements);
