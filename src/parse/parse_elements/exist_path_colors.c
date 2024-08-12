@@ -110,40 +110,37 @@ void	remove_spaces_around_commas(t_lmap *lmap)
 
 int	exist_path_colors2(char **line)
 {
-	char	**colors;
 	int		i;
 
-	colors = NULL;
-	if ((ft_strncmp(line[0], "F", 1) == 0) || \
-		(ft_strncmp(line[0], "C", 1) == 0))
+	i = 0;
+	while (line[i])
+		i++;
+	if (i == 4)
 	{
-		i = 0;
-		while (line[i])
-			i++;
-		if (i == 4)
+		if (check_range_values(i, line) == 1)
 		{
-			if (check_range_values(i, line) == 1)
-				ft_errors(3);
+			free_elements(line);
+			ft_errors(3);
 		}
-		else
-			free_data2(line, colors);
-		free_data2(line, colors);
 	}
 	else
+	{
+		free_elements(line);
 		return (1);
-		// free_elements(line);
+	}
 	return (0);
 }
 
 int	exist_path_colors(t_lmap *lmap)
 {
-	char	*temp;
+	// char	*temp;
 	char	**line;
 
 	while (lmap)
 	{
-		temp = lmap->content;
-		line = split_space_tab_comma(temp);
+		// temp = lmap->content;
+		line = NULL;
+		line = split_space_tab_comma(lmap->content);
 		if (ft_strncmp(line[0], "F", 1) == 0 || \
 			ft_strncmp(line[0], "C", 1) == 0)
 			if (exist_path_colors2(line))
