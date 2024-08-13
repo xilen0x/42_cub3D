@@ -30,6 +30,7 @@ int	exist_cardinals2(char **elements)
 		else if (ft_strncmp(elements[i], "WE", 2) == 0)
 			temp++;
 		i++;
+		// free(elements[i]);
 	}
 	return (temp);
 }
@@ -43,9 +44,9 @@ int	exist_elements2(t_lmap *lmap)
 	count = 0;
 	while (lmap)
 	{
+			elements = ft_split2(lmap->content);
 		if ((ft_strnstr(lmap->content, "NO", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "SO", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "EA", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "WE", ft_strlen(lmap->content)) != NULL))
 		{
-			elements = ft_split2(lmap->content);
 			temp = exist_cardinals2(elements);
 			count = count + temp;
 			if (temp != 1)
@@ -56,7 +57,7 @@ int	exist_elements2(t_lmap *lmap)
 				return (0);
 			}
 		}
-		// free_elements(elements);
+		free_elements(elements);
 		lmap = lmap->next;
 	}
 	return (0);

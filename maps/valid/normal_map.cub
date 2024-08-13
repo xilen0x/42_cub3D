@@ -1,18 +1,18 @@
-     F 116,212, 100
-	
- C	  255, 206,		200  
-
-
-			SO   		./textures/red.xpm		
-	  EA ./textures/yellow.xpm
- WE ./textures/green.xpm
-	 	NO        	 ./textures/blue.xpm   	  		
-
+ WE  	 ./textures/green.xpm
  
 
 
+    F	 116    	,  212, 100
+
+
+ C	  255, 206,		200  
+			SO   		./textures/red.xpm		   
+
+
+	  EA ./textures/yellow.xpm
+	 	NO        	 ./textures/blue.xpm   	  				 
 11111111111
 10100000101
 1000E001001
-10100001101
+10100 01101
 11111111111

@@ -42,26 +42,21 @@ int	exist_elements(t_lmap *lmap)
 {
 	char	**elements;
 	int		temp;
-	int		count;
 
-	count = 0;
-	// while (lmap && exist_elements_or_colors_anywhere(lmap))
-	while (lmap)
-	{
-		// elements = ft_split2(lmap->content);
-		elements = split_space_tab_comma(lmap->content);
+	// while (lmap)
+	// {
+		elements = ft_split2(lmap->content);
 		temp = exist_cardinals(elements);
-		count = count + temp;
 		if (temp != 1)
 			ft_errors(3);
-		if (count == 4)
-		{
-			free_elements(elements);
-			return (0);
-		}
+		// if (count == 4)
+		// {
+		// 	free_elements(elements);
+		// 	return (0);
+		// }
 		free_elements(elements);
-		lmap = lmap->next;
-	}
+	// 	lmap = lmap->next;
+	// }
 	return (0);
 }
 
@@ -96,15 +91,15 @@ int	exist_path_elements(t_lmap *lmap)
 	int		count;
 
 	temp = 0;
-	while (lmap)
-	{
+	// while (lmap)
+	// {
 		elements = ft_split2(lmap->content);
 		count = looking_for_xpm(elements);
 		temp = temp + count;
 		free_elements(elements);
-		lmap = lmap->next;
-	}
-	if (temp != 4)
-		ft_errors(3);
+	// 	lmap = lmap->next;
+	// }
+	// if (temp != 4)
+	// 	ft_errors(3);
 	return (0);
 }
