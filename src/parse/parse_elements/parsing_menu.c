@@ -29,7 +29,7 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 	char	*line;
 	char	*option;
 
-	while (elements[i])
+	while (elements[i] && ((ft_strncmp(elements[i], "NO", 2) == 0) || (ft_strncmp(elements[i], "SO", 2) == 0) || (ft_strncmp(elements[i], "EA", 2) == 0) || (ft_strncmp(elements[i], "WE", 2) == 0)))
 	{
 		if (ft_strlen(elements[i]) == 2)
 		{
@@ -41,7 +41,7 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 				temp++;
 			}
 		}
-		if (temp == 4)
+		if (temp == 1)
 			break ;
 		i++;
 	}
@@ -70,31 +70,7 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 	return (0);
 }
 
-int	duplicate_lines(t_lmap *lmap)
-{
-	t_lmap	*temp;
-	t_lmap	*temp2;
 
-	temp = lmap;
-	while (temp)
-	{
-		temp2 = temp->next;
-		if (temp->content[0] == 'S' || temp->content[0] == 'N' || \
-		temp->content[0] == 'E' || temp->content[0] == 'W' || \
-		temp->content[0] == 'F' || temp->content[0] == 'C')
-		{
-			while (temp2)
-			{
-				if (ft_strncmp(temp->content, temp2->content, ft_strlen(temp->content)) == 0)
-					return (1);
-				temp2 = temp2->next;
-			}
-			temp = temp->next;
-		}
-		temp = temp->next;
-	}
-	return (0);
-}
 int	exist_elements_or_colors_anywhere(t_lmap *lmap)
 {
 	t_lmap	*temp;
@@ -204,10 +180,9 @@ void	parse_elems(t_elem *elem, t_lmap *lmap)
 		ft_errors(3);
 	
 	hub_elements(lmap);
-	// if (duplicate_lines(lmap))
-	// 	ft_errors(3);
-
-	// save_path_chain_to_elem_struct(lmap, elem);
+	save_path_chain_to_elem_struct(lmap, elem);
+	// printf("F: %d\n", elem->colors->f);
+	// printf("C: %d\n", elem->colors->c);
 }
 
 /*Menu parsing*/
@@ -219,7 +194,6 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
 	parse_elems(elem, *lmap);
-
 	// parsing_map(map, lmap);
 	print_list(*lmap);
 	ft_printf("\n");
@@ -228,3 +202,29 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	// print_colors(colors);
 	// print_width_height(map);
 }
+
+// int	duplicate_lines(t_lmap *lmap)
+// {
+// 	t_lmap	*temp;
+// 	t_lmap	*temp2;
+
+// 	temp = lmap;
+// 	while (temp)
+// 	{
+// 		temp2 = temp->next;
+// 		if (temp->content[0] == 'S' || temp->content[0] == 'N' || 
+// 		temp->content[0] == 'E' || temp->content[0] == 'W' || 
+// 		temp->content[0] == 'F' || temp->content[0] == 'C')
+// 		{
+// 			while (temp2)
+// 			{
+// 				if (ft_strncmp(temp->content, temp2->content, ft_strlen(temp->content)) == 0)
+// 					return (1);
+// 				temp2 = temp2->next;
+// 			}
+// 			temp = temp->next;
+// 		}
+// 		temp = temp->next;
+// 	}
+// 	return (0);
+// }

@@ -25,22 +25,22 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 		lmap = lmap->next;
 	}
 }
-void	remove_internal_tabs_spaces_elem(t_lmap *lmap)
-{
-	int		i;
+// void	remove_internal_tabs_spaces_elem(t_lmap *lmap)
+// {
+// 	int		i;
 
-	while (lmap)
-	{
-		i = 0;
-		while (lmap->content[i])
-		{
-			if (lmap->content[i] == '\t' || lmap->content[i] == ' ')
-				lmap->content[i] = ' ';
-			i++;
-		}
-		lmap = lmap->next;
-	}
-}
+// 	while (lmap)
+// 	{
+// 		i = 0;
+// 		while (lmap->content[i])
+// 		{
+// 			if (lmap->content[i] == '\t' || lmap->content[i] == ' ')
+// 				lmap->content[i] = ' ';
+// 			i++;
+// 		}
+// 		lmap = lmap->next;
+// 	}
+// }
 void	remove_empty_lines(t_lmap *lmap)
 {
 	t_lmap	*temp;
