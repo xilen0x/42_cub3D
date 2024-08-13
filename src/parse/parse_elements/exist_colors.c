@@ -22,20 +22,18 @@
 // 	return (count);
 // }
 
+
 int	exist_colors(t_lmap *lmap)
 {
 	char	**elements;
 	int		temp;
 
-	// while (lmap)
-	// {
-		elements = split_space_tab_comma(lmap->content);
-		// temp = count_f_c(elements);
-		temp = ft_strlen(*elements);
-		free_elements(elements);
-		// lmap = lmap->next;
-		if (temp == 3)
-			return (0);
-	// }
+	temp = 0;
+	elements = split_space_tab_comma(lmap->content);
+	while (elements[temp])
+		temp++;
+	free_elements(elements);
+	if (temp == 3)
+		return (0);
 	return (1);
 }
