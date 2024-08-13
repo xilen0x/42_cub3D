@@ -157,7 +157,7 @@ static void	hub_elements(t_lmap *lmap)
 		add_one_space_between_elements(lmap);
 		if (exist_colors(lmap))
 			ft_errors(3);
-		if (exist_path_colors_op2(lmap))
+		if (exist_path_colors_op2(lmap))//aki voy...corregir esta linea
 			ft_errors(3);	
 		}
 		lmap = lmap->next;
@@ -165,41 +165,88 @@ static void	hub_elements(t_lmap *lmap)
 	
 }
 
+void	save_rgb_values(t_lmap *lmap, t_colors *colors)
+{
+	t_lmap	*temp;
+	int		i;
+	int		j;
+	int		count;
+
+	temp = lmap;
+	while (temp)
+	{
+		if (temp->content[0] == 'F' || temp->content[0] == 'C')
+		{
+			i = 0;
+			j = 0;
+			count = 0;
+			while (temp->content[i])
+			{
+				if (temp->content[i] == ' ' || temp->content[i] == '\t')
+					i++;
+				if (temp->content[i] >= '0' && temp->content[i] <= '9')
+				{
+					if (temp->content[0] == 'F')
+					{
+						if (count == 0)
+							colors->f_color[j++] = ft_atoi(&temp->content[i]);
+						else if (count == 1)
+							colors->f_color[j++] = ft_atoi(&temp->content[i]);
+						else if (count == 2)
+							colors->f_color[j++] = ft_atoi(&temp->content[i]);
+					}
+					else if (temp->content[0] == 'C')
+					{
+						if (count == 0)
+							colors->c_color[j++] = ft_atoi(&temp->content[i]);
+						else if (count == 1)
+							colors->c_color[j++] = ft_atoi(&temp->content[i]);
+						else if (count == 2)
+							colors->c_color[j++] = ft_atoi(&temp->content[i]);
+					}
+					while (temp->content[i] >= '0' && temp->content[i] <= '9')
+						i++;
+					count++;
+				}
+				if (count == 3)
+				{
+					return ;
+				}				
+				i++;
+			}
+		}
+		temp = temp->next;
+	}
+}
 
 
-
-void	parse_elems(t_elem *elem, t_lmap *lmap)
+void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 {
 	(void)elem;
 	remove_empty_lines(lmap);
 	remove_external_tabs_spaces_elem(lmap);
-	// remove_internal_tabs_spaces_elem(lmap);
-	// add_one_space_between_elements(lmap);
-
 	if(exist_elements_or_colors_anywhere(lmap))
 		ft_errors(3);
-	
 	hub_elements(lmap);
 	save_path_chain_to_elem_struct(lmap, elem);
-	// printf("F: %d\n", elem->colors->f);
-	// printf("C: %d\n", elem->colors->c);
+	save_rgb_values(lmap, colors);
 }
 
 /*Menu parsing*/
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
 	// (void)lmap;
-	(void)colors;
+	// (void)colors;
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
-	parse_elems(elem, *lmap);
+	parse_elems(elem, *lmap, colors);
 	// parsing_map(map, lmap);
 	print_list(*lmap);
 	ft_printf("\n");
 	
 	// print_elements(elem);
-	// print_colors(colors);
+	print_colors(colors);
 	// print_width_height(map);
 }
 

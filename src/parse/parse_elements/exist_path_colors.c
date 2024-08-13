@@ -38,7 +38,7 @@ int	value_isdigit(char *num)
 	return (1);
 }
 
-static int	check_range_values(int i, char **line)
+static int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap)
 {
 	int		color_value;
 
@@ -50,15 +50,10 @@ static int	check_range_values(int i, char **line)
 		if (value_isdigit(line[i]))
 			color_value = ft_atoi(line[i]);
 		else
-		{
-			// free_elements(line);
 			return (1);
-		}
 		if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
-		{
-			// free_elements(line);
 			return (1);
-		}
+		save_rgb_values(lmap, colors);
 		i++;
 	}
 	return (0);
@@ -114,7 +109,7 @@ void	remove_spaces_around_commas(t_lmap *lmap)
 }
 
 
-int	exist_path_colors2(char **line)
+int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
 {
 	int		i;
 
@@ -123,7 +118,7 @@ int	exist_path_colors2(char **line)
 		i++;
 	if (i == 3)
 	{
-		if (check_range_values(i, line) == 1)
+		if (check_range_values(i, line, colors, lmap) == 1)
 		{
 			free_elements(line);
 			ft_errors(3);
@@ -138,7 +133,7 @@ int	exist_path_colors2(char **line)
 }
 
 
-int	exist_path_colors(t_lmap *lmap)
+int	exist_path_colors(t_lmap *lmap, t_colors *colors)
 {
 	// char	*temp;
 	char	**line;
@@ -150,7 +145,7 @@ int	exist_path_colors(t_lmap *lmap)
 		line = split_space_tab_comma(lmap->content);
 		if (ft_strncmp(line[0], "F", 1) == 0 || \
 			ft_strncmp(line[0], "C", 1) == 0)
-			if (exist_path_colors2(line))
+			if (exist_path_colors2(line, colors, lmap))
 				ft_errors(3);
 		free_elements(line);
 		lmap = lmap->next;

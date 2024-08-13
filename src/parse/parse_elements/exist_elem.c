@@ -43,20 +43,11 @@ int	exist_elements(t_lmap *lmap)
 	char	**elements;
 	int		temp;
 
-	// while (lmap)
-	// {
-		elements = ft_split2(lmap->content);
+	elements = ft_split2(lmap->content);
 		temp = exist_cardinals(elements);
 		if (temp != 1)
 			ft_errors(3);
-		// if (count == 4)
-		// {
-		// 	free_elements(elements);
-		// 	return (0);
-		// }
 		free_elements(elements);
-	// 	lmap = lmap->next;
-	// }
 	return (0);
 }
 
