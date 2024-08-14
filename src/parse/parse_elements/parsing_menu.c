@@ -70,29 +70,50 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 	return (0);
 }
 
-
 int	exist_elements_or_colors_anywhere(t_lmap *lmap)
 {
-	t_lmap	*temp;
 	int		count;
 
-	temp = lmap;
-	while (temp)
+	count = 0;
+	while (lmap)
 	{
-		if (temp->content[0] == 'S' || temp->content[0] == 'N' || \
-		temp->content[0] == 'E' || temp->content[0] == 'W' || \
-		temp->content[0] == 'F' || temp->content[0] == 'C')
+		if (ft_strnstr(lmap->content, "NO", ft_strlen(lmap->content)))
 			count++;
-		temp = temp->next;
+		else if (ft_strnstr(lmap->content, "SO", ft_strlen(lmap->content)))
+			count++;
+		else if (ft_strnstr(lmap->content, "EA", ft_strlen(lmap->content)))
+			count++;
+		else if (ft_strnstr(lmap->content, "WE", ft_strlen(lmap->content)))
+			count++;
+		else if (ft_strnstr(lmap->content, "F", ft_strlen(lmap->content)))
+			count++;
+		else if (ft_strnstr(lmap->content, "C", ft_strlen(lmap->content)))
+			count++;
+		lmap = lmap->next;
 	}
 	if (count != 6)
-	{
-		ft_printf("count: %d\n", count);
 		ft_errors(3);
-	}
-	
 	return (0);
 }
+
+// int	exist_elements_or_colors_anywhere(t_lmap *lmap)
+// {
+// 	t_lmap	*temp;
+// 	int		count;
+
+// 	temp = lmap;
+// 	while (temp)
+// 	{
+// 		if (temp->content[0] == 'S' || temp->content[0] == 'N' || 
+// 		temp->content[0] == 'E' || temp->content[0] == 'W' || 
+// 		temp->content[0] == 'F' || temp->content[0] == 'C')
+// 			count++;
+// 		temp = temp->next;
+// 	}
+// 	if (count != 6)
+// 		ft_errors(3);
+// 	return (0);
+// }
 /*Inserta un espacio antes y despues de la coma.(de los val. nums.)*/
 void	add_one_space_between_elements(t_lmap *lmap)
 {
@@ -227,8 +248,8 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 	remove_empty_lines(lmap);
 	remove_external_tabs_spaces_elem(lmap);
 	print_list(lmap);
-	// if (exist_elements_or_colors_anywhere(lmap))
-	// 	ft_errors(3);
+	if (exist_elements_or_colors_anywhere(lmap))
+		ft_errors(3);
 	// hub_elements(lmap, colors);
 	// save_path_chain_to_elem_struct(lmap, elem);
 	// save_rgb_values(lmap, colors);
