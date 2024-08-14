@@ -39,8 +39,10 @@ void	create_list(t_map *map, t_lmap **lmap)
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
+	printf("\n--------------LISTA DESP. DE VERF EXIST Y AGREGAR 1 ESPACIO--------------n\n");
 	print_list(*lmap);
 	create_matrix(map, *lmap);
+	printf("\n--------------MATRIX RESULTANTE--------------\n");
 	print_matrix(map);
 	valid_map(map);
 // 	lst_clear(lmap, &free);

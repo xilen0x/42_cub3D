@@ -25,49 +25,52 @@ int	count_delimiters2(const char *str)
 	}
 	return (count);
 }
-void copy_substring2(char **result, const char *str, int start, int end, int *index)
+
+void	fill_substrings2(char **result, const char *s)
 {
-    result[*index] = p_malloc((end - start + 1) * sizeof(char));
-    ft_strncpy(result[*index], str + start, end - start);
-    result[*index][end - start] = '\0';
-    (*index)++;
+	int	start;
+	int	end;
+	int	index;
+	int	length;
+
+	start = 0;
+	end = 0;
+	index = 0;
+	length = ft_strlen(s);
+	while (end <= length)
+	{
+		if (s[end] == ' ' || s[end] == '\t' || s[end] == ',' || s[end] == '\0')
+		{
+			if (end > start)
+			{
+				result[index] = p_malloc((end - start + 1) * sizeof(char));
+				ft_strncpy(result[index], s + start, end - start);
+				result[index][end - start] = '\0';
+				index++;
+			}
+			start = end + 1;
+		}
+		end++;
+	}
+	result[index] = NULL;
 }
 
-void fill_substrings2(char **result, const char *str)
+char	**allocate_substrings2(const char *str, int *substr_count)
 {
-    int start = 0;
-    int end = 0;
-    int index = 0;
-    int length = ft_strlen(str);
+	int	delimiter_count;
 
-    while (end <= length)
-    {
-        if (str[end] == ' ' || str[end] == '\t' || str[end] == ',' || str[end] == '\0')
-        {
-            if (end > start)
-                copy_substring2(result, str, start, end, &index);
-            start = end + 1;
-        }
-        end++;
-    }
-    result[index] = NULL;
-}
-char **allocate_substrings2(const char *str, int *substr_count)
-{
-    int delimiter_count;
-
-    delimiter_count = count_delimiters2(str);
-    *substr_count = delimiter_count + 1;
-    return p_malloc((*substr_count + 1) * sizeof(char *));
+	delimiter_count = count_delimiters2(str);
+	*substr_count = delimiter_count + 1;
+	return (p_malloc((*substr_count + 1) * sizeof(char *)));
 }
 
-char **split_space_tab_comma(const char *str)
+char	**split_space_tab_comma(const char *str)
 {
-    char **result;
-    int substr_count;
+	char	**result;
+	int		substr_count;
 
 	str++;
-    result = allocate_substrings2(str, &substr_count);
-    fill_substrings2(result, str);
-    return result;
+	result = allocate_substrings2(str, &substr_count);
+	fill_substrings2(result, str);
+	return (result);
 }

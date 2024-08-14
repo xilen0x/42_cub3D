@@ -44,10 +44,10 @@ int	exist_elements(t_lmap *lmap)
 	int		temp;
 
 	elements = ft_split2(lmap->content);
-		temp = exist_cardinals(elements);
-		if (temp != 1)
-			ft_errors(3);
-		free_elements(elements);
+	temp = exist_cardinals(elements);
+	if (temp != 1)
+		ft_errors(3);
+	free_elements(elements);
 	return (0);
 }
 

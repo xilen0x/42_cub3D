@@ -96,24 +96,6 @@ int	exist_elements_or_colors_anywhere(t_lmap *lmap)
 	return (0);
 }
 
-// int	exist_elements_or_colors_anywhere(t_lmap *lmap)
-// {
-// 	t_lmap	*temp;
-// 	int		count;
-
-// 	temp = lmap;
-// 	while (temp)
-// 	{
-// 		if (temp->content[0] == 'S' || temp->content[0] == 'N' || 
-// 		temp->content[0] == 'E' || temp->content[0] == 'W' || 
-// 		temp->content[0] == 'F' || temp->content[0] == 'C')
-// 			count++;
-// 		temp = temp->next;
-// 	}
-// 	if (count != 6)
-// 		ft_errors(3);
-// 	return (0);
-// }
 /*Inserta un espacio antes y despues de la coma.(de los val. nums.)*/
 void	add_one_space_between_elements(t_lmap *lmap)
 {
@@ -136,7 +118,7 @@ void	add_one_space_between_elements(t_lmap *lmap)
 		}
 		new_line = (char *)malloc(strlen(line) + additional_space_count + 1);
 		if (!new_line)
-			return;
+			return ;
 		i = 0;
 		j = 0;
 		while (line[i])
@@ -161,28 +143,31 @@ void	add_one_space_between_elements(t_lmap *lmap)
 	}
 }
 
-// static void	hub_elements(t_lmap *lmap, t_colors *colors)
-// {
-// 	while (lmap)
-// 	{
-// 		if ((lmap->content[0] == 'N') || (lmap->content[0] == 'S') || // 		(lmap->content[0] == 'W') || (lmap->content[0] == 'E'))
-// 		{
-// 			if (exist_elements(lmap))
-// 				ft_errors(3);
-// 			if (exist_path_elements(lmap))
-// 				ft_errors(3);
-// 		}
-// 		else if ((lmap->content[0] == 'F') || (lmap->content[0] == 'C'))
-// 		{
-// 			add_one_space_between_elements(lmap);
-// 			if (exist_colors(lmap))
-// 				ft_errors(3);
-// 			if (exist_path_colors_op2(lmap, colors))
-// 				ft_errors(3);
-// 		}
-// 		lmap = lmap->next;
-// 	}
-// }
+/*Descripción:Encamina el parsing segun sea el caso. 
+  Objetivo: Manejar lineas en cualquier orden estas vengan.*/
+static void	hub_elements(t_lmap *lmap, t_colors *colors)
+{
+	while (lmap)
+	{
+		if ((lmap->content[0] == 'N') || (lmap->content[0] == 'S') || 
+			(lmap->content[0] == 'W') || (lmap->content[0] == 'E'))
+		{
+			if (exist_elements(lmap))
+				ft_errors(3);
+			if (exist_path_elements(lmap))
+				ft_errors(3);
+		}
+		else if ((lmap->content[0] == 'F') || (lmap->content[0] == 'C'))
+		{
+			add_one_space_between_elements(lmap);
+			if (exist_colors(lmap))
+				ft_errors(3);
+			if (exist_path_colors_op2(lmap, colors))
+				ft_errors(3);
+		}
+		lmap = lmap->next;
+	}
+}
 
 void	save_rgb_values(t_lmap *lmap, t_colors *colors)
 {
@@ -243,16 +228,14 @@ void	save_rgb_values(t_lmap *lmap, t_colors *colors)
 
 void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 {
-	(void)elem;
-	(void)colors;
 	remove_empty_lines(lmap);
 	remove_external_tabs_spaces_elem(lmap);
+	printf("\n---------LISTA DEPUES DE REM. LINEAS V. & TRIM-----------\n\n");
 	print_list(lmap);
 	if (exist_elements_or_colors_anywhere(lmap))
 		ft_errors(3);
-	// hub_elements(lmap, colors);
-	// save_path_chain_to_elem_struct(lmap, elem);
-	// save_rgb_values(lmap, colors);
+	hub_elements(lmap, colors);
+	save_path_chain_to_elem_struct(lmap, elem);
 }
 
 /******************************Menu parsing*******************************/
@@ -261,8 +244,10 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
+	printf("\n--------------LISTA ORIGINAL--------------\n\n");
+	print_list(*lmap);
 	parse_elems(elem, *lmap, colors);
-	//parsing_map(map, lmap);
+	parsing_map(map, lmap);
 	// print_elements(elem);
 	// print_colors(colors);
 	// print_width_height(map);

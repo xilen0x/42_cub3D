@@ -36,17 +36,17 @@ void	space_malloc(size_t rows, size_t cols, t_map *map)
 void	create_matrix(t_map *map, t_lmap *lmap)
 {
 	int		i;
-	t_lmap	*tmp;
 	size_t	max_line;
 
 	i = 0;
-	tmp = lmap;
-	map->h = lst_size(tmp) + 2;
-	max_line = search_longest_line(tmp);
+	while (lmap->content[0] != '1' && lmap->content[0] != ' ')
+		lmap = lmap->next;
+	map->h = lst_size(lmap) + 2;
+	max_line = search_longest_line(lmap);
 	space_malloc(map->h, max_line + 1, map);
 	map->w = ft_strlen(lmap->content);
 	i++;
-	while (lmap->content[0] != '1')
+	while (lmap->content[0] != '1' && lmap->content[0] != ' ')
 		lmap = lmap->next;
 	spaces_to_ones(lmap);
 	while (lmap)

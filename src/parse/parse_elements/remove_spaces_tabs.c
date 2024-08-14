@@ -13,18 +13,47 @@
 
 #include "cub3d.h"
 
+//spaces_to_ones(lmap);
+
 void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 {
 	char	*line;
 
-	while (lmap && (lmap->content[0] == ' ' || lmap->content[0] == '1'))
+	while (lmap)
 	{
-		line = ft_strtrim2(lmap->content, " ", "\t");
-		free(lmap->content);
-		lmap->content = line;
-		lmap = lmap->next;
+		if (ft_strnstr(lmap->content, "NO", ft_strlen(lmap->content)) || 
+			ft_strnstr(lmap->content, "SO", ft_strlen(lmap->content)) || 
+			ft_strnstr(lmap->content, "EA", ft_strlen(lmap->content)) || 
+			ft_strnstr(lmap->content, "WE", ft_strlen(lmap->content)) || 
+			ft_strnstr(lmap->content, "F", ft_strlen(lmap->content)) || 
+			ft_strnstr(lmap->content, "C", ft_strlen(lmap->content)))
+		{
+			line = ft_strtrim2(lmap->content, " ", "\t");
+			free(lmap->content);
+			lmap->content = line;
+			lmap = lmap->next;
+		}
+		else
+			break ;
 	}
 }
+
+// void	remove_external_tabs_spaces_elem(t_lmap *lmap)
+// {
+// 	char	*line;
+
+// 	while (lmap && (lmap->content[0] == ' ' || lmap->content[0] == '\t' || 
+// 			lmap->content[0] != '1'))
+// 	{
+// 		line = ft_strtrim2(lmap->content, " ", "\t");
+// 		printf("%s\n", line);
+// 		free(lmap->content);
+// 		lmap->content = line;
+// 		lmap = lmap->next;
+// 	}
+// }
+
+
 // void	remove_internal_tabs_spaces_elem(t_lmap *lmap)
 // {
 // 	int		i;
