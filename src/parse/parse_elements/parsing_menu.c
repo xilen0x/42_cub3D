@@ -140,29 +140,28 @@ void	add_one_space_between_elements(t_lmap *lmap)
 	}
 }
 
-static void	hub_elements(t_lmap *lmap)
+static void	hub_elements(t_lmap *lmap, t_colors *colors)
 {
 	while (lmap)
 	{
 		if ((lmap->content[0] == 'N') || (lmap->content[0] == 'S') || \
 		(lmap->content[0] == 'W') || (lmap->content[0] == 'E'))
 		{
-		if (exist_elements(lmap))
-			ft_errors(3);
-		if (exist_path_elements(lmap))
-			ft_errors(3);		
+			if (exist_elements(lmap))
+				ft_errors(3);
+			if (exist_path_elements(lmap))
+				ft_errors(3);
 		}
 		else if ((lmap->content[0] == 'F') || (lmap->content[0] == 'C'))
 		{
-		add_one_space_between_elements(lmap);
-		if (exist_colors(lmap))
-			ft_errors(3);
-		if (exist_path_colors_op2(lmap))//aki voy...corregir esta linea
-			ft_errors(3);	
+			add_one_space_between_elements(lmap);
+			if (exist_colors(lmap))
+				ft_errors(3);
+			if (exist_path_colors_op2(lmap, colors))
+				ft_errors(3);
 		}
 		lmap = lmap->next;
 	}
-	
 }
 
 void	save_rgb_values(t_lmap *lmap, t_colors *colors)
@@ -211,7 +210,7 @@ void	save_rgb_values(t_lmap *lmap, t_colors *colors)
 				if (count == 3)
 				{
 					return ;
-				}				
+				}
 				i++;
 			}
 		}
@@ -227,7 +226,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 	remove_external_tabs_spaces_elem(lmap);
 	if(exist_elements_or_colors_anywhere(lmap))
 		ft_errors(3);
-	hub_elements(lmap);
+	hub_elements(lmap, colors);
 	save_path_chain_to_elem_struct(lmap, elem);
 	save_rgb_values(lmap, colors);
 }
