@@ -17,7 +17,7 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 {
 	char	*line;
 
-	while (lmap)
+	while (lmap && (lmap->content[0] == ' ' || lmap->content[0] == '1'))
 	{
 		line = ft_strtrim2(lmap->content, " ", "\t");
 		free(lmap->content);
@@ -38,7 +38,7 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 // 				lmap->content[i] = ' ';
 // 			i++;
 // 		}
-// 		lmap = lmap->next;
+					// 		lmap = lmap->next;
 // 	}
 // }
 void	remove_empty_lines(t_lmap *lmap)

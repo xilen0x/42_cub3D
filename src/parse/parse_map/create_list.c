@@ -16,10 +16,8 @@ void	create_list(t_map *map, t_lmap **lmap)
 {
 	char	*line;
 	t_lmap	*node;
-	// int		len;
 
 	line = get_next_line(map->map_fd);
-	// len = ft_strlen(line);
 	while (line)
 	{
 		if (line[0] == '\n')
@@ -34,7 +32,6 @@ void	create_list(t_map *map, t_lmap **lmap)
 		node->content = line;
 		node->next = NULL;
 		ft_add_back(lmap, node);
-		// free(line);
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
@@ -42,14 +39,9 @@ void	create_list(t_map *map, t_lmap **lmap)
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
-	(void)map;
-	(void)lmap;
-	// create_list(map, lmap);
-	// print_list(*lmap);
-	// spaces_to_ones(*lmap);
-	// print_list(*lmap);
-	// create_matrix(map, *lmap);
-	// print_matrix(map);
-	// valid_map(map);
+	print_list(*lmap);
+	create_matrix(map, *lmap);
+	print_matrix(map);
+	valid_map(map);
 // 	lst_clear(lmap, &free);
 }

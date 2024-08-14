@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-unsigned int	lst_size(t_lmap *lmap)
+int	lst_size(t_lmap *lmap)
 {
 	unsigned int	i;
 
