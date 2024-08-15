@@ -26,14 +26,14 @@
 int	exist_colors(t_lmap *lmap)
 {
 	char	**elements;
-	int		temp;
+	int		i;
 
-	temp = 0;
+	i = 0;
 	elements = split_space_tab_comma(lmap->content);
-	while (elements[temp])
-		temp++;
+	while (elements[i] && *elements[i] != '\n')
+		i++;
 	free_elements(elements);
-	if (temp == 3)
+	if (i == 3)
 		return (0);
 	return (1);
 }

@@ -71,6 +71,18 @@ int	looking_for_xpm(char **elements)
 		return (0);
 	return (1);
 }
+void	remove_newline_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			str[i] = '\0';
+		i++;
+	}
+}
 
 int	path_is_valid(char **elements)
 {
@@ -83,8 +95,9 @@ int	path_is_valid(char **elements)
 	{
 		if (ft_strlen(elements[i]) > 3)
 		{
+			remove_newline_char(elements[i]);
 			if (access(elements[i], R_OK) != 0)
-				ft_errors("Invalid path\n");
+				ft_errors("Invalid path 01\n");
 			temp++;
 		}
 		i++;
@@ -100,9 +113,9 @@ int	exist_path_elements(t_lmap *lmap)
 
 	elements = ft_split2(lmap->content);
 	if (looking_for_xpm(elements) == 1)
-		ft_errors("Invalid path\n");
+		ft_errors("Invalid path 02\n");
 	if (path_is_valid(elements) == 1)
-		ft_errors("Invalid path\n");	
+		ft_errors("Invalid path 03\n");	
 	free_elements(elements);
 	return (0);
 }
