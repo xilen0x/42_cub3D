@@ -92,7 +92,7 @@ int	exist_elements_or_colors_anywhere(t_lmap *lmap)
 		lmap = lmap->next;
 	}
 	if (count != 6)
-		ft_errors(3);
+		ft_errors("Invalid number of elements or colors\n");
 	return (0);
 }
 
@@ -153,17 +153,17 @@ static void	hub_elements(t_lmap *lmap, t_colors *colors)
 			(lmap->content[0] == 'W') || (lmap->content[0] == 'E'))
 		{
 			if (exist_elements(lmap))
-				ft_errors(3);
+				ft_errors("Invalid elements\n");
 			if (exist_path_elements(lmap))
-				ft_errors(3);
+				ft_errors("Invalid path\n");
 		}
 		else if ((lmap->content[0] == 'F') || (lmap->content[0] == 'C'))
 		{
 			add_one_space_between_elements(lmap);
 			if (exist_colors(lmap))
-				ft_errors(3);
+				ft_errors("Invalid colors\n");
 			if (exist_path_colors_op2(lmap, colors))
-				ft_errors(3);
+				ft_errors("Invalid path or color\n");
 		}
 		lmap = lmap->next;
 	}
@@ -241,13 +241,20 @@ void	remove_extra_spaces_or_tabs(t_lmap *lmap)
 
 void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 {
+	// remove_empty_lines(lmap);
+	// printf("\n---------03 LISTA DEPUES DE REM. LINEAS-----------\n\n");
+	// print_list(lmap);
+
 	remove_extra_spaces_or_tabs(lmap);
-	remove_empty_lines(lmap);
-	remove_external_tabs_spaces_elem(lmap);
-	printf("\n---------LISTA DEPUES DE REM. LINEAS V. & TRIM-----------\n\n");
+	printf("\n---------04 LISTA DEPUES DE REM. ESPACIOS-----------\n\n");
 	print_list(lmap);
+	
+	remove_external_tabs_spaces_elem(lmap);
+	printf("\n---------05 LISTA DEPUES DE REM. LINEAS V. & TRIM-----------\n\n");
+	print_list(lmap);
+	
 	if (exist_elements_or_colors_anywhere(lmap))
-		ft_errors(3);
+		ft_errors("Invalid number of elements or colors\n");
 	hub_elements(lmap, colors);
 	save_path_chain_to_elem_struct(lmap, elem);
 }
@@ -255,13 +262,29 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 /******************************Menu parsing*******************************/
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
+	(void)colors;
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
+	ft_printf("\n--------------01 MAPA ORIGINAL--------------\n\n");
 	create_list(map, lmap);
-	printf("\n--------------LISTA ORIGINAL--------------\n\n");
+
+	printf("\n--------------02 LISTA CREADA!--------------\n\n");
 	print_list(*lmap);
-	parse_elems(elem, *lmap, colors);
-	parsing_map(map, lmap);
+
+	remove_empty_lines(*lmap);
+	ft_printf("\n--------------03 LISTA DESP. DE REM. NEWLINE--------------\n\n");
+	print_list(*lmap);
+
+	// parse_elems(elem, *lmap, colors);
+	// ft_printf("\n--------------06 LISTA DESP. DE PARSE ELEMS--------------\n\n");
+
+	// spaces_to_ones(*lmap);
+	// ft_printf("\n--------------07 LISTA DESP. DE CAMBIAR ESPACIOS POR 1s--------------\n\n");
+	// print_list(*lmap);
+
+	// parsing_map(map, lmap);
+	// ft_printf("\n--------------08 MATRIX DESP. DE PARSE MAP(DESP. de AGREGAR 1 ESPACIO)--------------\n\n");
+	// print_matrix(map);
 	// print_elements(elem);
 	// print_colors(colors);
 	// print_width_height(map);

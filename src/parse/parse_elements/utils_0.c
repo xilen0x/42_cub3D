@@ -17,7 +17,7 @@ int	open_map(char *av, t_map *map)
 {
 	map->map_fd = open(av, O_RDONLY);
 	if (map->map_fd == -1)
-		ft_errors(2);
+		ft_errors("Map file not found\n");
 	return (0);
 }
 

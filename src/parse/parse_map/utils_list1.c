@@ -19,7 +19,7 @@ void	print_list(t_lmap *lmap)
 	i = 0;
 	while (lmap)
 	{
-		ft_printf("%s\n", lmap->content);
+		ft_printf("%s", lmap->content);
 		lmap = lmap->next;
 		i++;
 	}

@@ -119,11 +119,11 @@ int	any_zero_or_space(t_map *map)
 void	valid_map(t_map *map)
 {
 	if (any_zero_or_space(map) == 1)
-		ft_errors(3);
+		ft_errors("Invalid map. There is a space around the 0\n");
 	if (is_one_player(map) == 1)
-		ft_errors(3);
+		ft_errors("Invalid map, there must be only one player\n");
 	if (only_characters_allowed(map) == 1)
-		ft_errors(3);
+		ft_errors("Invalid map, characters not allowed were found\n");
 	if (its_playable(map) == 1)
-		ft_errors(3);
+		ft_errors("Invalid map. The map is not playable\n");
 }

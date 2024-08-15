@@ -33,7 +33,7 @@ int	main(int ac, char *av[])
 		// mlx_loop(game.mlx);
 	}
 	else
-		ft_errors(1);
+		ft_errors("Invalid number of arguments\n");
 	lst_clear(&lmap, &free);
 	free_element_struct(&elem);
 	free_matrix(map.matrix, map.h);

@@ -46,7 +46,7 @@ int	exist_elements(t_lmap *lmap)
 	elements = ft_split2(lmap->content);
 	temp = exist_cardinals(elements);
 	if (temp != 1)
-		ft_errors(3);
+		ft_errors("Invalid number of elements\n");
 	free_elements(elements);
 	return (0);
 }
@@ -84,7 +84,7 @@ int	path_is_valid(char **elements)
 		if (ft_strlen(elements[i]) > 3)
 		{
 			if (access(elements[i], R_OK) != 0)
-				ft_errors(2);
+				ft_errors("Invalid path\n");
 			temp++;
 		}
 		i++;
@@ -100,9 +100,9 @@ int	exist_path_elements(t_lmap *lmap)
 
 	elements = ft_split2(lmap->content);
 	if (looking_for_xpm(elements) == 1)
-		ft_errors(3);
+		ft_errors("Invalid path\n");
 	if (path_is_valid(elements) == 1)
-		ft_errors(3);	
+		ft_errors("Invalid path\n");	
 	free_elements(elements);
 	return (0);
 }

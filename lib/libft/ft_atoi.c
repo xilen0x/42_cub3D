@@ -31,13 +31,6 @@ IMPLEMENTATION NOTES
 
 #include "libft.h"
 
-static char	*ft_isspace(char *str)
-{
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		++str;
-	return (str);
-}
-
 int	ft_atoi(const char *str)
 {
 	short int	parity;

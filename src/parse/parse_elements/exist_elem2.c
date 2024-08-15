@@ -50,7 +50,7 @@ int	exist_elements2(t_lmap *lmap)
 			temp = exist_cardinals2(elements);
 			count = count + temp;
 			if (temp != 1)
-				ft_errors(3);
+				ft_errors("Invalid number of elements\n");
 			if (count == 4)
 			{
 				free_elements(elements);

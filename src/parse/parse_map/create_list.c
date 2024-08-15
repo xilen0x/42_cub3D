@@ -26,8 +26,8 @@ void	create_list(t_map *map, t_lmap **lmap)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
-		// ft_printf("%s", line);
-		remove_newline(line);
+		ft_printf("%s", line);//quitar luego***************
+		// remove_newline(line);
 		node = p_malloc(sizeof(t_lmap));
 		node->content = line;
 		node->next = NULL;
@@ -83,9 +83,6 @@ un mapa irregular*/
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
-	(void)map;
-	printf("\n--------------LISTA DESP. DE VERF EXIST Y AGREGAR 1 ESPACIO--------------n\n");
-	print_list(*lmap);
 	// if (is_square_map(*lmap) == 1)
 	// {
 	// 	ft_printf("\nMapa cuadrado\n");
@@ -100,6 +97,6 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	create_matrix(map, *lmap);
 	printf("\n--------------MATRIX RESULTANTE--------------\n");
 	print_matrix(map);
-	// valid_map(map);
+	valid_map(map);
 // 	lst_clear(lmap, &free);
 }

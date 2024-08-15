@@ -70,24 +70,56 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 					// 		lmap = lmap->next;
 // 	}
 // }
+
+int	ft_is_space(char c)
+{
+	// Comprueba si el carácter es un espacio en blanco o una tabulación
+	return ((c >= 9 && c <= 13) || c == 32);
+}
+
+// Función para verificar si una línea está vacía o solo contiene espacios/tabs
+int	is_empty_or_whitespace(const char *str)
+{
+	while (*str)
+	{
+		if (!ft_is_space(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 void	remove_empty_lines(t_lmap *lmap)
 {
+	t_lmap	*current;
 	t_lmap	*prev;
+	t_lmap	*temp;
 
+	current = lmap;
 	prev = NULL;
-	while (lmap)
+	while (current)
 	{
-		if (lmap->content[0] == '\0')
+		// Si la línea está vacía o contiene solo espacios/tabulaciones, eliminarla
+		if (is_empty_or_whitespace(current->content))
 		{
-			if (prev)
-				prev->next = lmap->next;
-			free(lmap->content);
-			free(lmap);
-			lmap = prev;
+			temp = current;
+			if (prev) // No es el primer nodo
+				prev->next = current->next;
+			else // Es el primer nodo
+				lmap = current->next;
+			current = current->next;
+			free(temp->content);
+			free(temp);
 		}
-		lmap = lmap->next;
+		else
+		{
+			prev = current;
+			current = current->next;
+		}
 	}
 }
+
+
 
 void	remove_newline(char *line)
 {
