@@ -226,8 +226,22 @@ void	save_rgb_values(t_lmap *lmap, t_colors *colors)
 }
 
 
+void	remove_extra_spaces_or_tabs(t_lmap *lmap)
+{
+	char	*line;
+
+	while (lmap)
+	{
+		line = ft_strtrim2(lmap->content, " ", "\t");
+		free(lmap->content);
+		lmap->content = line;
+		lmap = lmap->next;
+	}
+}
+
 void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 {
+	remove_extra_spaces_or_tabs(lmap);
 	remove_empty_lines(lmap);
 	remove_external_tabs_spaces_elem(lmap);
 	printf("\n---------LISTA DEPUES DE REM. LINEAS V. & TRIM-----------\n\n");

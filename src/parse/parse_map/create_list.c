@@ -36,14 +36,70 @@ void	create_list(t_map *map, t_lmap **lmap)
 	}
 	close(map->map_fd);
 }
+/*funcion que primero se salta las lineas(NO,SO,WE,EA,F,C) que no corresponden al mapa(0,1)
+y luego, una vez que ha llegado al mapa, lo analiza para detectar si es de forma cuadrada (o rectangular tambien) o es 
+un mapa irregular*/
+// int	is_square_map(t_lmap *lmap)
+// {
+// 	int		len;
+// 	int		len2;
+// 	t_lmap	*tmp;
+
+// 	len = 0;
+// 	len2 = 0;
+// 	tmp = lmap;
+// 	while (tmp)
+// 	{
+// 		if (tmp->content[0] == '\n')
+// 		{
+// 			tmp = tmp->next;
+// 			continue ;
+// 		}
+// 		if (ft_strchr(tmp->content, '1') || ft_strchr(tmp->content, '0'))
+// 		{
+// 			len = ft_strlen(tmp->content);
+// 			break ;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	while (tmp)
+// 	{
+// 		if (tmp->content[0] == '\n')
+// 		{
+// 			tmp = tmp->next;
+// 			continue ;
+// 		}
+// 		if (ft_strchr(tmp->content, '1') || ft_strchr(tmp->content, '0'))
+// 		{
+// 			len2 = ft_strlen(tmp->content);
+// 			break ;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	if (len == len2)
+// 		return (1);
+// 	return (0);
+// }
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
+	(void)map;
 	printf("\n--------------LISTA DESP. DE VERF EXIST Y AGREGAR 1 ESPACIO--------------n\n");
 	print_list(*lmap);
+	// if (is_square_map(*lmap) == 1)
+	// {
+	// 	ft_printf("\nMapa cuadrado\n");
+	// 	create_matrix(map, *lmap);
+	// 	exit(1);
+	// }
+	// else
+	// {
+	// 	ft_printf("Mapa irregular\n");
+	// }
+
 	create_matrix(map, *lmap);
 	printf("\n--------------MATRIX RESULTANTE--------------\n");
 	print_matrix(map);
-	valid_map(map);
+	// valid_map(map);
 // 	lst_clear(lmap, &free);
 }

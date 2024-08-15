@@ -32,7 +32,7 @@ char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
 	unsigned int	i;
 	unsigned int	j;
 
-	dest[0] = ' ';
+	dest[0] = '+';
 	i = 0;
 	j = 1;
 	while (src[i] != '\0' && j < n)
@@ -43,7 +43,7 @@ char	*ft_strncpy2(char *dest, const char *src, unsigned int n)
 	}
 	while (j < n)
 	{
-		dest[j] = ' ';
+		dest[j] = '-';
 		j++;
 	}
 	return (dest);

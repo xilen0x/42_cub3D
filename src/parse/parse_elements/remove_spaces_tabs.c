@@ -72,23 +72,20 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 // }
 void	remove_empty_lines(t_lmap *lmap)
 {
-	t_lmap	*temp;
 	t_lmap	*prev;
 
-	temp = lmap;
 	prev = NULL;
-	while (temp)
+	while (lmap)
 	{
-		if (temp->content[0] == '\0')
+		if (lmap->content[0] == '\0')
 		{
 			if (prev)
-				prev->next = temp->next;
-			free(temp->content);
-			free(temp);
-			temp = prev;
+				prev->next = lmap->next;
+			free(lmap->content);
+			free(lmap);
+			lmap = prev;
 		}
-		prev = temp;
-		temp = temp->next;
+		lmap = lmap->next;
 	}
 }
 
