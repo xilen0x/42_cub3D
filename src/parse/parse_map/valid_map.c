@@ -116,6 +116,67 @@ int	any_zero_or_space(t_map *map)
 	return (0);
 }
 
+// int	all_walls_closed(t_lmap *lm)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (lm && (
+// 			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+// 			(lm->content[0] == '\0')))
+// 		lm = lm->next;
+// 	while (lm)
+// 	{
+// 		remove_newline_char(lm->content);//test
+// 		if (lm->content[0] == '1')
+// 		{
+// 			while (lm->content[i])
+// 				i++;
+// 			if (lm->content[i - 1] != '1')
+// 				return (1);
+// 		}
+// 		lm = lm->next;
+// 	}
+// 	return (0);
+// }
+
+// int	any_zero_or_space_lst(t_lmap *lm)
+// {
+// 	char	*line;
+// 	int		length;
+
+// 	while (lm && (
+// 			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+// 			(lm->content[0] == '\0')))
+// 		lm = lm->next;
+// 	while (lm != NULL)
+// 	{
+// 		line = lm->content;
+// 		length = 0;
+// 		while (line[length] != '\0')
+// 		{
+// 			length++;
+// 		}
+// 		if (length == 0 || line[0] != '1' || line[length - 2] != '1')
+// 		{
+// 			return (1);
+// 		}
+// 		lm = lm->next;
+// 	}
+// 	return (0);
+// }
+
+
 void	valid_map(t_map *map)
 {
 	if (any_zero_or_space(map) == 1)
@@ -127,3 +188,4 @@ void	valid_map(t_map *map)
 	if (its_playable(map) == 1)
 		ft_errors("Invalid map. The map is not playable\n");
 }
+

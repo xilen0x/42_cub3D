@@ -73,17 +73,11 @@ int	is_square_map(t_lmap *lm)
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
+	// if (any_zero_or_space_lst(*lmap) == 1)
+	// 	ft_errors("Invalid map. There is a space around the 0\n");
 	if (is_square_map(*lmap) == 1)
-	{
-		ft_printf("\nMapa cuadrado\n");
 		create_matrix(map, *lmap);
-	}
 	else
-	{
-		ft_printf("Mapa irregular\n");
 		create_matrix_irregular(map, *lmap);
-	}
-	//create_matrix(map, *lmap);
 	valid_map(map);
-// 	lst_clear(lmap, &free);
 }

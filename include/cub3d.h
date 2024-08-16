@@ -122,6 +122,9 @@ void	remove_empty_lines(t_lmap *lmap);
 void	remove_newline(char *line);
 void	remove_newline_char(char *str);
 int		free_data(char **line, char **colors);
+int any_zero_or_space_lst(t_lmap *lm);
+
+
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	create_matrix_irregular(t_map *map, t_lmap *lm);

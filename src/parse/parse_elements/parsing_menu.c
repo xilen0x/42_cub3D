@@ -247,23 +247,14 @@ void	remove_extra_spaces_or_tabs(t_lmap *lm)
 
 void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 {
-	// remove_empty_lines(lmap);
-	// printf("\n---------03 LISTA DEPUES DE REM. LINEAS-----------\n\n");
-	// print_list(lmap);
-
 	remove_extra_spaces_or_tabs(lmap);
 	printf("\n---------04 LISTA DEPUES DE REM. ESPACIOS------\n\n");
 	print_list(lmap);
-	
-	// remove_newline_char(lmap);
-	// printf("\n---------04.1 LISTA DEPUES DE REM. NEWLINE------\n\n");
-	// print_list(lmap);
-
 
 	remove_external_tabs_spaces_elem(lmap);
 	printf("\n---------05 LISTA DEPUES DE REM. LINEAS V. & TRIM----\n\n");
 	print_list(lmap);
-	
+
 	if (exist_elements_or_colors_anywhere(lmap))
 		ft_errors("Invalid number of elements or colors\n");
 	hub_elements(lmap, colors);
@@ -273,7 +264,6 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 /******************************Menu parsing*******************************/
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 {
-	(void)colors;
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	ft_printf("\n-------01 MAPA ORIGINAL--------------\n\n");
@@ -301,29 +291,3 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	// print_colors(colors);
 	// print_width_height(map);
 }
-
-// int	duplicate_lines(t_lmap *lmap)
-// {
-// 	t_lmap	*temp;
-// 	t_lmap	*temp2;
-
-// 	temp = lmap;
-// 	while (temp)
-// 	{
-// 		temp2 = temp->next;
-// 		if (temp->content[0] == 'S' || temp->content[0] == 'N' || 
-// 		temp->content[0] == 'E' || temp->content[0] == 'W' || 
-// 		temp->content[0] == 'F' || temp->content[0] == 'C')
-// 		{
-// 			while (temp2)
-// 			{
-// 				if (ft_strncmp(temp->content, temp2->content, ft_strlen(temp->content)) == 0)
-// 					return (1);
-// 				temp2 = temp2->next;
-// 			}
-// 			temp = temp->next;
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	return (0);
-// }
