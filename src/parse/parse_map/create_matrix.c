@@ -78,6 +78,7 @@ void	create_matrix_irregular(t_map *map, t_lmap *lm)
 	i = 0;
 	while (lm)
 	{
+		remove_newline_char(lm->content);
 		ft_strncpy2(map->matrix[i], lm->content, max_line);
 		map->matrix[i][max_line] = '\0';
 		lm = lm->next;

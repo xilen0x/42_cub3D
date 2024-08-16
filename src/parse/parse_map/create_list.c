@@ -27,7 +27,7 @@ void	create_list(t_map *map, t_lmap **lmap)
 			continue ;
 		}
 		ft_printf("%s", line);//quitar luego***************
-		// remove_newline(line);
+		// remove_newline(line);//eliminar esta funcion si no se utiliza
 		node = p_malloc(sizeof(t_lmap));
 		node->content = line;
 		node->next = NULL;
