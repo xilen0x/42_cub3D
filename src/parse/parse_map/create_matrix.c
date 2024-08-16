@@ -57,76 +57,59 @@ char	*ft_strnstr2(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-// void	create_matrix(t_map *map, t_lmap *lmap)
-// {
-// 	int		i;
-// 	size_t	max_line;
-
-// 	i = 0;
-// 	while (lmap)
-// 	{
-// 		if (lmap->content[0] == '1')
-// 			break ;
-// 		lmap = lmap->next;
-// 	}
-// 	map->w = ft_strlen(lmap->content);
-// 	map->h = lst_size(lmap) + 2;
-// 	max_line = search_longest_line(lmap);
-// 	space_malloc(map->h, max_line + 1, map);
-// 	i++;
-// 	while (lmap && (lmap->content[0] != '1' || lmap->content[0] == '\0'))
-// 		lmap = lmap->next;
-	
-// 	while (lmap)
-// 	{
-// 		map->w = ft_strlen(lmap->content);
-// 		ft_strncpy2(map->matrix[i], lmap->content, max_line);
-// 		map->matrix[i][max_line + 1] = '\0';
-// 		lmap = lmap->next;
-// 		i++;
-// 	}
-// }
-
-/* Funcion que crea la matriz a partir de la lista*/
-void	create_matrix(t_map *map, t_lmap *lmap)
+void	create_matrix_irregular(t_map *map, t_lmap *lm)
 {
 	int		i;
 	size_t	max_line;
 
-	// Saltar todas las líneas que contienen identificadores o están vacías
-	while (lmap && (
-	(ft_strnstr2(lmap->content, "NO", ft_strlen(lmap->content)) != NULL) ||
-	 (ft_strnstr2(lmap->content, "SO", ft_strlen(lmap->content)) != NULL) ||
-	  (ft_strnstr2(lmap->content, "WE", ft_strlen(lmap->content)) != NULL) ||
-	   (ft_strnstr2(lmap->content, "EA", ft_strlen(lmap->content)) != NULL) ||
-	    (ft_strnstr2(lmap->content, "F", ft_strlen(lmap->content)) != NULL) ||
-	     (ft_strnstr2(lmap->content, "C", ft_strlen(lmap->content)) != NULL) ||
-	      (lmap->content[0] == '\0')))
-	{
-		lmap = lmap->next;
-	}
-	// Calcular el alto del mapa (número de líneas)
-	map->h = lst_size(lmap);
-	// Encontrar la línea más larga para establecer el ancho máximo
-	max_line = search_longest_line(lmap);
-	// Reservar memoria para la matriz
+	while (lm && (
+			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+			(lm->content[0] == '\0')))
+		lm = lm->next;
+	map->h = lst_size(lm);
+	max_line = search_longest_line(lm);
+	map->w = max_line;
 	space_malloc(map->h, max_line + 1, map);
 	i = 0;
-	// Construir la matriz respetando la forma irregular del mapa
-	while (lmap)
+	while (lm)
 	{
-		// Copiar la línea del mapa en la matriz
-		ft_strncpy2(map->matrix[i], lmap->content, max_line);
-		// Asegurarse de que la línea termina con un carácter nulo
+		ft_strncpy2(map->matrix[i], lm->content, max_line);
 		map->matrix[i][max_line] = '\0';
-		// Avanzar al siguiente elemento de la lista
-		lmap = lmap->next;
+		lm = lm->next;
 		i++;
 	}
 }
 
+/* Funcion que crea la matriz a partir de la lista*/
+void	create_matrix(t_map *map, t_lmap *lm)
+{
+	int		i;
+	size_t	max_line;
 
-
-
-
-
+	while (lm && (
+			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+			(lm->content[0] == '\0')))
+		lm = lm->next;
+	map->h = lst_size(lm);
+	max_line = search_longest_line(lm);
+	map->w = max_line;
+	space_malloc(map->h, max_line + 1, map);
+	i = 0;
+	while (lm)
+	{
+		ft_strncpy2(map->matrix[i], lm->content, max_line);
+		map->matrix[i][max_line] = '\0';
+		lm = lm->next;
+		i++;
+	}
+}

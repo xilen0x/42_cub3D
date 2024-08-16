@@ -71,6 +71,7 @@ int	looking_for_xpm(char **elements)
 		return (0);
 	return (1);
 }
+
 void	remove_newline_char(char *str)
 {
 	int	i;

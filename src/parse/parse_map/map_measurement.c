@@ -12,26 +12,37 @@
 
 #include "cub3d.h"
 
-size_t	spaces_to_ones(t_lmap *lmap)
+size_t	spaces_to_ones(t_lmap *lm)
 {
 	size_t	i;
 
 	i = 0;
-	while (lmap)
+	while (lm && ( 
+			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+			(lm->content[0] == '\0')))
+	{
+		lm = lm->next;
+	}
+	while (lm)
 	{
 		i = 0;
-		while (lmap->content[i] == ' ' || lmap->content[i] == '\t')
+		while (lm->content[i] == ' ' || lm->content[i] == '\t')
 			i++;
-		while (lmap->content[i])
+		while (lm->content[i])
 		{
-			if (lmap->content[i] == ' ')
+			if (lm->content[i] == ' ')
 			{
-				if (ft_strcmp(lmap->content[i], ' ') == 0)
-					lmap->content[i] = '1';
+				if (ft_strcmp(lm->content[i], ' ') == 0)
+					lm->content[i] = '1';
 			}
 			i++;
 		}
-		lmap = lmap->next;
+		lm = lm->next;
 	}
 	return (0);
 }
