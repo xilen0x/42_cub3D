@@ -12,38 +12,58 @@
 
 #include "cub3d.h"
 
-size_t	spaces_to_ones(t_lmap *lm)
+void	spaces_to_ones(t_map *map)
 {
-	size_t	i;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (lm && ( 
-			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
-			(lm->content[0] == '\0')))
-		lm = lm->next;
-	while (lm)
+	while (i < map->h)
 	{
-		i = 0;
-		while (lm->content[i] == ' ' || lm->content[i] == '\t')
-			i++;
-		while (lm->content[i])
+		j = 0;
+		while (j < map->w)
 		{
-			if (lm->content[i] == ' ')
-			{
-				if (ft_strcmp(lm->content[i], ' ') == 0)
-					lm->content[i] = '1';
-			}
-			i++;
+			if (map->matrix[i][j] == ' ')
+				map->matrix[i][j] = '1';
+			j++;
 		}
-		lm = lm->next;
+		i++;
 	}
-	return (0);
 }
+
+
+// size_t	spaces_to_ones(t_lmap *lm)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	while (lm && ( 
+// 			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+// 			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+// 			(lm->content[0] == '\0')))
+// 		lm = lm->next;
+// 	while (lm)
+// 	{
+// 		i = 0;
+// 		while (lm->content[i] == ' ' || lm->content[i] == '\t')
+// 			i++;
+// 		while (lm->content[i])
+// 		{
+// 			if (lm->content[i] == ' ')
+// 			{
+// 				if (ft_strcmp(lm->content[i], ' ') == 0)
+// 					lm->content[i] = '1';
+// 			}
+// 			i++;
+// 		}
+// 		lm = lm->next;
+// 	}
+// 	return (0);
+// }
 
 /*busqueda de linea mas larga en el mapa(list)*/
 size_t	search_longest_line(t_lmap *lmap)

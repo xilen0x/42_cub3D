@@ -73,23 +73,15 @@ int	is_square_map(t_lmap *lm)
 
 void	parsing_map(t_map *map, t_lmap **lmap)
 {
-	(void)map;
-
 	if (first_row_is_all_ones(*lmap) == 1)
 		ft_errors("Invalid map. The row 1 is not all 1\n");
-	else
-	{
-		printf("The row 1 is all 1\n");
-	}
 	if (rows_are_all_ones(*lmap) == 1)
 		ft_errors("Invalid map. One or more rows are open\n");
+	if (is_square_map(*lmap) == 1)
+		create_matrix(map, *lmap);
 	else
-	{
-		printf("The rows are closed ok\n");
-	}
-	// if (is_square_map(*lmap) == 1)
-	// 	create_matrix(map, *lmap);
-	// else
-	// 	create_matrix_irregular(map, *lmap);
-	// valid_map(map);
+		create_matrix_irregular(map, *lmap);
+	valid_map(map);
+	ft_printf("\n\n-------07 MATRIX DESP. DE VALID_MAP----\n\n");
+	print_matrix(map);
 }

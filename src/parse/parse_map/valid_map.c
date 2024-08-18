@@ -13,20 +13,23 @@
 #include "cub3d.h"
 
 
-size_t	ft_strlen2(const char *s)
+size_t	ft_strlen2(const char *str)
 {
 	size_t	i;
 	size_t	space;
 
 	i = 0;
 	space = 0;
-	if (!s)
+	if (!str)
 		ft_errors("Error, the string is empty\n");
-	while (s[i] == ' ' || s[i] == '\t')
-		i++;
-	while (s[i] != '\0')
+	while (str[i] == ' ' || str[i] == '\t')
 	{
-		if (s[i] == ' ' )
+		space++;
+		i++;
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
 			space++;
 		i++;
 	}
@@ -279,8 +282,7 @@ int	first_row_is_all_ones(t_lmap *lm)
 
 void	valid_map(t_map *map)
 {
-	if (any_zero_or_space(map) == 1)
-		ft_errors("Invalid map. There is a space around the 0\n");
+	spaces_to_ones(map);
 	if (is_one_player(map) == 1)
 		ft_errors("Invalid map, there must be only one player\n");
 	if (only_characters_allowed(map) == 1)

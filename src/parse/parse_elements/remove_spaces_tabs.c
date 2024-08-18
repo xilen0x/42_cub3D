@@ -13,8 +13,6 @@
 
 #include "cub3d.h"
 
-//spaces_to_ones(lmap);
-
 void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 {
 	char	*line;

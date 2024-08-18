@@ -1,19 +1,15 @@
+			SO   		./textures/red.xpm		   
 
 
 
  WE  	 ./textures/green.xpm
  
 
-
-    F	 116    	,  21, 100
-
-
- C	  255, 206,		200  
-			SO   		./textures/red.xpm		   
-
-
 	  EA ./textures/yellow.xpm
-	 	NO        	 ./textures/blue.xpm   	  	
+
+   						 	NO        	 ./textures/blue.xpm   	  	
+    F	 116    	,  21, 100
+ C	  255, 206,		200  
 
 
 
