@@ -280,13 +280,14 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	ft_printf("\n------06 LISTA DESP. DE PARSE ELEMS----\n\n");
 	print_list(*lmap);
 
-	spaces_to_ones(*lmap);
-	ft_printf("\n----07 LISTA DESP. DE CAMBIAR ESPACIOS POR 1s----\n\n");
-	print_list(*lmap);
 
 	parsing_map(map, lmap);
 	ft_printf("\n\n-------08 MATRIX DESP. DE PARSE MAP----\n\n");
 	print_matrix(map);
+
+	spaces_to_ones(*lmap);
+	ft_printf("\n----07 LISTA DESP. DE CAMBIAR ESPACIOS POR 1s----\n\n");
+	print_list(*lmap);
 	// print_elements(elem);
 	// print_colors(colors);
 	// print_width_height(map);

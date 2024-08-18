@@ -12,6 +12,27 @@
 
 #include "cub3d.h"
 
+
+size_t	ft_strlen2(const char *s)
+{
+	size_t	i;
+	size_t	space;
+
+	i = 0;
+	space = 0;
+	if (!s)
+		ft_errors("Error, the string is empty\n");
+	while (s[i] == ' ' || s[i] == '\t')
+		i++;
+	while (s[i] != '\0')
+	{
+		if (s[i] == ' ' )
+			space++;
+		i++;
+	}
+	return (i - space);
+}
+
 int	its_playable(t_map	*map)
 {
 	int	count;
@@ -145,36 +166,115 @@ int	any_zero_or_space(t_map *map)
 // 	return (0);
 // }
 
-// int	any_zero_or_space_lst(t_lmap *lm)
-// {
-// 	char	*line;
-// 	int		length;
+int	counter_of_char(const char *str)
+{
+	int	count;
+	int	i;
 
-// 	while (lm && (
-// 			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
-// 			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
-// 			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
-// 			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
-// 			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
-// 			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
-// 			(lm->content[0] == '\0')))
-// 		lm = lm->next;
-// 	while (lm != NULL)
-// 	{
-// 		line = lm->content;
-// 		length = 0;
-// 		while (line[length] != '\0')
-// 		{
-// 			length++;
-// 		}
-// 		if (length == 0 || line[0] != '1' || line[length - 2] != '1')
-// 		{
-// 			return (1);
-// 		}
-// 		lm = lm->next;
-// 	}
-// 	return (0);
-// }
+	count = 0;
+	i = 0;
+	if (!str)
+		ft_errors("Error, the string is empty\n");
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '1')
+			count++;
+		i++;
+	}
+	return (count);
+}
+/*funcion que remueve los espacios y tabulaciones que encuentre al final de la linea, del tipo "1111111110110 0001110000000000001 \n". Solo los espacios o tabsdel final*/
+void	remove_final_spaces_tabs(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str) - 2;
+	while (str[i] == ' ' || str[i] == '\t')
+	{
+		str[i] = '\0';
+		i--;
+	}
+}
+
+int	rows_are_all_ones(t_lmap *lm)
+{
+	unsigned int	start;
+	unsigned int	end;
+	unsigned int	i;
+	unsigned int	size;
+	unsigned int	length_line;
+	unsigned int	q_of_ones;
+
+	i = 0;
+	while (lm && (
+			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+			(lm->content[0] == '\0')))
+		lm = lm->next;
+	lm = lm->next;//para q avance a la siguiente linea del mapa
+	size = lst_size(lm);
+	while (lm && size > 1)
+	{
+		start = 0;
+		end = 0;
+		i = 0;
+		remove_final_spaces_tabs(lm->content);
+		remove_newline_char(lm->content);
+		while (lm->content[i] == ' ' || lm->content[i] == '\t')
+			i++;
+		if (lm->content[i] == '1')
+			start = 1;
+		while (lm->content[i] != '\0')
+			i++;
+		if (lm->content[i - 1] == '1')
+			end = 1;
+		if (start == 1 && end == 1)
+			lm = lm->next;
+		else
+			return (1);
+		size--;
+	}
+	remove_newline_char(lm->content);
+	length_line = ft_strlen2(lm->content);
+	q_of_ones = counter_of_char(lm->content);
+	if (length_line != q_of_ones)
+		return (1);
+	return (0);
+}
+
+int	first_row_is_all_ones(t_lmap *lm)
+{
+	unsigned int	length_line;
+	unsigned int	q_of_ones;
+	char			*line;
+
+	while (lm && (
+			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
+			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
+			(lm->content[0] == '\0')))
+		lm = lm->next;
+	remove_newline_char(lm->content);
+	line = ft_strtrim2(lm->content, " ", "\t");
+	length_line = ft_strlen2(line);
+	q_of_ones = counter_of_char(line);
+	if (length_line != q_of_ones)
+	{
+		free(line);
+		return (1);
+	}
+	free(line);
+	return (0);
+}
 
 
 void	valid_map(t_map *map)

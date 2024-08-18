@@ -122,8 +122,9 @@ void	remove_empty_lines(t_lmap *lmap);
 void	remove_newline(char *line);
 void	remove_newline_char(char *str);
 int		free_data(char **line, char **colors);
-int any_zero_or_space_lst(t_lmap *lm);
-
+int 	first_row_is_all_ones(t_lmap *lm);
+int		rows_are_all_ones(t_lmap *lm);
+size_t	ft_strlen2(const char *s);
 
 /* ------------- MATRIX ------------- */
 void	create_matrix(t_map *map, t_lmap *lmap);

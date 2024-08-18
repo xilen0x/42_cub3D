@@ -25,9 +25,7 @@ size_t	spaces_to_ones(t_lmap *lm)
 			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
 			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
 			(lm->content[0] == '\0')))
-	{
 		lm = lm->next;
-	}
 	while (lm)
 	{
 		i = 0;
