@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	exist_cardinals2(char **elements)
+int	check_cardinal_direction(char **elements)
 {
 	int	i;
 	int	temp;
@@ -30,34 +30,41 @@ int	exist_cardinals2(char **elements)
 		else if (ft_strncmp(elements[i], "WE", 2) == 0)
 			temp++;
 		i++;
-		// free(elements[i]);
 	}
+	return (temp);
+}
+
+int	check_cardinal_in_line(t_lmap *lmap)
+{
+	char	**elements;
+	int		temp;
+
+	elements = ft_split2(lmap->cont);
+	temp = check_cardinal_direction(elements);
+	free_elements(elements);
 	return (temp);
 }
 
 int	exist_elements2(t_lmap *lmap)
 {
-	char	**elements;
 	int		temp;
 	int		count;
 
 	count = 0;
 	while (lmap)
 	{
-			elements = ft_split2(lmap->content);
-		if ((ft_strnstr(lmap->content, "NO", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "SO", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "EA", ft_strlen(lmap->content)) != NULL) || (ft_strnstr(lmap->content, "WE", ft_strlen(lmap->content)) != NULL))
+		if ((ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)) != NULL) || 
+			(ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)) != NULL) || 
+			(ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)) != NULL) || 
+			(ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)) != NULL))
 		{
-			temp = exist_cardinals2(elements);
-			count = count + temp;
+			temp = check_cardinal_in_line(lmap);
+			count += temp;
 			if (temp != 1)
 				ft_errors("Invalid number of elements\n");
 			if (count == 4)
-			{
-				free_elements(elements);
 				return (0);
-			}
 		}
-		free_elements(elements);
 		lmap = lmap->next;
 	}
 	return (0);

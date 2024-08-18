@@ -19,19 +19,9 @@ void	print_list(t_lmap *lmap)
 	i = 0;
 	while (lmap)
 	{
-		ft_printf("%s\n", lmap->content);
+		ft_printf("%s\n", lmap->cont);
 		lmap = lmap->next;
 		i++;
 	}
 	ft_printf("\n\n");
-	// ft_printf("Longitud de la lista: %d\n", i);
 }
-
-// void ft_del_one(t_lmap *lst, void (*del)(void*))
-// {
-//     if (lst)
-//     {
-//         del((void *)(uintptr_t)lst->content);
-//         free(lst);
-//     }
-// }

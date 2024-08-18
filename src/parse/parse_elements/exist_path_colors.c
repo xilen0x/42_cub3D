@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
 int	value_isdigit(char *num)
@@ -28,7 +27,7 @@ int	value_isdigit(char *num)
 	return (1);
 }
 
-static int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap)
+int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap)
 {
 	int		color_value;
 
@@ -36,7 +35,7 @@ static int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap
 	while (line[i])
 	{
 		if (i == 3)
-			break ;		
+			break ;
 		if (value_isdigit(line[i]))
 			color_value = ft_atoi(line[i]);
 		else
@@ -48,41 +47,43 @@ static int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap
 	}
 	return (0);
 }
+
 void	remove_leading_spaces(char *line, int *i, int *j)
 {
-    // Eliminar espacios o tabulaciones antes de la coma
 	if ((line[*i] == ' ' || line[*i] == '\t') && line[*i + 1] == ',')
 	{
-		(*i)++; // Saltar el espacio/tabulación
+		(*i)++;
 		return ;
 	}
-    // Eliminar espacios o tabulaciones después de la coma
 	if (line[*i] == ',' && (line[*i + 1] == ' ' || line[*i + 1] == '\t'))
 	{
-		line[(*j)++] = line[(*i)++]; // Copiar la coma
+		line[(*j)++] = line[(*i)++];
 		while (line[*i] == ' ' || line[*i] == '\t')
-			(*i)++; // Saltar los espacios/tabulaciones
+			(*i)++;
 		return ;
 	}
-	// Eliminar espacios o tabulaciones antes de la coma
 	if ((line[*i] == ' ' || line[*i] == '\t') && (line[*j - 1] != ','))
 	{
-		(*i)++; // Saltar el espacio/tabulación
+		(*i)++;
 		return ;
 	}
-	// Copiar el carácter normalmente
 	line[(*j)++] = line[(*i)++];
 }
+
 void	process_line(char *line)
 {
-	int i = 0, j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	while (line[i])
 		remove_leading_spaces(line, &i, &j);
 	while ((j > 0) && (line[j - 1] == ' ' || line[j - 1] == '\t'))
 		j--;
 	line[j] = '\0';
 }
+
 void	remove_spaces_around_commas(t_lmap *lmap)
 {
 	int		count;
@@ -90,55 +91,10 @@ void	remove_spaces_around_commas(t_lmap *lmap)
 	count = 0;
 	while (lmap)
 	{
-		process_line(lmap->content);
+		process_line(lmap->cont);
 		count++;
 		lmap = lmap->next;
 		if (count == 2)
-			break ;		
+			break ;
 	}
-}
-
-
-int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
-{
-	int		i;
-
-	i = 0;
-	while (line[i] && *line[i] != '\n')
-		i++;
-	if (i == 3)
-	{
-		if (check_range_values(i, line, colors, lmap) == 1)
-		{
-			free_elements(line);
-			ft_errors("Invalid color value 2\n");
-		}
-	}
-	else
-	{
-		free_elements(line);
-		return (1);
-	}
-	return (0);
-}
-
-
-int	exist_path_colors(t_lmap *lmap, t_colors *colors)
-{
-	// char	*temp;
-	char	**line;
-
-	while (lmap)
-	{
-		// temp = lmap->content;
-		line = NULL;
-		line = split_space_tab_comma(lmap->content);
-		if (ft_strncmp(line[0], "F", 1) == 0 || \
-			ft_strncmp(line[0], "C", 1) == 0)
-			if (exist_path_colors2(line, colors, lmap))
-				ft_errors("Invalid color value 1\n");
-		free_elements(line);
-		lmap = lmap->next;
-	}
-	return (0);
 }

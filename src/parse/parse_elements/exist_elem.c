@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cub3d.h"
 
 int	exist_cardinals(char **elements)
@@ -43,33 +42,12 @@ int	exist_elements(t_lmap *lmap)
 	char	**elements;
 	int		temp;
 
-	elements = ft_split2(lmap->content);
+	elements = ft_split2(lmap->cont);
 	temp = exist_cardinals(elements);
 	if (temp != 1)
 		ft_errors("Invalid number of elements\n");
 	free_elements(elements);
 	return (0);
-}
-
-int	looking_for_xpm(char **elements)
-{
-	int		i;
-	int		temp;
-
-	temp = 0;
-	i = 0;
-	while (elements[i] && temp < 4)
-	{
-		if (ft_strlen(elements[i]) > 3)
-		{
-			if (ft_strnstr(elements[i], ".xpm", ft_strlen(elements[i])) != NULL)
-				temp++;
-		}
-		i++;
-	}
-	if (temp == 1)
-		return (0);
-	return (1);
 }
 
 void	remove_newline_char(char *str)
@@ -112,11 +90,11 @@ int	exist_path_elements(t_lmap *lmap)
 {
 	char	**elements;
 
-	elements = ft_split2(lmap->content);
+	elements = ft_split2(lmap->cont);
 	if (looking_for_xpm(elements) == 1)
 		ft_errors("Invalid path 02\n");
 	if (path_is_valid(elements) == 1)
-		ft_errors("Invalid path 03\n");	
+		ft_errors("Invalid path 03\n");
 	free_elements(elements);
 	return (0);
 }

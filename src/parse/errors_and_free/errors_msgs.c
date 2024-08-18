@@ -15,14 +15,7 @@
 /*Funcion que muestra mensajes de error*/
 int	ft_errors(char *msg)
 {
-		write (2, "Error\n", 6);
-		write (2, msg, ft_strlen(msg));
-		// write (2, "Use: ./cub3d <map.cub>\n", 23);
-		// write (2, "It was not possible to open the file\n", 37);
-		// write (2, "Invalid map file!\n", 18);
-		// write (2, "Invalid route in map!\n", 22);
-		// write (2, "It was not possible to initialize the program!\n", 47);
-		// write (2, "The file does not have a .cub extension.\n", 41);
-		// write (2, "The texture path is not valid.\n", 31);
-		exit(1);
+	write (2, "Error\n", 6);
+	write (2, msg, ft_strlen(msg));
+	exit(1);
 }

@@ -59,7 +59,7 @@ void	lst_clear(t_lmap **lmap, void (*del)(void*))
 	while (current != NULL)
 	{
 		next = current->next;
-		del(current->content);
+		del(current->cont);
 		free(current);
 		current = next;
 	}
@@ -73,7 +73,7 @@ t_lmap	*ft_newnode(char *str)
 	new_node = (t_lmap *)malloc(sizeof(t_lmap));
 	if (new_node)
 	{
-		new_node->content = str;
+		new_node->cont = str;
 		new_node->next = NULL;
 	}
 	else

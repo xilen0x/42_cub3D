@@ -74,3 +74,26 @@ char	**split_space_tab_comma(const char *str)
 	fill_substrings2(result, str);
 	return (result);
 }
+
+size_t	ft_strlen2(const char *str)
+{
+	size_t	i;
+	size_t	space;
+
+	i = 0;
+	space = 0;
+	if (!str)
+		ft_errors("Error, the string is empty\n");
+	while (str[i] == ' ' || str[i] == '\t')
+	{
+		space++;
+		i++;
+	}
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			space++;
+		i++;
+	}
+	return (i - space);
+}

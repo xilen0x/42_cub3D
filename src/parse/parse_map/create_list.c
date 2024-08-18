@@ -26,15 +26,26 @@ void	create_list(t_map *map, t_lmap **lmap)
 			line = get_next_line(map->map_fd);
 			continue ;
 		}
-		ft_printf("%s", line);//quitar luego***************
-		// remove_newline(line);//eliminar esta funcion si no se utiliza
 		node = p_malloc(sizeof(t_lmap));
-		node->content = line;
+		node->cont = line;
 		node->next = NULL;
 		ft_add_back(lmap, node);
 		line = get_next_line(map->map_fd);
 	}
 	close(map->map_fd);
+}
+
+void	jump_elements(t_lmap **lm)
+{
+	while (*lm && (
+			(ft_strnstr2((*lm)->cont, "NO", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "SO", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "WE", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "EA", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "F", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "C", ft_strlen((*lm)->cont)) != NULL) || 
+			((*lm)->cont[0] == '\0')))
+		*lm = (*lm)->next;
 }
 
 /*funcion que primero se salta las lineas(NO,SO,WE,EA,F,C) que no corresponden
@@ -47,41 +58,17 @@ int	is_square_map(t_lmap *lm)
 
 	len = 0;
 	len2 = 0;
-	while (lm && (
-			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
-			(lm->content[0] == '\0')))
-		lm = lm->next;
+	jump_elements(&lm);
 	while (lm)
 	{
-		len = ft_strlen(lm->content);
+		len = ft_strlen(lm->cont);
 		if (len2 == 0)
 			len2 = len;
 		if (len != len2)
 			break ;
-
 		lm = lm->next;
 	}
 	if (len == len2)
 		return (1);
 	return (0);
-}
-
-void	parsing_map(t_map *map, t_lmap **lmap)
-{
-	if (first_row_is_all_ones(*lmap) == 1)
-		ft_errors("Invalid map. The row 1 is not all 1\n");
-	if (rows_are_all_ones(*lmap) == 1)
-		ft_errors("Invalid map. One or more rows are open\n");
-	if (is_square_map(*lmap) == 1)
-		create_matrix(map, *lmap);
-	else
-		create_matrix_irregular(map, *lmap);
-	valid_map(map);
-	ft_printf("\n\n-------07 MATRIX DESP. DE VALID_MAP----\n\n");
-	print_matrix(map);
 }

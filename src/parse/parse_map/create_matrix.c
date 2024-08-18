@@ -63,13 +63,13 @@ void	create_matrix_irregular(t_map *map, t_lmap *lm)
 	size_t	max_line;
 
 	while (lm && (
-			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
-			(lm->content[0] == '\0')))
+			(ft_strnstr2(lm->cont, "NO", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "SO", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "WE", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "EA", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "F", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "C", ft_strlen(lm->cont)) != NULL) || 
+			(lm->cont[0] == '\0')))
 		lm = lm->next;
 	map->h = lst_size(lm);
 	max_line = search_longest_line(lm);
@@ -78,8 +78,8 @@ void	create_matrix_irregular(t_map *map, t_lmap *lm)
 	i = 0;
 	while (lm)
 	{
-		remove_newline_char(lm->content);
-		ft_strncpy2(map->matrix[i], lm->content, max_line);
+		remove_newline_char(lm->cont);
+		ft_strncpy2(map->matrix[i], lm->cont, max_line);
 		map->matrix[i][max_line] = '\0';
 		lm = lm->next;
 		i++;
@@ -93,13 +93,13 @@ void	create_matrix(t_map *map, t_lmap *lm)
 	size_t	max_line;
 
 	while (lm && (
-			(ft_strnstr2(lm->content, "NO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "SO", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "WE", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "EA", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "F", ft_strlen(lm->content)) != NULL) || 
-			(ft_strnstr2(lm->content, "C", ft_strlen(lm->content)) != NULL) || 
-			(lm->content[0] == '\0')))
+			(ft_strnstr2(lm->cont, "NO", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "SO", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "WE", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "EA", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "F", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "C", ft_strlen(lm->cont)) != NULL) || 
+			(lm->cont[0] == '\0')))
 		lm = lm->next;
 	map->h = lst_size(lm);
 	max_line = search_longest_line(lm);
@@ -108,7 +108,7 @@ void	create_matrix(t_map *map, t_lmap *lm)
 	i = 0;
 	while (lm)
 	{
-		ft_strncpy2(map->matrix[i], lm->content, max_line);
+		ft_strncpy2(map->matrix[i], lm->cont, max_line);
 		map->matrix[i][max_line] = '\0';
 		lm = lm->next;
 		i++;

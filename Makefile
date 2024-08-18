@@ -34,31 +34,30 @@ MLX_FILE = libmlx.a
 SRC_FILES = main.c \
 			parse/parse_elements/map_init.c \
             parse/parse_elements/parsing_menu.c \
-            parse/errors_and_free/errors_msgs.c \
-			parse/errors_and_free/free_functions.c \
             parse/parse_elements/map_extension.c \
 			parse/parse_elements/utils_0.c \
 			parse/parse_elements/utils_1.c \
 			parse/parse_elements/utils_2.c \
-			parse/parse_map/create_list.c \
-			parse/parse_map/utils_list0.c \
-			parse/parse_map/utils_list1.c \
-			parse/parse_map/utils_map1.c \
-			parse/parse_map/create_matrix.c \
-			parse/parse_map/map_measurement.c \
-			parse/parse_map/valid_map.c \
 			parse/parse_elements/exist_elem.c \
 			parse/parse_elements/exist_elem2.c \
 			parse/parse_elements/exist_colors.c \
 			parse/parse_elements/exist_path_colors.c \
 			parse/parse_elements/exist_path_colors2.c \
-			parse/parse_elements/remove_spaces_tabs.c
-# parse/parse_elements/rm_spaces_n_tabs.c 
-# parse/parse_elements/parsing_colors.c 
-# parse/parse_elements/parsing_colors2.c 
-# parse/parse_elements/parsing_elements.c 
-# parse/parse_elements/parsing_elements2.c
-# game/window.c
+			parse/parse_elements/remove_spaces_tabs.c \
+			parse/parse_elements/remove_spaces_tabs2.c \
+			parse/parse_elements/save_path.c \
+			parse/parse_elements/save_rgb.c \
+			parse/parse_map/create_list.c \
+			parse/parse_map/create_matrix.c \
+			parse/parse_map/map_measurement.c \
+			parse/parse_map/utils_list0.c \
+			parse/parse_map/utils_list1.c \
+			parse/parse_map/utils_map0.c \
+			parse/parse_map/utils_map1.c \
+			parse/parse_map/valid_map.c \
+			parse/parse_map/valid_map2.c \
+            parse/errors_and_free/errors_msgs.c \
+			parse/errors_and_free/free_functions.c
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)

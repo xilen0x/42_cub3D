@@ -64,3 +64,9 @@ void	print_matrix(t_map *map)
 		i++;
 	}
 }
+
+void	free_data2(char **line, char **colors)
+{
+	free_elements(line);
+	free_elements(colors);
+}
