@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid_map2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/19 10:35:52 by castorga          #+#    #+#             */
+/*   Updated: 2024/08/19 10:35:55 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	check_start_and_end_ones(char *line)
@@ -59,12 +71,12 @@ int	first_row_is_all_ones(t_lmap *lm)
 	char			*line;
 
 	while (lm && (
-			(ft_strnstr2(lm->cont, "NO", ft_strlen(lm->cont)) != NULL) || 
-			(ft_strnstr2(lm->cont, "SO", ft_strlen(lm->cont)) != NULL) || 
-			(ft_strnstr2(lm->cont, "WE", ft_strlen(lm->cont)) != NULL) || 
-			(ft_strnstr2(lm->cont, "EA", ft_strlen(lm->cont)) != NULL) || 
-			(ft_strnstr2(lm->cont, "F", ft_strlen(lm->cont)) != NULL) || 
-			(ft_strnstr2(lm->cont, "C", ft_strlen(lm->cont)) != NULL) || 
+			(ft_strnstr2(lm->cont, "NO", ft_strlen(lm->cont)) != NULL) || \
+			(ft_strnstr2(lm->cont, "SO", ft_strlen(lm->cont)) != NULL) || \
+			(ft_strnstr2(lm->cont, "WE", ft_strlen(lm->cont)) != NULL) || \
+			(ft_strnstr2(lm->cont, "EA", ft_strlen(lm->cont)) != NULL) || \
+			(ft_strnstr2(lm->cont, "F", ft_strlen(lm->cont)) != NULL) || \
+			(ft_strnstr2(lm->cont, "C", ft_strlen(lm->cont)) != NULL) || \
 			(lm->cont[0] == '\0')))
 		lm = lm->next;
 	remove_newline_char(lm->cont);

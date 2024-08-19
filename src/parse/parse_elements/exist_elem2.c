@@ -53,9 +53,9 @@ int	exist_elements2(t_lmap *lmap)
 	count = 0;
 	while (lmap)
 	{
-		if ((ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)) != NULL) || 
-			(ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)) != NULL) || 
-			(ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)) != NULL) || 
+		if ((ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)) != NULL) || \
+			(ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)) != NULL) || \
+			(ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)) != NULL) || \
 			(ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)) != NULL))
 		{
 			temp = check_cardinal_in_line(lmap);

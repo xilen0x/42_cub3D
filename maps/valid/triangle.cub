@@ -1,11 +1,11 @@
 NO ./textures/blue.xpm
-C 135,206,235
+  	C 135,  206,235 	
 
 WE ./textures/green.xpm
 SO ./textures/red.xpm
 EA ./textures/yellow.xpm
 
-F 116,212,52
+F    116, 	212,	52
 
  1111111111111111111111
 100000000000S00000000001

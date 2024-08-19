@@ -43,7 +43,7 @@ static void	hub_elements(t_lmap *lmap, t_colors *colors)
 {
 	while (lmap)
 	{
-		if ((lmap->cont[0] == 'N') || (lmap->cont[0] == 'S') || 
+		if ((lmap->cont[0] == 'N') || (lmap->cont[0] == 'S') || \
 			(lmap->cont[0] == 'W') || (lmap->cont[0] == 'E'))
 		{
 			if (exist_elements(lmap))
@@ -74,7 +74,6 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	else
 		create_matrix_irregular(map, *lmap);
 	valid_map(map);
-	ft_printf("\n\n-------07 MATRIX DESP. DE VALID_MAP----\n\n");
 	print_matrix(map);
 }
 

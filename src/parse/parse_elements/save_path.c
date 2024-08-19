@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save_path.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/19 10:33:36 by castorga          #+#    #+#             */
+/*   Updated: 2024/08/19 10:33:38 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	save_path3(t_elem *elem, char *line, char *option)
@@ -18,9 +30,9 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 	char	*line;
 	char	*option;
 
-	while (elements[i] && ((ft_strncmp(elements[i], "NO", 2) == 0) || 
-			(ft_strncmp(elements[i], "SO", 2) == 0) || 
-			(ft_strncmp(elements[i], "EA", 2) == 0) || 
+	while (elements[i] && ((ft_strncmp(elements[i], "NO", 2) == 0) || \
+			(ft_strncmp(elements[i], "SO", 2) == 0) || \
+			(ft_strncmp(elements[i], "EA", 2) == 0) || \
 			(ft_strncmp(elements[i], "WE", 2) == 0)))
 	{
 		if (ft_strlen(elements[i]) == 2)

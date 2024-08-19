@@ -38,19 +38,17 @@ void	create_list(t_map *map, t_lmap **lmap)
 void	jump_elements(t_lmap **lm)
 {
 	while (*lm && (
-			(ft_strnstr2((*lm)->cont, "NO", ft_strlen((*lm)->cont)) != NULL) || 
-			(ft_strnstr2((*lm)->cont, "SO", ft_strlen((*lm)->cont)) != NULL) || 
-			(ft_strnstr2((*lm)->cont, "WE", ft_strlen((*lm)->cont)) != NULL) || 
-			(ft_strnstr2((*lm)->cont, "EA", ft_strlen((*lm)->cont)) != NULL) || 
-			(ft_strnstr2((*lm)->cont, "F", ft_strlen((*lm)->cont)) != NULL) || 
-			(ft_strnstr2((*lm)->cont, "C", ft_strlen((*lm)->cont)) != NULL) || 
+			(ft_strnstr2((*lm)->cont, "NO", ft_strlen((*lm)->cont)) != NULL) || \
+			(ft_strnstr2((*lm)->cont, "SO", ft_strlen((*lm)->cont)) != NULL) || \
+			(ft_strnstr2((*lm)->cont, "WE", ft_strlen((*lm)->cont)) != NULL) || \
+			(ft_strnstr2((*lm)->cont, "EA", ft_strlen((*lm)->cont)) != NULL) || \
+			(ft_strnstr2((*lm)->cont, "F", ft_strlen((*lm)->cont)) != NULL) || \
+			(ft_strnstr2((*lm)->cont, "C", ft_strlen((*lm)->cont)) != NULL) || \
 			((*lm)->cont[0] == '\0')))
 		*lm = (*lm)->next;
 }
 
-/*funcion que primero se salta las lineas(NO,SO,WE,EA,F,C) que no corresponden
- al mapa(0,1) y luego, una vez que ha llegado al mapa, lo analiza para detectar
-  si es de forma cuadrada (o rectangular tambien) o es un mapa irregular*/
+/*f que analiza si el mapa es de forma cuadrada o irregular*/
 int	is_square_map(t_lmap *lm)
 {
 	int		len;

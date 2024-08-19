@@ -18,11 +18,11 @@ void	remove_external_tabs_spaces_elem(t_lmap *lmap)
 
 	while (lmap)
 	{
-		if (ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)) || 
-			ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)) || 
-			ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)) || 
-			ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)) || 
-			ft_strnstr(lmap->cont, "F", ft_strlen(lmap->cont)) || 
+		if (ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)) || \
+			ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)) || \
+			ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)) || \
+			ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)) || \
+			ft_strnstr(lmap->cont, "F", ft_strlen(lmap->cont)) || \
 			ft_strnstr(lmap->cont, "C", ft_strlen(lmap->cont)))
 		{
 			line = ft_strtrim2(lmap->cont, " ", "\t");
