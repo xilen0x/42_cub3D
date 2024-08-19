@@ -1,5 +1,5 @@
 # Nombre del ejecutable
-NAME = cub3d
+NAME = cub3D
 
 # Detección del sistema operativo
 UNAME_S := $(shell uname -s)
@@ -90,25 +90,20 @@ RESET = \033[0m
 # Regla por defecto (primera regla)
 all: $(NAME)
 
-# Regla para compilar las bibliotecas externas
-subsystems:
-	@echo "$(YELLOW)▶ Compiling libft...$(RESET)"
-	@make -C $(LIBFT_DIR)
-	@echo "$(YELLOW)▶ Compiling MinilibX...$(RESET)"
-	@make -C $(MLX_DIR)
+# Regla de limpieza
+clean:
+	@echo "$(YELLOW)▶ Cleaning object files and dependencies...$(RESET)"
+	@make -C $(LIBFT_DIR) clean
+	@$(RM) $(OBJS_DIR) $(DEP_DIR)
 
-# Regla para crear la biblioteca estática (si fuera necesario)
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
-	@$(AR) $(OBJS)
-	@ranlib $(LIBFT)
+# Regla de limpieza completa (incluye 'clean')
+fclean: clean
+	@echo "$(YELLOW)▶ Cleaning executable...$(RESET)"
+	@make -C $(LIBFT_DIR) fclean
+	@$(RM) $(NAME)
 
-# Regla para crear el ejecutable
-$(NAME): subsystems $(OBJS_DIR) $(DEP_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx $(MLXFLAGS) -o $@
-	@echo " "
-	@echo "$(GREEN)▉▉▉▉▉▉▉▉▉▉ Cub3D successfully compiled! ▉▉▉▉▉▉▉▉▉▉ $(RESET)"
-	@echo " "
+# Regla para reconstruir todo
+re: fclean all
 
 # Regla para crear el directorio de los archivos objeto
 $(OBJS_DIR):
@@ -125,20 +120,22 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(MKF) | $(OBJS_DIR) $(DEP_DIR)
 	@$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCLUDE)
 	@mv $(patsubst %.o,%.d,$@) $(DEP_DIR)/$(notdir $(@:.o=.d))
 
-# Regla de limpieza
-clean:
-	@echo "$(YELLOW)▶ Cleaning object files and dependencies...$(RESET)"
-	@make -C $(LIBFT_DIR) clean
-	@$(RM) $(OBJS_DIR) $(DEP_DIR)
+# Regla para crear la biblioteca estática solo si es necesario
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
 
-# Regla de limpieza completa (incluye 'clean')
-fclean: clean
-	@echo "$(YELLOW)▶ Cleaning executable...$(RESET)"
-	@make -C $(LIBFT_DIR) fclean
-	@$(RM) $(NAME)
+$(MLX):
+	@$(MAKE) -C $(MLX_DIR)
 
-# Regla para reconstruir todo
-re: fclean all
+# Regla para compilar las bibliotecas externas solo si no existen
+subsystems: $(LIBFT) $(MLX)
+
+# Regla para crear el ejecutable
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx $(MLXFLAGS) -o $@
+	@echo " "
+	@echo "$(GREEN)▉▉▉▉▉▉▉▉▉▉ Cub3D successfully compiled! ▉▉▉▉▉▉▉▉▉▉ $(RESET)"
+	@echo " "
 
 # Incluye archivos de dependencias si existen
 -include $(DEPS)
