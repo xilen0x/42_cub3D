@@ -27,14 +27,6 @@ int	count_delimiters(const char *str)
 	return (count);
 }
 
-void	copy_substr(char **res, const char *str, int start, int end, int *index)
-{
-	res[*index] = p_malloc((end - start + 1) * sizeof(char));
-	ft_strncpy(res[*index], str + start, end - start);
-	res[*index][end - start] = '\0';
-	(*index)++;
-}
-
 void	fill_substrings(char **result, const char *str)
 {
 	int	start;
@@ -51,7 +43,12 @@ void	fill_substrings(char **result, const char *str)
 		if (str[end] == ' ' || str[end] == '\t' || str[end] == '\0')
 		{
 			if (end > start)
-				copy_substr(result, str, start, end, &index);
+			{
+				result[index] = p_malloc((end - start + 1) * sizeof(char));
+				ft_strncpy(result[index], str + start, end - start);
+				result[index][end - start] = '\0';
+				index++;
+			}
 			start = end + 1;
 		}
 		end++;

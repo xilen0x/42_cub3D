@@ -45,6 +45,7 @@ SRC_FILES = main.c \
 			parse/parse_elements/exist_path_colors2.c \
 			parse/parse_elements/remove_spaces_tabs.c \
 			parse/parse_elements/remove_spaces_tabs2.c \
+			parse/parse_elements/remove_spaces_tabs3.c \
 			parse/parse_elements/save_path.c \
 			parse/parse_elements/save_rgb.c \
 			parse/parse_map/create_list.c \
