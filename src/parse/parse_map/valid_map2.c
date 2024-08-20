@@ -70,15 +70,9 @@ int	first_row_is_all_ones(t_lmap *lm)
 	unsigned int	q_of_ones;
 	char			*line;
 
-	while (lm && (
-			(ft_strnstr2(lm->cont, "NO", ft_strlen(lm->cont)) != NULL) || \
-			(ft_strnstr2(lm->cont, "SO", ft_strlen(lm->cont)) != NULL) || \
-			(ft_strnstr2(lm->cont, "WE", ft_strlen(lm->cont)) != NULL) || \
-			(ft_strnstr2(lm->cont, "EA", ft_strlen(lm->cont)) != NULL) || \
-			(ft_strnstr2(lm->cont, "F", ft_strlen(lm->cont)) != NULL) || \
-			(ft_strnstr2(lm->cont, "C", ft_strlen(lm->cont)) != NULL) || \
-			(lm->cont[0] == '\0')))
-		lm = lm->next;
+	jump_elements(&lm);
+	if (!lm)
+		ft_errors("Invalid map.\n");
 	remove_newline_char(lm->cont);
 	line = ft_strtrim2(lm->cont, " ", "\t");
 	length_line = ft_strlen2(line);

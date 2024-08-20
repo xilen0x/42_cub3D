@@ -25,5 +25,10 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
+size_t	strchr_len(char *s, char c);
+size_t	str_len(char *s);
+char	*str_join(char *s1, char *s2);
+char	*sub_str(char *stack, unsigned int start, size_t len);
+void	my_free(char **str);
 
 #endif

@@ -12,52 +12,96 @@
 
 #include "get_next_line.h"
 
-char	*ft_strjoin3(char *s1, char const *s2, size_t len)
+void	my_free(char **str)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*join;
+	if (*str != NULL && str != NULL)
+	{
+		free(*str);
+		*str = NULL;
+	}
+}
 
-	if (!s1 || !s2)
-		return (0);
-	s1_len = ft_strlen(s1);
-	s2_len = len;
-	join = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!join)
-		return (0);
-	ft_strlcpy(join, s1, s1_len + 1);
-	ft_strlcpy((join + s1_len), s2, s2_len + 1);
-	free(s1);
-	return (join);
+static char	*fd_reader(int fd, char *stack)
+{
+	char	*buff;
+	int		bytes;
+
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+	{
+		my_free(&stack);
+		return (NULL);
+	}
+	buff[0] = '\0';
+	bytes = 1;
+	while (bytes > 0 && !(strchr_len(stack, '\n')))
+	{
+		bytes = read(fd, buff, BUFFER_SIZE);
+		if (bytes == -1 || (bytes == 0 && str_len(stack) == 0))
+			my_free(&stack);
+		if (bytes > 0)
+		{
+			buff[bytes] = '\0';
+			stack = str_join(stack, buff);
+		}
+	}
+	my_free(&buff);
+	return (stack);
+}
+
+static char	*str_extract(char *stack)
+{
+	char	*line;
+	size_t	len;
+
+	len = strchr_len(stack, '\n');
+	if (len > 0)
+	{
+		line = sub_str(stack, 0, len);
+		return (line);
+	}
+	line = str_join(NULL, stack);
+	return (line);
+}
+
+static char	*clean_stack(char *stack)
+{
+	char	*new_stack;
+	size_t	start;
+
+	start = strchr_len(stack, '\n');
+	if (start > 0)
+	{
+		new_stack = sub_str(stack, start, str_len(stack));
+		my_free(&stack);
+		stack = NULL;
+		if (str_len(new_stack) == 0)
+			my_free(&new_stack);
+		return (new_stack);
+	}
+	return (stack);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buf[BUFFER_SIZE + 1];
+	static char	*stack = NULL;
 	char		*line;
-	char		*newline;
-	int			bytes_read;
-	int			to_copy;
 
-	line = ft_strdup(buf);
-	while (!(ft_strchr(line, '\n')) && (bytes_read = read(fd, buf, BUFFER_SIZE)) > 0)
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		buf[bytes_read] = '\0';
-		line = ft_strjoin3(line, buf, bytes_read);
+		my_free(&stack);
+		return (NULL);
 	}
-	if (ft_strlen(line) == 0)
-		return (free(line), NULL);
-	newline = ft_strchr(line, '\n');
-	if (newline != NULL)
+	stack = fd_reader(fd, stack);
+	if (stack == NULL)
+		return (NULL);
+	line = str_extract(stack);
+	if (!strchr_len(line, '\n'))
 	{
-		to_copy = newline - line + 1;
-		ft_strlcpy(buf, newline + 1, BUFFER_SIZE + 1);
+		my_free(&stack);
+		return (line);
 	}
-	else
-	{
-		to_copy = ft_strlen(line);
-		ft_strlcpy(buf, "", BUFFER_SIZE + 1);
-	}
-	line[to_copy] = '\0';
+	stack = clean_stack(stack);
 	return (line);
 }

@@ -62,6 +62,17 @@ typedef struct s_colors
 	int		c_color[3];
 }	t_colors;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_game;
+
 /* ====================== PARSING ====================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap);

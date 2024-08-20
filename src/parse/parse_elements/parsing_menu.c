@@ -68,7 +68,7 @@ void	parsing_map(t_map *map, t_lmap **lmap)
 	if (first_row_is_all_ones(*lmap) == 1)
 		ft_errors("Invalid map. The row 1 is not all 1\n");
 	if (rows_are_all_ones(*lmap) == 1)
-		ft_errors("Invalid map. One or more rows are open\n");
+		ft_errors("Invalid map.\n");
 	if (is_square_map(*lmap) == 1)
 		create_matrix(map, *lmap);
 	else
