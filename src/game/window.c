@@ -76,3 +76,29 @@
 // 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, game->h * TILE_PXL, "cub3D");
 // 	//ft_printf("W: %d\n H: %d", game->w, game->h);
 // }
+
+int	exit_game(t_map *map)
+{
+	write (1, "####################\n", 21);
+	write (1, "     End Game!\n", 15);
+	write (1, "####################\n", 21);
+	mlx_destroy_window(map->mlx, map->mlx_win);
+	free(map->mlx);
+	exit(0);
+}
+
+void	init_game(t_map *map)
+{
+	map->mlx = mlx_init();
+	if (!map->mlx)
+		ft_errors("Error initializing mlx\n");
+	map->mlx_win = mlx_new_window(map->mlx, WIDTH, HEIGHT, "cub3D");
+}
+
+int	press_key(int keycode, t_map *map)
+{
+	ft_printf("keycode: %d\n", keycode);
+	if (keycode == KEY_ESC)
+		exit_game(map);
+	return (0);
+}

@@ -25,8 +25,6 @@
 /* ====================== MACROS ====================== */
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
-# define WIDTH 2560
-# define HEIGHT 1440
 
 /* ====================== STRUCTURES ====================== */
 typedef struct s_map
@@ -37,7 +35,7 @@ typedef struct s_map
 	int				x;
 	int				y;
 	char			**matrix;
-		void	*mlx;
+	void	*mlx;
 	void	*mlx_win;
 }	t_map;
 
@@ -76,6 +74,12 @@ typedef struct s_colors
 // 	// int		line_length;
 // 	// int		endian;
 // }	t_game;
+
+
+/* ====================== GAME ====================== */
+void	init_game(t_map *map);
+int		exit_game(t_map *map);
+int		press_key(int keycode, t_map *map);
 
 /* ====================== PARSING ====================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
@@ -137,6 +141,5 @@ void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map *map);
 void	print_width_height(t_map *map);
 
-/* ====================== GAME ====================== */
 
 #endif

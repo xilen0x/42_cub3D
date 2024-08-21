@@ -9,7 +9,7 @@ ifeq ($(UNAME_S), Darwin)
     MLXFLAGS = -Imlx -Lmlx -lmlx -framework OpenGL -framework AppKit
 else
     # Opciones específicas para Linux
-    MLXFLAGS = -I/usr/include -L/usr/lib -lXext -lX11 -lm -lbsd
+    MLXFLAGS = -I/usr/include -L/usr/lib -lXext -lX11 -lm -lbsd -lmlx
 endif
 
 # Compilador y FLAGS
@@ -58,7 +58,8 @@ SRC_FILES = main.c \
 			parse/parse_map/valid_map.c \
 			parse/parse_map/valid_map2.c \
             parse/errors_and_free/errors_msgs.c \
-			parse/errors_and_free/free_functions.c
+			parse/errors_and_free/free_functions.c \
+			game/window.c
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)
