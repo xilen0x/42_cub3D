@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* ====================== LIBRARIES ====================== */
+/* =============================== LIBRARIES =============================== */
 # include "mlx.h"
 # include "window.h"
 # include "libft.h"
@@ -22,11 +22,11 @@
 # include <fcntl.h>
 # include <stdint.h>
 
-/* ====================== MACROS ====================== */
+/* ===============================   MACROS  =============================== */
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
 
-/* ====================== STRUCTURES ====================== */
+/* =============================== STRUCTURES =============================== */
 typedef struct s_map
 {
 	int				map_fd;
@@ -35,8 +35,8 @@ typedef struct s_map
 	int				x;
 	int				y;
 	char			**matrix;
-	void	*mlx;
-	void	*mlx_win;
+	void			*mlx;
+	void			*mlx_win;
 }	t_map;
 
 typedef struct s_list_x_map
@@ -64,24 +64,12 @@ typedef struct s_colors
 	int		c_color[3];
 }	t_colors;
 
-// typedef struct s_game
-// {
-// 	void	*mlx;
-// 	void	*mlx_win;
-// 	// void	*img;
-// 	// char	*addr;
-// 	// int		bits_per_pixel;
-// 	// int		line_length;
-// 	// int		endian;
-// }	t_game;
-
-
-/* ====================== GAME ====================== */
+/* ===============================  GAME  =============================== */
 void	init_game(t_map *map);
 int		exit_game(t_map *map);
 int		press_key(int keycode, t_map *map);
 
-/* ====================== PARSING ====================== */
+/* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap);
 int		file_is_cub(char *av);
@@ -132,7 +120,7 @@ int		rows_are_all_ones(t_lmap *lm);
 size_t	ft_strlen2(const char *s);
 void	*p_malloc(size_t size);
 void	jump_elements(t_lmap **lm);
-/* ------------- MATRIX ------------- */
+		/* ------------------ MATRIX ------------------ */
 void	valid_map(t_map *map);
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	spaces_to_ones(t_map *map);

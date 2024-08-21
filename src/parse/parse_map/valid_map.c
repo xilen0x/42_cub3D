@@ -64,55 +64,41 @@ int	only_characters_allowed(t_map	*map)
 	return (0);
 }
 
+void	save_player_position(t_map *map, int *count, int *x, int *y)
+{
+	if (map->matrix[*y][*x] == 'N' || map->matrix[*y][*x] == 'S' || \
+			map->matrix[*y][*x] == 'E' || map->matrix[*y][*x] == 'W')
+	{
+		(*count)++;
+		map->y = *y;
+		map->x = *x;
+	}
+}
+
 int	is_one_player(t_map *map)
 {
 	int	count;
+	int	x;
+	int	y;
+
 
 	count = 0;
-	map->y = 0;
+	y = 0;
 	while (map->matrix[map->y])
 	{
-		map->x = 0;
-		while (map->matrix[map->y][map->x])
+		x = 0;
+		while (map->matrix[y][x])
 		{
-			if (map->matrix[map->y][map->x] == 'N' ||
-				map->matrix[map->y][map->x] == 'S' ||
-				map->matrix[map->y][map->x] == 'E' ||
-				map->matrix[map->y][map->x] == 'W')
-				count++;
-			map->x++;
+			save_player_position(map, &count, &x, &y);
+			x++;
 		}
-		if ((map->y + 1) < map->h)
-			map->y++;
+		if ((y + 1) < map->h)
+			y++;
 		else
 			break ;
 	}
 	if (count != 1)
 		return (1);
-	return (0);
-}
-
-/*Check if there is any space around the 0*/
-int	any_zero_or_space(t_map *map)
-{
-	while (map->matrix[map->y])
-	{
-		map->x = 0;
-		while (map->matrix[map->y][map->x])
-		{
-			if ((map->matrix[map->y][map->x] == '0') &&
-				((map->matrix[map->y - 1][map->x] == ' ') ||
-				(map->matrix[map->y + 1][map->x] == ' ') ||
-				(map->matrix[map->y][map->x - 1] == ' ') ||
-				(map->matrix[map->y][map->x + 1] == ' ')))
-				return (1);
-			map->x++;
-		}
-		if ((map->y + 1) < map->h)
-			map->y++;
-		else
-			break ;
-	}
 	return (0);
 }
 
