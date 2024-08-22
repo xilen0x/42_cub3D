@@ -12,23 +12,26 @@
 
 #include "cub3d.h"
 
+//*Descripción: Funcion que compueba si el mapa es jugable
 int	its_playable(t_map	*map)
 {
 	int	count;
+	int	x;
+	int	y;
 
 	count = 0;
-	map->y = 0;
-	while (map->matrix[map->y])
+	y = 0;
+	while (map->matrix[y])
 	{
-		map->x = 0;
-		while (map->matrix[map->y][map->x])
+		x = 0;
+		while (map->matrix[y][x])
 		{
-			if (map->matrix[map->y][map->x] == '1')
+			if (map->matrix[y][x] == '1')
 				count++;
-			map->x++;
+			x++;
 		}
-		if ((map->y + 1) < map->h)
-			map->y++;
+		if ((y + 1) < map->h)
+			y++;
 		else
 			break ;
 	}
@@ -37,27 +40,31 @@ int	its_playable(t_map	*map)
 	return (0);
 }
 
+/*Verifica si solo existen caracteres permitidos*/
 int	only_characters_allowed(t_map	*map)
 {
-	map->y = 0;
-	while (map->matrix[map->y])
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map->matrix[y])
 	{
-		map->x = 0;
-		while (map->matrix[map->y][map->x])
+		x = 0;
+		while (map->matrix[y][x])
 		{
-			if (map->matrix[map->y][map->x] != ' ' &&
-				map->matrix[map->y][map->x] != '0' &&
-				map->matrix[map->y][map->x] != '1' &&
-				map->matrix[map->y][map->x] != 'N' &&
-				map->matrix[map->y][map->x] != 'S' &&
-				map->matrix[map->y][map->x] != 'E' &&
-				map->matrix[map->y][map->x] != 'W' &&
-				map->matrix[map->y][map->x] != '\t')
+			if (map->matrix[y][x] != ' ' &&
+				map->matrix[y][x] != '0' &&
+				map->matrix[y][x] != '1' &&
+				map->matrix[y][x] != 'N' &&
+				map->matrix[y][x] != 'S' &&
+				map->matrix[y][x] != 'E' &&
+				map->matrix[y][x] != 'W' &&
+				map->matrix[y][x] != '\t')
 				return (1);
-			map->x++;
+			x++;
 		}
-		if ((map->y + 1) < map->h)
-			map->y++;
+		if ((y + 1) < map->h)
+			y++;
 		else
 			break ;
 	}

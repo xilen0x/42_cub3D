@@ -30,11 +30,11 @@
 typedef struct s_map
 {
 	int				map_fd;
-	int				w;
-	int				h;
-	int				x;
-	int				y;
-	char			**matrix;
+	int				w;//ancho del mapa
+	int				h;//alto del mapa
+	int				x;//posicion x del jugador
+	int				y;//posicion y del jugador
+	char			**matrix;//matriz donde se guarda el mapa
 	void			*mlx;
 	void			*mlx_win;
 }	t_map;
@@ -47,21 +47,20 @@ typedef struct s_list_x_map
 
 typedef struct s_elem
 {
-	char	all_elem_found;
-	char	*no_path;
-	char	*so_path;
-	char	*ea_path;
-	char	*we_path;
+	char	*no_path;//path que almacena la ruta de la textura NO
+	char	*so_path;//path que almacena la ruta de la textura SO
+	char	*ea_path;//path que almacena la ruta de la textura EA
+	char	*we_path;//path que almacena la ruta de la textura WE
 	char	**av;
 	char	*line;
 }	t_elem;
 
 typedef struct s_colors
 {
-	int		f;
-	int		c;
-	int		f_color[3];
-	int		c_color[3];
+	int		f;//int para saber si se ha encontrado F (1)
+	int		c;//int para saber si se ha encontrado C (2)
+	int		f_color[3];//array para guardar los valores de F
+	int		c_color[3];//array para guardar los valores de C
 }	t_colors;
 
 /* ===============================  GAME  =============================== */

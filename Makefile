@@ -59,7 +59,8 @@ SRC_FILES = main.c \
 			parse/parse_map/valid_map2.c \
             parse/errors_and_free/errors_msgs.c \
 			parse/errors_and_free/free_functions.c \
-			game/window.c
+			game/window.c \
+			game/utils_windows.c
 
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)

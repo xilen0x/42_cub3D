@@ -1,5 +1,8 @@
 {
 	"files.associations": {
 		"cub3d.h": "c"
+	},
+	"terminal.integrated.automationProfile.linux": {
+		
 	}
 }
