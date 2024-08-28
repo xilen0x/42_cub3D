@@ -69,6 +69,7 @@ void	init_game(t_map *map);
 int		exit_game(t_map *map);
 int		press_key(int keycode, t_map *map);
 void	set_images(t_map *map);
+
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap);

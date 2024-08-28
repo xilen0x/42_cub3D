@@ -35,54 +35,129 @@ void	set_images(t_map *map)
 	set_images_to_win(map);
 }
 
-// void	set_player(t_game *g, int y, int x, char dir)
-// {
-// 	if (dir == 'w')
-// 		mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.player.player_up, y * 32, x * 32);
-// 	if (dir == 'a')
-// 		mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.player.player_left, y * 32, x * 32);
-// 	if (dir == 's')
-// 		mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.player.player_down, y * 32, x * 32);
-// 	if (dir == 'd')
-// 		mlx_put_image_to_window(g->mlx, g->mlx_win, g->imgs.player.player_right, y * 32, x * 32);
-// }
 
-
-void	move_up(t_map *map)
+void	move_up(t_map *map, char op)
 {
-	(void)map;
-	ft_printf("Move up\n");
+	int	y;
+	int	x;
+
+	y = map->y;
+	x = map->x;
+	if (map->matrix[y - 1][x] >= 0 && map->matrix[y - 1][x] != '1')
+	{
+		if (map->matrix[y - 1][x] != '1')
+		{
+			map->matrix[y][x] = '0';
+			map->y--;
+			y = map->y;
+			if (op == 'N')
+				map->matrix[y][x] = 'N';
+			else if (op == 'S')
+				map->matrix[y][x] = 'S';
+			else if (op == 'E')
+				map->matrix[y][x] = 'E';
+			else if (op == 'W')
+				map->matrix[y][x] = 'W';
+			set_images_to_win(map);
+		}
+	}
 }
 
-void	move_down(t_map *map)
+void	move_down(t_map *map, char op)
 {
-	(void)map;
-	ft_printf("Move down\n");
+	int	y;
+	int	x;
+
+	y = map->y;
+	x = map->x;
+	if (map->matrix[y + 1][x] >= 0 && map->matrix[y + 1][x] != '1')
+	{
+		if (map->matrix[y + 1][x] != '1')
+		{
+			map->matrix[y][x] = '0';
+			map->y++;
+			y = map->y;
+			if (op == 'N')
+				map->matrix[y][x] = 'N';
+			else if (op == 'S')
+				map->matrix[y][x] = 'S';
+			else if (op == 'E')
+				map->matrix[y][x] = 'E';
+			else if (op == 'W')
+				map->matrix[y][x] = 'W';
+			set_images_to_win(map);
+		}
+	}
 }
 
-void	move_left(t_map *map)
+void	move_left(t_map *map, char op)
 {
-	(void)map;
-	ft_printf("Move left\n");
+	int	y;
+	int	x;
+
+	y = map->y;
+	x = map->x;
+	if (map->matrix[y][x - 1] >= 0 && map->matrix[y][x - 1] != '1')
+	{
+		if (map->matrix[y][x - 1] != '1')
+		{
+			map->matrix[y][x] = '0';
+			map->x--;
+			x = map->x;
+			if (op == 'N')
+				map->matrix[y][x] = 'N';
+			else if (op == 'S')
+				map->matrix[y][x] = 'S';
+			else if (op == 'E')
+				map->matrix[y][x] = 'E';
+			else if (op == 'W')
+				map->matrix[y][x] = 'W';
+			set_images_to_win(map);
+		}
+	}
 }
 
-void	move_right(t_map *map)
+void	move_right(t_map *map, char op)
 {
-	(void)map;
-	ft_printf("Move right\n");
+	int	y;
+	int	x;
+
+	y = map->y;
+	x = map->x;
+	if (map->matrix[y][x + 1] >= 0 && map->matrix[y][x + 1] != '1')
+	{
+		if (map->matrix[y][x + 1] != '1')
+		{
+			map->matrix[y][x] = '0';
+			map->x++;
+			x = map->x;
+			if (op == 'N')
+				map->matrix[y][x] = 'N';
+			else if (op == 'S')
+				map->matrix[y][x] = 'S';
+			else if (op == 'E')
+				map->matrix[y][x] = 'E';
+			else if (op == 'W')
+				map->matrix[y][x] = 'W';
+			set_images_to_win(map);
+		}
+	}
 }
 
 int	press_key(int keycode, t_map *map)
 {
+	char	op;
+
+	op = map->matrix[map->y][map->x];
 	if (keycode == KEY_ESC)
 		exit_game(map);
 	if (keycode == KEY_W || keycode == KEY_UP)
-		move_up(map);
+		move_up(map, op);
 	if (keycode == KEY_S || keycode == KEY_DOWN)
-		move_down(map);
+		move_down(map, op);
 	if (keycode == KEY_A || keycode == KEY_LEFT)
-		move_left(map);
+		move_left(map, op);
 	if (keycode == KEY_D || keycode == KEY_RIGHT)
-		move_right(map);
+		move_right(map, op);
 	return (0);
 }
