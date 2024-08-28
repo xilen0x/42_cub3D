@@ -23,6 +23,16 @@
 # define KEY_RIGHT				65363
 // # define TILE_PXL 				
 
+typedef struct s_img
+{
+	void		*wall;
+	void		*floor;
+	void		*player;
+	// t_player	player;
+	int			w;
+	int			h;
+	// void		*img_ptr;
+}	t_img;
 
 
 #endif

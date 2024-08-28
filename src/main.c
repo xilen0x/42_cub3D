@@ -27,7 +27,7 @@ int	main(int ac, char *av[])
 		init_values(&elem, &colors, &map, av);
 		parsing(&elem, &colors, &map, &lmap);
 		init_game(&map);
-		// set_images(&game);
+		set_images(&map);
 		mlx_hook(map.mlx_win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &map);
 		mlx_hook(map.mlx_win, X_EVENT_KEY_EXIT, 0, &exit_game, &map);
 		// ft_printf("\nAnchura mapa(w): %d\n", map.w);
