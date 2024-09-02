@@ -52,8 +52,7 @@ int	only_characters_allowed(t_map	*map)
 		x = 0;
 		while (map->matrix[y][x])
 		{
-			if (map->matrix[y][x] != ' ' &&
-				map->matrix[y][x] != '0' &&
+			if (map->matrix[y][x] != ' ' && map->matrix[y][x] != '0' && \
 				map->matrix[y][x] != '1' &&
 				map->matrix[y][x] != 'N' &&
 				map->matrix[y][x] != 'S' &&

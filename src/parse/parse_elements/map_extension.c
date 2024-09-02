@@ -15,17 +15,27 @@
 /*Funcion que verifica la extension .cub del fichero*/
 int	file_is_cub(char *av)
 {
-	int	len;
+	int		len;
+	char	**tmp;
 
-	len = ft_strlen(av);
-	if (ft_strncmp(&av[len - 4], ".cub", 4) == 0)
-		return (0);
-	else
+	tmp = ft_split(av, '/');
+	len = ft_strlen(tmp[2]);
+	if (len < 5)
 	{
 		write (2, "Error\n", 6);
-		write (2, "The file does not have a .cub extension.\n", 41);
+		write (2, "The file does not have a name!\n", 31);
+		free_elements(tmp);
 		exit(1);
 	}
+	len = ft_strlen(av);
+	if (ft_strncmp(&av[len - 4], ".cub", 4) == 0)
+	{
+		free_elements(tmp);
+		return (0);
+	}
+	else
+		ft_errors("The file is not a .cub file\n");
+	free_elements(tmp);
 	return (0);
 }
 

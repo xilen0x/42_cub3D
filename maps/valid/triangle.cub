@@ -1,18 +1,14 @@
-	C 135,  206,235 	
-F    116, 	212,	52
 WE ./textures/green.xpm
-SO            ./textures/red.xpm
+SO       		./textures/red.xpm
 EA 				    ./textures/yellow.xpm
-          	NO ./textures/blue.xpm
+       	NO ./textures/blue.xpm
+		
+C            135,  206,235 	
+F    116, 	255,	52
   	
 	
 	
 	
-
-
-
-
-
 
 
 
@@ -30,3 +26,8 @@ EA 				    ./textures/yellow.xpm
          101101
           1001
            11
+
+
+
+
+
