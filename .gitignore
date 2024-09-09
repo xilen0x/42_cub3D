@@ -1,10 +1,11 @@
 cub3D
 lib/libft/libft.a
 lib/libft/obj/
-lib/MLX42/
+lib/mlx/
 objs/*.o
 objs/*.d
 .dep/
 .objs/
 menu
-docs
+docs/
+maps/

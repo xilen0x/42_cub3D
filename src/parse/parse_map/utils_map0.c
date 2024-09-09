@@ -58,3 +58,30 @@ int	any_zero_or_space(t_map *map)
 	}
 	return (0);
 }
+
+int	space_exist_next_to_0(t_map *m)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (m->matrix[y])
+	{
+		x = 0;
+		while (m->matrix[y][x])
+		{
+			if (m->matrix[y][x] == '0')
+			{
+				if (m->matrix[y][x + 1] == ' ' || m->matrix[y][x - 1] == ' ' || \
+					m->matrix[y + 1][x] == ' ' || m->matrix[y - 1][x] == ' ')
+					return (1);
+			}
+			x++;
+		}
+		if ((y + 1) < m->h)
+			y++;
+		else
+			break ;
+	}
+	return (0);
+}

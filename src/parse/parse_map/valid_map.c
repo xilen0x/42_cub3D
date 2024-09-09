@@ -52,7 +52,7 @@ int	only_characters_allowed(t_map	*map)
 		x = 0;
 		while (map->matrix[y][x])
 		{
-			if (map->matrix[y][x] != ' ' && map->matrix[y][x] != '0' && \
+			if (map->matrix[y][x] != '0' && \
 				map->matrix[y][x] != '1' &&
 				map->matrix[y][x] != 'N' &&
 				map->matrix[y][x] != 'S' &&
@@ -110,11 +110,13 @@ int	is_one_player(t_map *map)
 
 void	valid_map(t_map *map)
 {
+	if (space_exist_next_to_0(map) == 1)
+		ft_errors("Invalid map, there are spaces next to 0\n");
 	spaces_to_ones(map);
-	if (is_one_player(map) == 1)
-		ft_errors("Invalid map, there must be only one player\n");
 	if (only_characters_allowed(map) == 1)
 		ft_errors("Invalid map, characters not allowed were found\n");
+	if (is_one_player(map) == 1)
+		ft_errors("Invalid map, there must be only one player\n");
 	if (its_playable(map) == 1)
 		ft_errors("Invalid map. The map is not playable\n");
 }
