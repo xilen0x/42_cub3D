@@ -110,6 +110,7 @@ int	is_one_player(t_map *map)
 
 void	valid_map(t_map *map)
 {
+	print_matrix(map);
 	if (space_exist_next_to_0(map) == 1)
 		ft_errors("Invalid map, there are spaces next to 0\n");
 	spaces_to_ones(map);

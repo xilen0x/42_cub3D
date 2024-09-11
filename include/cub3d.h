@@ -129,6 +129,7 @@ void	create_matrix_irregular(t_map *map, t_lmap *lm);
 void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map *map);
 void	print_width_height(t_map *map);
+int		space_exist_next_to_0(t_map *m);
 
 
 #endif

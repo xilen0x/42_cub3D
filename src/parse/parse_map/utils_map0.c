@@ -82,6 +82,7 @@ int	space_exist_next_to_0(t_map *m)
 			y++;
 		else
 			break ;
+		y++;
 	}
 	return (0);
 }
