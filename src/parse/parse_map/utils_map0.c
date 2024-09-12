@@ -75,6 +75,9 @@ int	space_exist_next_to_0(t_map *m)
 				if (m->matrix[y][x + 1] == ' ' || m->matrix[y][x - 1] == ' ' || \
 					m->matrix[y + 1][x] == ' ' || m->matrix[y - 1][x] == ' ')
 					return (1);
+				if (m->matrix[y][x + 1] == '\t' || m->matrix[y][x - 1] == '\t' || \
+					m->matrix[y + 1][x] == '\t' || m->matrix[y - 1][x] == '\t')
+					return (1);
 			}
 			x++;
 		}
