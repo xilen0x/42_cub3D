@@ -36,7 +36,12 @@ void	remove_final_spaces_tabs(char *str)
 {
 	int	i;
 
+	i = 0;
+	if (str[i] == '\n')
+		return ;
 	i = ft_strlen(str) - 2;
+	if (i <= 0)
+		return ;
 	while (str[i] == ' ' || str[i] == '\t')
 	{
 		str[i] = '\0';

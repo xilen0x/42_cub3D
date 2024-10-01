@@ -93,7 +93,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
-	remove_empty_lines(*lmap);
+	// remove_empty_lines(*lmap);
 	parse_elems(elem, *lmap, colors);
 	parsing_map(map, lmap);
 }

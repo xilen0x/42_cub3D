@@ -20,12 +20,12 @@ void	create_list(t_map *map, t_lmap **lmap)
 	line = get_next_line(map->map_fd);
 	while (line)
 	{
-		if (line[0] == '\n')
-		{
-			free(line);
-			line = get_next_line(map->map_fd);
-			continue ;
-		}
+		// if (line[0] == '\n')
+		// {
+		// 	free(line);
+		// 	line = get_next_line(map->map_fd);
+		// 	continue ;
+		// }
 		node = p_malloc(sizeof(t_lmap));
 		node->cont = line;
 		node->next = NULL;

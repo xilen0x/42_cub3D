@@ -65,7 +65,7 @@ int	space_exist_next_to_0(t_map *m)
 	int	y;
 
 	y = 0;
-	while (m->matrix[y])
+	while (y < m->h && m->matrix[y])
 	{
 		x = 0;
 		while (m->matrix[y][x])
