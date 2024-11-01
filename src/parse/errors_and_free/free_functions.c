@@ -71,3 +71,23 @@ void	free_data2(char **line, char **colors)
 	free_elements(line);
 	free_elements(colors);
 }
+
+void	printMap(t_game *g)
+{
+	int i = 0;
+	int j = 0;
+	int k = 0;
+
+	while (i < g->map.mapH)
+	{
+		j = 0;
+		while (j < g->map.mapW)
+		{
+			ft_printf("%c", g->map.map[k]);
+			k++;
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+}

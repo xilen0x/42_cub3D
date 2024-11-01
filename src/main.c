@@ -32,7 +32,9 @@ int	main(int argc, char *argv[])
 		elem.av = argv;
 		init_values(&elem, &colors, &map_parse, elem.av);
 		parsing(&elem, &colors, &map_parse, &lmap);
-
+		
+		load_map(&g, &map_parse);
+		
 		g.map.mapH = 8;	// map height in tiles
 		g.map.mapW = 8;	// map width in tiles
 

@@ -62,6 +62,34 @@ static void	hub_elements(t_lmap *lmap, t_colors *colors)
 		lmap = lmap->next;
 	}
 }
+// Copia la cadena de caracteres de la matriz al string map->map
+void	load_map(t_game *g, t_map_parse *map)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	k = 0;
+	// g->map.mapH = map->h;
+	// g->map.mapW = map->w;
+	g->map.map = (char *)p_malloc(sizeof(char) * (map->h * map->w + 1));
+	//  = (char *)p_malloc(sizeof(char) * (map->mapH * map->mapW + 1));
+	while (i < map->h)
+	{
+		j = 0;
+		while (j < map->w)
+		{
+			g->map.map[k] = map->matrix[i][j];
+			j++;
+			k++;
+		}
+		i++;
+	}
+	g->map.map[k] = '\0';
+	ft_printf("**********String Map**********\n");//borrar luego
+	printMap(g);//borrar luego
+}
 
 void	parsing_map(t_map_parse *map, t_lmap **lmap)
 {

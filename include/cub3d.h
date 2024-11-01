@@ -239,6 +239,6 @@ void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map_parse *map);
 void	print_width_height(t_map_parse *map);
 int		space_exist_next_to_0(t_map_parse *m);
-
-
+void	load_map(t_game *g, t_map_parse *map);
+void	printMap(t_game *g);
 #endif
