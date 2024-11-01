@@ -63,7 +63,7 @@ static void	hub_elements(t_lmap *lmap, t_colors *colors)
 	}
 }
 
-void	parsing_map(t_map *map, t_lmap **lmap)
+void	parsing_map(t_map_parse *map, t_lmap **lmap)
 {
 	if (first_row_is_all_ones(*lmap) == 1)
 		ft_errors("Invalid map. The row 1 is not all 1\n");
@@ -88,7 +88,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 }
 
 /******************************Menu parsing*******************************/
-void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap)
+void	parsing(t_elem *elem, t_colors *colors, t_map_parse *map, t_lmap **lmap)
 {
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);

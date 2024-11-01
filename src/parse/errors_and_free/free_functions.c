@@ -53,7 +53,7 @@ void	free_elements(char **double_pointer)
 }
 
 /*funcion que imprime la matriz*/
-void	print_matrix(t_map *map)
+void	print_matrix(t_map_parse *map)
 {
 	int	i;
 

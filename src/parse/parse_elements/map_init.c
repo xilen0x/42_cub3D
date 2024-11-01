@@ -37,7 +37,7 @@ static void	init_colors_values(t_colors *colors)
 }
 
 /*Inicialización de valores estructura t_map*/
-static void	init_map_values(t_map *map)
+static void	init_map_values(t_map_parse *map)
 {
 	map->map_fd = 0;
 	map->w = 0;
@@ -46,21 +46,11 @@ static void	init_map_values(t_map *map)
 	map->y = 0;
 	map->matrix = NULL;
 }
-void	init_img_values(t_img *imgs)
-{
-	imgs->wall = NULL;
-	imgs->floor = NULL;
-	imgs->player = NULL;
-	imgs->w = 0;
-	imgs->h = 0;
-	// imgs->img_ptr = NULL;
-}
 
 /*Inicializacion de valores*/
-void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[])
+void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map_parse, char *av[])
 {
 	init_elem_values(elem, av);
 	init_colors_values(colors);
-	init_map_values(map);
-	init_img_values(&map->imgs);
+	init_map_values(map_parse);
 }

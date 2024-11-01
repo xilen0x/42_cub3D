@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 /*Funcion que abre el mapa en modo lectura y almacena su fd en map_fd*/
-int	open_map(char *av, t_map *map)
+int	open_map(char *av, t_map_parse *map)
 {
 	map->map_fd = open(av, O_RDONLY);
 	if (map->map_fd == -1)
@@ -22,11 +22,11 @@ int	open_map(char *av, t_map *map)
 }
 
 /*funcion que imprime ancho y largo del fichero*/
-void	print_width_height(t_map *map)
-{
-	ft_printf("Width: %d\n", map->w);
-	ft_printf("Height: %d\n", map->h);
-}
+// void	print_width_height(t_map_parse *map)
+// {
+// 	ft_printf("Width: %d\n", map->w);
+// 	ft_printf("Height: %d\n", map->h);
+// }
 
 /* F. que verifica si un carácter está presente en un conjunto de caracteres.*/
 static int	ft_isset2(char c, const char *set)

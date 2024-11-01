@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	spaces_to_ones(t_map *map)
+void	spaces_to_ones(t_map_parse *map)
 {
 	int		i;
 	int		j;
@@ -32,7 +32,7 @@ void	spaces_to_ones(t_map *map)
 }
 
 /*Check if there is any space around the 0*/
-int	any_zero_or_space(t_map *map)
+int	any_zero_or_space(t_map_parse *map)
 {
 	int		x;
 	int		y;
@@ -59,7 +59,7 @@ int	any_zero_or_space(t_map *map)
 	return (0);
 }
 
-int	space_exist_next_to_0(t_map *m)
+int	space_exist_next_to_0(t_map_parse *m)
 {
 	int	x;
 	int	y;

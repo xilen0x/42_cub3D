@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 //*Descripción: Funcion que compueba si el mapa es jugable
-int	its_playable(t_map	*map)
+int	its_playable(t_map_parse	*map)
 {
 	int	count;
 	int	x;
@@ -41,7 +41,7 @@ int	its_playable(t_map	*map)
 }
 
 /*Verifica si solo existen caracteres permitidos*/
-int	only_characters_allowed(t_map	*map)
+int	only_characters_allowed(t_map_parse	*map)
 {
 	int	x;
 	int	y;
@@ -70,7 +70,7 @@ int	only_characters_allowed(t_map	*map)
 	return (0);
 }
 
-void	save_player_position(t_map *map, int *count, int *x, int *y)
+void	save_player_position(t_map_parse *map, int *count, int *x, int *y)
 {
 	if (map->matrix[*y][*x] == 'N' || map->matrix[*y][*x] == 'S' || \
 			map->matrix[*y][*x] == 'E' || map->matrix[*y][*x] == 'W')
@@ -81,7 +81,7 @@ void	save_player_position(t_map *map, int *count, int *x, int *y)
 	}
 }
 
-int	is_one_player(t_map *map)
+int	is_one_player(t_map_parse *map)
 {
 	int	count;
 	int	x;
@@ -108,7 +108,7 @@ int	is_one_player(t_map *map)
 	return (0);
 }
 
-void	valid_map(t_map *map)
+void	valid_map(t_map_parse *map)
 {
 	print_matrix(map);
 	if (space_exist_next_to_0(map) == 1)

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	create_list(t_map *map, t_lmap **lmap)
+void	create_list(t_map_parse *map, t_lmap **lmap)
 {
 	char	*line;
 	t_lmap	*node;

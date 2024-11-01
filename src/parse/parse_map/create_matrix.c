@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 /* Funcion que reserva memoria y rellena con ' ' */
-void	space_malloc(size_t rows, size_t cols, t_map *map)
+void	space_malloc(size_t rows, size_t cols, t_map_parse *map)
 {
 	size_t	i;
 
@@ -57,7 +57,7 @@ char	*ft_strnstr2(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-void	create_matrix_irregular(t_map *map, t_lmap *lm)
+void	create_matrix_irregular(t_map_parse *map, t_lmap *lm)
 {
 	int		i;
 	size_t	max_line;
@@ -87,7 +87,7 @@ void	create_matrix_irregular(t_map *map, t_lmap *lm)
 }
 
 /* Funcion que crea la matriz a partir de la lista*/
-void	create_matrix(t_map *map, t_lmap *lm)
+void	create_matrix(t_map_parse *map, t_lmap *lm)
 {
 	int		i;
 	size_t	max_line;
