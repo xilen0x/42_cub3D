@@ -29,7 +29,7 @@ int	check_start_and_end_ones(char *line)
 		start = 1;
 	while (line[i] != '\0')
 		i++;
-	if (line[i - 1] == '1')
+	if (i > 0 && line[i - 1] == '1')
 		end = 1;
 	return (start && end);
 }

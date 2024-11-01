@@ -58,6 +58,7 @@ void	print_matrix(t_map *map)
 	int	i;
 
 	i = 0;
+	ft_printf("\n");
 	while (i < map->h)
 	{
 		ft_printf("%s\n", map->matrix[i]);
