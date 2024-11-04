@@ -51,7 +51,37 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 	}
 }
 
-int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
+void	save_colors(t_colors *colors, char **elements, int i)
+{
+	while (elements[i] && ((ft_strncmp(elements[i], "F", 1) == 0) || (ft_strncmp(elements[i], "C", 1) == 0)))
+	{
+		if (ft_strlen(elements[i]) == 1)
+		{
+			if (ft_strncmp(elements[i], "F", 1) == 0)
+			{
+				colors->f = 1;
+				colors->f_color[0] = ft_atoi(elements[i + 1]); // Rojo
+				colors->f_color[1] = ft_atoi(elements[i + 2]); // Verde
+				colors->f_color[2] = ft_atoi(elements[i + 3]); // Azul
+				colors->f_color_hex = (colors->f_color[0] << 16) | (colors->f_color[1] << 8) | colors->f_color[2];
+			}
+			else if (ft_strncmp(elements[i], "C", 1) == 0)
+			{
+				colors->c = 2;
+				colors->c_color[0] = ft_atoi(elements[i + 1]); // Rojo
+				colors->c_color[1] = ft_atoi(elements[i + 2]); // Verde
+				colors->c_color[2] = ft_atoi(elements[i + 3]); // Azul
+				colors->c_color_hex = (colors->c_color[0] << 16) | (colors->c_color[1] << 8) | colors->c_color[2];
+			}
+			i += 4; // Salta F/C y sus tres valores RGB
+		}
+		else
+            i++; // Solo avanza si no se encontró un elemento válido
+	}
+}
+
+
+int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem, t_colors *colors)
 {
 	char	**elements;
 	int		i;
@@ -68,6 +98,7 @@ int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem)
 		elements = ft_split2(lmap->cont);
 		i = 0;
 		save_path2(elem, elements, i, temp);
+		save_colors(colors, elements, i);
 		free_elements(elements);
 		lmap = lmap->next;
 	}

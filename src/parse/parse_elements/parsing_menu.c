@@ -62,6 +62,7 @@ static void	hub_elements(t_lmap *lmap, t_colors *colors)
 		lmap = lmap->next;
 	}
 }
+
 // Copia la cadena de caracteres de la matriz al string map->map
 void	load_map(t_game *g, t_map_parse *map)
 {
@@ -112,7 +113,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 	if (exist_elements_or_colors_anywhere(lmap))
 		ft_errors("Invalid number of elements or colors\n");
 	hub_elements(lmap, colors);
-	save_path_chain_to_elem_struct(lmap, elem);
+	save_path_chain_to_elem_struct(lmap, elem, colors);
 }
 
 /******************************Menu parsing*******************************/

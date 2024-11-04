@@ -14,28 +14,26 @@
 
 void	save_rgb_values3(t_lmap *temp, t_colors *colors, int i, int count)
 {
-	int		j;
-
-	j = 0;
+	(void)count;
 	if (temp->cont[0] == 'F')
 	{
 		colors->f = 1;
-		if (count == 0)
-			colors->f_color[j++] = ft_atoi(&temp->cont[i]);
-		else if (count == 1)
-			colors->f_color[j++] = ft_atoi(&temp->cont[i]);
-		else if (count == 2)
-			colors->f_color[j++] = ft_atoi(&temp->cont[i]);
+		// if (count == 0)
+			colors->f_color[0] = (uint32_t)ft_atoi(&temp->cont[1]);
+		// else if (count == 1)
+			colors->f_color[1] = (uint32_t)ft_atoi(&temp->cont[2]);
+		// else if (count == 2)
+			colors->f_color[2] = (uint32_t)ft_atoi(&temp->cont[3]);
 	}
 	else if (temp->cont[0] == 'C')
 	{
 		colors->c = 2;
-		if (count == 0)
-			colors->c_color[j++] = ft_atoi(&temp->cont[i]);
-		else if (count == 1)
-			colors->c_color[j++] = ft_atoi(&temp->cont[i]);
-		else if (count == 2)
-			colors->c_color[j++] = ft_atoi(&temp->cont[i]);
+		// if (count == 0)
+			colors->c_color[0] = (uint32_t)ft_atoi(&temp->cont[1]);
+		// else if (count == 1)
+			colors->c_color[1] = (uint32_t)ft_atoi(&temp->cont[2]);
+		// else if (count == 2)
+			colors->c_color[2] = (uint32_t)ft_atoi(&temp->cont[3]);
 	}
 	while (temp->cont[i] >= '0' && temp->cont[i] <= '9')
 		i++;

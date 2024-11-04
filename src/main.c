@@ -61,7 +61,7 @@ int	main(int argc, char *argv[])
 		if (img_init(&g))
 			ft_errors("Error initializing image\n");
 		set_player(&g.map, &g.player);
-		set_image(&g);
+		set_image(&g, &colors);
 		set_rays(&g);
 		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0 , 0);
 		mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &map);

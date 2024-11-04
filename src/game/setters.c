@@ -22,7 +22,7 @@
 // 	*(unsigned int *)offset = color;
 // }
 
-void set_pixel_to_image(t_img *img, int x, int y, int color)
+void set_pixel_to_image(t_img *img, int x, int y, uint32_t color)
 {
 	if (x < 0 || x >= WINX || y < 0 || y >= WINY)
 		return ;
@@ -104,9 +104,9 @@ void    set_rays(t_game *g)
 			//else
 				g->ray.color = g->ray.vcolor;
 		}
-		printf("hlen:%d - hx:%d - hy:%d - angle:%d\n", g->ray.hlen, g->ray.hx,  g->ray.hy, g->ray.ra);
-		printf("vlen:%d - vx:%d - vy:%d - angle:%d\n", g->ray.vlen, g->ray.vx, g->ray.vy, g->ray.ra);
-		printf("len:%d - angle:%d\n\n", g->ray.len, g->ray.ra);
+		// printf("hlen:%d - hx:%d - hy:%d - angle:%d\n", g->ray.hlen, g->ray.hx,  g->ray.hy, g->ray.ra);
+		// printf("vlen:%d - vx:%d - vy:%d - angle:%d\n", g->ray.vlen, g->ray.vx, g->ray.vy, g->ray.ra);
+		// printf("len:%d - angle:%d\n\n", g->ray.len, g->ray.ra);
 		
 		ray_to_image(g, 0x00FF0000);//0x0000FF00 green
 		//printf("Current col: %d\n", (int)(radians * (g->w / 128)));
@@ -250,10 +250,10 @@ void	check_vertical_lines(t_game *g)
 		g->ray.vlen = 0;
 }
 
-void	set_image(t_game *g)
+void	set_image(t_game *g, t_colors *colors)
 {
 	//bg_to_image(&g->img3, 0x00C0C0C0);
-	floor_to_image(&g->img3);
+	floor_to_image(&g->img3, colors);
 	// ceiling_to_image(&g->img3, 0x00ff5050);//COLOR ROJO
 
 	// bg_to_image(&g->img2, 0x00606060);    				// grey background

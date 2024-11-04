@@ -12,18 +12,6 @@
 
 #include "cub3d.h"
 
-int	exist_path_colors_op2(t_lmap *lmap, t_colors *colors)
-{
-	char	**line;
-
-	line = NULL;
-	line = split_space_tab_comma(lmap->cont);
-	if (exist_path_colors2(line, colors, lmap))
-		ft_errors("Invalid path or color\n");
-	free_elements(line);
-	return (0);
-}
-
 int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
 {
 	int		i;
@@ -46,6 +34,19 @@ int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
 	}
 	return (0);
 }
+
+int	exist_path_colors_op2(t_lmap *lmap, t_colors *colors)
+{
+	char	**line;
+
+	line = NULL;
+	line = split_space_tab_comma(lmap->cont);
+	if (exist_path_colors2(line, colors, lmap))
+		ft_errors("Invalid path or color\n");
+	free_elements(line);
+	return (0);
+}
+
 
 int	exist_path_colors(t_lmap *lmap, t_colors *colors)
 {

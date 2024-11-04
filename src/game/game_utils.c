@@ -24,21 +24,21 @@ int	exit_game(t_game *g)
 	exit(EXIT_SUCCESS);
 }
 
-int	press_key(int keycode, t_game *g)
+int	press_key(int keycode, t_game *g, t_colors *colors)
 {
 	if (keycode == KEY_ESC)
 		exit_game(g);
 	else if (keycode == KEY_W)
-		move_w(g);
+		move_w(g, colors);
 	else if (keycode == KEY_A)
-		move_a(g);
+		move_a(g, colors);
 	else if (keycode == KEY_S)
-		move_s(g);
+		move_s(g, colors);
 	else if (keycode == KEY_D)
-		move_d(g);
+		move_d(g, colors);
 	else if (keycode == KEY_LEFT)
-		move_l(g);
+		move_l(g, colors);
 	else if (keycode == KEY_RIGHT)
-		move_r(g);
+		move_r(g, colors);
 	return (0);
 }

@@ -64,10 +64,12 @@ typedef struct s_elem
 
 typedef struct s_colors
 {
-	int		f;//int para saber si se ha encontrado F (1)
-	int		c;//int para saber si se ha encontrado C (2)
-	int		f_color[3];//array para guardar los valores de F
-	int		c_color[3];//array para guardar los valores de C
+	int			f;//int para saber si se ha encontrado F (1)
+	int			c;//int para saber si se ha encontrado C (2)
+	uint32_t	f_color[3];//array para guardar los valores de F
+	uint32_t	c_color[3];//array para guardar los valores de C
+	uint32_t	f_color_hex;//color en hexadecimal de F
+	uint32_t	c_color_hex;//color en hexadecimal de C
 }	t_colors;
 
 /* ===============================  SERGIO STRUCTURES  =============================== */
@@ -145,10 +147,10 @@ void	set_cosine(float *cos_arr);
 void	set_tan(float *tan_arr);
 
 /************************* setters.c ******************************/
-void	set_pixel_to_image(t_img *img, int x, int y, int color);
+void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color);
 void	set_player(t_map *map, t_player *player);
 void	set_rays(t_game *g);
-void	set_image(t_game *g);
+void	set_image(t_game *g, t_colors *colors);
 
 void	calculate_ray_hlen(t_game *g);
 void	calculate_ray_vlen(t_game *g);
@@ -158,21 +160,26 @@ void	check_vertical_lines(t_game *g);
 
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
-int		press_key(int keycode, t_game *g);
+int		press_key(int keycode, t_game *g, t_colors *colors);
 
 /********************** game_moves.c ****************************/
-void	move_w(t_game *g);
-void	move_s(t_game *g);
-void	move_a(t_game *g);
-void	move_d(t_game *g);
-void	move_l(t_game *g);
-void	move_r(t_game *g);
-
+// void	move_w(t_game *g);
+// void	move_s(t_game *g);
+// void	move_a(t_game *g);
+// void	move_d(t_game *g);
+// void	move_l(t_game *g);
+// void	move_r(t_game *g);
+void	move_w(t_game *g, t_colors *colors);
+void	move_s(t_game *g, t_colors *colors);
+void	move_a(t_game *g, t_colors *colors);
+void	move_d(t_game *g, t_colors *colors);
+void	move_l(t_game *g, t_colors *colors);
+void	move_r(t_game *g, t_colors *colors);
 /********************* put_to_image.c **************************/
 void	bg_to_image(t_img *img, int color);
 // void	floor_to_image(t_img *img, int color);
-void	floor_to_image(t_img *img);
-void	ceiling_to_image(t_img *img, int color);
+void	floor_to_image(t_img *img, t_colors *colors);
+// void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
 void	box_to_image(t_img *img, int x, int y, int color);
 void	player_to_image(t_img *img, t_player *player, int color);
@@ -202,7 +209,7 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs);
 char	**ft_split2(const char *str);
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
 int		looking_for_xpm(char **elements);
-int		save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem);
+int		save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem, t_colors *colors);
 void	remove_extra_spaces_or_tabs(t_lmap *lm);
 int		exist_elements_or_colors_anywhere(t_lmap *lmap);
 int		is_square_map(t_lmap *lm);

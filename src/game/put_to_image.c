@@ -12,18 +12,18 @@
 
 #include "cub3d.h"
 
-void	floor_to_image(t_img *img)
+void	floor_to_image(t_img *img, t_colors *colors)
 {
 	int	x;
 	int	y;
 
-    y = 0;
+	y = 0;
 	while (y < (WINY / 2))
 	{
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, 0x00FF0000);
+			set_pixel_to_image(img, x, y, colors->c_color_hex);
 			x++;
 		}
 		y++;
@@ -33,12 +33,13 @@ void	floor_to_image(t_img *img)
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, 0x00ff5050);
+			set_pixel_to_image(img, x, y, colors->f_color_hex);
 			x++;
 		}
 		y++;
 	}
 }
+
 
 // void	ceiling_to_image(t_img *img, int color)
 // {
