@@ -26,9 +26,11 @@
 #define KEY_D				100
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
-#define	PX2					64//32//64	// Side of 2D tiles in pixels
+#define	PX2					15//32//64	// Side of 2D tiles in pixels
 #define	PX3					64//32//64	// Side of 3D tiles in pixels
 #define	PI					314	// int 314 / 100.0f returns a float !!!
+#define WINX				1920
+#define WINY				1080
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -168,7 +170,8 @@ void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
 void	bg_to_image(t_img *img, int color);
-void	floor_to_image(t_img *img, int color);
+// void	floor_to_image(t_img *img, int color);
+void	floor_to_image(t_img *img);
 void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
 void	box_to_image(t_img *img, int x, int y, int color);

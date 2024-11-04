@@ -17,7 +17,7 @@ int	exit_game(t_game *g)
 	if (g->mlx)
 		mlx_destroy_window(g->mlx, g->win);
 	free(g->map.map); // free strdup
-	mlx_destroy_image(g->mlx, g->img2.img_ptr);
+	mlx_destroy_image(g->mlx, g->img3.img_ptr);
 	mlx_destroy_display(g->mlx);
 	free(g->mlx);
 	printf("GOOD BYE!\n");

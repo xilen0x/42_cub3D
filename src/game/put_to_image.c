@@ -12,41 +12,51 @@
 
 #include "cub3d.h"
 
-void	floor_to_image(t_img *img, int color)
+void	floor_to_image(t_img *img)
 {
 	int	x;
 	int	y;
 
     y = 0;
-	while (y < (img->h / 2))
+	while (y < (WINY / 2))
 	{
 		x = 0;   
-		while (x < img->w)
+		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, color);
+			set_pixel_to_image(img, x, y, 0x00FF0000);
+			x++;
+		}
+		y++;
+	}
+	while (y < WINY)
+	{
+		x = 0;   
+		while (x < WINX)
+		{
+			set_pixel_to_image(img, x, y, 0x00ff5050);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	ceiling_to_image(t_img *img, int color)
-{
-	int	x;
-	int	y;
+// void	ceiling_to_image(t_img *img, int color)
+// {
+// 	int	x;
+// 	int	y;
 
-    y = img->h / 2;
-	while (y < img->h)
-	{
-		x = 0;   
-		while (x < img->w)
-		{
-			set_pixel_to_image(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
+//     y = img->h / 2;
+// 	while (y < WINY)
+// 	{
+// 		x = 0;   
+// 		while (x < WINX)
+// 		{
+// 			set_pixel_to_image(img, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 void	bg_to_image(t_img *img, int color)
 {
@@ -54,10 +64,10 @@ void	bg_to_image(t_img *img, int color)
 	int	y;
 
     y = 0;
-	while (y < img->h)
+	while (y < WINY)
 	{
 		x = 0;   
-		while (x < img->w)
+		while (x < WINX)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -113,7 +123,7 @@ void	map_to_image(t_img *img, t_map *map, int color)
 	while (y < map->mapH)
 	{
 		x = 0;
-		while (x < map->mapW)
+		while (x < map->mapW && map->map[y * map->mapW + x] != '\0')
 		{
 			if (map->map[y * map->mapW + x] == '1')
 				box_to_image(img, x * PX2, y * PX2, color);
@@ -160,9 +170,10 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 		//y = player->py + (int)(sin(player->pa) * hyp);
 		y = (int)(g->player.py + (g->si[g->player.pa] * hyp));
 		//printf("pa: %d\tsin(pa) * hyp: %f * %d\n\n", g->player.pa, g->sines[g->player.pa], hyp);
-		if (x >= 0 && x <= 511 && y >=0 && y <= 511)//////////
+		// if (x >= 0 && x <= 511 && y >=0 && y <= 511)//////////
+		if (x >= 0 && x < WINX && y >= 0 && y < WINY)//////////
 		{
-			set_pixel_to_image(&g->img2, x, y, color);
+			set_pixel_to_image(&g->img3, x, y, color);
 			//printf("x:\t%d\ny:\t%d\n\n", x, y);//////////
 		}
 		hyp++;
