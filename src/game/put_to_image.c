@@ -18,7 +18,7 @@ void	floor_to_image(t_img *img, t_colors *colors)
 	int	y;
 
 	y = 0;
-	while (y < (WINY / 2))
+	/*while (y < (WINY / 2))
 	{
 		x = 0;   
 		while (x < WINX)
@@ -27,8 +27,8 @@ void	floor_to_image(t_img *img, t_colors *colors)
 			x++;
 		}
 		y++;
-	}
-	while (y < WINY)
+	}*/
+	while (y < (WINY / 2))
 	{
 		x = 0;   
 		while (x < WINX)
@@ -41,36 +41,36 @@ void	floor_to_image(t_img *img, t_colors *colors)
 }
 
 
-// void	ceiling_to_image(t_img *img, int color)
-// {
-// 	int	x;
-// 	int	y;
-
-//     y = img->h / 2;
-// 	while (y < WINY)
-// 	{
-// 		x = 0;   
-// 		while (x < WINX)
-// 		{
-// 			set_pixel_to_image(img, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-void	bg_to_image(t_img *img, int color)
+void	ceiling_to_image(t_img *img, t_colors *colors)
 {
 	int	x;
 	int	y;
 
-    y = 0;
+    y = img->h / 2;
 	while (y < WINY)
 	{
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, color);
+			set_pixel_to_image(img, x, y, colors->c_color_hex);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	bg_to_image(t_game *g, int color)
+{
+	int	x;
+	int	y;
+
+    y = 0;
+	while (y < g->img2.h)
+	{
+		x = 0;   
+		while (x < g->img2.w)
+		{
+			set_pixel_to_image(&g->img2, x, y, color);
 			x++;
 		}
 		y++;
@@ -161,7 +161,7 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 	int	x;
 	int	y;
 	int	hyp;	// hyp is the length of the view direction arrow
-
+(void)color;
 	hyp = 1;
 	while (hyp <= 30)
 	{
@@ -174,7 +174,7 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 		// if (x >= 0 && x <= 511 && y >=0 && y <= 511)//////////
 		if (x >= 0 && x < WINX && y >= 0 && y < WINY)//////////
 		{
-			set_pixel_to_image(&g->img3, x, y, color);
+			//set_pixel_to_image(&g->img3, x, y, color);//imprime una linea en la direccion de la vista
 			//printf("x:\t%d\ny:\t%d\n\n", x, y);//////////
 		}
 		hyp++;
@@ -241,7 +241,7 @@ void	slice_to_image(t_game *g, int col, int top_px, int bottom_px)//, int color)
 	//int	color;
 
 	x = 0;
-	wall_slice = 768 / 128;// fov = 1.28 radians
+	wall_slice = WINX / 128;//768 / 128 fov = 1.28 radians
 	//color = get_color(g);
 	while (top_px < bottom_px)
 	{
@@ -264,7 +264,7 @@ void	wall_to_image(t_game *g, int col)
 
 	//printf("ra:%d - len:%d - cos: %.2f - len*cos: %d\n", g->ray.ra, g->ray.len, g->co[g->ray.ra], (int)(g->ray.len * g->co[g->ray.ra - g->player.pa]));
 	//printf("ra:%d - len:%d\n", g->ray.ra, g->ray.len);
-	
+
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
 		cos_angle = cos_angle + 2 * PI;

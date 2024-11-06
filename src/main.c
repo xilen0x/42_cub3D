@@ -12,9 +12,31 @@
 		// ft_printf("C: %d\n\n", colors.c);
 		// ft_printf("Posición del jugador(y, x): %d,%d\n\n", map.y, map.x);
 		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
-
+int img2_init(t_game *g)
+{
+	g->img2.w = PX2 * g->map.mapW;
+	g->img2.h = PX2 * g->map.mapH;
+	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
+	if (!g->img2.img_ptr)
+	{
+		mlx_destroy_display(g->mlx);
+		free(g->mlx);
+		return (1);
+	}
+	g->img2.addr = mlx_get_data_addr(g->img2.img_ptr, &(g->img2.bpp), &(g->img2.line_len), &(g->img2.endian));
+	if (!g->img2.addr)
+	{
+		mlx_destroy_image(g->mlx, g->img2.img_ptr);
+		mlx_destroy_display(g->mlx);
+		free(g->mlx);
+		return (1);
+	}
+	return (0);
+}
 int img_init(t_game *g)
 {
+	g->img3.w = WINX;
+	g->img3.h = WINY;
 	g->img3.img_ptr = mlx_new_image(g->mlx, WINX, WINY);
 	if (!g->img3.img_ptr)
 	{
@@ -39,7 +61,7 @@ int	main(int argc, char *argv[])
 	t_colors	colors;
 	t_map_parse	map_parse;
 	t_lmap		*lmap;
-	t_map		map;
+	//t_map		map;
 	t_game		g;
 
 
@@ -58,14 +80,15 @@ int	main(int argc, char *argv[])
 		if (!g.mlx)
 			ft_errors("Error initializing mlx\n");
 		g.win = mlx_new_window(g.mlx, WINX, WINY, "Cub3D");
-		if (img_init(&g))
-			ft_errors("Error initializing image\n");
+		img2_init(&g);
+		img_init(&g);
 		set_player(&g.map, &g.player);
 		set_image(&g, &colors);
 		set_rays(&g);
-		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0 , 0);
-		mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &map);
-		mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &exit_game, &map);
+		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
+		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+		mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &g);
+		mlx_hook(g.win, X_EVENT_KEY_EXIT, 0, &exit_game, &g);
 		mlx_loop(g.mlx);
 	}
 	else

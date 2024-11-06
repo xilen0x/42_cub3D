@@ -22,12 +22,14 @@
 // 	*(unsigned int *)offset = color;
 // }
 
-void set_pixel_to_image(t_img *img, int x, int y, uint32_t color)
+void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color)
 {
+	char	*dst;
+
 	if (x < 0 || x >= WINX || y < 0 || y >= WINY)
 		return ;
-    char *dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-    *(unsigned int*)dst = color;
+	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	set_player(t_map *map, t_player *player)
@@ -43,10 +45,10 @@ void	set_player(t_map *map, t_player *player)
 		{       
 			if (map->map[y * map->mapW + x] == 'N' || map->map[y * map->mapW + x] == 'S' || map->map[y * map->mapW + x] == 'E' || map->map[y * map->mapW + x] == 'W')
 			{
-				// player->px = x * PX2 + PX2/2; // PX/2 is the centre of tile
-				// player->py = y * PX2 + PX2/2; // PX/2 is the centre of tile
-				player->px = x * PX3 + PX3/2;
-				player->py = y * PX3 + PX3/2;
+				player->px = x * PX2 + PX2/2; // PX/2 is the centre of tile
+				player->py = y * PX2 + PX2/2; // PX/2 is the centre of tile
+				// player->px = x * PX3 + PX3/2;
+				// player->py = y * PX3 + PX3/2;
 				player->pa = 0;//PI / 2;//M_PI;
 				return ;
 			}
@@ -56,7 +58,7 @@ void	set_player(t_map *map, t_player *player)
 	}
 }
 
-void    set_rays(t_game *g)
+void	set_rays(t_game *g)
 {
 	int	rays;//radians
 
@@ -107,7 +109,6 @@ void    set_rays(t_game *g)
 		// printf("hlen:%d - hx:%d - hy:%d - angle:%d\n", g->ray.hlen, g->ray.hx,  g->ray.hy, g->ray.ra);
 		// printf("vlen:%d - vx:%d - vy:%d - angle:%d\n", g->ray.vlen, g->ray.vx, g->ray.vy, g->ray.ra);
 		// printf("len:%d - angle:%d\n\n", g->ray.len, g->ray.ra);
-		
 		ray_to_image(g, 0x00FF0000);//0x0000FF00 green
 		//printf("Current col: %d\n", (int)(radians * (g->w / 128)));
 		wall_to_image(g, rays * (g->img3.w / 128));// + (g->w / 128))));////128////////
@@ -254,12 +255,12 @@ void	set_image(t_game *g, t_colors *colors)
 {
 	//bg_to_image(&g->img3, 0x00C0C0C0);
 	floor_to_image(&g->img3, colors);
-	// ceiling_to_image(&g->img3, 0x00ff5050);//COLOR ROJO
+	ceiling_to_image(&g->img3, colors);//0x00ff5050);//COLOR ROJO
 
-	// bg_to_image(&g->img2, 0x00606060);    				// grey background
-	// map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
-	// grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
-	// player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
+	bg_to_image(g, 0x00FFFFFF);    				// grey background
+	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
+	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
+	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
-	//ray_to_image(g, 0x00FF0000);//0x0000FF00 green
+	// ray_to_image(g, 0x00FF0000);//0x0000FF00 green
 }
