@@ -68,8 +68,8 @@ typedef struct s_colors
 	int			c;//int para saber si se ha encontrado C (2)
 	uint32_t	f_color[3];//array para guardar los valores de F
 	uint32_t	c_color[3];//array para guardar los valores de C
-	uint32_t	f_color_hex;//color en hexadecimal de F
-	uint32_t	c_color_hex;//color en hexadecimal de C
+	const uint32_t	f_color_hex;//color en hexadecimal de F
+	const uint32_t	c_color_hex;//color en hexadecimal de C
 }	t_colors;
 
 /* ===============================  SERGIO STRUCTURES  =============================== */
@@ -179,6 +179,7 @@ void	move_r(t_game *g, t_colors *colors);
 void	bg_to_image(t_game *g, int color);
 // void	floor_to_image(t_img *img, int color);
 void	floor_to_image(t_img *img, t_colors *colors);
+// void	floor_to_image(t_img *img, uint32_t *color);
 void	ceiling_to_image(t_img *img, t_colors *colors);
 void	grid_to_image(t_img *img, int color);
 void	box_to_image(t_img *img, int x, int y, int color);

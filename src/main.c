@@ -61,7 +61,6 @@ int	main(int argc, char *argv[])
 	t_colors	colors;
 	t_map_parse	map_parse;
 	t_lmap		*lmap;
-	//t_map		map;
 	t_game		g;
 
 

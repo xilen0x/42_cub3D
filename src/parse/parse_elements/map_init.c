@@ -28,12 +28,12 @@ static void	init_colors_values(t_colors *colors)
 {
 	colors->f = 0;
 	colors->c = 0;
-	colors->f_color[0] = 0;
-	colors->f_color[1] = 0;
-	colors->f_color[2] = 0;
-	colors->c_color[0] = 0;
-	colors->c_color[1] = 0;
-	colors->c_color[2] = 0;
+	colors->f_color[0] = 255;
+	colors->f_color[1] = 255;
+	colors->f_color[2] = 255;
+	colors->c_color[0] = 255;
+	colors->c_color[1] = 255;
+	colors->c_color[2] = 255;
 }
 
 /*Inicialización de valores estructura t_map*/

@@ -12,51 +12,71 @@
 
 #include "cub3d.h"
 
-void	floor_to_image(t_img *img, t_colors *colors)
+// void	floor_to_image(t_img *img, uint32_t *color)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = 0;
+// 	while (y < (WINY / 2))
+// 	{
+// 		x = 0;   
+// 		while (x < WINX)
+// 		{
+// 			set_pixel_to_image(img, x, y, colors->c_color_hex);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	while (y < WINY)
+// 	{
+// 		x = 0;   
+// 		while (x < WINX)
+// 		{
+// 			set_pixel_to_image(img, x, y, colors->f_color_hex);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+void	floor_to_image(t_img *img, t_colors *color)
 {
 	int	x;
 	int	y;
 
 	y = 0;
-	/*while (y < (WINY / 2))
-	{
-		x = 0;   
-		while (x < WINX)
-		{
-			set_pixel_to_image(img, x, y, colors->c_color_hex);
-			x++;
-		}
-		y++;
-	}*/
 	while (y < (WINY / 2))
 	{
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, colors->f_color_hex);
+			set_pixel_to_image(img, x, y, color->f_color_hex);
 			x++;
 		}
 		y++;
 	}
+	printf("color->f_color_hex: %d\n", color->f_color_hex);
 }
 
 
-void	ceiling_to_image(t_img *img, t_colors *colors)
+void	ceiling_to_image(t_img *img, t_colors *color)
 {
 	int	x;
 	int	y;
 
-    y = img->h / 2;
-	while (y < WINY)
+	y = WINY / 2;
+	while (y < (WINY))
 	{
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, colors->c_color_hex);
+			set_pixel_to_image(img, x, y, color->c_color_hex);
 			x++;
 		}
 		y++;
 	}
+	printf("color->c_color_hex: %d\n", color->c_color_hex);
 }
 
 void	bg_to_image(t_game *g, int color)
@@ -275,10 +295,10 @@ void	wall_to_image(t_game *g, int col)
 	wall_h = (roundf)((64.f / g->ray.len) * ((g->img3.w / 2) / g->ta[64]));//ta[g->ray.ra - g->player.pa])); // get the wall height
 	if (wall_h < 0)
 		wall_h = (-1) * wall_h;
-	bottom_px = (g->h / 2) + (wall_h / 2); // get the bottom pixel
-	top_px = (g->h / 2) - (wall_h / 2); // get the top pixel
-	if (bottom_px > g->h) // check the bottom pixel
-		bottom_px = g->h;
+	bottom_px = (WINY / 2) + (wall_h / 2);//(g->h / 2) + (wall_h / 2); // get the bottom pixel
+	top_px = (WINY / 2) - (wall_h / 2);//(g->h / 2) - (wall_h / 2); // get the top pixel
+	if (bottom_px > WINY)//(bottom_px > g->h) // check the bottom pixel
+		bottom_px = WINY;//bottom_px = g->h;
 	if (top_px < 0) // check the top pixel
 		top_px = 0;
 	slice_to_image(g, col, top_px, bottom_px);

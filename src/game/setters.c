@@ -24,12 +24,13 @@
 
 void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color)
 {
-	char	*dst;
+	char	*offset;
 
 	if (x < 0 || x >= WINX || y < 0 || y >= WINY)
 		return ;
-	dst = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(unsigned int *)dst = color;
+	// Line len is in bytes. If img_w = 1024 pixels, so len_line ~ 4096 bytes (can differ for aligment)
+	offset = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)offset = color;
 }
 
 void	set_player(t_map *map, t_player *player)
@@ -255,7 +256,7 @@ void	set_image(t_game *g, t_colors *colors)
 {
 	//bg_to_image(&g->img3, 0x00C0C0C0);
 	floor_to_image(&g->img3, colors);
-	ceiling_to_image(&g->img3, colors);//0x00ff5050);//COLOR ROJO
+	ceiling_to_image(&g->img3, colors);
 
 	bg_to_image(g, 0x00FFFFFF);    				// grey background
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
