@@ -75,7 +75,6 @@ void	load_map(t_game *g, t_map_parse *map)
 	g->map.mapH = map->h;
 	g->map.mapW = map->w;
 	g->map.map = (char *)p_malloc(sizeof(char) * (map->h * map->w + 1));
-	//  = (char *)p_malloc(sizeof(char) * (map->mapH * map->mapW + 1));
 	while (i < map->h)
 	{
 		j = 0;
@@ -114,6 +113,7 @@ void	parse_elems(t_elem *elem, t_lmap *lmap, t_colors *colors)
 		ft_errors("Invalid number of elements or colors\n");
 	hub_elements(lmap, colors);
 	save_path_chain_to_elem_struct(lmap, elem, colors);
+	save_rgb_values(lmap, colors);
 }
 
 /******************************Menu parsing*******************************/

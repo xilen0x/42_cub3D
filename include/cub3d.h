@@ -29,8 +29,8 @@
 #define	PX2					64//32//64	// Side of 2D tiles in pixels
 #define	PX3					64//32//64	// Side of 3D tiles in pixels
 #define	PI					314	// int 314 / 100.0f returns a float !!!
-#define WINX				1280//1920
-#define WINY				1024//1080
+#define WINX				1920//1280
+#define WINY				1080//1024
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -68,8 +68,8 @@ typedef struct s_colors
 	int			c;//int para saber si se ha encontrado C (2)
 	uint32_t	f_color[3];//array para guardar los valores de F
 	uint32_t	c_color[3];//array para guardar los valores de C
-	const uint32_t	f_color_hex;//color en hexadecimal de F
-	const uint32_t	c_color_hex;//color en hexadecimal de C
+	uint32_t	f_color_hex;//color en hexadecimal de F
+	uint32_t	c_color_hex;//color en hexadecimal de C
 }	t_colors;
 
 /* ===============================  SERGIO STRUCTURES  =============================== */
@@ -109,8 +109,7 @@ typedef struct	s_map
 	int		x;			// x coordinate of the map, in boxes/tiles
 	int		y;			// y coordinate of the map, in boxes/tiles
 	int		pos;		// position n the map = y * mapW + x
-}
-				t_map;
+}				t_map;
 
 typedef struct	s_img
 {
@@ -130,6 +129,7 @@ typedef struct	s_game
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_colors	cols;
 	void		*mlx;
 	void		*win;
 	int			h;		// game/window height in pixels
@@ -150,7 +150,8 @@ void	set_tan(float *tan_arr);
 void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color);
 void	set_player(t_map *map, t_player *player);
 void	set_rays(t_game *g);
-void	set_image(t_game *g, t_colors *colors);
+void	set_image(t_game *g, t_colors colors);
+// void	set_image2(t_game *g);
 
 void	calculate_ray_hlen(t_game *g);
 void	calculate_ray_vlen(t_game *g);
@@ -160,27 +161,26 @@ void	check_vertical_lines(t_game *g);
 
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
-int		press_key(int keycode, t_game *g, t_colors *colors);
+int		press_key(int keycode, t_game *g, t_colors colors);
 
 /********************** game_moves.c ****************************/
-// void	move_w(t_game *g);
-// void	move_s(t_game *g);
-// void	move_a(t_game *g);
-// void	move_d(t_game *g);
-// void	move_l(t_game *g);
-// void	move_r(t_game *g);
-void	move_w(t_game *g, t_colors *colors);
-void	move_s(t_game *g, t_colors *colors);
-void	move_a(t_game *g, t_colors *colors);
-void	move_d(t_game *g, t_colors *colors);
-void	move_l(t_game *g, t_colors *colors);
-void	move_r(t_game *g, t_colors *colors);
+void	move_w(t_game *g);
+void	move_s(t_game *g);
+void	move_a(t_game *g);
+void	move_d(t_game *g);
+void	move_l(t_game *g);
+void	move_r(t_game *g);
+// void	move_w(t_game *g, t_colors colors);
+// void	move_s(t_game *g, t_colors colors);
+// void	move_a(t_game *g, t_colors colors);
+// void	move_d(t_game *g, t_colors colors);
+// void	move_l(t_game *g, t_colors colors);
+// void	move_r(t_game *g, t_colors colors);
+
 /********************* put_to_image.c **************************/
 void	bg_to_image(t_game *g, int color);
-// void	floor_to_image(t_img *img, int color);
-void	floor_to_image(t_img *img, t_colors *colors);
-// void	floor_to_image(t_img *img, uint32_t *color);
-void	ceiling_to_image(t_img *img, t_colors *colors);
+void	floor_to_image(t_img *img, int color);
+void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
 void	box_to_image(t_img *img, int x, int y, int color);
 void	player_to_image(t_img *img, t_player *player, int color);
@@ -252,4 +252,6 @@ void	print_width_height(t_map_parse *map);
 int		space_exist_next_to_0(t_map_parse *m);
 void	load_map(t_game *g, t_map_parse *map);
 void	printMap(t_game *g);
+void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
+
 #endif

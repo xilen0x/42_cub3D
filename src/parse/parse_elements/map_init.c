@@ -34,6 +34,10 @@ static void	init_colors_values(t_colors *colors)
 	colors->c_color[0] = 255;
 	colors->c_color[1] = 255;
 	colors->c_color[2] = 255;
+	colors->f_color_hex = 0x00FF0000;//65280;//verde
+	colors->c_color_hex = 0x0000FF00;//65280;//verde
+
+	printf("floor:%d, ceiling:%d\n", colors->f_color_hex, colors->c_color_hex);
 }
 
 /*Inicialización de valores estructura t_map*/

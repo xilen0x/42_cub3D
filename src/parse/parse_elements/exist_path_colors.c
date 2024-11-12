@@ -30,7 +30,8 @@ int	value_isdigit(char *num)
 int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap)
 {
 	int		color_value;
-
+	(void)colors;
+	(void)lmap;
 	i = 0;
 	while (line[i])
 	{
@@ -42,7 +43,7 @@ int	check_range_values(int i, char **line, t_colors *colors, t_lmap *lmap)
 			return (1);
 		if (color_value < MIN_COLOR_VALUE || color_value > MAX_COLOR_VALUE)
 			return (1);
-		save_rgb_values(lmap, colors);
+		// save_rgb_values(lmap, colors);
 		i++;
 	}
 	return (0);

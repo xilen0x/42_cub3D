@@ -43,6 +43,10 @@ int	exist_path_colors_op2(t_lmap *lmap, t_colors *colors)
 	line = split_space_tab_comma(lmap->cont);
 	if (exist_path_colors2(line, colors, lmap))
 		ft_errors("Invalid path or color\n");
+	// else
+	// {
+		// save_rgb_values(lmap, colors);
+	// }
 	free_elements(line);
 	return (0);
 }

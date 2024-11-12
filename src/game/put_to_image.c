@@ -40,8 +40,11 @@
 // 	}
 // }
 
-void	floor_to_image(t_img *img, t_colors *color)
+void	floor_to_image(t_img *img, int color)
 {
+	// printf("En floor_to_image, color del piso antes: %u\n", color);
+    // (void)img;
+	
 	int	x;
 	int	y;
 
@@ -51,17 +54,19 @@ void	floor_to_image(t_img *img, t_colors *color)
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, color->f_color_hex);
+			set_pixel_to_image(img, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	printf("color->f_color_hex: %d\n", color->f_color_hex);
+    // printf("En floor_to_image, color del piso después: %u\n", color);
 }
 
 
-void	ceiling_to_image(t_img *img, t_colors *color)
+void	ceiling_to_image(t_img *img, int color)
 {
+	// (void)color;
+	// printf("En ceiling_to_image, color del techo antes: %u\n", color);
 	int	x;
 	int	y;
 
@@ -71,12 +76,12 @@ void	ceiling_to_image(t_img *img, t_colors *color)
 		x = 0;   
 		while (x < WINX)
 		{
-			set_pixel_to_image(img, x, y, color->c_color_hex);
+			set_pixel_to_image(img, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	printf("color->c_color_hex: %d\n", color->c_color_hex);
+	// printf("En ceiling_to_image, color del techo despues: %u\n", color);
 }
 
 void	bg_to_image(t_game *g, int color)
@@ -84,7 +89,7 @@ void	bg_to_image(t_game *g, int color)
 	int	x;
 	int	y;
 
-    y = 0;
+	y = 0;
 	while (y < g->img2.h)
 	{
 		x = 0;   
@@ -102,12 +107,12 @@ void	grid_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-    y = 0;
+	y = 0;
 	while (y < img->h)
 	{
 		x = 0;
 		while (x < img->w)
-		{       
+		{
 			if ((y % PX2) == 0 || (x % PX2) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
