@@ -161,7 +161,7 @@ void	check_vertical_lines(t_game *g);
 
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
-int		press_key(int keycode, t_game *g, t_colors colors);
+int		press_key(int keycode, t_game *g);
 
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);
@@ -170,12 +170,6 @@ void	move_a(t_game *g);
 void	move_d(t_game *g);
 void	move_l(t_game *g);
 void	move_r(t_game *g);
-// void	move_w(t_game *g, t_colors colors);
-// void	move_s(t_game *g, t_colors colors);
-// void	move_a(t_game *g, t_colors colors);
-// void	move_d(t_game *g, t_colors colors);
-// void	move_l(t_game *g, t_colors colors);
-// void	move_r(t_game *g, t_colors colors);
 
 /********************* put_to_image.c **************************/
 void	bg_to_image(t_game *g, int color);

@@ -77,7 +77,7 @@ void	save_rgb_values(t_lmap *lmap, t_colors *colors)
 		if (lmap->cont[0] == 'F' || lmap->cont[0] == 'C')
 		{
 			save_rgb_values2(lmap, colors);
-			//save_colors_in_hx(lmap, colors);
+			save_colors_in_hx(lmap, colors);
 			if (colors->f == 1 && colors->c == 2)
 			{
 				return ;

@@ -25,15 +25,8 @@ int	exit_game(t_game *g)
 }
 
 // int	press_key(int keycode, t_game *g, t_colors colors)
-int	press_key(int keycode, t_game *g, t_colors colors)
+int	press_key(int keycode, t_game *g)
 {
-	(void)colors;
-	printf("ANTES DE TECLEAR: colors: %u\n", g->cols.f_color_hex);
-	printf("ANTES DE TECLEAR: colors: %u\n", g->cols.c_color_hex);
-	// g->cols.f_color_hex = colors.f_color_hex;
-	// g->cols.c_color_hex = colors.c_color_hex;
-	// g->cols.f_color_hex = 0x00FF0000;
-	// g->cols.c_color_hex = 0x0000FF00;
 	if (keycode == KEY_ESC)
 		exit_game(g);
 	else if (keycode == KEY_W)
@@ -52,8 +45,5 @@ int	press_key(int keycode, t_game *g, t_colors colors)
 	set_rays(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0 , 0);
 	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
-
-	printf("LUEGO DE TECLEAR: colors: %u\n", g->cols.f_color_hex);
-	printf("LUEGO DE TECLEAR: colors: %u\n", g->cols.c_color_hex);
 	return (0);
 }

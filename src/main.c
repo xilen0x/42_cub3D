@@ -58,7 +58,6 @@ int img_init(t_game *g)
 int	main(int argc, char *argv[])
 {
 	t_elem		elem;
-	t_colors	colors;
 	t_map_parse	map_parse;
 	t_lmap		*lmap;
 	t_game		g;
@@ -73,8 +72,7 @@ int	main(int argc, char *argv[])
 
 		elem.av = argv;
 		init_values(&elem, &g.cols, &map_parse, elem.av);
-		// init_values(&elem, &colors, &map_parse, elem.av);
-		parsing(&elem, &colors, &map_parse, &lmap);
+		parsing(&elem, &g.cols, &map_parse, &lmap);
 		load_map(&g, &map_parse);
 		g.mlx = mlx_init();
 		if (!g.mlx)
@@ -83,13 +81,11 @@ int	main(int argc, char *argv[])
 		img2_init(&g);
 		img_init(&g);
 		set_player(&g.map, &g.player);
-		set_image(&g, colors);
+		set_image(&g, g.cols);
 		set_rays(&g);
 		mlx_clear_window(g.mlx, g.win);
 		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
 		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
-		printf("ANTES colors.f: %u\n", colors.f_color_hex);
-		printf("ANTES colors.c: %u\n", colors.c_color_hex);
 		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);
 		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);
 		mlx_loop(g.mlx);
