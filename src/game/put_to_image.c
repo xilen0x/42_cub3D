@@ -139,7 +139,7 @@ void	box_to_image(t_img *img, int x, int y, int color)
 		y++;
 	}
 }
-
+//box_to_image(img, x * (PX2 / 5), y * (PX2 / 5), color);
 void	map_to_image(t_img *img, t_map *map, int color)
 {
 	int	x;

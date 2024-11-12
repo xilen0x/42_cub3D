@@ -61,7 +61,6 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 
 void	save_colors_in_hx(t_lmap *lmap, t_colors *col)
 {
-	// (void)lmap;
 	if (lmap->cont[0] == 'F')
 		col->f_color_hex = (col->f_color[0] << 16) + (col->f_color[1] << 8) + col->f_color[2];
 	else if (lmap->cont[0] == 'C')

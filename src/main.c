@@ -16,7 +16,9 @@ int img2_init(t_game *g)
 {
 	g->img2.w = PX2 * g->map.mapW;
 	g->img2.h = PX2 * g->map.mapH;
-	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
+	// g->img2.w = WINX / 5;
+	// g->img2.h = WINY / 5;
+	g->img2.img_ptr = mlx_new_image(g->mlx, WINX / 5, WINY / 5);
 	if (!g->img2.img_ptr)
 	{
 		mlx_destroy_display(g->mlx);
@@ -54,6 +56,27 @@ int img_init(t_game *g)
 	}
 	return (0);
 }
+// int minimap_init(t_game *g)
+// {
+// 	g->img3.w = WINX;
+// 	g->img3.h = WINY;
+// 	g->img_mini.img_ptr = mlx_new_image(g->mlx, WINX / 5, WINY / 5);
+// 	if (!g->img_mini.img_ptr)
+// 	{
+// 		mlx_destroy_display(g->mlx);
+// 		free(g->mlx);
+// 		return (1);
+// 	}
+// 	g->img_mini.addr = mlx_get_data_addr(g->img_mini.img_ptr, &(g->img_mini.bpp), &(g->img_mini.line_len), &(g->img_mini.endian));
+// 	if (!g->img_mini.addr)
+// 	{
+// 		mlx_destroy_image(g->mlx, g->img_mini.img_ptr);
+// 		mlx_destroy_display(g->mlx);
+// 		free(g->mlx);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 int	main(int argc, char *argv[])
 {
@@ -80,12 +103,14 @@ int	main(int argc, char *argv[])
 		g.win = mlx_new_window(g.mlx, WINX, WINY, "Cub3D");
 		img2_init(&g);
 		img_init(&g);
+		// minimap_init(&g);
 		set_player(&g.map, &g.player);
 		set_image(&g, g.cols);
 		set_rays(&g);
-		mlx_clear_window(g.mlx, g.win);
+		// mlx_clear_window(g.mlx, g.win);
 		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
 		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+		// mlx_put_image_to_window(g.mlx, g.win, g.img_mini.img_ptr, 0, 0);
 		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);
 		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);
 		mlx_loop(g.mlx);
