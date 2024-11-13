@@ -46,8 +46,8 @@ void	set_player(t_map *map, t_player *player)
 		{       
 			if (map->map[y * map->mapW + x] == 'N' || map->map[y * map->mapW + x] == 'S' || map->map[y * map->mapW + x] == 'E' || map->map[y * map->mapW + x] == 'W')
 			{
-				player->px = x * PX2 + PX2/2; // PX/2 is the centre of tile
-				player->py = y * PX2 + PX2/2; // PX/2 is the centre of tile
+				player->px = x * PX2 + PX2B/2; // PX/2 is the centre of tile
+				player->py = y * PX2 + PX2B/2; // PX/2 is the centre of tile
 				player->pa = 0;//PI / 2;//M_PI;
 				return ;
 			}
@@ -250,7 +250,7 @@ void	check_vertical_lines(t_game *g)
 		g->ray.vlen = 0;
 }
 
-void	set_image(t_game *g, t_colors colors)
+void	set_image(t_game *g)
 {
 	int	red;
 	int	green;
@@ -260,15 +260,11 @@ void	set_image(t_game *g, t_colors colors)
 
 	printf("red: %d, green: %d\n", red, green);
 
-	// (void)g;
-	(void)colors;
-	// printf("En set_image: f_color_hex: %u, c_color_hex: %u\n", colors->f_color_hex, colors->c_color_hex);
 	// floor_to_image(&g->img3, colors.f_color_hex);
 	floor_to_image(&g->img3, red);//g->cols.f_color_hex);
-	// printf("En set_image: f_color_hex: %u, c_color_hex: %u\n", colors->f_color_hex, colors->c_color_hex);
 	// ceiling_to_image(&g->img3, colors.c_color_hex);
 	ceiling_to_image(&g->img3, green);//g->cols.c_color_hex);
-	bg_to_image(g, 0x00e3e6e5);    				// background color minimap
+	bg_to_image(g, 0x00FFCDD2);    	// background color rosado minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player

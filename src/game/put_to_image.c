@@ -90,10 +90,12 @@ void	bg_to_image(t_game *g, int color)
 	int	y;
 
 	y = 0;
-	while (y < g->img2.h)
+	// while (y < g->img2.h)
+	while (y < WINY / 5)
 	{
 		x = 0;   
-		while (x < g->img2.w)
+		// while (x < g->img2.w)
+		while (x < WINX / 5)
 		{
 			set_pixel_to_image(&g->img2, x, y, color);
 			x++;
@@ -108,12 +110,14 @@ void	grid_to_image(t_img *img, int color)
 	int	y;
 
 	y = 0;
+	// while (y < WINY / 5)
 	while (y < img->h)
 	{
 		x = 0;
+		// while (x < WINX / 5)
 		while (x < img->w)
 		{
-			if ((y % PX2) == 0 || (x % PX2) == 0)
+			if ((y % PX2B) == 0 || (x % PX2B) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
 		}
@@ -128,10 +132,10 @@ void	box_to_image(t_img *img, int x, int y, int color)
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + PX2)
+	while (y < y0 + PX2B)
 	{
 		x = x0;
-		while (x < x0 + PX2)
+		while (x < x0 + PX2B)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -152,7 +156,8 @@ void	map_to_image(t_img *img, t_map *map, int color)
 		while (x < map->mapW && map->map[y * map->mapW + x] != '\0')
 		{
 			if (map->map[y * map->mapW + x] == '1')
-				box_to_image(img, x * PX2, y * PX2, color);
+				box_to_image(img, x * PX2B, y * PX2B, color);
+				//box_to_image(img, x * PX2, y * PX2, color);//box_to_image(img, x * PX2B, y * PX2B, color);
 			x++;
 		}
 		y++;

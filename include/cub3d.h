@@ -27,6 +27,7 @@
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
 #define	PX2					64//(64 / 5)//32//64	// Side of 2D tiles in pixels
+#define	PX2B				(64 / 5)
 #define	PX3					64//32//64	// Side of 3D tiles in pixels
 #define	PI					314	// int 314 / 100.0f returns a float !!!
 #define WINX				1920//1280
@@ -151,8 +152,7 @@ void	set_tan(float *tan_arr);
 void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color);
 void	set_player(t_map *map, t_player *player);
 void	set_rays(t_game *g);
-void	set_image(t_game *g, t_colors colors);
-// void	set_image2(t_game *g);
+void	set_image(t_game *g);
 
 void	calculate_ray_hlen(t_game *g);
 void	calculate_ray_vlen(t_game *g);
