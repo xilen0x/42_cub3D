@@ -15,23 +15,23 @@
 /* ===============================   MACROS  =============================== */
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
-//#define	PI	3.1415f	// already defined in <math.h> as M_PI = 3.14159265358979323846
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_RELEASE	3
-#define X_EVENT_KEY_EXIT	17
-#define KEY_ESC				65307
-#define KEY_W				119
-#define KEY_A				97
-#define KEY_S				115
-#define KEY_D				100
-#define	KEY_LEFT			65361
-#define	KEY_RIGHT			65363
-#define	PX2					64//(64 / 5)//32//64	// Side of 2D tiles in pixels
-#define	PX2B				32//(64 / 5)
-#define	PX3					64//32//64	// Side of 3D tiles in pixels
-#define	PI					314	// int 314 / 100.0f returns a float !!!
-#define WINX				1920//1280
-#define WINY				1080//1024
+//# define	PI	3.1415f	// already defined in <math.h> as M_PI = 3.14159265358979323846
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_EXIT		17
+# define KEY_ESC				65307
+# define KEY_W					119
+# define KEY_A					97
+# define KEY_S					115
+# define KEY_D					100
+# define KEY_LEFT				65361
+# define KEY_RIGHT				65363
+# define PX2					64//(64 / 5)//32//64	// Side of 2D tiles in pixels
+# define PX2B					32//(64 / 5)
+# define PX3					64//32//64	// Side of 3D tiles in pixels
+# define PI						3.141592f//314	// int 314 / 100.0f returns a float !!!
+# define WINX					1920//1280
+# define WINY					1080//1024
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -76,30 +76,27 @@ typedef struct s_colors
 /* ===============================  SERGIO STRUCTURES  =============================== */
 typedef struct	s_player
 {
-	int		px;			// player x coordinate (body centre) in pixels, into the image
-	int		py;			// player y coordinate (body centre) in pixels, into the image
-//	float	pdx;
-//	float	pdy;
-//	float	pa;			// player angle in radians
-	int		pa;			// player angle in radians (in integer form, then divided by 100.0f)
+	float	px;
+	float	py;
+	float	pa;
+	float	fov;
 }				t_player;
 
 typedef struct	s_ray
 {
-//	float	ra;			// ray angle
-	int		ra;			// ray angle in radians (in integer form, then divided by 100.0f)
-	int		hx;			// horizontal line intersection point
-	int		hy;			// horizontal line intersection point
-	int		vx;			// vertical line intersection point
-	int		vy;			// vertical line intersection point
-	int		x_step;		// x offset to next horizontal line
-	int		y_step;		// y offset to next horizontal line
-	int		hlen;		// length of the ray to horizontal hit
-	int		vlen;		// length of the ray to vertical hit
-	int		len;		// minimal of hlen and vlen
-	int		hcolor;		// color based on orientation of the wall (N, S)
-	int		vcolor;		// color based on orientation of the wall (E, W)
-	int		color;		// definitive color
+	float	ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
+	float		hx;			// horizontal line intersection point
+	float		hy;			// horizontal line intersection point
+	float		vx;			// vertical line intersection point
+	float		vy;			// vertical line intersection point
+	float		x_step;		// x offset to next horizontal line
+	float		y_step;		// y offset to next horizontal line
+	float		hlen;		// length of the ray to horizontal hit
+	float		vlen;		// length of the ray to vertical hit
+	float		len;		// minimal of hlen and vlen
+	float		hcolor;		// color based on orientation of the wall (N, S)
+	float		vcolor;		// color based on orientation of the wall (E, W)
+	float		color;		// definitive color
 }				t_ray;
 
 typedef struct	s_map
@@ -110,7 +107,8 @@ typedef struct	s_map
 	int		x;			// x coordinate of the map, in boxes/tiles
 	int		y;			// y coordinate of the map, in boxes/tiles
 	int		pos;		// position n the map = y * mapW + x
-}				t_map;
+}
+				t_map;
 
 typedef struct	s_img
 {
@@ -136,9 +134,9 @@ typedef struct	s_game
 	void		*win;
 	int			h;		// game/window height in pixels
 	int			w;		// game/window width in pixels
-	float		si[628];
-	float		co[628];
-	float		ta[628];
+	// float		si[628];
+	// float		co[628];
+	// float		ta[628];
 }				t_game;
 
 /* ===============================  GAME  =============================== */
@@ -149,7 +147,7 @@ void	set_cosine(float *cos_arr);
 void	set_tan(float *tan_arr);
 
 /************************* setters.c ******************************/
-void	set_pixel_to_image(t_img *img, int x, int y, uint32_t color);
+void	set_pixel_to_image(t_img *img, int x, int y, int color);
 void	set_player(t_map *map, t_player *player);
 void	set_rays(t_game *g);
 void	set_image(t_game *g);
@@ -248,5 +246,6 @@ int		space_exist_next_to_0(t_map_parse *m);
 void	load_map(t_game *g, t_map_parse *map);
 void	printMap(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
+void	render_wall(t_game *g, int col);
 
 #endif

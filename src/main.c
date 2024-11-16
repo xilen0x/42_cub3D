@@ -16,6 +16,8 @@ int img2_init(t_game *g)
 {
 	g->img2.w = WINX / 5;
 	g->img2.h = WINY / 5;
+	// g.img2.h = g.map.mapH * PX2;//8 * 64 = 512;
+	// g.img2.w = g.map.mapW * PX2;//8 * 64 = 512;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -35,8 +37,11 @@ int img2_init(t_game *g)
 }
 int img_init(t_game *g)
 {
-	g->img3.w = WINX;
+	// g.img3.h = 512;//g.map.mapH * PX3;//768;//1536;
+	// g.img3.w = 768;//g.map.mapH * PX3;//1280;//2048;
 	g->img3.h = WINY;
+	g->img3.w = WINX;
+	// g.img3.img_ptr = mlx_new_image(g.mlx, g.img3.w, g.img3.h);
 	g->img3.img_ptr = mlx_new_image(g->mlx, WINX, WINY);
 	if (!g->img3.img_ptr)
 	{
@@ -66,9 +71,9 @@ int	main(int argc, char *argv[])
 	lmap = NULL;
 	if (argc == 2)
 	{
-		set_sine(g.si);
-		set_cosine(g.co);
-		set_tan(g.ta);
+		// set_sine(g.si);
+		// set_cosine(g.co);
+		// set_tan(g.ta);
 
 		elem.av = argv;
 		init_values(&elem, &g.cols, &map_parse, elem.av);
@@ -86,8 +91,8 @@ int	main(int argc, char *argv[])
 		// mlx_clear_window(g.mlx, g.win);
 		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
 		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
-		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);
-		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);
+		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);//1L << 0
+		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);//1L << 0
 		mlx_loop(g.mlx);
 	}
 	else
@@ -97,3 +102,5 @@ int	main(int argc, char *argv[])
 	free_matrix(map_parse.matrix, map_parse.h);
 	return (0);
 }
+
+
