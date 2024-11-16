@@ -258,16 +258,11 @@ void	set_image(t_game *g)
 	red = g->cols.f_color_hex;
 	green = g->cols.c_color_hex;
 
-	printf("red: %d, green: %d\n", red, green);
-
-	// floor_to_image(&g->img3, colors.f_color_hex);
-	floor_to_image(&g->img3, red);//g->cols.f_color_hex);
-	// ceiling_to_image(&g->img3, colors.c_color_hex);
-	ceiling_to_image(&g->img3, green);//g->cols.c_color_hex);
+	floor_to_image(&g->img3, green);//g->cols.f_color_hex);
+	ceiling_to_image(&g->img3, red);//g->cols.c_color_hex);
 	bg_to_image(g, 0x00FFCDD2);    	// background color rosado minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
 }
-

@@ -27,7 +27,7 @@
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
 #define	PX2					64//(64 / 5)//32//64	// Side of 2D tiles in pixels
-#define	PX2B				(64 / 5)
+#define	PX2B				32//(64 / 5)
 #define	PX3					64//32//64	// Side of 3D tiles in pixels
 #define	PI					314	// int 314 / 100.0f returns a float !!!
 #define WINX				1920//1280

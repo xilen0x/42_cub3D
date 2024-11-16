@@ -12,39 +12,8 @@
 
 #include "cub3d.h"
 
-// void	floor_to_image(t_img *img, uint32_t *color)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	y = 0;
-// 	while (y < (WINY / 2))
-// 	{
-// 		x = 0;   
-// 		while (x < WINX)
-// 		{
-// 			set_pixel_to_image(img, x, y, colors->c_color_hex);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	while (y < WINY)
-// 	{
-// 		x = 0;   
-// 		while (x < WINX)
-// 		{
-// 			set_pixel_to_image(img, x, y, colors->f_color_hex);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
 void	floor_to_image(t_img *img, int color)
 {
-	// printf("En floor_to_image, color del piso antes: %u\n", color);
-    // (void)img;
-	
 	int	x;
 	int	y;
 
@@ -59,14 +28,11 @@ void	floor_to_image(t_img *img, int color)
 		}
 		y++;
 	}
-    // printf("En floor_to_image, color del piso después: %u\n", color);
 }
 
 
 void	ceiling_to_image(t_img *img, int color)
 {
-	// (void)color;
-	// printf("En ceiling_to_image, color del techo antes: %u\n", color);
 	int	x;
 	int	y;
 
@@ -81,7 +47,6 @@ void	ceiling_to_image(t_img *img, int color)
 		}
 		y++;
 	}
-	// printf("En ceiling_to_image, color del techo despues: %u\n", color);
 }
 
 void	bg_to_image(t_game *g, int color)
@@ -143,21 +108,23 @@ void	box_to_image(t_img *img, int x, int y, int color)
 		y++;
 	}
 }
-//box_to_image(img, x * (PX2 / 5), y * (PX2 / 5), color);
 void	map_to_image(t_img *img, t_map *map, int color)
 {
 	int	x;
 	int	y;
 
     y = 0;
+	// while (y < (map->mapH / WINY)
 	while (y < map->mapH)
 	{
 		x = 0;
+		//while (x < (map->mapW / WINX) && map->map[y * map->mapW + x] != '\0')
 		while (x < map->mapW && map->map[y * map->mapW + x] != '\0')
 		{
 			if (map->map[y * map->mapW + x] == '1')
-				box_to_image(img, x * PX2B, y * PX2B, color);
-				//box_to_image(img, x * PX2, y * PX2, color);//box_to_image(img, x * PX2B, y * PX2B, color);
+				box_to_image(img, x * PX2, y * PX2, color);
+				//box_to_image(img, x * PX2B, y * PX2B, color);
+				//box_to_image(img, x * (PX2 / 5), y * (PX2 / 5), color);
 			x++;
 		}
 		y++;
@@ -191,7 +158,8 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 	int	x;
 	int	y;
 	int	hyp;	// hyp is the length of the view direction arrow
-(void)color;
+
+	(void)color;
 	hyp = 1;
 	while (hyp <= 30)
 	{
@@ -292,16 +260,13 @@ void	wall_to_image(t_game *g, int col)
 	int	top_px;
 	int	cos_angle;
 
-	//printf("ra:%d - len:%d - cos: %.2f - len*cos: %d\n", g->ray.ra, g->ray.len, g->co[g->ray.ra], (int)(g->ray.len * g->co[g->ray.ra - g->player.pa]));
-	//printf("ra:%d - len:%d\n", g->ray.ra, g->ray.len);
-
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
 		cos_angle = cos_angle + 2 * PI;
 	else if (cos_angle > 2 * PI)
 		cos_angle = cos_angle - 2 * PI;
 	g->ray.len = roundf(g->ray.len * g->co[cos_angle]); // fix the fisheye
-	
+
 	wall_h = (roundf)((64.f / g->ray.len) * ((g->img3.w / 2) / g->ta[64]));//ta[g->ray.ra - g->player.pa])); // get the wall height
 	if (wall_h < 0)
 		wall_h = (-1) * wall_h;
@@ -313,5 +278,3 @@ void	wall_to_image(t_game *g, int col)
 		top_px = 0;
 	slice_to_image(g, col, top_px, bottom_px);
 }
-//printf("TL/len:%.2f - ra:%d - len:%d - tan: %.2f\n", 64.f/g->ray.len, g->ray.ra, g->ray.len, g->ta[64]);
-//printf("Col:%d - Wall Height: %d - topPX:%d - botPX:%d\n\n", col, wall_h, top_px, bottom_px);
