@@ -14,10 +14,10 @@
 		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
 int img2_init(t_game *g)
 {
-	g->img2.w = WINX / 5;
-	g->img2.h = WINY / 5;
-	// g.img2.h = g.map.mapH * PX2;//8 * 64 = 512;
-	// g.img2.w = g.map.mapW * PX2;//8 * 64 = 512;
+	g->img2.h = g->map.mapH * PX2;//8 * 64 = 512;
+	g->img2.w = g->map.mapW * PX2;//8 * 64 = 512;
+	//g->img2.w = WINX;
+	//g->img2.h = WINY;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -39,8 +39,8 @@ int img_init(t_game *g)
 {
 	// g.img3.h = 512;//g.map.mapH * PX3;//768;//1536;
 	// g.img3.w = 768;//g.map.mapH * PX3;//1280;//2048;
-	g->img3.h = WINY;
 	g->img3.w = WINX;
+	g->img3.h = WINY;
 	// g.img3.img_ptr = mlx_new_image(g.mlx, g.img3.w, g.img3.h);
 	g->img3.img_ptr = mlx_new_image(g->mlx, WINX, WINY);
 	if (!g->img3.img_ptr)

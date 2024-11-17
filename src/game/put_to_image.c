@@ -37,7 +37,7 @@ void	ceiling_to_image(t_img *img, int color)
 	int	y;
 
 	y = WINY / 2;//antes: y = img->h / 2;
-	while (y < (WINY))//antes: while (y < img->h)
+	while (y < WINY)//antes: while (y < img->h)
 	{
 		x = 0;   
 		while (x < WINX)//antes: while (x < img->w)
@@ -55,11 +55,11 @@ void	bg_to_image(t_game *g, int color)
 	int	y;
 
 	y = 0;
-	while (y < WINY / 5)//antes: while (y < img->h)
+	while (y < g->img2.h)//antes: while (y < img->h)
 	{
 		x = 0;   
 		// while (x < g->img2.w)
-		while (x < WINX / 5)//antes : while(x < img->w)
+		while (x < g->img2.w)//antes : while(x < img->w)
 		{
 			set_pixel_to_image(&g->img2, x, y, color);//antes: set_pixel_to_image(img, x, y, color);
 			x++;
@@ -81,7 +81,7 @@ void	grid_to_image(t_img *img, int color)
 		// while (x < WINX / 5)
 		while (x < img->w)
 		{
-			if ((y % PX2B) == 0 || (x % PX2B) == 0)//antes: if ((y % PX2) == 0 || (x % PX2) == 0)
+			if ((y % PX2) == 0 || (x % PX2) == 0)//antes: if ((y % PX2) == 0 || (x % PX2) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
 		}
@@ -96,10 +96,10 @@ void	box_to_image(t_img *img, int x, int y, int color)
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + PX2B)//antes: while (y < y0 + PX2)
+	while (y < y0 + PX2)//antes: while (y < y0 + PX2)
 	{
 		x = x0;
-		while (x < x0 + PX2B)//antes: while (x < x0 + PX2)
+		while (x < x0 + PX2)//antes: while (x < x0 + PX2)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -156,13 +156,13 @@ void	player_to_image(t_img *img, t_player *player, int color)
 	int x0;
 	int y0;
 
-	x0 = player->px - 4;//- 8;
-	y0 = player->py - 4;//- 8;
+	x0 = player->px - 8;//- 4;
+	y0 = player->py - 8;//- 4;
 	y = y0;//player->py - 4;
-	while (y <= player->py + 4) // + 8 // 17 pixels is the size of the mini player
+	while (y <= player->py + 8) // + 4 // 17 pixels is the size of the mini player
 	{
 		x = x0;//player->px -4;
-		while (x <= player->px + 4)//+ 8
+		while (x <= player->px + 8)//+ 4
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -295,8 +295,8 @@ void	render_wall(t_game *g, int col)
 {
 	float	cos_angle;
 	float	wall_h;
-	int	bot_pix;
-	int	top_pix;
+	float	bot_pix;
+	float	top_pix;
 
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
@@ -305,9 +305,9 @@ void	render_wall(t_game *g, int col)
 		cos_angle = cos_angle - 2 * PI;
 	g->ray.len = (g->ray.len * cosf(cos_angle)); // fix the fisheye
 	//g->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl - mlx->ply->angle)); // fix the fisheye
-	wall_h = (PX2 / g->ray.len) * ((768 / 2) / tanf(g->player.fov / 2)); // get the wall height
-	bot_pix = (g->h / 2) + (wall_h / 2); // get the bottom pixel
-	top_pix = (g->h / 2) - (wall_h / 2); // get the top pixel
+	wall_h = (PX2 / g->ray.len) * ((WINX / 2) / tanf(g->player.fov / 2)); // get the wall height
+	bot_pix = (WINY / 2.f) + (wall_h / 2.f); // get the bottom pixel
+	top_pix = (WINY / 2.f) - (wall_h / 2.f); // get the top pixel
 	if (bot_pix > g->h) // check the bottom pixel
 		bot_pix = g->h;
 	if (top_pix < 0) // check the top pixel

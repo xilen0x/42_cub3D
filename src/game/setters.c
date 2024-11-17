@@ -26,8 +26,8 @@ void	set_pixel_to_image(t_img *img, int x, int y, int color)
 {
 	char	*offset;
 
-	// if (x < 0 || x >= WINX || y < 0 || y >= WINY)
-	// 	return ;
+	if (x < 0 || x >= WINX || y < 0 || y >= WINY)
+		return ;
 	// Line len is in bytes. If img_w = 1024 pixels, so len_line ~ 4096 bytes (can differ for aligment)
 	offset = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)offset = color;
@@ -70,8 +70,8 @@ void	set_player(t_map *map, t_player *player)
 		{       
 			if (map->map[y * map->mapW + x] == 'N' || map->map[y * map->mapW + x] == 'S' || map->map[y * map->mapW + x] == 'E' || map->map[y * map->mapW + x] == 'W')
 			{
-				player->px = x * PX2 + PX2B/2; // PX/2 is the centre of tile
-				player->py = y * PX2 + PX2B/2; // PX/2 is the centre of tile
+				player->px = x * PX2 + PX2/2; // PX/2 is the centre of tile
+				player->py = y * PX2 + PX2/2; // PX/2 is the centre of tile
 				player->pa = 0;//PI / 2;//M_PI;
 				player->fov = 1.05;
 				return ;
@@ -88,24 +88,24 @@ void    set_rays(t_game *g)
 
 	g->ray.ra = g->player.pa - 30 * 0.0175;
 	rays = 0;
-	printf("Ray angle:%f\n", g->ray.ra);
-	while (rays < 768)//g->img3.w)// w=768 //128)
+	//printf("Ray angle:%f\n", g->ray.ra);
+	while (rays < WINX)// w=768 //128)
 	{
-		g->ray.ra = g->ray.ra + (g->player.fov / 768);//g->img3.w);// fov/768
-		printf("Ray angle:%f - dif:%f\n", g->ray.ra, (g->player.fov / g->img3.w));
+		g->ray.ra = g->ray.ra + (g->player.fov / WINX);// fov/768
+		//printf("Ray angle:%f - dif:%f\n", g->ray.ra, (g->player.fov / g->img3.w));
 		if (g->ray.ra < 0)
 			g->ray.ra = g->ray.ra + 2 * PI;
 		else if (g->ray.ra >= 2 * PI)
 			g->ray.ra = g->ray.ra - 2 * PI;
-		printf("2PI:%f\n", 2 * PI);
-		printf("Norm angle:%f\n", g->ray.ra);
+		//printf("2PI:%f\n", 2 * PI);
+		//printf("Norm angle:%f\n", g->ray.ra);
 		check_horizon_lines(g);
 		check_vertical_lines(g);
 		if (g->ray.hlen <= 0)
 		{
 			g->ray.len = g->ray.vlen;
 			g->ray.color = g->ray.vcolor;
-		}	
+		}
 		else if (g->ray.vlen <= 0)
 		{
 			g->ray.len = g->ray.hlen;
@@ -141,7 +141,7 @@ void	calculate_ray_hlen(t_game *g)
 	
 	while (hit == 0)
 	{
-		if ((g->ray.hx < 64) || (g->ray.hx > 448))//((g->ray.hx <= PX2 + 1 && g->ray.hy != PX2) || (g->ray.hx >= g->map.mapW * PX2 - PX2 - 1 && g->ray.hy != PX2))//
+		if ((g->ray.hx < PX2) || (g->ray.hx > WINY - PX2))//((g->ray.hx <= PX2 + 1 && g->ray.hy != PX2) || (g->ray.hx >= g->map.mapW * PX2 - PX2 - 1 && g->ray.hy != PX2))//
 		{
 			g->ray.hlen = 0;
 			return ;
@@ -201,7 +201,7 @@ void	calculate_ray_vlen(t_game *g)
 
 	while (hit == 0)
 	{
-		if ((g->ray.vy < 64) || (g->ray.vy > 448))//((g->ray.vy <= PX2 + 1 && g->ray.vx != PX2) || (g->ray.vy >= g->map.mapH * PX2 - PX2 - 1 && g->ray.vx != g->map.mapH * PX2 - PX2))//
+		if ((g->ray.vy < PX2) || (g->ray.vy > WINX - PX2))//((g->ray.vy <= PX2 + 1 && g->ray.vx != PX2) || (g->ray.vy >= g->map.mapH * PX2 - PX2 - 1 && g->ray.vx != g->map.mapH * PX2 - PX2))//
 		{
 			g->ray.vlen = 0;
 			return ;
@@ -267,6 +267,7 @@ void	set_image(t_game *g)
 
 	floor_to_image(&g->img3, green);//g->cols.f_color_hex);
 	ceiling_to_image(&g->img3, red);//g->cols.c_color_hex);
+
 	bg_to_image(g, 0x00FFCDD2);    	// background color rosado minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
