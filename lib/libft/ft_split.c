@@ -11,19 +11,9 @@
 /* ************************************************************************** */
 
 /*
-Prototipo
-char **ft_split(char const *s, char c);
-
-Parámetros
-s: La string a separar.
-c: El carácter delimitador.
-
 Valor devuelto
 El array de nuevas strings resultante de la separación.
 NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc, free
 
 Descripción
 Reserva (con malloc) un array de strings, resultante de separar
@@ -108,7 +98,6 @@ char	**ft_split(const char *s, char c)
 	array_strings = ft_process(s, c, array_strings);
 	return (array_strings);
 }
-
 
 /*int	main(void)
 {

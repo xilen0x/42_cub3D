@@ -55,7 +55,6 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char	*ft_strncpy(char *dest, const char *src, unsigned int n);
 int		ft_strcmp(char c1, char c2);
 char	*ft_isspace(char *str);

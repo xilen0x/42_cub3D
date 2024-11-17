@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-/* ====================== LIBRARIES ====================== */
+/* =============================== LIBRARIES =============================== */
 # include "mlx.h"
 # include "window.h"
 # include "libft.h"
@@ -22,19 +22,21 @@
 # include <fcntl.h>
 # include <stdint.h>
 
-/* ====================== MACROS ====================== */
+/* ===============================   MACROS  =============================== */
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
 
-/* ====================== STRUCTURES ====================== */
+/* =============================== STRUCTURES =============================== */
 typedef struct s_map
 {
 	int				map_fd;
-	int				w;
-	int				h;
-	int				x;
-	int				y;
-	char			**matrix;
+	int				w;//ancho del mapa
+	int				h;//alto del mapa
+	int				x;//posicion x del jugador
+	int				y;//posicion y del jugador
+	char			**matrix;//matriz donde se guarda el mapa
+	void			*mlx;
+	void			*mlx_win;
 }	t_map;
 
 typedef struct s_list_x_map
@@ -45,24 +47,28 @@ typedef struct s_list_x_map
 
 typedef struct s_elem
 {
-	char	all_elem_found;
-	char	*no_path;
-	char	*so_path;
-	char	*ea_path;
-	char	*we_path;
+	char	*no_path;//path que almacena la ruta de la textura NO
+	char	*so_path;//path que almacena la ruta de la textura SO
+	char	*ea_path;//path que almacena la ruta de la textura EA
+	char	*we_path;//path que almacena la ruta de la textura WE
 	char	**av;
 	char	*line;
 }	t_elem;
 
 typedef struct s_colors
 {
-	int		f;
-	int		c;
-	int		f_color[3];
-	int		c_color[3];
+	int		f;//int para saber si se ha encontrado F (1)
+	int		c;//int para saber si se ha encontrado C (2)
+	int		f_color[3];//array para guardar los valores de F
+	int		c_color[3];//array para guardar los valores de C
 }	t_colors;
 
-/* ====================== PARSING ====================== */
+/* ===============================  GAME  =============================== */
+void	init_game(t_map *map);
+int		exit_game(t_map *map);
+int		press_key(int keycode, t_map *map);
+
+/* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map *map, char *av[]);
 void	parsing(t_elem *elem, t_colors *colors, t_map *map, t_lmap **lmap);
 int		file_is_cub(char *av);
@@ -113,7 +119,7 @@ int		rows_are_all_ones(t_lmap *lm);
 size_t	ft_strlen2(const char *s);
 void	*p_malloc(size_t size);
 void	jump_elements(t_lmap **lm);
-/* ------------- MATRIX ------------- */
+		/* ------------------ MATRIX ------------------ */
 void	valid_map(t_map *map);
 void	create_matrix(t_map *map, t_lmap *lmap);
 void	spaces_to_ones(t_map *map);
@@ -122,6 +128,5 @@ void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map *map);
 void	print_width_height(t_map *map);
 
-/* ====================== GAME ====================== */
 
 #endif

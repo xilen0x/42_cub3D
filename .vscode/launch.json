@@ -8,7 +8,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "${workspaceFolder}/cub3d",
+			"program": "${workspaceFolder}/cub3D",
 			"args": ["maps/valid/triangle.cub"],
 			"cwd": "${workspaceFolder}"
 		}

@@ -26,11 +26,23 @@ int	main(int ac, char *av[])
 		elem.av = av;
 		init_values(&elem, &colors, &map, av);
 		parsing(&elem, &colors, &map, &lmap);
-		//init_game(&game);
+		init_game(&map);
 		// set_images(&game);
-		// mlx_hook(game.mlx_win, X_EVENT_KEY_PRESS, 0, &press_key, &game);
-		// mlx_hook(game.mlx_win, X_EVENT_KEY_EXIT, 0, &exit_game, &game);
-		// mlx_loop(game.mlx);
+		mlx_hook(map.mlx_win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &map);
+		mlx_hook(map.mlx_win, X_EVENT_KEY_EXIT, 0, &exit_game, &map);
+		// ft_printf("\nAnchura mapa(w): %d\n", map.w);
+		// ft_printf("Altura mapa(h): %d\n\n", map.h);
+		// ft_printf("Valor x: %d\n", map.x);
+		// ft_printf("Valor y: %d\n\n", map.y);
+		// ft_printf("NO: %s\n", elem.no_path);
+		// ft_printf("SO: %s\n", elem.so_path);
+		// ft_printf("EA: %s\n", elem.ea_path);
+		// ft_printf("WE: %s\n", elem.we_path);
+		// ft_printf("F: %d\n", colors.f);
+		// ft_printf("C: %d\n\n", colors.c);
+		// ft_printf("Posición del jugador(y, x): %d,%d\n\n", map.y, map.x);
+		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
+		mlx_loop(map.mlx);
 	}
 	else
 		ft_errors("Invalid number of arguments\n");

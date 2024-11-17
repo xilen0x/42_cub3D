@@ -30,3 +30,31 @@ void	spaces_to_ones(t_map *map)
 		i++;
 	}
 }
+
+/*Check if there is any space around the 0*/
+int	any_zero_or_space(t_map *map)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (map->matrix[y])
+	{
+		x = 0;
+		while (map->matrix[y][x])
+		{
+			if ((map->matrix[y][x] == '0') &&
+				((map->matrix[y - 1][x] == ' ') ||
+				(map->matrix[y + 1][x] == ' ') ||
+				(map->matrix[y][x - 1] == ' ') ||
+				(map->matrix[y][x + 1] == ' ')))
+				return (1);
+			x++;
+		}
+		if ((y + 1) < map->h)
+			y++;
+		else
+			break ;
+	}
+	return (0);
+}

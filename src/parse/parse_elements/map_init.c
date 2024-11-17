@@ -15,7 +15,6 @@
 /*Inicializacion de valores estructura t_elem*/
 static void	init_elem_values(t_elem *elem, char *av[])
 {
-	elem->all_elem_found = '0';
 	elem->no_path = NULL;
 	elem->so_path = NULL;
 	elem->ea_path = NULL;

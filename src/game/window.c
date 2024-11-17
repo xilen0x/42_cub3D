@@ -67,12 +67,41 @@
 // 	}
 // }
 
-// /*Funcion que inicializa minilibx, crea una ventana*/
-// void	init_game(t_game *game)
-// {
-// 	game->mlx = mlx_init();
-// 	if (!game->mlx)
-// 		ft_errors2(5);
-// 	game->mlx_win = mlx_new_window(game->mlx, game->w * TILE_PXL, game->h * TILE_PXL, "cub3D");
-// 	//ft_printf("W: %d\n H: %d", game->w, game->h);
-// }
+void	move_up(t_map *map)
+{
+	(void)map;
+	ft_printf("Move up\n");
+}
+
+void	move_down(t_map *map)
+{
+	(void)map;
+	ft_printf("Move down\n");
+}
+
+void	move_left(t_map *map)
+{
+	(void)map;
+	ft_printf("Move left\n");
+}
+
+void	move_right(t_map *map)
+{
+	(void)map;
+	ft_printf("Move right\n");
+}
+
+int	press_key(int keycode, t_map *map)
+{
+	if (keycode == KEY_ESC)
+		exit_game(map);
+	if (keycode == KEY_W || keycode == KEY_UP)
+		move_up(map);
+	if (keycode == KEY_S || keycode == KEY_DOWN)
+		move_down(map);
+	if (keycode == KEY_A || keycode == KEY_LEFT)
+		move_left(map);
+	if (keycode == KEY_D || keycode == KEY_RIGHT)
+		move_right(map);
+	return (0);
+}
