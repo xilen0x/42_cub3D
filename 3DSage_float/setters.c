@@ -111,11 +111,11 @@ void	calculate_ray_hlen(t_game *g)
 			g->ray.hlen = 0;
 			return ;
 		}
-		g->map.x = (int)(g->ray.hx) >> 6;
+		g->map.x = ((int)(g->ray.hx)) >> 6;
 		if (g->ray.ra > PI && g->ray.ra < 2 * PI)// looking up
-			g->map.y = (int)(g->ray.hy - 1) >> 6;
+			g->map.y = ((int)(g->ray.hy - 1)) >> 6;
 		else if (g->ray.ra < PI && g->ray.ra > 0)//looking down
-			g->map.y = (int)(g->ray.hy) >> 6;
+			g->map.y = ((int)(g->ray.hy)) >> 6;
 		g->map.pos = g->map.y * g->map.mapW + g->map.x;
 		
 		//if ((g->ray.hx % 64 == 0 || g->ray.hx % 64 == 1) && g->ray.hy % 64 == 0 && g->map.pos >= 8 && g->map.pos < g->map.mapW * g->map.mapH && (g->map.map[g->map.pos] == '1' || g->map.map[g->map.pos - 1] == '1'))
@@ -143,17 +143,17 @@ void	check_horizon_lines(t_game *g)
 	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
 	{
 		g->ray.hy = ((int)(g->player.py) >> 6) << 6;
-		g->ray.hx = (int)roundf(g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));//g->ta[g->ray.ra]
+		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));//(int)roundf
 		g->ray.y_step = -PX2;
-		g->ray.x_step = (int)roundf(g->ray.y_step / tanf(g->ray.ra));//g->ta[g->ray.ra]);
+		g->ray.x_step = (g->ray.y_step / tanf(g->ray.ra));//(int)roundf
 		calculate_ray_hlen(g);
 	}
 	else if (g->ray.ra < PI && g->ray.ra > 0)	// looking down
 	{
 		g->ray.hy = (((int)(g->player.py) >> 6) << 6) + PX2;
-		g->ray.hx = (int)roundf(g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));
+		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));//(int)roundf
 		g->ray.y_step = PX2;
-		g->ray.x_step = (int)roundf(g->ray.y_step / tanf(g->ray.ra));
+		g->ray.x_step = (g->ray.y_step / tanf(g->ray.ra));//(int)roundf
 		calculate_ray_hlen(g);
 	}
 	else if (g->ray.ra == 0 || g->ray.ra == PI)
@@ -172,10 +172,10 @@ void	calculate_ray_vlen(t_game *g)
 			return ;
 		}
 		if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2))// looking left
-			g->map.x = ((int)(g->ray.vx - 1) >> 6);
+			g->map.x = ((int)(g->ray.vx - 1)) >> 6;
 		else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2))// looking right
-			g->map.x = (int)(g->ray.vx) >> 6;
-		g->map.y = (int)g->ray.vy >> 6;
+			g->map.x = ((int)(g->ray.vx)) >> 6;
+		g->map.y = ((int)g->ray.vy) >> 6;
 		g->map.pos = g->map.y * g->map.mapW + g->map.x;//printf("vx:%d -- vy:%d\n", g->ray.vx, g->ray.vy);//printf("pos: %d\n", g->map.pos);
 			
 		//if (g->ray.vx % 64 == 0 && (g->ray.vy % 64 == 0 || g->ray.vy % 64 == 1) && g->map.pos >= 8 && g->map.pos < g->map.mapW * g->map.mapH && (g->map.map[g->map.pos] == '1' || g->map.map[g->map.pos - 8] == '1'))
