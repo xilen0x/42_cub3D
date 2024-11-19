@@ -16,8 +16,6 @@ int img2_init(t_game *g)
 {
 	g->img2.h = g->map.mapH * PX2;//8 * 64 = 512;
 	g->img2.w = g->map.mapW * PX2;//8 * 64 = 512;
-	//g->img2.w = WINX;
-	//g->img2.h = WINY;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -35,7 +33,7 @@ int img2_init(t_game *g)
 	}
 	return (0);
 }
-int img_init(t_game *g)
+int img3_init(t_game *g)
 {
 	// g.img3.h = 512;//g.map.mapH * PX3;//768;//1536;
 	// g.img3.w = 768;//g.map.mapH * PX3;//1280;//2048;
@@ -71,10 +69,6 @@ int	main(int argc, char *argv[])
 	lmap = NULL;
 	if (argc == 2)
 	{
-		// set_sine(g.si);
-		// set_cosine(g.co);
-		// set_tan(g.ta);
-
 		elem.av = argv;
 		init_values(&elem, &g.cols, &map_parse, elem.av);
 		parsing(&elem, &g.cols, &map_parse, &lmap);
@@ -84,7 +78,7 @@ int	main(int argc, char *argv[])
 			ft_errors("Error initializing mlx\n");
 		g.win = mlx_new_window(g.mlx, WINX, WINY, "Cub3D");
 		img2_init(&g);
-		img_init(&g);
+		img3_init(&g);
 		set_player(&g.map, &g.player);
 		set_image(&g);
 		set_rays(&g);

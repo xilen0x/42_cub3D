@@ -17,11 +17,11 @@ void	floor_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < (WINY / 2))//antes: while (y < (img->h / 2))
+    y = 0;
+	while (y < (img->h / 2))
 	{
 		x = 0;   
-		while (x < WINX)//antes: while (x < img->w)
+		while (x < img->w)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -29,18 +29,17 @@ void	floor_to_image(t_img *img, int color)
 		y++;
 	}
 }
-
 
 void	ceiling_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
-	y = WINY / 2;//antes: y = img->h / 2;
-	while (y < WINY)//antes: while (y < img->h)
+    y = img->h / 2;
+	while (y < img->h)
 	{
 		x = 0;   
-		while (x < WINX)//antes: while (x < img->w)
+		while (x < img->w)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -49,19 +48,18 @@ void	ceiling_to_image(t_img *img, int color)
 	}
 }
 
-void	bg_to_image(t_game *g, int color)
+void	bg_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < g->img2.h)//antes: while (y < img->h)
+    y = 0;
+	while (y < img->h)
 	{
 		x = 0;   
-		// while (x < g->img2.w)
-		while (x < g->img2.w)//antes : while(x < img->w)
+		while (x < img->w)
 		{
-			set_pixel_to_image(&g->img2, x, y, color);//antes: set_pixel_to_image(img, x, y, color);
+			set_pixel_to_image(img, x, y, color);
 			x++;
 		}
 		y++;
@@ -73,15 +71,13 @@ void	grid_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-	y = 0;
-	// while (y < WINY / 5)
+    y = 0;
 	while (y < img->h)
 	{
 		x = 0;
-		// while (x < WINX / 5)
 		while (x < img->w)
-		{
-			if ((y % PX2) == 0 || (x % PX2) == 0)//antes: if ((y % PX2) == 0 || (x % PX2) == 0)
+		{       
+			if ((y % PX2) == 0 || (x % PX2) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
 		}
@@ -96,10 +92,10 @@ void	box_to_image(t_img *img, int x, int y, int color)
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + PX2)//antes: while (y < y0 + PX2)
+	while (y < y0 + PX2)
 	{
 		x = x0;
-		while (x < x0 + PX2)//antes: while (x < x0 + PX2)
+		while (x < x0 + PX2)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -107,28 +103,6 @@ void	box_to_image(t_img *img, int x, int y, int color)
 		y++;
 	}
 }
-// void	map_to_image(t_img *img, t_map *map, int color)
-// {
-// 	int	x;
-// 	int	y;
-
-//     y = 0;
-// 	// while (y < (map->mapH / WINY)
-// 	while (y < map->mapH)
-// 	{
-// 		x = 0;
-// 		//while (x < (map->mapW / WINX) && map->map[y * map->mapW + x] != '\0')
-// 		while (x < map->mapW && map->map[y * map->mapW + x] != '\0')
-// 		{
-// 			if (map->map[y * map->mapW + x] == '1')
-// 				box_to_image(img, x * PX2, y * PX2, color);
-// 				//box_to_image(img, x * PX2B, y * PX2B, color);
-// 				//box_to_image(img, x * (PX2 / 5), y * (PX2 / 5), color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
 
 void	map_to_image(t_img *img, t_map *map, int color)
 {
@@ -156,13 +130,13 @@ void	player_to_image(t_img *img, t_player *player, int color)
 	int x0;
 	int y0;
 
-	x0 = player->px - 8;//- 4;
-	y0 = player->py - 8;//- 4;
+	x0 = player->px - 8;
+	y0 = player->py - 8;
 	y = y0;//player->py - 4;
-	while (y <= player->py + 8) // + 4 // 17 pixels is the size of the mini player
+	while (y <= player->py + 8)  // 17 pixels is the size of the mini player
 	{
 		x = x0;//player->px -4;
-		while (x <= player->px + 8)//+ 4
+		while (x <= player->px + 8)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -170,32 +144,6 @@ void	player_to_image(t_img *img, t_player *player, int color)
 		y++;
 	}
 }
-
-// void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, int color)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	hyp;	// hyp is the length of the view direction arrow
-
-// 	(void)color;
-// 	hyp = 1;
-// 	while (hyp <= 30)
-// 	{
-// 		//x = player->px + (int)(cos(player->pa) * hyp);
-// 		x = (int)(g->player.px + (g->co[g->player.pa] * hyp));
-// 		//printf("pa: %d\tcos(pa) * hyp: %f * %d\n", g->player.pa, g->cosines[g->player.pa], hyp);
-// 		//y = player->py + (int)(sin(player->pa) * hyp);
-// 		y = (int)(g->player.py + (g->si[g->player.pa] * hyp));
-// 		//printf("pa: %d\tsin(pa) * hyp: %f * %d\n\n", g->player.pa, g->sines[g->player.pa], hyp);
-// 		// if (x >= 0 && x <= 511 && y >=0 && y <= 511)//////////
-// 		if (x >= 0 && x < WINX && y >= 0 && y < WINY)//////////
-// 		{
-// 			//set_pixel_to_image(&g->img3, x, y, color);//imprime una linea en la direccion de la vista
-// 			//printf("x:\t%d\ny:\t%d\n\n", x, y);//////////
-// 		}
-// 		hyp++;
-// 	}
-// }
 
 void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, int color)
 {
@@ -208,49 +156,11 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 	{
 		x = (int)(g->player.px + (cosf(g->player.pa) * hyp));
 		y = (int)(g->player.py + (sinf(g->player.pa) * hyp));
-		if (x >= 0 && x <= 511 && y >=0 && y <= 511)
-			set_pixel_to_image(&g->img2, x, y, color);
+		//if (x >= 0 && x <= 511 && y >=0 && y <= 511)
+		set_pixel_to_image(&g->img2, x, y, color);
 		hyp++;
 	}
 }
-
-// void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *player, int color)
-// {
-// 	int	x;
-// 	int	y;
-// 	int	hyp;
-
-// 	hyp = 1;
-// 	x = 0;//68;
-// 	y = 0;//452;
-// 	while (hyp <= g->ray.len)
-// 	{
-// 		x = (int)(g->player.px + roundf(g->co[g->ray.ra] * hyp));//(g->co[g->player.pa] * hyp));
-// 		y = (int)(g->player.py + roundf(g->si[g->ray.ra] * hyp));//(g->si[g->player.pa] * hyp));
-// 	//	if (x >= 0 && x <= 511 && y >= 0 && y<= 511)///////////////(x >= 64 && x <= 447 && y >= 64 && y<= 447)/////////////
-// 	//	{
-// 			set_pixel_to_image(&g->img2, x, y, color);
-// 			//printf("x:\t\%d\ny:\t%d\n", x, y);//////////////
-// 	//	}
-// 		hyp++;
-// 	}
-// /*
-// 	hyp = 1;
-// 	x = 0;//68;
-// 	y = 0;//452;
-// 	while (hyp <= g->ray.vlen)
-// 	{
-// 		x = (int)(g->player.px + roundf(g->co[g->ray.ra] * hyp));//(g->co[g->player.pa] * hyp));
-// 		y = (int)(g->player.py + roundf(g->si[g->ray.ra] * hyp));//(g->si[g->player.pa] * hyp));
-// 	//	if (x >= 0 && x <= 511 && y >= 0 && y<= 511)///////////////(x >= 64 && x <= 447 && y >= 64 && y<= 447)/////////////
-// 	//	{
-// 			set_pixel_to_image(&g->img, x, y, 0x0000FF00);
-// 			//printf("x:\t\%d\ny:\t%d\n", x, y);//////////////
-// 	//	}
-// 		hyp++;
-// 	}
-// */
-// }
 
 void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *player, int color)
 {
@@ -265,7 +175,7 @@ void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *play
 	{
 		x = (int)(g->player.px + roundf(cosf(g->ray.ra) * hyp));
 		y = (int)(g->player.py + roundf(sinf(g->ray.ra) * hyp));
-			set_pixel_to_image(&g->img2, x, y, color);
+		set_pixel_to_image(&g->img2, x, y, color);
 		hyp++;
 	}
 }
@@ -295,8 +205,8 @@ void	render_wall(t_game *g, int col)
 {
 	float	cos_angle;
 	float	wall_h;
-	float	bot_pix;
-	float	top_pix;
+	int		bot_pix;
+	int		top_pix;
 
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
@@ -306,8 +216,8 @@ void	render_wall(t_game *g, int col)
 	g->ray.len = (g->ray.len * cosf(cos_angle)); // fix the fisheye
 	//g->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl - mlx->ply->angle)); // fix the fisheye
 	wall_h = (PX2 / g->ray.len) * ((WINX / 2) / tanf(g->player.fov / 2)); // get the wall height
-	bot_pix = (WINY / 2.f) + (wall_h / 2.f); // get the bottom pixel
-	top_pix = (WINY / 2.f) - (wall_h / 2.f); // get the top pixel
+	bot_pix = (g->h / 2) + (wall_h / 2); // get the bottom pixel
+	top_pix = (g->h / 2) - (wall_h / 2); // get the top pixel
 	if (bot_pix > g->h) // check the bottom pixel
 		bot_pix = g->h;
 	if (top_pix < 0) // check the top pixel
@@ -315,50 +225,55 @@ void	render_wall(t_game *g, int col)
 	draw_wall(g, col, top_pix, bot_pix); // draw the wall
 	//draw_floor_ceiling(mlx, ray, t_pix, b_pix); // draw the floor and the ceiling
 }
+/*void	slice_to_image(t_game *g, int col, int top_px, int bottom_px)//, int color)	// draw the wall
+{
+	int	x;
+	int	wall_slice;
+	//int	color;
 
-// void	slice_to_image(t_game *g, int col, int top_px, int bottom_px)//, int color)	// draw the wall
-// {
-// 	int	x;
-// 	int	wall_slice;
-// 	//int	color;
+	x = 0;
+	wall_slice = 1;//768 / 128;// fov = 1.28 radians
+	//color = get_color(g);
+	while (top_px < bottom_px)
+	{
+		x = 0;
+		while (x < wall_slice)
+		{
+			set_pixel_to_image(&g->img3, col + x, top_px, g->ray.color);
+			x++;
+		}
+		top_px++;
+	}
+}*/
 
-// 	x = 0;
-// 	wall_slice = WINX / 128;//768 / 128 fov = 1.28 radians
-// 	//color = get_color(g);
-// 	while (top_px < bottom_px)
-// 	{
-// 		x = 0;
-// 		while (x < wall_slice)
-// 		{
-// 			set_pixel_to_image(&g->img3, col + x, top_px, g->ray.color);
-// 			x++;
-// 		}
-// 		top_px++;
-// 	}
-// }
+/*
+void	wall_to_image(t_game *g, int col)
+{
+	int	wall_h;
+	int	bottom_px;
+	int	top_px;
+	float	cos_angle;
 
-// void	wall_to_image(t_game *g, int col)
-// {
-// 	int	wall_h;
-// 	int	bottom_px;
-// 	int	top_px;
-// 	int	cos_angle;
-
-// 	cos_angle = g->player.pa - g->ray.ra;
-// 	if (cos_angle < 0)
-// 		cos_angle = cos_angle + 2 * PI;
-// 	else if (cos_angle > 2 * PI)
-// 		cos_angle = cos_angle - 2 * PI;
-// 	g->ray.len = roundf(g->ray.len * g->co[cos_angle]); // fix the fisheye
-
-// 	wall_h = (roundf)((64.f / g->ray.len) * ((g->img3.w / 2) / g->ta[64]));//ta[g->ray.ra - g->player.pa])); // get the wall height
-// 	if (wall_h < 0)
-// 		wall_h = (-1) * wall_h;
-// 	bottom_px = (WINY / 2) + (wall_h / 2);//(g->h / 2) + (wall_h / 2); // get the bottom pixel
-// 	top_px = (WINY / 2) - (wall_h / 2);//(g->h / 2) - (wall_h / 2); // get the top pixel
-// 	if (bottom_px > WINY)//(bottom_px > g->h) // check the bottom pixel
-// 		bottom_px = WINY;//bottom_px = g->h;
-// 	if (top_px < 0) // check the top pixel
-// 		top_px = 0;
-// 	slice_to_image(g, col, top_px, bottom_px);
-// }
+	//printf("ra:%d - len:%d - cos: %.2f - len*cos: %d\n", g->ray.ra, g->ray.len, g->co[g->ray.ra], (int)(g->ray.len * g->co[g->ray.ra - g->player.pa]));
+	//printf("ra:%d - len:%d\n", g->ray.ra, g->ray.len);
+	
+	cos_angle = g->player.pa - g->ray.ra;
+	if (cos_angle < 0)
+		cos_angle = cos_angle + 2 * PI;
+	else if (cos_angle > 2 * PI)
+		cos_angle = cos_angle - 2 * PI;
+	g->ray.len = (g->ray.len * cosf(cos_angle)); // fix the fisheye
+	
+	wall_h = (64.f / g->ray.len) * ((g->img3.w / 2) / tanf(0.525));
+	if (wall_h < 0)
+		wall_h = (-1) * wall_h;
+	bottom_px = (g->h / 2) + (wall_h / 2); // get the bottom pixel
+	top_px = (g->h / 2) - (wall_h / 2); // get the top pixel
+	if (bottom_px > g->h) // check the bottom pixel
+		bottom_px = g->h;
+	if (top_px < 0) // check the top pixel
+		top_px = 0;
+	slice_to_image(g, col, top_px, bottom_px);
+}*/
+//printf("TL/len:%.2f - ra:%d - len:%d - tan: %.2f\n", 64.f/g->ray.len, g->ray.ra, g->ray.len, g->ta[64]);
+//printf("Col:%d - Wall Height: %d - topPX:%d - botPX:%d\n\n", col, wall_h, top_px, bottom_px);

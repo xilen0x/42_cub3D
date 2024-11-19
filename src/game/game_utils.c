@@ -17,14 +17,13 @@ int	exit_game(t_game *g)
 	if (g->mlx)
 		mlx_destroy_window(g->mlx, g->win);
 	free(g->map.map); // free strdup
-	mlx_destroy_image(g->mlx, g->img3.img_ptr);
+	mlx_destroy_image(g->mlx, g->img2.img_ptr);
 	mlx_destroy_display(g->mlx);
 	free(g->mlx);
 	printf("GOOD BYE!\n");
 	exit(EXIT_SUCCESS);
 }
 
-// int	press_key(int keycode, t_game *g, t_colors colors)
 int	press_key(int keycode, t_game *g)
 {
 	if (keycode == KEY_ESC)
@@ -46,4 +45,16 @@ int	press_key(int keycode, t_game *g)
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0 , 0);
 	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
 	return (0);
+}
+
+int	is_wall(t_game *g, int x, int y)
+{
+	int	mapX;
+	int	mapY;
+	int	pos;
+
+	mapX = x >> 6;//x / PX2;
+	mapY = y >> 6;//y / PX2;
+	pos = mapY * g->map.mapW + mapX;
+	return (g->map.map[pos] == '1');
 }

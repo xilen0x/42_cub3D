@@ -27,11 +27,11 @@
 # define KEY_LEFT				65361
 # define KEY_RIGHT				65363
 # define PX2					64//(64 / 5)//32//64	// Side of 2D tiles in pixels
-# define PX2B					32//(64 / 5)
+// # define PX2B					32//(64 / 5)
 # define PX3					64//32//64	// Side of 3D tiles in pixels
 # define PI						3.141592f//314	// int 314 / 100.0f returns a float !!!
-# define WINX					1920//1280
-# define WINY					1080//1024
+# define WINX					1920//ancho
+# define WINY					1080//alto
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -134,9 +134,6 @@ typedef struct	s_game
 	void		*win;
 	int			h;		// game/window height in pixels
 	int			w;		// game/window width in pixels
-	// float		si[628];
-	// float		co[628];
-	// float		ta[628];
 }				t_game;
 
 /* ===============================  GAME  =============================== */
@@ -171,7 +168,7 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-void	bg_to_image(t_game *g, int color);
+void	bg_to_image(t_img *img, int color);
 void	floor_to_image(t_img *img, int color);
 void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
