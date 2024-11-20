@@ -27,8 +27,9 @@
 #define KEY_D				100
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
-#define	PX2					64//32//64	// Side of 2D tiles in pixels
-#define	PX3					64//32//64	// Side of 3D tiles in pixels
+#define	WX					1280//32//64	// Side of 2D tiles in pixels
+#define	WY					512//32//64	// Side of 3D tiles in pixels
+#define	TL					64
 #define	PI					3.141592f
 
 typedef struct	s_player
@@ -41,7 +42,7 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	float	ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
+	float		ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
 	float		hx;			// horizontal line intersection point
 	float		hy;			// horizontal line intersection point
 	float		vx;			// vertical line intersection point
@@ -80,24 +81,24 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
-	t_img	img2;
-	t_img	img3;
-	t_map	map;
+	t_img		img2;
+	t_img		img3;
+	t_map		map;
 	t_player	player;
-	t_ray	ray;
-	void	*mlx;
-	void	*win;
-	int		h;			// game/window height in pixels
-	int		w;			// game/window width in pixels
+	t_ray		ray;
+	void		*mlx;
+	void		*win;
+	//int			h;			// game/window height in pixels
+	//int			w;			// game/window width in pixels
 	//float	si[628];
 	//float	co[628];
 	//float	ta[628];
 }				t_game;
 
 /************************** trigo.c *******************************/
-void	set_sine(float *sin_arr);
-void	set_cosine(float *cos_arr);
-void	set_tan(float *tan_arr);
+//void	set_sine(float *sin_arr);
+//void	set_cosine(float *cos_arr);
+//void	set_tan(float *tan_arr);
 
 /************************* setters.c ******************************/
 void	set_pixel_to_image(t_img *img, int x, int y, int color);
@@ -114,7 +115,7 @@ void	check_vertical_lines(t_game *g);
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
-int	is_wall(t_game *g, int x, int y);
+int		is_wall(t_game *g, int x, int y);
 
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);

@@ -18,7 +18,7 @@ HEADER	:=	./cub3D.h
 #LIBFT	:=	./libft/libft.a
 MLX		:=	./mlx_linux/libmlx.a
 CC		:=	gcc
-CFLAGS	:=	-Wall -Werror -Wextra -fsanitize=address
+CFLAGS	:=	-Wall -Werror -Wextra# -fsanitize=address
 LFLAGS	:=	-Lmlx_linux -lmlx -lX11 -lXext -lm
 IFLAGS	:=	-Imlx_linux -Iinc
 
