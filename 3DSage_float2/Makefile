@@ -14,7 +14,7 @@ NAME	:=	cub3D
 SRC		:=	cub3D.c setters.c game_utils.c game_moves.c \
 			put_to_image.c
 OBJ		:=	$(SRC:%.c=%.o)
-HEADER	:=	./cub3D.h
+HEADER	:=	./cub3d.h
 #LIBFT	:=	./libft/libft.a
 MLX		:=	./mlx_linux/libmlx.a
 CC		:=	gcc
