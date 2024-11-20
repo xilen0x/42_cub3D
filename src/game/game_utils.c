@@ -41,7 +41,7 @@ int	press_key(int keycode, t_game *g)
 	else if (keycode == KEY_RIGHT)
 		move_r(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);//g->img2.w , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
+	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
 	return (0);
 }
 

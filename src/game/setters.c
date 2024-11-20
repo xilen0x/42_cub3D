@@ -203,11 +203,28 @@ void	check_vertical_lines(t_game *g)
 		g->ray.vlen = 0;
 }
 
+// void	set_image(t_game *g)
+// {
+// 	floor_to_image(&g->img3, 0x0099CCFF);
+// 	ceiling_to_image(&g->img3, 0x00CC9966);
+// 	bg_to_image(&g->img2, 0x00606060);    				// grey background
+// 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
+// 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
+// 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
+// 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
+// }
+
 void	set_image(t_game *g)
 {
-	floor_to_image(&g->img3, 0x0099CCFF);
-	ceiling_to_image(&g->img3, 0x00CC9966);
-	bg_to_image(&g->img2, 0x00606060);    				// grey background
+	int	color1;
+	int	color2;
+
+	color1 = g->cols.f_color_hex;
+	color2 = g->cols.c_color_hex;
+
+	floor_to_image(&g->img3, color2);//g->cols.f_color_hex);
+	ceiling_to_image(&g->img3, color1);//g->cols.c_color_hex);
+	bg_to_image(&g->img2, 0x00e3e6e5);    				// background color minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player

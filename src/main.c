@@ -84,7 +84,7 @@ int	main(int argc, char *argv[])
 		set_rays(&g);
 		mlx_clear_window(g.mlx, g.win);
 		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
-		// mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
 		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);//1L << 0
 		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);//1L << 0
 		mlx_loop(g.mlx);
