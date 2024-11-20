@@ -40,15 +40,8 @@ int	press_key(int keycode, t_game *g)
 		move_l(g);
 	else if (keycode == KEY_RIGHT)
 		move_r(g);
-<<<<<<<< HEAD:src/game/game_utils.c
-	set_image(g);
-	set_rays(g);
-	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0 , 0);
-	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
-========
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, g->img2.w , 0);
 	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
->>>>>>>> sergio:3DSage_float2/game_utils.c
 	return (0);
 }
 

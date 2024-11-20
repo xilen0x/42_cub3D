@@ -12,7 +12,7 @@
 
 NAME	:=	cub3D	
 SRC		:=	cub3D.c setters.c game_utils.c game_moves.c \
-			put_to_image.c trigo.c
+			put_to_image.c
 OBJ		:=	$(SRC:%.c=%.o)
 HEADER	:=	./cub3D.h
 #LIBFT	:=	./libft/libft.a

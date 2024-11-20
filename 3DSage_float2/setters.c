@@ -64,8 +64,6 @@ void    set_rays(t_game *g)
 			g->ray.ra = g->ray.ra + 2 * PI;
 		else if (g->ray.ra >= 2 * PI)
 			g->ray.ra = g->ray.ra - 2 * PI;
-		// printf("2PI:%f\n", 2 * PI);
-		// printf("Norm angle:%f\n", g->ray.ra);
 		check_horizon_lines(g);
 		check_vertical_lines(g);
 		if (g->ray.hlen <= 0)
@@ -90,12 +88,7 @@ void    set_rays(t_game *g)
 			g->ray.len = g->ray.vlen;
 			g->ray.color = g->ray.vcolor;
 		}
-		// printf("hlen:%f - hx:%f - hy:%f - angle:%f\n", g->ray.hlen, g->ray.hx,  g->ray.hy, g->ray.ra);
-		// printf("vlen:%f - vx:%f - vy:%f - angle:%f\n", g->ray.vlen, g->ray.vx, g->ray.vy, g->ray.ra);
-		// printf("len:%f - angle:%f\n\n", g->ray.len, g->ray.ra);
-		
 		ray_to_image(g, g->ray.color);//0x00FF0000);//0x0000FF00 green
-		// printf("Current col: %d\n", (int)(radians * (g->w / 128)));
 		render_wall(g, rays);// + (g->w / 128))));////128////////
 		
 		rays++;

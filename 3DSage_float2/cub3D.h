@@ -95,11 +95,6 @@ typedef struct	s_game
 	//float	ta[628];
 }				t_game;
 
-/************************** trigo.c *******************************/
-//void	set_sine(float *sin_arr);
-//void	set_cosine(float *cos_arr);
-//void	set_tan(float *tan_arr);
-
 /************************* setters.c ******************************/
 void	set_pixel_to_image(t_img *img, int x, int y, int color);
 void	set_player(t_map *map, t_player *player);
