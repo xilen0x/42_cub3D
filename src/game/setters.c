@@ -34,8 +34,32 @@ void	set_player(t_map *map, t_player *player)
 	{
 		x = 0;
 		while (x < map->mapW)
-		{       
-			if (map->map[y * map->mapW + x] == 'N' || map->map[y * map->mapW + x] == 'S' || map->map[y * map->mapW + x] == 'E' || map->map[y * map->mapW + x] == 'W')
+		{
+			if (map->map[y * map->mapW + x] == 'N')
+			{
+				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
+				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
+				player->pa = 0.f;
+				player->fov = 1.05f;
+				return ;
+			}
+			if (map->map[y * map->mapW + x] == 'S')
+			{
+				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
+				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
+				player->pa = 0.f;
+				player->fov = 1.05f;
+				return ;
+			}
+			if (map->map[y * map->mapW + x] == 'E')
+			{
+				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
+				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
+				player->pa = 0.f;
+				player->fov = 1.05f;
+				return ;
+			}
+			if (map->map[y * map->mapW + x] == 'W')
 			{
 				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
 				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
@@ -55,7 +79,6 @@ void    set_rays(t_game *g)
 
 	g->ray.ra = g->player.pa - 30 * 0.0175;
 	rays = 0;
-	printf("Ray angle:%f\n", g->ray.ra);
 	while (rays < g->img3.w)// w=768 //128)
 	{
 		g->ray.ra = g->ray.ra + (g->player.fov / g->img3.w);// fov/768
@@ -69,7 +92,7 @@ void    set_rays(t_game *g)
 		{
 			g->ray.len = sqrtf(g->ray.vlen);
 			g->ray.color = g->ray.vcolor;
-		}	
+		}
 		else if (g->ray.vlen <= 0)
 		{
 			g->ray.len = sqrtf(g->ray.hlen);

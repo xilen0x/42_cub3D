@@ -14,8 +14,10 @@
 		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
 int img2_init(t_game *g)
 {
-	g->img2.h = g->map.mapH * TL;//8 * 64 = 512;
-	g->img2.w = g->map.mapW * TL;//8 * 64 = 512;
+	// g->img2.h = g->map.mapH * TL;//8 * 64 = 512;
+	// g->img2.w = g->map.mapW * TL;//8 * 64 = 512;
+	g->img2.w =384;
+	g->img2.h = 128;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
