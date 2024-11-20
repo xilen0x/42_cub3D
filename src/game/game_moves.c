@@ -14,104 +14,94 @@
 
 void	move_w(t_game *g)
 {
-	//int	x;
-	//int	xleft;
-	//int	xright;
-	//int	y;
+	int	x;
+	int	xleft;
+	int	xright;
+	int	y;
 
-	//x = (int)(g->player.px) >> 6;
-	//xleft = (int)(g->player.px - 8) >> 6;
-	//xright = (int)(g->player.px + 7) >> 6;
-	//y = (int)(g->player.py) >> 6;//y = (int)(g->player.py - 9) >> 6;
-	//if (g->map.map[g->map.mapH * y + x] != '1')// && g->map.map[g->map.mapH * y + xleft] != '1' && g->map.map[g->map.mapH * y + xright] != '1')//68)  // min py will be 68 = 64 px is the top wall heigth + 4 is miniplayer height/2
+	x = (int)(g->player.px) >> 6;
+	xleft = (int)(g->player.px - 8) >> 6;
+	xright = (int)(g->player.px + 7) >> 6;
+	y = (int)(g->player.py - 9) >> 6;
+	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * y + xleft] != '1' && g->map.map[g->map.mapW * y + xright] != '1')//68)  // min py will be 68 = 64 px is the top wall heigth + 4 is miniplayer height/2
+	{
 		g->player.py = g->player.py - 4;    // 4 is the Y step of miniplayer
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+		set_image(g);
+		set_rays(g);
+	}
 }
 
 void	move_s(t_game *g)
 {
-	//int	x;
-	//int	xleft;
-	//int	xright;
-	//int	y;
+	int	x;
+	int	xleft;
+	int	xright;
+	int	y;
 
-	//x = (int)(g->player.px) >> 6;
-	//xleft = (int)(g->player.px - 8) >> 6;
-	//xright = (int)(g->player.px + 7) >> 6;
-	//y = (int)(g->player.py) >> 6;//y = (int)(g->player.py + 9) >> 6;
-	//if (g->map.map[g->map.mapH * y + x] != '1')// && g->map.map[g->map.mapH * y + xleft] != '1' && g->map.map[g->map.mapH * y + xright] != '1')
+	x = (int)(g->player.px) >> 6;
+	xleft = (int)(g->player.px - 8) >> 6;
+	xright = (int)(g->player.px + 7) >> 6;
+	y = (int)(g->player.py + 9) >> 6;
+	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * y + xleft] != '1' && g->map.map[g->map.mapW * y + xright] != '1')
+	{
 		g->player.py = g->player.py + 4;    // 4 is the Y step of miniplayer
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+		set_image(g);
+		set_rays(g);
+	}
 }
 
 void	move_a(t_game *g)
 {
-//	int	x;
-//	int	y;
-	//int	yup;
-	//int	ydown;
+	int	x;
+	int	y;
+	int	yup;
+	int	ydown;
 
-//	x = (int)(g->player.px) >> 6;//x = (int)(g->player.px - 9) >> 6;
-//	y = (int)(g->player.py) >> 6;
-	//yup = (int)(g->player.py - 8) >> 6;
-	//ydown = (int)(g->player.py + 7) >> 6;
-	//if (g->map.map[g->map.mapH * y + x] != '1')// && g->map.map[g->map.mapH * yup + x] != '1' && g->map.map[g->map.mapH * ydown + x] != '1')
+	x = (int)(g->player.px - 9) >> 6;
+	y = (int)(g->player.py) >> 6;
+	yup = (int)(g->player.py - 8) >> 6;
+	ydown = (int)(g->player.py + 7) >> 6;
+	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * yup + x] != '1' && g->map.map[g->map.mapW * ydown + x] != '1')
+	{
 		g->player.px = g->player.px - 4;    // 4 is the Y step of miniplayer
-
-//	if (g->player.px > PX2 + 4)//68)  // 64 px is the left wall heigth + 4 is miniplayer height/2
-//		g->player.px = g->player.px - 4;    // 4 is the Y step of miniplayer
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+		set_image(g);
+		set_rays(g);
+	}
 }
 
 void	move_d(t_game *g)
 {
-//	int	x;
-//	int	y;
-	//int	yup;
-	//int	ydown;
+	int	x;
+	int	y;
+	int	yup;
+	int	ydown;
 
-//	x = (int)(g->player.px) >> 6;//x = (int)(g->player.px + 9) >> 6;
-//	y = (int)(g->player.py) >> 6;
-	//yup = (int)(g->player.py - 8) >> 6;
-	//ydown = (int)(g->player.py + 7) >> 6;
-	//if (g->map.map[g->map.mapH * y + x] != '1')// && g->map.map[g->map.mapH * yup + x] != '1' && g->map.map[g->map.mapH * ydown + x] != '1')
+	x = (int)(g->player.px + 9) >> 6;
+	y = (int)(g->player.py) >> 6;
+	yup = (int)(g->player.py - 8) >> 6;
+	ydown = (int)(g->player.py + 7) >> 6;
+	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * yup + x] != '1' && g->map.map[g->map.mapW * ydown + x] != '1')
+	{
 		g->player.px = g->player.px + 4;    // 4 is the Y step of miniplayer
-
-//	if (g->player.px < ((PX2 * g->map.mapW) - (PX2 + 4)))//512 - 68)    // 64 px is the rigth wall heigth + 4 is miniplayer height/2
-//		g->player.px = g->player.px + 4;    // 4 is the Y step of miniplayer
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+		set_image(g);
+		set_rays(g);
+	}
 }
 
 void	move_l(t_game *g)
 {
-	g->player.pa -= 0.01;//5;//10 //0.1;
+	g->player.pa -= 0.1;//5;//10 //0.1;
 	if (g->player.pa < 0)
 		g->player.pa += 2 * PI;
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+	set_image(g);
+	set_rays(g);
 }
 
 void	move_r(t_game *g)
 {
-	g->player.pa += 0.01;//5;//10 //0.1;
+	g->player.pa += 0.1;//5;//10 //0.1;
 	if (g->player.pa >= 2 * PI)
 		g->player.pa -= 2 * PI;
-	// set_image(g);
-	// set_rays(g);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 512 , 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0 , 0);
+	set_image(g);
+	set_rays(g);
 }

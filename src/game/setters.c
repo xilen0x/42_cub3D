@@ -17,7 +17,7 @@ void	set_pixel_to_image(t_img *img, int x, int y, int color)
 {
 	char	*offset;
 
-	if (x < 0 || x >= WINX || y < 0 || y >= WINY)
+	if (x < 0 || x >= WX || y < 0 || y >= WY)
 		return ;
 	// Line len is in bytes. If img_w = 1024 pixels, so len_line ~ 4096 bytes (can differ for aligment)
 	offset = img->addr + (y * img->line_len + x * (img->bpp / 8));
@@ -59,13 +59,10 @@ void    set_rays(t_game *g)
 	while (rays < g->img3.w)// w=768 //128)
 	{
 		g->ray.ra = g->ray.ra + (g->player.fov / g->img3.w);// fov/768
-		printf("Ray angle:%f - dif:%f\n", g->ray.ra, (g->player.fov / g->img3.w));
 		if (g->ray.ra < 0)
 			g->ray.ra = g->ray.ra + 2 * PI;
 		else if (g->ray.ra >= 2 * PI)
 			g->ray.ra = g->ray.ra - 2 * PI;
-		// printf("2PI:%f\n", 2 * PI);
-		// printf("Norm angle:%f\n", g->ray.ra);
 		check_horizon_lines(g);
 		check_vertical_lines(g);
 		if (g->ray.hlen <= 0)
@@ -90,14 +87,8 @@ void    set_rays(t_game *g)
 			g->ray.len = g->ray.vlen;
 			g->ray.color = g->ray.vcolor;
 		}
-		// printf("hlen:%f - hx:%f - hy:%f - angle:%f\n", g->ray.hlen, g->ray.hx,  g->ray.hy, g->ray.ra);
-		// printf("vlen:%f - vx:%f - vy:%f - angle:%f\n", g->ray.vlen, g->ray.vx, g->ray.vy, g->ray.ra);
-		// printf("len:%f - angle:%f\n\n", g->ray.len, g->ray.ra);
-		
 		ray_to_image(g, g->ray.color);//0x00FF0000);//0x0000FF00 green
-		// printf("Current col: %d\n", (int)(radians * (g->w / 128)));
 		render_wall(g, rays);// + (g->w / 128))));////128////////
-		
 		rays++;
 	}
 }

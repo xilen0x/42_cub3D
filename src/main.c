@@ -14,8 +14,8 @@
 		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
 int img2_init(t_game *g)
 {
-	g->img2.h = g->map.mapH * PX2;//8 * 64 = 512;
-	g->img2.w = g->map.mapW * PX2;//8 * 64 = 512;
+	g->img2.h = g->map.mapH * TL;//8 * 64 = 512;
+	g->img2.w = g->map.mapW * TL;//8 * 64 = 512;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -37,10 +37,10 @@ int img3_init(t_game *g)
 {
 	// g.img3.h = 512;//g.map.mapH * PX3;//768;//1536;
 	// g.img3.w = 768;//g.map.mapH * PX3;//1280;//2048;
-	g->img3.w = WINX;
-	g->img3.h = WINY;
+	g->img3.w = WX;
+	g->img3.h = WY;
 	// g.img3.img_ptr = mlx_new_image(g.mlx, g.img3.w, g.img3.h);
-	g->img3.img_ptr = mlx_new_image(g->mlx, WINX, WINY);
+	g->img3.img_ptr = mlx_new_image(g->mlx, WX, WY);
 	if (!g->img3.img_ptr)
 	{
 		mlx_destroy_display(g->mlx);
@@ -76,7 +76,7 @@ int	main(int argc, char *argv[])
 		g.mlx = mlx_init();
 		if (!g.mlx)
 			ft_errors("Error initializing mlx\n");
-		g.win = mlx_new_window(g.mlx, WINX, WINY, "Cub3D");
+		g.win = mlx_new_window(g.mlx, WX, WY, "Cub3D");
 		img2_init(&g);
 		img3_init(&g);
 		set_player(&g.map, &g.player);

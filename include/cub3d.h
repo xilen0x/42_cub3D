@@ -132,8 +132,8 @@ typedef struct	s_game
 	t_colors	cols;
 	void		*mlx;
 	void		*win;
-	int			h;		// game/window height in pixels
-	int			w;		// game/window width in pixels
+	// int			h;		// game/window height in pixels
+	// int			w;		// game/window width in pixels
 }				t_game;
 
 /* ===============================  GAME  =============================== */
