@@ -67,24 +67,24 @@ void    set_rays(t_game *g)
 		check_vertical_lines(g);
 		if (g->ray.hlen <= 0)
 		{
-			g->ray.len = g->ray.vlen;
+			g->ray.len = sqrtf(g->ray.vlen);
 			g->ray.color = g->ray.vcolor;
 		}	
 		else if (g->ray.vlen <= 0)
 		{
-			g->ray.len = g->ray.hlen;
+			g->ray.len = sqrtf(g->ray.hlen);
 			g->ray.color = g->ray.hcolor;
 		}
 		else if (g->ray.vlen == g->ray.hlen)
-			g->ray.len = g->ray.hlen;
+			g->ray.len = sqrtf(g->ray.hlen);
 		else if (g->ray.hlen < g->ray.vlen)
 		{
-			g->ray.len = g->ray.hlen;
+			g->ray.len = sqrtf(g->ray.hlen);
 			g->ray.color = g->ray.hcolor;
 		}
 		else if (g->ray.vlen < g->ray.hlen)
 		{
-			g->ray.len = g->ray.vlen;
+			g->ray.len = sqrtf(g->ray.vlen);
 			g->ray.color = g->ray.vcolor;
 		}
 		ray_to_image(g, g->ray.color);//0x00FF0000);//0x0000FF00 green
@@ -123,7 +123,7 @@ void	calculate_ray_hlen(t_game *g)
 		g->ray.hcolor = 0x00C0C0C0;//0x00FFFFFF;// color of north wall
 	else if (g->ray.ra <= PI && g->ray.ra >= 0)	// looking down
 		g->ray.hcolor = 0x00FF00FF;// color of south wall
-	g->ray.hlen = sqrtf((g->player.px - g->ray.hx) * (g->player.px - g->ray.hx) + (g->player.py - g->ray.hy) * (g->player.py - g->ray.hy));
+	g->ray.hlen = (g->player.px - g->ray.hx) * (g->player.px - g->ray.hx) + (g->player.py - g->ray.hy) * (g->player.py - g->ray.hy);//sqrtf
 }
 
 void	check_horizon_lines(t_game *g)
@@ -177,7 +177,8 @@ void	calculate_ray_vlen(t_game *g)
 		g->ray.vcolor = 0x00FFFF00;// color of east wall
 	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2)) // looking right
 		g->ray.vcolor = 0x0000FFFF;// color of west wall
-	g->ray.vlen = sqrtf((g->player.px - g->ray.vx) * (g->player.px - g->ray.vx) + (g->player.py - g->ray.vy) * (g->player.py - g->ray.vy));
+	g->ray.vlen = (g->player.px - g->ray.vx) * (g->player.px - g->ray.vx) + (g->player.py - g->ray.vy) * (g->player.py - g->ray.vy);
+	// g->ray.vlen = sqrtf((g->player.px - g->ray.vx) * (g->player.px - g->ray.vx) + (g->player.py - g->ray.vy) * (g->player.py - g->ray.vy));
 }
 
 void	check_vertical_lines(t_game *g)
