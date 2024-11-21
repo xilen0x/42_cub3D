@@ -16,23 +16,20 @@
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
 
-# define X_EVENT_KEY_PRESS		2
-# define X_EVENT_KEY_RELEASE	3
-# define X_EVENT_KEY_EXIT		17
-# define KEY_ESC				65307
-# define KEY_W					119
-# define KEY_A					97
-# define KEY_S					115
-# define KEY_D					100
-# define KEY_LEFT				65361
-# define KEY_RIGHT				65363
-# define TL						64//(64 / 5)//32//64	// Side of 2D tiles in pixels
-# define TL32					16
-# define PI						3.141592f//314	// int 314 / 100.0f returns a float !!!
-# define WX						2000//1536//1280//1920//ancho
-# define WY						768//512//1080//alto
-# define MX						341
-# define MY						192
+#define X_EVENT_KEY_PRESS	2
+#define X_EVENT_KEY_RELEASE	3
+#define X_EVENT_KEY_EXIT	17
+#define KEY_ESC				65307
+#define KEY_W				119
+#define KEY_A				97
+#define KEY_S				115
+#define KEY_D				100
+#define	KEY_LEFT			65361
+#define	KEY_RIGHT			65363
+#define	WX					1536//32//64	// Side of 2D tiles in pixels
+#define	WY					768//512//32//64	// Side of 3D tiles in pixels
+#define	TL					64
+#define	PI					3.141592f
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -85,7 +82,7 @@ typedef struct	s_player
 
 typedef struct	s_ray
 {
-	float	ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
+	float		ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
 	float		hx;			// horizontal line intersection point
 	float		hy;			// horizontal line intersection point
 	float		vx;			// vertical line intersection point
@@ -126,7 +123,7 @@ typedef struct	s_game
 {
 	t_img		img2;	// to be img2
 	t_img		img3;
-	t_img		img_mini;
+	// t_img		img_mini;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -152,6 +149,7 @@ void	check_vertical_lines(t_game *g);
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
+float	norm_angle(float angle);
 
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);
@@ -162,15 +160,15 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-void	bg_to_image(t_img *img, unsigned int color);
-void	floor_to_image(t_img *img, unsigned int color);
-void	ceiling_to_image(t_img *img, unsigned int color);
-void	grid_to_image(t_img *img, unsigned int color);
-void	box_to_image(t_img *img, int x, int y, unsigned int color);
-void	player_to_image(t_img *img, t_player *player, unsigned int color);
-void	direction_to_image(t_game *g, unsigned int color);//(t_img *img, t_player *player, int color);
-void	ray_to_image(t_game *g, unsigned int color);//(t_img *img, t_ray *ray, t_player *player, int color);
-void	map_to_image(t_img *img, t_map *map, unsigned int color);
+void	bg_to_image(t_img *img,  int color);
+void	floor_to_image(t_img *img, int color);
+void	ceiling_to_image(t_img *img, int color);
+void	grid_to_image(t_img *img, int color);
+void	box_to_image(t_img *img, int x, int y, int color);
+void	player_to_image(t_img *img, t_player *player, int color);
+void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
+void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
+void	map_to_image(t_img *img, t_map *map, int color);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map, char *av[]);

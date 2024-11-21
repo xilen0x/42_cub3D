@@ -74,47 +74,98 @@ void	set_player(t_map *map, t_player *player)
 	}
 }
 
+float	norm_angle(float angle)
+{
+	float	norm;
+
+	if (angle < 0)
+		norm = angle + 2 * PI;
+	else if (angle >= 2 * PI)
+		norm = angle - 2 * PI;
+	else
+		norm = angle;
+	return (norm);
+}
+
 void    set_rays(t_game *g)
 {
+	float	angle_step;
 	int	rays;
 
-	g->ray.ra = g->player.pa - 30 * 0.0175;
+	g->ray.ra = g->player.pa - (g->player.fov / 2);
+	angle_step = g->player.fov / g->img3.w;
 	rays = 0;
-	while (rays < g->img3.w)// w=768 //128)
+	while (rays < g->img3.w)
 	{
-		g->ray.ra = g->ray.ra + (g->player.fov / g->img3.w);// fov/768
-		if (g->ray.ra < 0)
-			g->ray.ra = g->ray.ra + 2 * PI;
-		else if (g->ray.ra >= 2 * PI)
-			g->ray.ra = g->ray.ra - 2 * PI;
+		g->ray.ra = norm_angle(g->ray.ra);
 		check_horizon_lines(g);
 		check_vertical_lines(g);
-		if (g->ray.hlen <= 0)
+		if (g->ray.hlen <= 0 || (g->ray.vlen > 0 && g->ray.vlen < g->ray.hlen))
 		{
-			g->ray.len = sqrtf(g->ray.vlen);
-			g->ray.color = g->ray.vcolor;
+            g->ray.len = sqrtf(g->ray.vlen); // Usar la distancia vertical
+            g->ray.color = g->ray.vcolor;
+			//g->ray.path = g->ray.vpath;///////////////
 		}
-		else if (g->ray.vlen <= 0)
+		else
 		{
-			g->ray.len = sqrtf(g->ray.hlen);
-			g->ray.color = g->ray.hcolor;
+            g->ray.len = sqrtf(g->ray.hlen); // Usar la distancia horizontal
+            g->ray.color = g->ray.hcolor;
+			//g->ray.path = g->ray.hpath;///////////////
 		}
-		else if (g->ray.vlen == g->ray.hlen)
-			g->ray.len = sqrtf(g->ray.hlen);
-		else if (g->ray.hlen < g->ray.vlen)
-		{
-			g->ray.len = sqrtf(g->ray.hlen);
-			g->ray.color = g->ray.hcolor;
-		}
-		else if (g->ray.vlen < g->ray.hlen)
-		{
-			g->ray.len = sqrtf(g->ray.vlen);
-			g->ray.color = g->ray.vcolor;
-		}
-		ray_to_image(g, g->ray.color);//0x00FF0000);//0x0000FF00 green
-		render_wall(g, rays);// + (g->w / 128))));////128////////
+		//load_texture(&g->ray.tex, g->ray.path, g->mlx);//////////
+		ray_to_image(g, g->ray.color);
+		render_wall(g, rays);
+		g->ray.ra += angle_step;
 		rays++;
 	}
+}
+
+void	set_hcolor(t_game *g)// to be set_path
+{
+	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
+	{
+		g->ray.hcolor = 0x00C0C0C0;//0x00FFFFFF;// color of north wall
+		//g->ray.hpath = "./textures/north.xpm";/////////////
+	}
+	else if (g->ray.ra <= PI && g->ray.ra >= 0)	// looking down
+	{
+		g->ray.hcolor = 0x00FF00FF;// color of south wall
+		//g->ray.hpath = "./textures/south.xpm";//////////////
+	}
+}
+
+void	set_vcolor(t_game *g)// to be set_path
+{
+	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2)) // looking left
+	{
+		g->ray.vcolor = 0x00FFFF00;// color of east wall
+		//g->ray.vpath = "./textures/east.xpm";
+	}
+	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2)) // looking right
+	{
+		g->ray.vcolor = 0x0000FFFF;// color of west wall
+		//g->ray.vpath = "./textures/west.xpm";
+	}
+}
+
+float	squared_hlen(t_game *g)
+{
+	float	dx;
+	float	dy;
+
+	dx = g->player.px - g->ray.hx;
+	dy = g->player.py - g->ray.hy;
+	return (dx * dx + dy * dy);
+}
+
+float	squared_vlen(t_game *g)
+{
+	float	dx;
+	float	dy;
+
+	dx = g->player.px - g->ray.vx;
+	dy = g->player.py - g->ray.vy;
+	return (dx * dx + dy * dy);
 }
 
 void	calculate_ray_hlen(t_game *g)
@@ -123,7 +174,7 @@ void	calculate_ray_hlen(t_game *g)
 	
 	while (hit == 0)
 	{
-		if ((g->ray.hx < TL) || (g->ray.hx > (g->map.mapW - 1) * TL))//((g->ray.hx <= PX2 + 1 && g->ray.hy != PX2) || (g->ray.hx >= g->map.mapW * PX2 - PX2 - 1 && g->ray.hy != PX2))//
+		if ((g->ray.hx < TL) || (g->ray.hx > (g->map.mapW - 1) * TL))
 		{
 			g->ray.hlen = 0;
 			return ;
@@ -134,43 +185,43 @@ void	calculate_ray_hlen(t_game *g)
 		else if (g->ray.ra < PI && g->ray.ra > 0)//looking down
 			g->map.y = ((int)(g->ray.hy)) >> 6;
 		g->map.pos = g->map.y * g->map.mapW + g->map.x;
-		
 		if (g->map.pos >= 0 && g->map.pos < g->map.mapW * g->map.mapH && g->map.map[g->map.pos] == '1')
-				hit = 1;//dof = 8;    // hit wall
+				hit = 1;
 		else
 		{
 			g->ray.hx += g->ray.x_step;
 			g->ray.hy += g->ray.y_step;
 		}
 	}
-	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
-		g->ray.hcolor = 0x00C0C0C0;//0x00FFFFFF;// color of north wall
-	else if (g->ray.ra <= PI && g->ray.ra >= 0)	// looking down
-		g->ray.hcolor = 0x00FF00FF;// color of south wall
-	g->ray.hlen = (g->player.px - g->ray.hx) * (g->player.px - g->ray.hx) + (g->player.py - g->ray.hy) * (g->player.py - g->ray.hy);//sqrtf
+	set_hcolor(g);
+	g->ray.hlen = squared_hlen(g);
 }
 
 void	check_horizon_lines(t_game *g)
 {
+	float	tan_ra;
+
+	tan_ra = tanf(g->ray.ra);
 	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
 	{
 		g->ray.hy = ((int)(g->player.py) >> 6) << 6;
-		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));//(int)roundf
+		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tan_ra));
 		g->ray.y_step = -TL;
-		g->ray.x_step = (g->ray.y_step / tanf(g->ray.ra));//(int)roundf
+		g->ray.x_step = (g->ray.y_step / tan_ra);
 		calculate_ray_hlen(g);
 	}
-	else if (g->ray.ra < PI && g->ray.ra > 0)	// looking down
+	else if (g->ray.ra < PI && g->ray.ra > 0)
 	{
 		g->ray.hy = (((int)(g->player.py) >> 6) << 6) + TL;
-		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tanf(g->ray.ra)));//(int)roundf
+		g->ray.hx = (g->player.px - ((g->player.py - g->ray.hy) / tan_ra));
 		g->ray.y_step = TL;
-		g->ray.x_step = (g->ray.y_step / tanf(g->ray.ra));//(int)roundf
+		g->ray.x_step = (g->ray.y_step / tan_ra);
 		calculate_ray_hlen(g);
 	}
 	else if (g->ray.ra == 0 || g->ray.ra == PI)
 		g->ray.hlen = 0;
 }
+
 
 void	calculate_ray_vlen(t_game *g)
 {
@@ -178,7 +229,7 @@ void	calculate_ray_vlen(t_game *g)
 
 	while (hit == 0)
 	{
-		if ((g->ray.vy < TL) || (g->ray.vy > (g->map.mapH - 1) * TL))//((g->ray.vy <= PX2 + 1 && g->ray.vx != PX2) || (g->ray.vy >= g->map.mapH * PX2 - PX2 - 1 && g->ray.vx != g->map.mapH * PX2 - PX2))//
+		if ((g->ray.vy < TL) || (g->ray.vy > (g->map.mapH - 1) * TL))
 		{
 			g->ray.vlen = 0;
 			return ;
@@ -189,38 +240,38 @@ void	calculate_ray_vlen(t_game *g)
 			g->map.x = ((int)(g->ray.vx)) >> 6;
 		g->map.y = ((int)g->ray.vy) >> 6;
 		g->map.pos = g->map.y * g->map.mapW + g->map.x;
+			
 		if (g->map.pos >= 0 && g->map.pos < g->map.mapW * g->map.mapH && g->map.map[g->map.pos] == '1')
-				hit =1;//dof = 8;    // hit wall
+				hit =1;
 		else
 		{
 			g->ray.vx += g->ray.x_step;
 			g->ray.vy += g->ray.y_step;
 		}
 	}
-	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2)) // looking left
-		g->ray.vcolor = 0x00FFFF00;// color of east wall
-	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2)) // looking right
-		g->ray.vcolor = 0x0000FFFF;// color of west wall
-	g->ray.vlen = (g->player.px - g->ray.vx) * (g->player.px - g->ray.vx) + (g->player.py - g->ray.vy) * (g->player.py - g->ray.vy);
-	// g->ray.vlen = sqrtf((g->player.px - g->ray.vx) * (g->player.px - g->ray.vx) + (g->player.py - g->ray.vy) * (g->player.py - g->ray.vy));
+	set_vcolor(g);
+	g->ray.vlen = squared_vlen(g);
 }
 
 void	check_vertical_lines(t_game *g)
 {
+	float	tan_ra;
+
+	tan_ra = tanf(g->ray.ra);
 	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2)) // looking left
 	{
 		g->ray.vx = (((int)g->player.px >> 6) << 6);
-		g->ray.vy = (g->player.py - (g->player.px - g->ray.vx) * tanf(g->ray.ra));
+		g->ray.vy = (g->player.py - (g->player.px - g->ray.vx) * tan_ra);
 		g->ray.x_step = -TL;
-		g->ray.y_step = (g->ray.x_step * tanf(g->ray.ra));
+		g->ray.y_step = (g->ray.x_step * tan_ra);
 		calculate_ray_vlen(g);
 	}
 	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2))
 	{
 		g->ray.vx = (((int)g->player.px >> 6) << 6) + TL;
-		g->ray.vy = (g->player.py - (g->player.px - g->ray.vx) * tanf(g->ray.ra));
+		g->ray.vy = (g->player.py - (g->player.px - g->ray.vx) * tan_ra);
 		g->ray.x_step = TL;
-		g->ray.y_step = (g->ray.x_step * tanf(g->ray.ra));
+		g->ray.y_step = (g->ray.x_step * tan_ra);
 		calculate_ray_vlen(g);
 	}
 	else if (g->ray.ra == (PI / 2) || g->ray.ra == (3 * PI / 2))
@@ -271,7 +322,7 @@ void	set_image(t_game *g)
 	(void)opposite_color;
 	bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
-	//grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
+	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
 }

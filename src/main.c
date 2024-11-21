@@ -14,11 +14,9 @@
 		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
 int img2_init(t_game *g)
 {
-	// g->img2.h = g->map.mapH * TL;//8 * 64 = 512;
-	// g->img2.w = g->map.mapW * TL;//8 * 64 = 512;
-	g->img2.w = MX;
-	g->img2.h = MY;
-	g->img2.img_ptr = mlx_new_image(g->mlx, MX, MY);
+	g->img2.h = g->map.mapH * 32;//TL;//8 * 64 = 512;
+	g->img2.w = g->map.mapW * 32;//TL;//8 * 64 = 512;
+	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
 		mlx_destroy_display(g->mlx);
@@ -86,17 +84,13 @@ int	main(int argc, char *argv[])
 		set_player(&g.map, &g.player);
 		set_image(&g);
 		set_rays(&g);
-		// mlx_clear_window(g.mlx, g.win);
-		//mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
-		//mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
-		write(1,"e\n",2);
-		mlx_hook(g.win, X_EVENT_KEY_PRESS, 0, &press_key, &g);//1L << 0
-		write(1,"e\n",2);
-		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1, &exit_game, &g);//1L << 0
-		write(1,"e\n",2);
+		mlx_clear_window(g.mlx, g.win);
+		mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);
+		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+		mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &g);//1L << 0
+		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1L << 0, &exit_game, &g);//1L << 0
 		mlx_loop(g.mlx);
-		write(1,"end\n",2);
-	}
+		}
 	else
 		ft_errors("Invalid number of arguments\n");
 	lst_clear(&lmap, &free);

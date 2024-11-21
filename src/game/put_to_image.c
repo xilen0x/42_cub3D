@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	floor_to_image(t_img *img, unsigned int color)
+void	floor_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -30,7 +30,7 @@ void	floor_to_image(t_img *img, unsigned int color)
 	}
 }
 
-void	ceiling_to_image(t_img *img, unsigned int color)
+void	ceiling_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -48,7 +48,7 @@ void	ceiling_to_image(t_img *img, unsigned int color)
 	}
 }
 
-void	bg_to_image(t_img *img, unsigned int color)
+void	bg_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -66,7 +66,7 @@ void	bg_to_image(t_img *img, unsigned int color)
 	}
 }
 
-void	grid_to_image(t_img *img, unsigned int color)
+void	grid_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -77,7 +77,7 @@ void	grid_to_image(t_img *img, unsigned int color)
 		x = 0;
 		while (x < img->w)
 		{       
-			if ((y % TL32) == 0 || (x % TL32) == 0)
+			if ((y % 32) == 0 || (x % 32) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
 		}
@@ -85,17 +85,17 @@ void	grid_to_image(t_img *img, unsigned int color)
 	}
 }
 
-void	box_to_image(t_img *img, int x, int y, unsigned int color)
+void	box_to_image(t_img *img, int x, int y, int color)
 {
 	int	x0;
 	int	y0;
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + TL32)
+	while (y < y0 + 32)
 	{
 		x = x0;
-		while (x < x0 + TL32)
+		while (x < x0 + 32)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -104,7 +104,7 @@ void	box_to_image(t_img *img, int x, int y, unsigned int color)
 	}
 }
 
-void	map_to_image(t_img *img, t_map *map, unsigned int color)
+void	map_to_image(t_img *img, t_map *map, int color)
 {
 	int	x;
 	int	y;
@@ -116,28 +116,27 @@ void	map_to_image(t_img *img, t_map *map, unsigned int color)
 		while (x < map->mapW)
 		{
 			if (map->map[y * map->mapW + x] == '1')
-				box_to_image(img, x * TL32, y * TL32, color);
-				// box_to_image(img, x * TL, y * TL, color);
+				box_to_image(img, x * 32, y * 32, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	player_to_image(t_img *img, t_player *player,unsigned int color)
+void	player_to_image(t_img *img, t_player *player, int color)
 {
 	int	x;
 	int	y;
 	int x0;
 	int y0;
 
-	x0 = player->px - 8;
-	y0 = player->py - 8;
-	y = y0;//player->py - 4;
-	while (y <= player->py + 8)  // 17 pixels is the size of the mini player
+	x0 = (player->px) / 2 - 4;//8;
+	y0 = (player->py) / 2 - 4;//8;
+	y = y0;
+	while (y <= (player->py / 2) + 4)//8)  // 17 pixels is the size of the mini player
 	{
-		x = x0;//player->px -4;
-		while (x <= player->px + 8)
+		x = x0;
+		while (x <= (player->px / 2) + 4)//8)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -146,35 +145,43 @@ void	player_to_image(t_img *img, t_player *player,unsigned int color)
 	}
 }
 
-void	direction_to_image(t_game *g,unsigned int color)//(t_img *img, t_player *player, int color)
+void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, int color)
 {
 	int	x;
 	int	y;
 	int	hyp;	// hyp is the length of the view direction arrow
+	float	px;
+	float	py;
 
 	hyp = 1;
-	while (hyp <= 30)
+	px = g->player.px / 2;
+	py = g->player.py / 2;
+	while (hyp <= 15)//30)
 	{
-		x = (int)(g->player.px + (cosf(g->player.pa) * hyp));
-		y = (int)(g->player.py + (sinf(g->player.pa) * hyp));
+		x = (int)(px + (cosf(g->player.pa) * hyp));
+		y = (int)(py + (sinf(g->player.pa) * hyp));
 		set_pixel_to_image(&g->img2, x, y, color);
 		hyp++;
 	}
 }
 
-void	ray_to_image(t_game *g, unsigned int color)//(t_img *img, t_ray *ray, t_player *player, int color)
+void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *player, int color)
 {
 	int	x;
 	int	y;
 	int	hyp;
+	float	px;
+	float	py;
 
 	hyp = 1;
 	x = 0;
 	y = 0;
-	while (hyp <= g->ray.len)
+	px = g->player.px / 2;
+	py = g->player.py / 2;
+	while (hyp <= g->ray.len / 2)
 	{
-		x = (int)(g->player.px + (cosf(g->ray.ra) * hyp));
-		y = (int)(g->player.py + (sinf(g->ray.ra) * hyp));
+		x = (int)(px + (cosf(g->ray.ra) * hyp));
+		y = (int)(py + (sinf(g->ray.ra) * hyp));
 			set_pixel_to_image(&g->img2, x, y, color);
 		hyp++;
 	}
@@ -214,7 +221,6 @@ void	render_wall(t_game *g, int col)
 	else if (cos_angle > 2 * PI)
 		cos_angle = cos_angle - 2 * PI;
 	g->ray.len = (g->ray.len * cosf(cos_angle)); // fix the fisheye
-	//g->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl - mlx->ply->angle)); // fix the fisheye
 	wall_h = (TL / g->ray.len) * ((g->img3.w / 2) / tanf(g->player.fov / 2));
 	bot_pix = (g->img3.h / 2) + (wall_h / 2); // get the bottom pixel
 	top_pix = (g->img3.h / 2) - (wall_h / 2); // get the top pixel
