@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	floor_to_image(t_img *img, int color)
+void	floor_to_image(t_img *img, unsigned int color)
 {
 	int	x;
 	int	y;
@@ -30,7 +30,7 @@ void	floor_to_image(t_img *img, int color)
 	}
 }
 
-void	ceiling_to_image(t_img *img, int color)
+void	ceiling_to_image(t_img *img, unsigned int color)
 {
 	int	x;
 	int	y;
@@ -48,7 +48,7 @@ void	ceiling_to_image(t_img *img, int color)
 	}
 }
 
-void	bg_to_image(t_img *img, int color)
+void	bg_to_image(t_img *img, unsigned int color)
 {
 	int	x;
 	int	y;
@@ -66,7 +66,7 @@ void	bg_to_image(t_img *img, int color)
 	}
 }
 
-void	grid_to_image(t_img *img, int color)
+void	grid_to_image(t_img *img, unsigned int color)
 {
 	int	x;
 	int	y;
@@ -77,7 +77,7 @@ void	grid_to_image(t_img *img, int color)
 		x = 0;
 		while (x < img->w)
 		{       
-			if ((y % TL) == 0 || (x % TL) == 0)
+			if ((y % TL32) == 0 || (x % TL32) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
 		}
@@ -85,17 +85,17 @@ void	grid_to_image(t_img *img, int color)
 	}
 }
 
-void	box_to_image(t_img *img, int x, int y, int color)
+void	box_to_image(t_img *img, int x, int y, unsigned int color)
 {
 	int	x0;
 	int	y0;
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + TL)
+	while (y < y0 + TL32)
 	{
 		x = x0;
-		while (x < x0 + TL)
+		while (x < x0 + TL32)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -104,7 +104,7 @@ void	box_to_image(t_img *img, int x, int y, int color)
 	}
 }
 
-void	map_to_image(t_img *img, t_map *map, int color)
+void	map_to_image(t_img *img, t_map *map, unsigned int color)
 {
 	int	x;
 	int	y;
@@ -116,14 +116,15 @@ void	map_to_image(t_img *img, t_map *map, int color)
 		while (x < map->mapW)
 		{
 			if (map->map[y * map->mapW + x] == '1')
-				box_to_image(img, x * TL, y * TL, color);
+				box_to_image(img, x * TL32, y * TL32, color);
+				// box_to_image(img, x * TL, y * TL, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	player_to_image(t_img *img, t_player *player, int color)
+void	player_to_image(t_img *img, t_player *player,unsigned int color)
 {
 	int	x;
 	int	y;
@@ -145,7 +146,7 @@ void	player_to_image(t_img *img, t_player *player, int color)
 	}
 }
 
-void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, int color)
+void	direction_to_image(t_game *g,unsigned int color)//(t_img *img, t_player *player, int color)
 {
 	int	x;
 	int	y;
@@ -161,7 +162,7 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 	}
 }
 
-void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *player, int color)
+void	ray_to_image(t_game *g, unsigned int color)//(t_img *img, t_ray *ray, t_player *player, int color)
 {
 	int	x;
 	int	y;

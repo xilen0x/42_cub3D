@@ -15,7 +15,7 @@
 /* ===============================   MACROS  =============================== */
 # define MAX_COLOR_VALUE 255
 # define MIN_COLOR_VALUE 0
-//# define	PI	3.1415f	// already defined in <math.h> as M_PI = 3.14159265358979323846
+
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17
@@ -27,11 +27,12 @@
 # define KEY_LEFT				65361
 # define KEY_RIGHT				65363
 # define TL						64//(64 / 5)//32//64	// Side of 2D tiles in pixels
-// # define PX2B					32//(64 / 5)
-// # define PX3					64//32//64	// Side of 3D tiles in pixels
+# define TL32					16
 # define PI						3.141592f//314	// int 314 / 100.0f returns a float !!!
-# define WX					1536//1280//1920//ancho
-# define WY					512//1080//alto
+# define WX						2000//1536//1280//1920//ancho
+# define WY						768//512//1080//alto
+# define MX						341
+# define MY						192
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -132,19 +133,12 @@ typedef struct	s_game
 	t_colors	cols;
 	void		*mlx;
 	void		*win;
-	// int			h;		// game/window height in pixels
-	// int			w;		// game/window width in pixels
 }				t_game;
 
 /* ===============================  GAME  =============================== */
 
-/************************** trigo.c *******************************/
-void	set_sine(float *sin_arr);
-void	set_cosine(float *cos_arr);
-void	set_tan(float *tan_arr);
-
 /************************* setters.c ******************************/
-void	set_pixel_to_image(t_img *img, int x, int y, int color);
+void	set_pixel_to_image(t_img *img, int x, int y, unsigned int color);
 void	set_player(t_map *map, t_player *player);
 void	set_rays(t_game *g);
 void	set_image(t_game *g);
@@ -168,18 +162,15 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-void	bg_to_image(t_img *img, int color);
-void	floor_to_image(t_img *img, int color);
-void	ceiling_to_image(t_img *img, int color);
-void	grid_to_image(t_img *img, int color);
-void	box_to_image(t_img *img, int x, int y, int color);
-void	player_to_image(t_img *img, t_player *player, int color);
-void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
-void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
-void	map_to_image(t_img *img, t_map *map, int color);
-void	slice_to_image(t_game *g, int col, int top_px, int bottom_px);//, int color);
-void	wall_to_image(t_game *g, int col);
-//int		get_color(t_game *g);
+void	bg_to_image(t_img *img, unsigned int color);
+void	floor_to_image(t_img *img, unsigned int color);
+void	ceiling_to_image(t_img *img, unsigned int color);
+void	grid_to_image(t_img *img, unsigned int color);
+void	box_to_image(t_img *img, int x, int y, unsigned int color);
+void	player_to_image(t_img *img, t_player *player, unsigned int color);
+void	direction_to_image(t_game *g, unsigned int color);//(t_img *img, t_player *player, int color);
+void	ray_to_image(t_game *g, unsigned int color);//(t_img *img, t_ray *ray, t_player *player, int color);
+void	map_to_image(t_img *img, t_map *map, unsigned int color);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map, char *av[]);
@@ -238,7 +229,7 @@ void	spaces_to_ones(t_map_parse *map);
 void	create_matrix_irregular(t_map_parse *map, t_lmap *lm);
 void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map_parse *map);
-void	print_width_height(t_map_parse *map);
+// void	print_width_height(t_map_parse *map);
 int		space_exist_next_to_0(t_map_parse *m);
 void	load_map(t_game *g, t_map_parse *map);
 void	printMap(t_game *g);

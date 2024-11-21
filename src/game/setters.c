@@ -13,10 +13,11 @@
 #include "cub3d.h"
 
 /* Set the colour of a given pixel in an array of pixels (i.e. the image) */
-void	set_pixel_to_image(t_img *img, int x, int y, int color)
+void	set_pixel_to_image(t_img *img, int x, int y, unsigned int color)
 {
-	char	*offset;
+	void	*offset;
 
+	//printf("x: %d | y: %d\n", x, y);
 	if (x < 0 || x >= WX || y < 0 || y >= WY)
 		return ;
 	// Line len is in bytes. If img_w = 1024 pixels, so len_line ~ 4096 bytes (can differ for aligment)
@@ -29,7 +30,7 @@ void	set_player(t_map *map, t_player *player)
 	int	x;
 	int	y;
 
-    y = 0;
+	y = 0;
 	while (y < map->mapH)
 	{
 		x = 0;
@@ -37,33 +38,33 @@ void	set_player(t_map *map, t_player *player)
 		{
 			if (map->map[y * map->mapW + x] == 'N')
 			{
-				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
-				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
+				player->px = x * TL + TL / 2;
+				player->py = y * TL + TL / 2;
+				player->pa = 3 * PI / 2;
+				player->fov = 1.05f;
+				return ;
+			}
+			else if (map->map[y * map->mapW + x] == 'S')
+			{
+				player->px = x * TL + TL / 2;
+				player->py = y * TL + TL / 2;
+				player->pa = PI / 2;
+				player->fov = 1.05f;
+				return ;
+			}
+			else if (map->map[y * map->mapW + x] == 'E')
+			{
+				player->px = x * TL + TL / 2;
+				player->py = y * TL + TL / 2;
 				player->pa = 0.f;
 				player->fov = 1.05f;
 				return ;
 			}
-			if (map->map[y * map->mapW + x] == 'S')
+			else if (map->map[y * map->mapW + x] == 'W')
 			{
-				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
-				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
-				player->pa = 0.f;
-				player->fov = 1.05f;
-				return ;
-			}
-			if (map->map[y * map->mapW + x] == 'E')
-			{
-				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
-				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
-				player->pa = 0.f;
-				player->fov = 1.05f;
-				return ;
-			}
-			if (map->map[y * map->mapW + x] == 'W')
-			{
-				player->px = x * TL + TL / 2; // PX/2 is the centre of tile
-				player->py = y * TL + TL / 2; // PX/2 is the centre of tile
-				player->pa = 0.f;
+				player->px = x * TL + TL / 2;
+				player->py = y * TL + TL / 2;
+				player->pa = PI;
 				player->fov = 1.05f;
 				return ;
 			}
@@ -237,19 +238,40 @@ void	check_vertical_lines(t_game *g)
 // 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
 // }
 
+unsigned int get_opposite_color(unsigned int color)
+{
+    // Extraer componentes RGB
+    unsigned int red = (color >> 16) & 0xFF;  // Componente rojo
+    unsigned int green = (color >> 8) & 0xFF; // Componente verde
+    unsigned int blue = color & 0xFF;         // Componente azul
+
+    // Calcular componentes opuestos
+    unsigned int opposite_red = 255 - red;
+    unsigned int opposite_green = 255 - green;
+    unsigned int opposite_blue = 255 - blue;
+
+    // Combinar componentes opuestos en un solo color
+    return (opposite_red << 16) | (opposite_green << 8) | opposite_blue;
+}
+
 void	set_image(t_game *g)
 {
 	int	color1;
 	int	color2;
+	unsigned int opposite_color;
 
 	color1 = g->cols.f_color_hex;
 	color2 = g->cols.c_color_hex;
 
 	floor_to_image(&g->img3, color2);//g->cols.f_color_hex);
 	ceiling_to_image(&g->img3, color1);//g->cols.c_color_hex);
-	bg_to_image(&g->img2, 0x00e3e6e5);    				// background color minimap
+
+	opposite_color = get_opposite_color(color2);
+
+	(void)opposite_color;
+	bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
-	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
+	//grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
 }
