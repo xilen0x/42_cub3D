@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Background color of the ground - map*/
 void	floor_to_image(t_img *img, int color)
 {
 	int	x;
@@ -29,7 +30,7 @@ void	floor_to_image(t_img *img, int color)
 		y++;
 	}
 }
-
+/*Sky background color - map*/
 void	ceiling_to_image(t_img *img, int color)
 {
 	int	x;
@@ -48,16 +49,17 @@ void	ceiling_to_image(t_img *img, int color)
 	}
 }
 
+/*Background color minimap*/
 void	bg_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
     y = 0;
-	while (y < img->h)
+	while (y < WY_SM)//(y < img->h)
 	{
 		x = 0;   
-		while (x < img->w)
+		while (x < WX_SM)//(x < img->w)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -66,17 +68,18 @@ void	bg_to_image(t_img *img, int color)
 	}
 }
 
+/*Grid lines minimap*/
 void	grid_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
     y = 0;
-	while (y < img->h)
+	while (y < WY_SM)// (y < img->h)
 	{
 		x = 0;
-		while (x < img->w)
-		{       
+		while (x < WX_SM)//(x < img->w)
+		{
 			if ((y % 32) == 0 || (x % 32) == 0)
 				set_pixel_to_image(img, x, y, color);
 			x++;
@@ -84,18 +87,60 @@ void	grid_to_image(t_img *img, int color)
 		y++;
 	}
 }
+// /*Walls minimap(part2)*/
+// void	box_to_image(t_img *img, int x, int y, int color)
+// {
+// 	int	x0;
+// 	int	y0;
 
-void	box_to_image(t_img *img, int x, int y, int color)
+// 	x0 = x;
+// 	y0 = y;
+// 	while (y < y0 + 32)
+// 	{
+// 		x = x0;
+// 		while (x < x0 + 32)
+// 		{
+// 			set_pixel_to_image(img, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+// /*Walls minimap*/
+// void	map_to_image(t_img *img, t_map *map, int color)
+// {
+// 	int	x;
+// 	int	y;
+
+//     y = 0;
+// 	while (y < map->mapH)
+// 	{
+// 		x = 0;
+// 		while (x < map->mapW)
+// 		{
+// 			if (map->map[y * map->mapW + x] == '1')
+// 				box_to_image(img, x * 32, y * 32, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+// Tamaño de un bloque en píxeles (en el minimapa)
+// #define BLOCK_SM 32  // Ajustar si es necesario
+
+/* Dibuja un bloque en el minimapa */
+void	box_to_image(t_img *img, int x, int y, int block_size, int color)
 {
 	int	x0;
 	int	y0;
 
 	x0 = x;
 	y0 = y;
-	while (y < y0 + 32)
+	while (y < y0 + block_size)
 	{
 		x = x0;
-		while (x < x0 + 32)
+		while (x < x0 + block_size)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -104,39 +149,82 @@ void	box_to_image(t_img *img, int x, int y, int color)
 	}
 }
 
+/* Dibuja solo el área relevante del mapa en el minimapa */
 void	map_to_image(t_img *img, t_map *map, int color)
 {
 	int	x;
 	int	y;
+	float scale_x = SCALE_X(map->mapW);
+	float scale_y = SCALE_Y(map->mapH);
 
-    y = 0;
+	y = 0;
 	while (y < map->mapH)
 	{
 		x = 0;
 		while (x < map->mapW)
 		{
-			if (map->map[y * map->mapW + x] == '1')
-				box_to_image(img, x * 32, y * 32, color);
+			if (map->map[y * map->mapW + x] == '1') // Si el bloque es un muro
+			{
+				// Escalamos las coordenadas del bloque para el minimapa
+				int scaled_x = (int)(x * scale_x);
+				int scaled_y = (int)(y * scale_y);
+				// Usamos el tamaño máximo de bloque basado en las escalas
+				int block_size = (int)fmax(scale_x, scale_y);
+				// Dibujamos el bloque en el minimapa con el tamaño escalado
+				// box_to_image(img, scaled_x, scaled_y, (int)fmax(scale_x, scale_y), color);
+				box_to_image(img, scaled_x, scaled_y, block_size, color);
+			}
 			x++;
 		}
 		y++;
 	}
 }
 
-void	player_to_image(t_img *img, t_player *player, int color)
+
+// /*Red player in minimap*/
+// void	player_to_image(t_img *img, t_player *player, int color)
+// {
+// 	int	x;
+// 	int	y;
+// 	int x0;
+// 	int y0;
+
+// 	x0 = (player->px) / 2 - 4;//8;
+// 	y0 = (player->py) / 2 - 4;//8;
+// 	y = y0;
+// 	while (y <= (player->py / 2) + 4)//8)  // 17 pixels is the size of the mini player
+// 	{
+// 		x = x0;
+// 		while (x <= (player->px / 2) + 4)//8)
+// 		{
+// 			set_pixel_to_image(img, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+
+void	player_to_image(t_img *img, t_player *player, t_map *map, int color)
 {
 	int	x;
 	int	y;
-	int x0;
-	int y0;
+	int	x0;
+	int	y0;
 
-	x0 = (player->px) / 2 - 4;//8;
-	y0 = (player->py) / 2 - 4;//8;
+	// Calculamos los factores de escala para el minimapa
+	float scale_x = (float)WX_SM / (float)(map->mapW);
+	float scale_y = (float)WY_SM / (float)(map->mapH);
+
+	// Calculamos la posición del jugador escalada al minimapa
+	x0 = (int)(player->px * scale_x); // Tamaño del jugador reducido
+	y0 = (int)(player->py * scale_y);
+
+	// Dibujamos al jugador como un cuadrado de 9x9 píxeles
 	y = y0;
-	while (y <= (player->py / 2) + 4)//8)  // 17 pixels is the size of the mini player
+	while (y <= y0 + 8)  // Altura del jugador en el minimapa
 	{
 		x = x0;
-		while (x <= (player->px / 2) + 4)//8)
+		while (x <= x0 + 8)  // Ancho del jugador en el minimapa
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -145,6 +233,7 @@ void	player_to_image(t_img *img, t_player *player, int color)
 	}
 }
 
+/*white direction in minimap*/
 void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, int color)
 {
 	int	x;

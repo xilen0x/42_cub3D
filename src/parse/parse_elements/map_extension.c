@@ -25,7 +25,7 @@ int	file_is_cub(char *av)
 		write (2, "Error\n", 6);
 		write (2, "The file does not have a name!\n", 31);
 		free_elements(tmp);
-		exit(1);
+		return (1);
 	}
 	len = ft_strlen(av);
 	if (ft_strncmp(&av[len - 4], ".cub", 4) == 0)

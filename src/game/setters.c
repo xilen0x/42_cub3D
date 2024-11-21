@@ -289,27 +289,27 @@ void	check_vertical_lines(t_game *g)
 // 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
 // }
 
-unsigned int get_opposite_color(unsigned int color)
-{
-    // Extraer componentes RGB
-    unsigned int red = (color >> 16) & 0xFF;  // Componente rojo
-    unsigned int green = (color >> 8) & 0xFF; // Componente verde
-    unsigned int blue = color & 0xFF;         // Componente azul
+// unsigned int get_opposite_color(unsigned int color)
+// {
+//     // Extraer componentes RGB
+//     unsigned int red = (color >> 16) & 0xFF;  // Componente rojo
+//     unsigned int green = (color >> 8) & 0xFF; // Componente verde
+//     unsigned int blue = color & 0xFF;         // Componente azul
 
-    // Calcular componentes opuestos
-    unsigned int opposite_red = 255 - red;
-    unsigned int opposite_green = 255 - green;
-    unsigned int opposite_blue = 255 - blue;
+//     // Calcular componentes opuestos
+//     unsigned int opposite_red = 255 - red;
+//     unsigned int opposite_green = 255 - green;
+//     unsigned int opposite_blue = 255 - blue;
 
-    // Combinar componentes opuestos en un solo color
-    return (opposite_red << 16) | (opposite_green << 8) | opposite_blue;
-}
+//     // Combinar componentes opuestos en un solo color
+//     return (opposite_red << 16) | (opposite_green << 8) | opposite_blue;
+// }
 
 void	set_image(t_game *g)
 {
 	int	color1;
 	int	color2;
-	unsigned int opposite_color;
+	// unsigned int opposite_color;
 
 	color1 = g->cols.f_color_hex;
 	color2 = g->cols.c_color_hex;
@@ -317,12 +317,15 @@ void	set_image(t_game *g)
 	floor_to_image(&g->img3, color2);//g->cols.f_color_hex);
 	ceiling_to_image(&g->img3, color1);//g->cols.c_color_hex);
 
-	opposite_color = get_opposite_color(color2);
+	// opposite_color = get_opposite_color(color2);
 
-	(void)opposite_color;
-	bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
+	// (void)opposite_color;
+	bg_to_image(&g->img2, 0x00A9E2F3);//bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
+	// bg_to_image(&g->img2, &g->map, 0x00A9E2F3);
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
-	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
-	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
-	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
+	// grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
+	// player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
+	player_to_image(&g->img2, &g->player, &g->map, 0x00FF0000);// red player
+	// direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
+	
 }

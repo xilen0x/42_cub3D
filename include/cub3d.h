@@ -28,8 +28,15 @@
 #define	KEY_RIGHT			65363
 #define	WX					1536//32//64	// Side of 2D tiles in pixels
 #define	WY					768//512//32//64	// Side of 3D tiles in pixels
+#define WX_SM				384
+#define WY_SM				192
 #define	TL					64
 #define	PI					3.141592f
+
+// Escalar las dimensiones del minimapa
+#define SCALE_X(mapW) ((float)WX_SM / (float)(mapW))
+#define SCALE_Y(mapH) ((float)WY_SM / (float)(mapH))
+
 
 // /* =============================== CARLOS STRUCTURES =============================== */
 typedef struct s_map_parse
@@ -150,7 +157,7 @@ void	check_vertical_lines(t_game *g);
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
 float	norm_angle(float angle);
-
+// int	cub_mouse(int x, int y, t_game *g);
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);
 void	move_s(t_game *g);
@@ -161,11 +168,13 @@ void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
 void	bg_to_image(t_img *img,  int color);
+// void	bg_to_image(t_img *img, t_map *map, int color);
 void	floor_to_image(t_img *img, int color);
 void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
-void	box_to_image(t_img *img, int x, int y, int color);
-void	player_to_image(t_img *img, t_player *player, int color);
+// void	box_to_image(t_img *img, int x, int y, int color);
+// void	player_to_image(t_img *img, t_player *player, int color);
+void player_to_image(t_img *img, t_player *player, t_map *map, int color);
 void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
 void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
 void	map_to_image(t_img *img, t_map *map, int color);

@@ -1,21 +1,11 @@
 #include "cub3d.h"
 
-		// ft_printf("\nAnchura mapa(w): %d\n", map.w);
-		// ft_printf("Altura mapa(h): %d\n\n", map.h);
-		// ft_printf("Valor x: %d\n", map.x);
-		// ft_printf("Valor y: %d\n\n", map.y);
-		// ft_printf("NO: %s\n", elem.no_path);
-		// ft_printf("SO: %s\n", elem.so_path);
-		// ft_printf("EA: %s\n", elem.ea_path);
-		// ft_printf("WE: %s\n", elem.we_path);
-		// ft_printf("F: %d\n", colors.f);
-		// ft_printf("C: %d\n\n", colors.c);
-		// ft_printf("Posición del jugador(y, x): %d,%d\n\n", map.y, map.x);
-		// ft_printf("Orientación del jugador: %c\n\n", map.matrix[map.y][map.x]);
 int img2_init(t_game *g)
 {
-	g->img2.h = g->map.mapH * 32;//TL;//8 * 64 = 512;
-	g->img2.w = g->map.mapW * 32;//TL;//8 * 64 = 512;
+	// g->img2.h = g->map.mapH * 32;//TL;//8 * 64 = 512;
+	// g->img2.w = g->map.mapW * 32;//TL;//8 * 64 = 512;
+	g->img2.h = WY_SM;
+	g->img2.w = WX_SM;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -57,6 +47,20 @@ int img3_init(t_game *g)
 	}
 	return (0);
 }
+// int	cub_mouse(int x, int y, t_game *g)
+// {
+// 	if (y != -1)
+// 	{
+// 		g->player.px = x;
+// 		g->player.py = y;
+// 		set_image(g);
+// 		set_rays(g);
+// 		mlx_clear_window(g->mlx, g->win);
+// 		mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);
+// 	}
+// 	return (0);
+// }
+
 
 int	main(int argc, char *argv[])
 {
@@ -89,6 +93,7 @@ int	main(int argc, char *argv[])
 		mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
 		mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &g);//1L << 0
 		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1L << 0, &exit_game, &g);//1L << 0
+		// mlx_hook(g.win, 06, 1L << 6, cub_mouse, &g);
 		mlx_loop(g.mlx);
 		}
 	else
