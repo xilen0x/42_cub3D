@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/22 14:25:17 by castorga          #+#    #+#             */
+/*   Updated: 2024/11/22 14:25:19 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 // void Minimap_Init(Minimap* minimap, int x, int y, int width, int height) {
@@ -46,4 +58,43 @@
 
 //     // Restaurar el recorte a su estado predeterminado
 //     SDL_RenderSetClipRect(renderer, NULL);
+// }
+
+// /*Walls minimap(part2)*/
+// void	box_to_image(t_img *img, int x, int y, int color)
+// {
+// 	int	x0;
+// 	int	y0;
+
+// 	x0 = x;
+// 	y0 = y;
+// 	while (y < y0 + 32)
+// 	{
+// 		x = x0;
+// 		while (x < x0 + 32)
+// 		{
+// 			set_pixel_to_image(img, x, y, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
+// /*Walls minimap*/
+// void	map_to_image(t_img *img, t_map *map, int color)
+// {
+// 	int	x;
+// 	int	y;
+
+//     y = 0;
+// 	while (y < map->mapH)
+// 	{
+// 		x = 0;
+// 		while (x < map->mapW)
+// 		{
+// 			if (map->map[y * map->mapW + x] == '1')
+// 				box_to_image(img, x * 32, y * 32, color);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
 // }

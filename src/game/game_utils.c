@@ -16,7 +16,7 @@ int	exit_game(t_game *g)
 {
 	if (g->mlx)
 		mlx_destroy_window(g->mlx, g->win);
-	free(g->map.map); // free strdup
+	free(g->map.map);
 	mlx_destroy_image(g->mlx, g->img2.img_ptr);
 	mlx_destroy_display(g->mlx);
 	free(g->mlx);
@@ -41,21 +41,19 @@ int	press_key(int keycode, t_game *g)
 	else if (keycode == KEY_RIGHT)
 		move_r(g);
 	mlx_clear_window(g->mlx, g->win);
-	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);//g->img2.w , 0);
-	// mlx_hook(g->win, 06, 1L << 6, &cub_mouse, &g);//para el movimiento del raton
+	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);
 	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
-	// mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, g->player.px, g->player.py);
 	return (0);
 }
 
 int	is_wall(t_game *g, int x, int y)
 {
-	int	mapX;
-	int	mapY;
+	int	map_x;
+	int	map_y;
 	int	pos;
 
-	mapX = x >> 6;//x / PX2;
-	mapY = y >> 6;//y / PX2;
-	pos = mapY * g->map.mapW + mapX;
+	map_x = x >> 6;
+	map_y = y >> 6;
+	pos = map_y * g->map.mapW + map_x;
 	return (g->map.map[pos] == '1');
 }

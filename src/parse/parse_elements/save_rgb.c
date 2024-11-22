@@ -12,6 +12,32 @@
 
 #include "cub3d.h"
 
+void	save_floor_rgb_values(t_colors *colors, int count, char **line)
+{
+	colors->f = 1;
+	if (count == 0)
+	{
+		colors->f_color[0] = (uint32_t)ft_atoi(line[1]);
+		colors->f_color[1] = (uint32_t)ft_atoi(line[2]);
+		colors->f_color[2] = (uint32_t)ft_atoi(line[3]);
+		if (colors->f == 1)
+			free_elements(line);
+	}
+}
+
+void	save_ceiling_rgb_values(t_colors *colors, int count, char **line)
+{
+	colors->c = 2;
+	if (count == 0)
+	{
+		colors->c_color[0] = (uint32_t)ft_atoi(line[1]);
+		colors->c_color[1] = (uint32_t)ft_atoi(line[2]);
+		colors->c_color[2] = (uint32_t)ft_atoi(line[3]);
+		if (colors->c == 2)
+			free_elements(line);
+	}
+}
+
 void	save_rgb_values3(t_lmap *temp, t_colors *colors, int count)
 {
 	char	**line;
@@ -19,33 +45,14 @@ void	save_rgb_values3(t_lmap *temp, t_colors *colors, int count)
 	line = ft_split2(temp->cont);
 	if (temp->cont[0] == 'F')
 	{
-		colors->f = 1;
-		if (count == 0)
-		{
-			colors->f_color[0] = (uint32_t)ft_atoi(line[1]);
-			colors->f_color[1] = (uint32_t)ft_atoi(line[2]);
-			colors->f_color[2] = (uint32_t)ft_atoi(line[3]);
-			if (colors->f == 1)
-				free_elements(line);//no esta entrando aqui
-			return ;
-		}
+		save_floor_rgb_values(colors, count, line);
+		return ;
 	}
 	else if (temp->cont[0] == 'C')
 	{
-		colors->c = 2;
-		if (count == 0)
-		{
-			colors->c_color[0] = (uint32_t)ft_atoi(line[1]);
-			colors->c_color[1] = (uint32_t)ft_atoi(line[2]);
-			colors->c_color[2] = (uint32_t)ft_atoi(line[3]);
-			if (colors->c == 2)
-				free_elements(line);//no esta entrando aqui
-			return ;
-		}
+		save_ceiling_rgb_values(colors, count, line);
+		return ;
 	}
-	// while (temp->cont[i] >= '0' && temp->cont[i] <= '9')
-	// 	i++;
-
 }
 
 void	save_rgb_values2(t_lmap *temp, t_colors *colors)

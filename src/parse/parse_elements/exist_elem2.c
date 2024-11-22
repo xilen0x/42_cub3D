@@ -69,3 +69,29 @@ int	exist_elements2(t_lmap *lmap)
 	}
 	return (0);
 }
+
+int	exist_elements_or_colors_anywhere(t_lmap *lmap)
+{
+	int		count;
+
+	count = 0;
+	while (lmap)
+	{
+		if (ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)))
+			count++;
+		else if (ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)))
+			count++;
+		else if (ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)))
+			count++;
+		else if (ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)))
+			count++;
+		else if (ft_strnstr(lmap->cont, "F", ft_strlen(lmap->cont)))
+			count++;
+		else if (ft_strnstr(lmap->cont, "C", ft_strlen(lmap->cont)))
+			count++;
+		lmap = lmap->next;
+	}
+	if (count != 6)
+		ft_errors("Invalid number of elements or colors\n");
+	return (0);
+}

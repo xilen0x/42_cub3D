@@ -87,7 +87,6 @@ int	is_one_player(t_map_parse *map)
 	int	x;
 	int	y;
 
-
 	count = 0;
 	y = 0;
 	while (map->matrix[map->y])

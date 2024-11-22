@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
+int	exist_path_colors2(char **line)
 {
 	int		i;
 
@@ -21,7 +21,7 @@ int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
 		i++;
 	if (i == 3)
 	{
-		if (check_range_values(i, line, colors, lmap) == 1)
+		if (check_range_values(i, line) == 1)
 		{
 			free_elements(line);
 			ft_errors("Invalid color value 2\n");
@@ -35,24 +35,19 @@ int	exist_path_colors2(char **line, t_colors *colors, t_lmap *lmap)
 	return (0);
 }
 
-int	exist_path_colors_op2(t_lmap *lmap, t_colors *colors)
+int	exist_path_colors_op2(t_lmap *lmap)
 {
 	char	**line;
 
 	line = NULL;
 	line = split_space_tab_comma(lmap->cont);
-	if (exist_path_colors2(line, colors, lmap))
+	if (exist_path_colors2(line))
 		ft_errors("Invalid path or color\n");
-	// else
-	// {
-		// save_rgb_values(lmap, colors);
-	// }
 	free_elements(line);
 	return (0);
 }
 
-
-int	exist_path_colors(t_lmap *lmap, t_colors *colors)
+int	exist_path_colors(t_lmap *lmap)
 {
 	char	**line;
 
@@ -62,7 +57,7 @@ int	exist_path_colors(t_lmap *lmap, t_colors *colors)
 		line = split_space_tab_comma(lmap->cont);
 		if (ft_strncmp(line[0], "F", 1) == 0 || \
 			ft_strncmp(line[0], "C", 1) == 0)
-			if (exist_path_colors2(line, colors, lmap))
+			if (exist_path_colors2(line))
 				ft_errors("Invalid color value 1\n");
 		free_elements(line);
 		lmap = lmap->next;

@@ -17,12 +17,46 @@ void	set_pixel_to_image(t_img *img, int x, int y, unsigned int color)
 {
 	void	*offset;
 
-	//printf("x: %d | y: %d\n", x, y);
 	if (x < 0 || x >= WX || y < 0 || y >= WY)
 		return ;
-	// Line len is in bytes. If img_w = 1024 pixels, so len_line ~ 4096 bytes (can differ for aligment)
 	offset = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)offset = color;
+}
+
+void	initialize_player(t_player *player, int x, int y, float angle)
+{
+	player->px = x * TL + TL / 2;
+	player->py = y * TL + TL / 2;
+	player->pa = angle;
+	player->fov = 1.05f;
+}
+
+int	check_and_initialize_player(t_map *map, t_player *player, int x, int y)
+{
+	char	tile;
+
+	tile = map->map[y * map->mapW + x];
+	if (tile == 'N')
+	{
+		initialize_player(player, x, y, 3 * PI / 2);
+		return (1);
+	}
+	else if (tile == 'S')
+	{
+		initialize_player(player, x, y, PI / 2);
+		return (1);
+	}
+	else if (tile == 'E')
+	{
+		initialize_player(player, x, y, 0.f);
+		return (1);
+	}
+	else if (tile == 'W')
+	{
+		initialize_player(player, x, y, PI);
+		return (1);
+	}
+	return (0);
 }
 
 void	set_player(t_map *map, t_player *player)
@@ -36,38 +70,8 @@ void	set_player(t_map *map, t_player *player)
 		x = 0;
 		while (x < map->mapW)
 		{
-			if (map->map[y * map->mapW + x] == 'N')
-			{
-				player->px = x * TL + TL / 2;
-				player->py = y * TL + TL / 2;
-				player->pa = 3 * PI / 2;
-				player->fov = 1.05f;
+			if (check_and_initialize_player(map, player, x, y))
 				return ;
-			}
-			else if (map->map[y * map->mapW + x] == 'S')
-			{
-				player->px = x * TL + TL / 2;
-				player->py = y * TL + TL / 2;
-				player->pa = PI / 2;
-				player->fov = 1.05f;
-				return ;
-			}
-			else if (map->map[y * map->mapW + x] == 'E')
-			{
-				player->px = x * TL + TL / 2;
-				player->py = y * TL + TL / 2;
-				player->pa = 0.f;
-				player->fov = 1.05f;
-				return ;
-			}
-			else if (map->map[y * map->mapW + x] == 'W')
-			{
-				player->px = x * TL + TL / 2;
-				player->py = y * TL + TL / 2;
-				player->pa = PI;
-				player->fov = 1.05f;
-				return ;
-			}
 			x++;
 		}
 		y++;
@@ -87,7 +91,7 @@ float	norm_angle(float angle)
 	return (norm);
 }
 
-void    set_rays(t_game *g)
+void	set_rays(t_game *g)
 {
 	float	angle_step;
 	int		rays;
@@ -113,7 +117,7 @@ void    set_rays(t_game *g)
 			//g->ray.path = g->ray.hpath;///////////////
 		}
 		//load_texture(&g->ray.tex, g->ray.path, g->mlx);//////////
-		ray_to_image(g, g->ray.color);
+		//ray_to_image(g, g->ray.color);
 		render_wall(g, rays);
 		g->ray.ra += angle_step;
 		rays++;
@@ -170,8 +174,9 @@ float	squared_vlen(t_game *g)
 
 void	calculate_ray_hlen(t_game *g)
 {
-	int	hit = 0;
-	
+	int	hit;
+
+	hit = 0;
 	while (hit == 0)
 	{
 		if ((g->ray.hx < TL) || (g->ray.hx > (g->map.mapW - 1) * TL))
@@ -240,9 +245,8 @@ void	calculate_ray_vlen(t_game *g)
 			g->map.x = ((int)(g->ray.vx)) >> 6;
 		g->map.y = ((int)g->ray.vy) >> 6;
 		g->map.pos = g->map.y * g->map.mapW + g->map.x;
-			
 		if (g->map.pos >= 0 && g->map.pos < g->map.mapW * g->map.mapH && g->map.map[g->map.pos] == '1')
-				hit =1;
+			hit = 1;
 		else
 		{
 			g->ray.vx += g->ray.x_step;
@@ -278,38 +282,10 @@ void	check_vertical_lines(t_game *g)
 		g->ray.vlen = 0;
 }
 
-// void	set_image(t_game *g)
-// {
-// 	floor_to_image(&g->img3, 0x0099CCFF);
-// 	ceiling_to_image(&g->img3, 0x00CC9966);
-// 	bg_to_image(&g->img2, 0x00606060);    				// grey background
-// 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
-// 	grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
-// 	player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
-// 	direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
-// }
-
-// unsigned int get_opposite_color(unsigned int color)
-// {
-//     // Extraer componentes RGB
-//     unsigned int red = (color >> 16) & 0xFF;  // Componente rojo
-//     unsigned int green = (color >> 8) & 0xFF; // Componente verde
-//     unsigned int blue = color & 0xFF;         // Componente azul
-
-//     // Calcular componentes opuestos
-//     unsigned int opposite_red = 255 - red;
-//     unsigned int opposite_green = 255 - green;
-//     unsigned int opposite_blue = 255 - blue;
-
-//     // Combinar componentes opuestos en un solo color
-//     return (opposite_red << 16) | (opposite_green << 8) | opposite_blue;
-// }
-
 void	set_image(t_game *g)
 {
 	int	color1;
 	int	color2;
-	// unsigned int opposite_color;
 
 	color1 = g->cols.f_color_hex;
 	color2 = g->cols.c_color_hex;
@@ -317,9 +293,6 @@ void	set_image(t_game *g)
 	floor_to_image(&g->img3, color2);//g->cols.f_color_hex);
 	ceiling_to_image(&g->img3, color1);//g->cols.c_color_hex);
 
-	// opposite_color = get_opposite_color(color2);
-
-	// (void)opposite_color;
 	bg_to_image(&g->img2, 0x00A9E2F3);//bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
 	// bg_to_image(&g->img2, &g->map, 0x00A9E2F3);
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
@@ -327,5 +300,4 @@ void	set_image(t_game *g)
 	// player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player
 	player_to_image(&g->img2, &g->player, &g->map, 0x00FF0000);// red player
 	// direction_to_image(g, 0x00FFFFFF);//(&g->img, &g->player, 0x00FFFFFF);// white direction
-	
 }

@@ -51,22 +51,15 @@ static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 	}
 }
 
-// uint32_t    combiner_hex(uint32_t r, uint32_t g, uint32_t b)
-// {
-//     return (r << 24 | g << 16 | b << 8);
-// }
-
-
-//scene->ccolor = (r << 16) + (g << 8) + b;
-
 void	save_colors_in_hx(t_lmap *lmap, t_colors *col)
 {
 	if (lmap->cont[0] == 'F')
-		col->f_color_hex = (col->f_color[0] << 16) + (col->f_color[1] << 8) + col->f_color[2];
+		col->f_color_hex = (col->f_color[0] << 16) + (col->f_color[1] << 8) + \
+		col->f_color[2];
 	else if (lmap->cont[0] == 'C')
-		col->c_color_hex = (col->c_color[0] << 16) + (col->c_color[1] << 8) + col->c_color[2];
+		col->c_color_hex = (col->c_color[0] << 16) + (col->c_color[1] << 8) + \
+		col->c_color[2];
 }
-
 
 int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem, t_colors *colors)
 {

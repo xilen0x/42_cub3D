@@ -59,6 +59,17 @@ int	any_zero_or_space(t_map_parse *map)
 	return (0);
 }
 
+int	has_space_or_tab_adjacent(t_map_parse *m, int x, int y)
+{
+	if (m->matrix[y][x + 1] == ' ' || m->matrix[y][x - 1] == ' ' ||
+		m->matrix[y + 1][x] == ' ' || m->matrix[y - 1][x] == ' ')
+		return (1);
+	if (m->matrix[y][x + 1] == '\t' || m->matrix[y][x - 1] == '\t' ||
+		m->matrix[y + 1][x] == '\t' || m->matrix[y - 1][x] == '\t')
+		return (1);
+	return (0);
+}
+
 int	space_exist_next_to_0(t_map_parse *m)
 {
 	int	x;
@@ -72,11 +83,7 @@ int	space_exist_next_to_0(t_map_parse *m)
 		{
 			if (m->matrix[y][x] == '0')
 			{
-				if (m->matrix[y][x + 1] == ' ' || m->matrix[y][x - 1] == ' ' || \
-					m->matrix[y + 1][x] == ' ' || m->matrix[y - 1][x] == ' ')
-					return (1);
-				if (m->matrix[y][x + 1] == '\t' || m->matrix[y][x - 1] == '\t' || \
-					m->matrix[y + 1][x] == '\t' || m->matrix[y - 1][x] == '\t')
+				if (has_space_or_tab_adjacent(m, x, y))
 					return (1);
 			}
 			x++;

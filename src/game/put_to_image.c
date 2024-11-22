@@ -18,7 +18,7 @@ void	floor_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-    y = 0;
+	y = 0;
 	while (y < (img->h / 2))
 	{
 		x = 0;   
@@ -30,16 +30,17 @@ void	floor_to_image(t_img *img, int color)
 		y++;
 	}
 }
+
 /*Sky background color - map*/
 void	ceiling_to_image(t_img *img, int color)
 {
 	int	x;
 	int	y;
 
-    y = img->h / 2;
+	y = img->h / 2;
 	while (y < img->h)
 	{
-		x = 0;   
+		x = 0;
 		while (x < img->w)
 		{
 			set_pixel_to_image(img, x, y, color);
@@ -55,11 +56,11 @@ void	bg_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-    y = 0;
-	while (y < WY_SM)//(y < img->h)
+	y = 0;
+	while (y < WY_SM)
 	{
-		x = 0;   
-		while (x < WX_SM)//(x < img->w)
+		x = 0;
+		while (x < WX_SM)
 		{
 			set_pixel_to_image(img, x, y, color);
 			x++;
@@ -74,11 +75,11 @@ void	grid_to_image(t_img *img, int color)
 	int	x;
 	int	y;
 
-    y = 0;
-	while (y < WY_SM)// (y < img->h)
+	y = 0;
+	while (y < WY_SM)
 	{
 		x = 0;
-		while (x < WX_SM)//(x < img->w)
+		while (x < WX_SM)
 		{
 			if ((y % 32) == 0 || (x % 32) == 0)
 				set_pixel_to_image(img, x, y, color);
@@ -87,47 +88,6 @@ void	grid_to_image(t_img *img, int color)
 		y++;
 	}
 }
-// /*Walls minimap(part2)*/
-// void	box_to_image(t_img *img, int x, int y, int color)
-// {
-// 	int	x0;
-// 	int	y0;
-
-// 	x0 = x;
-// 	y0 = y;
-// 	while (y < y0 + 32)
-// 	{
-// 		x = x0;
-// 		while (x < x0 + 32)
-// 		{
-// 			set_pixel_to_image(img, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-// /*Walls minimap*/
-// void	map_to_image(t_img *img, t_map *map, int color)
-// {
-// 	int	x;
-// 	int	y;
-
-//     y = 0;
-// 	while (y < map->mapH)
-// 	{
-// 		x = 0;
-// 		while (x < map->mapW)
-// 		{
-// 			if (map->map[y * map->mapW + x] == '1')
-// 				box_to_image(img, x * 32, y * 32, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
-// Tamaño de un bloque en píxeles (en el minimapa)
-// #define BLOCK_SM 32  // Ajustar si es necesario
 
 /* Dibuja un bloque en el minimapa */
 void	box_to_image(t_img *img, int x, int y, int block_size, int color)
@@ -152,26 +112,27 @@ void	box_to_image(t_img *img, int x, int y, int block_size, int color)
 /* Dibuja solo el área relevante del mapa en el minimapa */
 void	map_to_image(t_img *img, t_map *map, int color)
 {
-	int	x;
-	int	y;
-	float scale_x = SCALE_X(map->mapW);
-	float scale_y = SCALE_Y(map->mapH);
+	int		x;
+	int		y;
+	int		scaled_x;
+	int		scaled_y;
+	int		block_size;
+	float	scale_x;
+	float	scale_y;
 
+	scale_x = SCALE_X(map->mapW);
+	scale_y = SCALE_Y(map->mapH);
 	y = 0;
 	while (y < map->mapH)
 	{
 		x = 0;
 		while (x < map->mapW)
 		{
-			if (map->map[y * map->mapW + x] == '1') // Si el bloque es un muro
+			if (map->map[y * map->mapW + x] == '1')
 			{
-				// Escalamos las coordenadas del bloque para el minimapa
-				int scaled_x = (int)(x * scale_x);
-				int scaled_y = (int)(y * scale_y);
-				// Usamos el tamaño máximo de bloque basado en las escalas
-				int block_size = (int)fmax(scale_x, scale_y);
-				// Dibujamos el bloque en el minimapa con el tamaño escalado
-				// box_to_image(img, scaled_x, scaled_y, (int)fmax(scale_x, scale_y), color);
+				scaled_x = (int)(x * scale_x);
+				scaled_y = (int)(y * scale_y);
+				block_size = (int)fmax(scale_x, scale_y);
 				box_to_image(img, scaled_x, scaled_y, block_size, color);
 			}
 			x++;
@@ -182,43 +143,21 @@ void	map_to_image(t_img *img, t_map *map, int color)
 
 
 // /*Red player in minimap*/
-// void	player_to_image(t_img *img, t_player *player, int color)
-// {
-// 	int	x;
-// 	int	y;
-// 	int x0;
-// 	int y0;
-
-// 	x0 = (player->px) / 2 - 4;//8;
-// 	y0 = (player->py) / 2 - 4;//8;
-// 	y = y0;
-// 	while (y <= (player->py / 2) + 4)//8)  // 17 pixels is the size of the mini player
-// 	{
-// 		x = x0;
-// 		while (x <= (player->px / 2) + 4)//8)
-// 		{
-// 			set_pixel_to_image(img, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
-
 void	player_to_image(t_img *img, t_player *player, t_map *map, int color)
 {
-	int	x;
-	int	y;
-	int	x0;
-	int	y0;
+	int		x;
+	int		y;
+	int		x0;
+	int		y0;
+	float	scale_x;
+	float	scale_y;
 
 	// Calculamos los factores de escala para el minimapa
-	float scale_x = (float)WX_SM / (float)(map->mapW);
-	float scale_y = (float)WY_SM / (float)(map->mapH);
-
+	scale_x = (float)WX_SM / (float)(map->mapW);
+	scale_y = (float)WY_SM / (float)(map->mapH);
 	// Calculamos la posición del jugador escalada al minimapa
 	x0 = (int)(player->px * scale_x); // Tamaño del jugador reducido
 	y0 = (int)(player->py * scale_y);
-
 	// Dibujamos al jugador como un cuadrado de 9x9 píxeles
 	y = y0;
 	while (y <= y0 + 8)  // Altura del jugador en el minimapa
@@ -256,9 +195,9 @@ void	direction_to_image(t_game *g, int color)//(t_img *img, t_player *player, in
 
 void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *player, int color)
 {
-	int	x;
-	int	y;
-	int	hyp;
+	int		x;
+	int		y;
+	int		hyp;
 	float	px;
 	float	py;
 
@@ -276,22 +215,7 @@ void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *play
 	}
 }
 
-/*int	get_color(t_game *g)// get the color of the wall
-{
-	int	color;
-
-	if (g->ray.ra >= (7 * PI / 4) || g->ray.ra < (PI / 4)) // 7*PI/4=549 and PI/4=78 because of integer division!!!
-		color = 0x00FFFF00; // east wall
-	else if (g->ray.ra >= (PI / 4) && g->ray.ra < (3 * PI / 4))
-		color = 0x00FF00FF; // south wall
-	else if (g->ray.ra >= (3 * PI / 4) && g->ray.ra < (5 * PI / 4))
-		color = 0x0000FFFF; // west wall
-	else if (g->ray.ra >= (5 * PI / 4) && g->ray.ra < (7 * PI / 4))
-		color = 0x00FFFFFF;//north wall
-	return (color);
-}*/
-
-void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)	// draw the wall
+void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)
 {
 	while (top_pix < bot_pix)
 		set_pixel_to_image(&g->img3, col, top_pix++, g->ray.color);

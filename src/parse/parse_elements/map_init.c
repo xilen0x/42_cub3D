@@ -34,8 +34,8 @@ static void	init_colors_values(t_colors *colors)
 	colors->c_color[0] = 255;
 	colors->c_color[1] = 255;
 	colors->c_color[2] = 255;
-	colors->f_color_hex = 0x0000FF00;// verde
-	colors->c_color_hex = 0x0000FF00;// verde
+	colors->f_color_hex = 0x0000FF00;
+	colors->c_color_hex = 0x0000FF00;
 }
 
 /*Inicialización de valores estructura t_map*/
@@ -50,9 +50,9 @@ static void	init_map_values(t_map_parse *map)
 }
 
 /*Inicializacion de valores*/
-void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map_parse, char *av[])
+void	init_values(t_elem *elem, t_colors *col, t_map_parse *m, char *av[])
 {
 	init_elem_values(elem, av);
-	init_colors_values(colors);
-	init_map_values(map_parse);
+	init_colors_values(col);
+	init_map_values(m);
 }
