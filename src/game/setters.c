@@ -90,7 +90,7 @@ float	norm_angle(float angle)
 void    set_rays(t_game *g)
 {
 	float	angle_step;
-	int	rays;
+	int		rays;
 
 	g->ray.ra = g->player.pa - (g->player.fov / 2);
 	angle_step = g->player.fov / g->img3.w;

@@ -271,7 +271,7 @@ void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *play
 	{
 		x = (int)(px + (cosf(g->ray.ra) * hyp));
 		y = (int)(py + (sinf(g->ray.ra) * hyp));
-			set_pixel_to_image(&g->img2, x, y, color);
+		set_pixel_to_image(&g->img2, x, y, color);
 		hyp++;
 	}
 }

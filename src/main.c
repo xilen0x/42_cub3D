@@ -83,7 +83,7 @@ int	main(int argc, char *argv[])
 		g.win = mlx_new_window(g.mlx, WX, WY, "Cub3D");
 		if (img2_init(&g))
 			return (1);
-		if 	(img3_init(&g))
+		if (img3_init(&g))
 			return (1);
 		set_player(&g.map, &g.player);
 		set_image(&g);
@@ -95,7 +95,7 @@ int	main(int argc, char *argv[])
 		mlx_hook(g.win, X_EVENT_KEY_EXIT, 1L << 0, &exit_game, &g);//1L << 0
 		// mlx_hook(g.win, 06, 1L << 6, cub_mouse, &g);
 		mlx_loop(g.mlx);
-		}
+	}
 	else
 		ft_errors("Invalid number of arguments\n");
 	lst_clear(&lmap, &free);
