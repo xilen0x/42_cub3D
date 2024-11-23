@@ -108,15 +108,14 @@ void	set_rays(t_game *g)
 		{
             g->ray.len = sqrtf(g->ray.vlen); // Usar la distancia vertical
             g->ray.color = g->ray.vcolor;
-			//g->ray.path = g->ray.vpath;///////////////
+			g->ray.path = g->ray.vpath;///////////////
 		}
 		else
 		{
             g->ray.len = sqrtf(g->ray.hlen); // Usar la distancia horizontal
             g->ray.color = g->ray.hcolor;
-			//g->ray.path = g->ray.hpath;///////////////
+			g->ray.path = g->ray.hpath;///////////////
 		}
-		//load_texture(&g->ray.tex, g->ray.path, g->mlx);//////////
 		ray_to_image(g, g->ray.color);
 		render_wall(g, rays);
 		g->ray.ra += angle_step;
@@ -129,12 +128,12 @@ void	set_hcolor(t_game *g)// to be set_path
 	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
 	{
 		g->ray.hcolor = 0x00C0C0C0;//0x00FFFFFF;// color of north wall
-		//g->ray.hpath = "./textures/north.xpm";/////////////
+		g->ray.hpath = 0;//"./textures/north.xpm";/////////////
 	}
 	else if (g->ray.ra <= PI && g->ray.ra >= 0)	// looking down
 	{
 		g->ray.hcolor = 0x00FF00FF;// color of south wall
-		//g->ray.hpath = "./textures/south.xpm";//////////////
+		g->ray.hpath = 1;//"./textures/south.xpm";//////////////
 	}
 }
 
@@ -143,12 +142,12 @@ void	set_vcolor(t_game *g)// to be set_path
 	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2)) // looking left
 	{
 		g->ray.vcolor = 0x00FFFF00;// color of east wall
-		//g->ray.vpath = "./textures/east.xpm";
+		g->ray.vpath = 2;//"./textures/east.xpm";
 	}
 	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2)) // looking right
 	{
 		g->ray.vcolor = 0x0000FFFF;// color of west wall
-		//g->ray.vpath = "./textures/west.xpm";
+		g->ray.vpath = 3;//"./textures/west.xpm";
 	}
 }
 

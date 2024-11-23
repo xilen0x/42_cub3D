@@ -15,6 +15,7 @@ int	main(int argc, char *argv[])
 		parsing(&elem, &g.cols, &map_parse, &lmap);
 		load_map(&g, &map_parse);
 		game_init(&g);
+		load_textures(&g);
 		set_player(&g.map, &g.player);
 		set_image(&g);
 		set_rays(&g);

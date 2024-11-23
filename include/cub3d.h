@@ -26,7 +26,7 @@
 #define KEY_D				100
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
-#define	WX					1536//32//64	// Side of 2D tiles in pixels
+#define	WX					1280//1536//32//64	// Side of 2D tiles in pixels
 #define	WY					768//512//32//64	// Side of 3D tiles in pixels
 #define WX_SM				384
 #define WY_SM				192
@@ -99,9 +99,12 @@ typedef struct	s_ray
 	float		hlen;		// length of the ray to horizontal hit
 	float		vlen;		// length of the ray to vertical hit
 	float		len;		// minimal of hlen and vlen
-	float		hcolor;		// color based on orientation of the wall (N, S)
-	float		vcolor;		// color based on orientation of the wall (E, W)
-	float		color;		// definitive color
+	int			hpath;
+	int			vpath;
+	int			path;
+	int			hcolor;		// color based on orientation of the wall (N, S)
+	int			vcolor;		// color based on orientation of the wall (E, W)
+	int			color;		// definitive color
 }				t_ray;
 
 typedef struct	s_map
@@ -134,6 +137,7 @@ typedef struct	s_game
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_img		tex[4];
 	t_colors	cols;
 	void		*mlx;
 	void		*win;
@@ -180,6 +184,8 @@ void player_to_image(t_img *img, t_player *player, t_map *map, int color);
 void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
 void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
 void	map_to_image(t_img *img, t_map *map, int color);
+void	render_wall(t_game *g, int col);
+void    load_textures(t_game *g);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map, char *av[]);

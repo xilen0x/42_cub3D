@@ -215,18 +215,89 @@ void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *play
 	}
 }
 
-void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)
+// void	draw_wall(t_game *g, int col, float wall_h, int top_pix, int bot_pix)
+// {
+// 	float	wall_x;
+// 	int		texture_x;
+// 	int		texture_y;
+// 	int		screen_y;
+// 	int		d;
+// 	unsigned int tex_pos;
+// 	unsigned int color;
+
+// 	if (g->ray.path == g->ray.vpath)
+// 		wall_x = g->ray.vy;
+// 	else
+// 		wall_x = g->ray.hx;
+// 	texture_x = (int)(wall_x) % 64;
+// 	screen_y = top_pix;
+// 	while (screen_y < bot_pix)
+// 	{
+//         d = screen_y * 256 - g->img3.h * 128 + wall_h * 128;
+//         texture_y = ((d * g->tex[g->ray.path].h) / wall_h) / 256;//texture_y = (int)(((screen_y - top_pix) * 64) / wall_h);
+// 		texture_y = texture_y % 64;
+//         tex_pos = (texture_y * g->tex[g->ray.path].line_len) + 
+//                       (texture_x * (g->tex[g->ray.path].bpp / 8));
+//         color = *(unsigned int *)(g->tex[g->ray.path].addr + tex_pos);
+// 	    set_pixel_to_image(&g->img3, col, screen_y, color);
+// 		screen_y++;
+//     }
+// 	printf("texPos:%d\n", tex_pos);
+// //printf("wall_H:%f\n", wall_h);
+// }
+
+void draw_wall(t_game *g, int col, float wall_h, int top_pix, int bot_pix)
 {
-	while (top_pix < bot_pix)
-		set_pixel_to_image(&g->img3, col, top_pix++, g->ray.color);
+    float wall_x;
+    unsigned int texture_x, texture_y, screen_y, d;
+    unsigned int tex_pos;
+    unsigned int color;
+
+    if (g->ray.path < 0 || g->ray.path >= 4) {
+        printf("Invalid ray path: %d\n", g->ray.path);
+        return;
+    }
+
+    if (g->tex[g->ray.path].addr == NULL) {
+        printf("Texture address is NULL for path: %d\n", g->ray.path);
+        return;
+    }
+
+    if (g->ray.path == g->ray.vpath)
+        wall_x = g->ray.vy;
+    else
+        wall_x = g->ray.hx;
+
+    texture_x = (unsigned int)(wall_x) % 64;
+    screen_y = top_pix;
+
+    while (screen_y < (unsigned int)bot_pix) {
+        d = screen_y * 256 - g->img3.h * 128 + wall_h * 128;
+        texture_y = ((d * g->tex[g->ray.path].h) / wall_h) / 256;
+		texture_y = texture_y % 64;
+        //if (texture_x < 0 || texture_x >= g->tex[g->ray.path].w || 
+          //  texture_y < 0 || texture_y >= g->tex[g->ray.path].h)
+			/*if (texture_x >= g->tex[g->ray.path].w || texture_y >= g->tex[g->ray.path].h)
+			{
+            printf("Texture coordinates out of bounds: x=%d, y=%d\n", texture_x, texture_y);
+            return;
+        }*/
+
+        tex_pos = (texture_y * g->tex[g->ray.path].line_len) + 
+                  (texture_x * (g->tex[g->ray.path].bpp / 8));
+        
+        color = *(unsigned int *)(g->tex[g->ray.path].addr + tex_pos);
+        set_pixel_to_image(&g->img3, col, screen_y, color);
+        screen_y++;
+    }
 }
 
 void	render_wall(t_game *g, int col)
 {
 	float	cos_angle;
 	float	wall_h;
-	int		bot_pix;
-	int		top_pix;
+	int	bot_pix;
+	int	top_pix;
 
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
@@ -241,5 +312,5 @@ void	render_wall(t_game *g, int col)
 		bot_pix = g->img3.h;
 	if (top_pix < 0) // check the top pixel
 		top_pix = 0;
-	draw_wall(g, col, top_pix, bot_pix); // draw the wall
+	draw_wall(g, col, wall_h, top_pix, bot_pix);
 }
