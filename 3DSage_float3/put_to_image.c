@@ -187,35 +187,53 @@ void	ray_to_image(t_game *g, int color)//(t_img *img, t_ray *ray, t_player *play
 	}
 }
 
-/*int	get_color(t_game *g)// get the color of the wall
-{
-	int	color;
-
-	if (g->ray.ra >= (7 * PI / 4) || g->ray.ra < (PI / 4)) // 7*PI/4=549 and PI/4=78 because of integer division!!!
-		color = 0x00FFFF00; // east wall
-	else if (g->ray.ra >= (PI / 4) && g->ray.ra < (3 * PI / 4))
-		color = 0x00FF00FF; // south wall
-	else if (g->ray.ra >= (3 * PI / 4) && g->ray.ra < (5 * PI / 4))
-		color = 0x0000FFFF; // west wall
-	else if (g->ray.ra >= (5 * PI / 4) && g->ray.ra < (7 * PI / 4))
-		color = 0x00FFFFFF;//north wall
-	return (color);
-}*/
 
 //IT WORKS OK WITH COLOURS!!!!!!!!!!!!!!!!!!
-void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)	// draw the wall
+/*void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)	// draw the wall
 {
 	while (top_pix < bot_pix)
 		set_pixel_to_image(&g->img3, col, top_pix++, g->ray.color);
+}*/
+
+
+
+void	draw_wall(t_game *g, int col, float wall_h, int top_pix, int bot_pix)
+{
+	float	wall_x;
+	int		texture_x;
+	int		texture_y;
+	int		screen_y;
+	int		d;
+
+	//wall_x = (g->ray.path == g->ray.vpath) ? g->ray.vy : g->ray.hx;
+	if (g->ray.path == g->ray.vpath)
+		wall_x = g->ray.vy;
+	else
+		wall_x = g->ray.hx;
+	texture_x = (int)(wall_x) % 64;
+	screen_y = top_pix;
+	while (screen_y < bot_pix)
+	{
+        d = screen_y * 256 - g->img3.h * 128 + wall_h * 128;
+        texture_y = ((d * g->tex[g->ray.path].h) / wall_h) / 256;//texture_y = (int)(((screen_y - top_pix) * 64) / wall_h);
+		texture_y = texture_y % 64;
+
+        int tex_pos = (texture_y * g->tex[g->ray.path].line_len) + 
+                      (texture_x * (g->tex[g->ray.path].bpp / 8));
+        int color = *(int *)(g->tex[g->ray.path].addr + tex_pos);
+        set_pixel_to_image(&g->img3, col, screen_y, color);
+		screen_y++;
+    }
 }
 
-//IT WORKS OK WITH COLOURS!!!!!!!!!!!!!!!!
 void	render_wall(t_game *g, int col)
 {
 	float	cos_angle;
 	float	wall_h;
+	//float	wall_x;
 	int	bot_pix;
 	int	top_pix;
+	//int texture_x, texture_y;
 
 	cos_angle = g->player.pa - g->ray.ra;
 	if (cos_angle < 0)
@@ -223,7 +241,6 @@ void	render_wall(t_game *g, int col)
 	else if (cos_angle > 2 * PI)
 		cos_angle = cos_angle - 2 * PI;
 	g->ray.len = (g->ray.len * cosf(cos_angle)); // fix the fisheye
-	//g->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl - mlx->ply->angle)); // fix the fisheye
 	wall_h = (TL / g->ray.len) * ((g->img3.w / 2) / tanf(g->player.fov / 2));
 	bot_pix = (g->img3.h / 2) + (wall_h / 2); // get the bottom pixel
 	top_pix = (g->img3.h / 2) - (wall_h / 2); // get the top pixel
@@ -231,21 +248,44 @@ void	render_wall(t_game *g, int col)
 		bot_pix = g->img3.h;
 	if (top_pix < 0) // check the top pixel
 		top_pix = 0;
-	draw_wall(g, col, top_pix, bot_pix); // draw the wall
+	
+	// Determinar coordenada X de la textura
+    //printf("RayPath:%s - Texture width:%d\n", g->ray.path, g->tex[1].w);
+	
+	//wall_x = (g->ray.path == g->ray.vpath) ? g->ray.vy : g->ray.hx;
+	//wall_x -= floorf(wall_x);
+	//printf("decimal wall_x:%f\n", wall_x);
+    //texture_x = (int)(wall_x * 64);//texture_x = (int)(wall_x * g->tex[g->ray.path].w);
+	//texture_x = (int)(wall_x) % 64;
+	// Dibujar la pared píxel a píxel
+    /*for (int screen_y = top_pix; screen_y < bot_pix; screen_y++)
+	{
+        int d = screen_y * 256 - g->img3.h * 128 + wall_h * 128;
+        texture_y = ((d * g->tex[g->ray.path].h) / wall_h) / 256;//texture_y = (int)(((screen_y - top_pix) * 64) / wall_h);
+		texture_y = texture_y % 64;
+
+        int tex_pos = (texture_y * g->tex[g->ray.path].line_len) + 
+                      (texture_x * (g->tex[g->ray.path].bpp / 8));
+        int color = *(int *)(g->tex[g->ray.path].addr + tex_pos);
+
+        set_pixel_to_image(&g->img3, col, screen_y, color);
+    }*/
+	draw_wall(g, col, wall_h, top_pix, bot_pix);
 }
 
+/*
 int	get_texture_pixel(t_img *tex, int x, int y)
 {
 	char *pixel = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
 	int color = *(int*)pixel;
 	return color;
-}
+}*/
 
-void load_texture(t_img *tex, char *path, void *mlx)
+/*void load_texture(t_img *tex, char *path, void *mlx)
 {
     tex->img_ptr = mlx_xpm_file_to_image(mlx, path, &tex->w, &tex->h);  // leaks here!!!
     tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
-}
+}*/
 /*
 void	draw_wall(t_game *g, int col, int top_pix, int bot_pix)	// draw the wall
 {

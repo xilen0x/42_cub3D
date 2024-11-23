@@ -27,7 +27,7 @@
 #define KEY_D				100
 #define	KEY_LEFT			65361
 #define	KEY_RIGHT			65363
-#define	WX					1536//32//64	// Side of 2D tiles in pixels
+#define	WX					1280//1536//32//64	// Side of 2D tiles in pixels
 #define	WY					768//512//32//64	// Side of 3D tiles in pixels
 #define	TL					64
 #define	PI					3.141592f
@@ -74,13 +74,12 @@ typedef struct	s_ray
 	float		hlen;		// length of the ray to horizontal hit
 	float		vlen;		// length of the ray to vertical hit
 	float		len;		// minimal of hlen and vlen
-	float		hcolor;		// color based on orientation of the wall (N, S)
-	float		vcolor;		// color based on orientation of the wall (E, W)
-	float		color;		// definitive color
-	char		*hpath;
-	char		*vpath;
-	char		*path;
-	t_img		tex;
+	int			hpath;
+	int			vpath;
+	int			path;
+	int			hcolor;		// color based on orientation of the wall (N, S)
+	int			vcolor;		// color based on orientation of the wall (E, W)
+	int			color;		// definitive color
 }				t_ray;
 
 typedef struct	s_game
@@ -90,6 +89,7 @@ typedef struct	s_game
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
+	t_img		tex[4];
 	void		*mlx;
 	void		*win;
 	//int			h;			// game/window height in pixels
@@ -120,6 +120,7 @@ void	check_vertical_lines(t_game *g);
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
 int		is_wall(t_game *g, int x, int y);
+void    load_textures(t_game *g);
 
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);
@@ -141,7 +142,8 @@ void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *pla
 void	map_to_image(t_img *img, t_map *map, int color);
 //void	slice_to_image(t_game *g, int col, int top_px, int bottom_px);//, int color);
 //void	wall_to_image(t_game *g, int col);
-void	draw_wall(t_game *g, int col, int top_pix, int bot_pix);	// draw the wall
+//void	draw_wall(t_game *g, int col, int top_pix, int bot_pix);	// draw the wall
 void	render_wall(t_game *g, int col);
-int	get_texture_pixel(t_img *tex, int x, int y);//////////
-void load_texture(t_img *tex, char *path, void *mlx);/////////
+//int	get_texture_pixel(t_img *tex, int x, int y);//////////
+//void load_texture(t_img *tex, char *path, void *mlx);/////////
+void    load_textures(t_game *g);

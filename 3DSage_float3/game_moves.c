@@ -24,11 +24,9 @@ void	move_w(t_game *g)
 	xright = (int)(g->player.px + 7) >> 6;
 	y = (int)(g->player.py - 9) >> 6;
 	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * y + xleft] != '1' && g->map.map[g->map.mapW * y + xright] != '1')//68)  // min py will be 68 = 64 px is the top wall heigth + 4 is miniplayer height/2
-	{
-		g->player.py = g->player.py - 4;    // 4 is the Y step of miniplayer
+			g->player.py = g->player.py - 4;
 		set_image(g);
 		set_rays(g);
-	}
 }
 
 void	move_s(t_game *g)
@@ -43,11 +41,9 @@ void	move_s(t_game *g)
 	xright = (int)(g->player.px + 7) >> 6;
 	y = (int)(g->player.py + 9) >> 6;
 	if (g->map.map[g->map.mapW * y + x] != '1' && g->map.map[g->map.mapW * y + xleft] != '1' && g->map.map[g->map.mapW * y + xright] != '1')
-	{
-		g->player.py = g->player.py + 4;    // 4 is the Y step of miniplayer
+			g->player.py = g->player.py + 4;    // 4 is the Y step of miniplayer
 		set_image(g);
 		set_rays(g);
-	}
 }
 
 void	move_a(t_game *g)
@@ -90,7 +86,7 @@ void	move_d(t_game *g)
 
 void	move_l(t_game *g)
 {
-	g->player.pa -= 0.1;//5;//10 //0.1;
+	g->player.pa -= 0.01;//5;//10 //0.1;
 	if (g->player.pa < 0)
 		g->player.pa += 2 * PI;
 	set_image(g);
@@ -99,7 +95,7 @@ void	move_l(t_game *g)
 
 void	move_r(t_game *g)
 {
-	g->player.pa += 0.1;//5;//10 //0.1;
+	g->player.pa += 0.01;//5;//10 //0.1;
 	if (g->player.pa >= 2 * PI)
 		g->player.pa -= 2 * PI;
 	set_image(g);
