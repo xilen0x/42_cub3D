@@ -117,7 +117,7 @@ void	set_rays(t_game *g)
 			//g->ray.path = g->ray.hpath;///////////////
 		}
 		//load_texture(&g->ray.tex, g->ray.path, g->mlx);//////////
-		//ray_to_image(g, g->ray.color);
+		ray_to_image(g, g->ray.color);
 		render_wall(g, rays);
 		g->ray.ra += angle_step;
 		rays++;
