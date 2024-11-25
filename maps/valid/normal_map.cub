@@ -1,7 +1,7 @@
-SO ./textures/red.xpm		   
-WE ./textures/green.xpm
-EA ./textures/yellow.xpm
-NO ./textures/blue.xpm   	  	
+NO ./textures/north.xpm
+WE ./textures/west.xpm
+SO ./textures/south.xpm
+EA ./textures/east.xpm
 
 F	 191, 54, 12
 C	  0, 172, 193 

@@ -185,7 +185,8 @@ void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, i
 void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
 void	map_to_image(t_img *img, t_map *map, int color);
 void	render_wall(t_game *g, int col);
-void    load_textures(t_game *g);
+//void    load_textures(t_game *g);
+void    load_textures(t_game *g, t_elem *elem);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map, char *av[]);
@@ -229,7 +230,7 @@ int		exist_path_colors2(char **line);
 int		exist_path_colors_op2(t_lmap *lmap);
 void	remove_external_tabs_spaces_elem(t_lmap *lmap);
 void	save_rgb_values(t_lmap *lmap, t_colors *colors);
-void	remove_empty_lines(t_lmap *lmap);
+void	remove_empty_lines(t_lmap **lmap);
 void	remove_newline(char *line);
 void	remove_newline_char(char *str);
 int		free_data(char **line, char **colors);
@@ -251,4 +252,6 @@ void	print_map(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
 void	render_wall(t_game *g, int col);
 
+int	is_empty_or_whitespace(const char *str);
+void	remove_first_spaces(t_lmap *lm);
 #endif

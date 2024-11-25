@@ -116,7 +116,7 @@ void	set_rays(t_game *g)
             g->ray.color = g->ray.hcolor;
 			g->ray.path = g->ray.hpath;///////////////
 		}
-		ray_to_image(g, g->ray.color);
+		//ray_to_image(g, g->ray.color);
 		render_wall(g, rays);
 		g->ray.ra += angle_step;
 		rays++;
@@ -293,7 +293,6 @@ void	set_image(t_game *g)
 	ceiling_to_image(&g->img3, color1);//g->cols.c_color_hex);
 
 	bg_to_image(&g->img2, 0x00A9E2F3);//bg_to_image(&g->img2, get_opposite_color(opposite_color));	// background color minimap
-	// bg_to_image(&g->img2, &g->map, 0x00A9E2F3);
 	map_to_image(&g->img2, &g->map, 0x000000FF);			// blue boxes (walls)
 	// grid_to_image(&g->img2, 0x00FFFF00);					// yellow grid lines
 	// player_to_image(&g->img2, &g->player, 0x00FF0000);	// red player

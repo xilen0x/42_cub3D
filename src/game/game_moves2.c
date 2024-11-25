@@ -14,7 +14,7 @@
 
 void	move_l(t_game *g)
 {
-	g->player.pa -= 0.1;
+	g->player.pa -= 0.05;
 	if (g->player.pa < 0)
 		g->player.pa += 2 * PI;
 	set_image(g);
@@ -23,7 +23,7 @@ void	move_l(t_game *g)
 
 void	move_r(t_game *g)
 {
-	g->player.pa += 0.1;
+	g->player.pa += 0.05;
 	if (g->player.pa >= 2 * PI)
 		g->player.pa -= 2 * PI;
 	set_image(g);

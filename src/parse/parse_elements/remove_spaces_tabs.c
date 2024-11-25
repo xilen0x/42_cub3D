@@ -52,13 +52,13 @@ int	is_empty_or_whitespace(const char *str)
 	return (1);
 }
 
-void	remove_empty_lines(t_lmap *lmap)
+void	remove_empty_lines(t_lmap **lmap)
 {
 	t_lmap	*current;
 	t_lmap	*prev;
 	t_lmap	*temp;
 
-	current = lmap;
+	current = *lmap;
 	prev = NULL;
 	while (current)
 	{
@@ -68,7 +68,7 @@ void	remove_empty_lines(t_lmap *lmap)
 			if (prev)
 				prev->next = current->next;
 			else
-				lmap = current->next;
+				*lmap = current->next;
 			current = current->next;
 			free(temp->cont);
 			free(temp);
