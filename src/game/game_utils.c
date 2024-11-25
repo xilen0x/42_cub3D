@@ -44,8 +44,8 @@ int	press_key(int keycode, t_game *g)
 		move_r(g);
 	mlx_clear_window(g->mlx, g->win);
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);
-	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
-	// display_minimap(g);
+	//mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
+	display_minimap(g);
 	return (0);
 }
 

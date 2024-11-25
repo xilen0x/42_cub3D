@@ -14,8 +14,10 @@
 
 int	img2_init(t_game *g)
 {
-	g->img2.h = WY_SM;
-	g->img2.w = WX_SM;
+	// g->img2.h = WY_SM;
+	// g->img2.w = WX_SM;
+	g->img2.h = g->map.mapH * 32;
+	g->img2.w = g->map.mapW * 32;
 	g->img2.img_ptr = mlx_new_image(g->mlx, g->img2.w, g->img2.h);
 	if (!g->img2.img_ptr)
 	{
@@ -35,6 +37,28 @@ int	img2_init(t_game *g)
 	return (0);
 }
 
+int	img22_init(t_game *g)
+{
+	g->img22.h = ft_min(g->img2.h, MINIMAP_HEIGHT);
+	g->img22.w = ft_min(g->img2.w, MINIMAP_WIDTH);
+	g->img22.img_ptr = mlx_new_image(g->mlx, g->img22.w, g->img22.h);
+	if (!g->img22.img_ptr)
+	{
+		mlx_destroy_display(g->mlx);
+		free(g->mlx);
+		return (1);
+	}
+	g->img22.addr = mlx_get_data_addr(g->img22.img_ptr, &(g->img22.bpp), \
+		&(g->img22.line_len), &(g->img22.endian));
+	if (!g->img22.addr)
+	{
+		mlx_destroy_image(g->mlx, g->img22.img_ptr);
+		mlx_destroy_display(g->mlx);
+		free(g->mlx);
+		return (1);
+	}
+	return (0);
+}
 int	img3_init(t_game *g)
 {
 	g->img3.w = WX;
@@ -68,13 +92,15 @@ void	game_init(t_game *g)
 		return ;
 	if (img3_init(g))
 		return ;
+	if (img22_init(g))
+		return ;
 }
 
 void	set_mlx(t_game *g)
 {
 	mlx_clear_window(g->mlx, g->win);
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);
-	mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
+	display_minimap(g);
 	mlx_hook(g->win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, g);
 	mlx_hook(g->win, X_EVENT_KEY_EXIT, 1L << 0, &exit_game, g);
 	mlx_loop(g->mlx);

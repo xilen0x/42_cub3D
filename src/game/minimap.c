@@ -55,24 +55,24 @@ void	bg_to_image(t_img *img, int color)
 	}
 }
 
-// void	grid_to_image(t_img *img, int color)
-// {
-// 	int	x;
-// 	int	y;
+void	grid_to_image(t_img *img, int color)
+{
+	int	x;
+	int	y;
 
-//     y = 0;
-// 	while (y < img->h)
-// 	{
-// 		x = 0;
-// 		while (x < img->w)
-// 		{       
-// 			if ((y % 32) == 0 || (x % 32) == 0)
-// 				set_pixel_to_image(img, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
+    y = 0;
+	while (y < img->h)
+	{
+		x = 0;
+		while (x < img->w)
+		{       
+			if ((y % 32) == 0 || (x % 32) == 0)
+				set_pixel_to_image(img, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	box_to_image(t_img *img, int x, int y, int color)
 {
