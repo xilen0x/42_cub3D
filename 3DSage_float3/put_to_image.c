@@ -103,6 +103,25 @@ void	box_to_image(t_img *img, int x, int y, int color)
 		y++;
 	}
 }
+/* OK!!!
+void	map_to_image(t_img *img, t_map *map, int color)
+{
+	int	x;
+	int	y;
+
+    y = 0;
+	while (y < map->mapH)
+	{
+		x = 0;
+		while (x < map->mapW)
+		{
+			if (map->map[y * map->mapW + x] == '1')
+				box_to_image(img, x * 32, y * 32, color);//box_to_image(img, x * TL, y * TL, color);
+			x++;
+		}
+		y++;
+	}
+}*/
 
 void	map_to_image(t_img *img, t_map *map, int color)
 {
@@ -122,6 +141,7 @@ void	map_to_image(t_img *img, t_map *map, int color)
 		y++;
 	}
 }
+
 
 void	player_to_image(t_img *img, t_player *player, int color)
 {

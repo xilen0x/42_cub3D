@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
+/*
 void	move_w(t_game *g)
 {
 	int	x;
@@ -83,10 +83,198 @@ void	move_d(t_game *g)
 		set_rays(g);
 	}
 }
+*/
+
+/*
+#define SPEED 4 // Ajusta la velocidad de movimiento
+
+void	move_w(t_game *g)
+{
+	float	new_px;
+	float	new_py;
+	int		x;
+	int		y;
+
+	new_px = g->player.px + cosf(g->player.pa) * SPEED;
+	new_py = g->player.py + sinf(g->player.pa) * SPEED;
+	x = (int)new_px >> 6;
+	y = (int)new_py >> 6;
+	// Verifica colisiones
+	if (g->map.map[g->map.mapW * y + x] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_s(t_game *g)
+{
+	float new_px = g->player.px - cosf(g->player.pa) * SPEED;
+	float new_py = g->player.py - sinf(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	// Verifica colisiones
+	if (g->map.map[g->map.mapW * y + x] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_d(t_game *g)
+{
+	float new_px = g->player.px - sinf(g->player.pa) * SPEED;
+	float new_py = g->player.py + cosf(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	// Verifica colisiones
+	if (g->map.map[g->map.mapW * y + x] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_a(t_game *g)
+{
+	float new_px = g->player.px + sin(g->player.pa) * SPEED;
+	float new_py = g->player.py - cos(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	// Verifica colisiones
+	if (g->map.map[g->map.mapW * y + x] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+*/
+
+#define SPEED 4       // Velocidad del jugador
+#define MARGIN 8      // Distancia mínima a las paredes
+
+void	move_w(t_game *g)
+{
+	float new_px = g->player.px + cosf(g->player.pa) * SPEED;
+	float new_py = g->player.py + sinf(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	int x_margin_left = (int)(new_px - MARGIN) >> 6;
+	int x_margin_right = (int)(new_px + MARGIN) >> 6;
+	int y_margin_up = (int)(new_py - MARGIN) >> 6;
+	int y_margin_down = (int)(new_py + MARGIN) >> 6;
+
+	// Verificar colisiones con margen
+	if (g->map.map[g->map.mapW * y_margin_up + x] != '1' &&
+		g->map.map[g->map.mapW * y_margin_down + x] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_left] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_right] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_s(t_game *g)
+{
+	float new_px = g->player.px - cos(g->player.pa) * SPEED;
+	float new_py = g->player.py - sin(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	int x_margin_left = (int)(new_px - MARGIN) >> 6;
+	int x_margin_right = (int)(new_px + MARGIN) >> 6;
+	int y_margin_up = (int)(new_py - MARGIN) >> 6;
+	int y_margin_down = (int)(new_py + MARGIN) >> 6;
+
+	// Verificar colisiones con margen
+	if (g->map.map[g->map.mapW * y_margin_up + x] != '1' &&
+		g->map.map[g->map.mapW * y_margin_down + x] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_left] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_right] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_d(t_game *g)
+{
+	float new_px = g->player.px - sin(g->player.pa) * SPEED;
+	float new_py = g->player.py + cos(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	int x_margin_left = (int)(new_px - MARGIN) >> 6;
+	int x_margin_right = (int)(new_px + MARGIN) >> 6;
+	int y_margin_up = (int)(new_py - MARGIN) >> 6;
+	int y_margin_down = (int)(new_py + MARGIN) >> 6;
+
+	// Verificar colisiones con margen
+	if (g->map.map[g->map.mapW * y_margin_up + x] != '1' &&
+		g->map.map[g->map.mapW * y_margin_down + x] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_left] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_right] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
+void	move_a(t_game *g)
+{
+	float new_px = g->player.px + sin(g->player.pa) * SPEED;
+	float new_py = g->player.py - cos(g->player.pa) * SPEED;
+
+	int x = (int)new_px >> 6;
+	int y = (int)new_py >> 6;
+
+	int x_margin_left = (int)(new_px - MARGIN) >> 6;
+	int x_margin_right = (int)(new_px + MARGIN) >> 6;
+	int y_margin_up = (int)(new_py - MARGIN) >> 6;
+	int y_margin_down = (int)(new_py + MARGIN) >> 6;
+
+	// Verificar colisiones con margen
+	if (g->map.map[g->map.mapW * y_margin_up + x] != '1' &&
+		g->map.map[g->map.mapW * y_margin_down + x] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_left] != '1' &&
+		g->map.map[g->map.mapW * y + x_margin_right] != '1')
+	{
+		g->player.px = new_px;
+		g->player.py = new_py;
+	}
+	set_image(g);
+	set_rays(g);
+}
+
 
 void	move_l(t_game *g)
 {
-	g->player.pa -= 0.01;//5;//10 //0.1;
+	g->player.pa -= 0.05;//0.01//5;//10 //0.1;
 	if (g->player.pa < 0)
 		g->player.pa += 2 * PI;
 	set_image(g);
@@ -95,7 +283,7 @@ void	move_l(t_game *g)
 
 void	move_r(t_game *g)
 {
-	g->player.pa += 0.01;//5;//10 //0.1;
+	g->player.pa += 0.05;//0.01//5;//10 //0.1;
 	if (g->player.pa >= 2 * PI)
 		g->player.pa -= 2 * PI;
 	set_image(g);
