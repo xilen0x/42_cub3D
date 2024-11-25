@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 15:21:08 by castorga          #+#    #+#             */
+/*   Updated: 2024/11/25 15:21:09 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -13,32 +24,36 @@
 # include <stdio.h>
 
 /* ===============================   MACROS  =============================== */
-# define MAX_COLOR_VALUE 255
-# define MIN_COLOR_VALUE 0
+# define MAX_COLOR_VALUE 	 255
+# define MIN_COLOR_VALUE 	 0
 
-#define X_EVENT_KEY_PRESS	2
-#define X_EVENT_KEY_RELEASE	3
-#define X_EVENT_KEY_EXIT	17
-#define KEY_ESC				65307
-#define KEY_W				119
-#define KEY_A				97
-#define KEY_S				115
-#define KEY_D				100
-#define	KEY_LEFT			65361
-#define	KEY_RIGHT			65363
-#define	WX					1280//1536//32//64	// Side of 2D tiles in pixels
-#define	WY					768//512//32//64	// Side of 3D tiles in pixels
-#define WX_SM				384
-#define WY_SM				192
-#define	TL					64
-#define	PI					3.141592f
+# define X_EVENT_KEY_PRESS	 2
+# define X_EVENT_KEY_RELEASE 3
+# define X_EVENT_KEY_EXIT	 17
+# define KEY_ESC			 65307
+# define KEY_W				 119
+# define KEY_A				 97
+# define KEY_S				 115
+# define KEY_D				 100
+# define KEY_LEFT			 65361
+# define KEY_RIGHT			 65363
+# define WX					 1280//1536//32//64	// Side of 2D tiles in pixels
+# define WY					 768//512//32//64	// Side of 3D tiles in pixels
+# define WX_SM				 384
+# define WY_SM				 192
+# define TL					 64
+# define PI					 3.141592f
+#define MINIMAP_WIDTH 320//200  // Ancho en píxeles
+#define MINIMAP_HEIGHT 320//200 // Alto en píxeles
+
+# define SPEED 				 4       // Velocidad del jugador
+# define MARGIN				 8      // Distancia mínima a las paredes
 
 // Escalar las dimensiones del minimapa
-#define SCALE_X(mapW) ((float)WX_SM / (float)(mapW))
-#define SCALE_Y(mapH) ((float)WY_SM / (float)(mapH))
+// # define SCALE_X(mapW) ((float)WX_SM / (float)(mapW))
+// # define SCALE_Y(mapH) ((float)WY_SM / (float)(mapH))
 
-
-// /* =============================== CARLOS STRUCTURES =============================== */
+/* ============================= CARLOS STRUCTURES ====================== */
 typedef struct s_map_parse
 {
 	int				map_fd;
@@ -78,8 +93,8 @@ typedef struct s_colors
 	uint32_t	c_color_hex;//color en hexadecimal de C
 }	t_colors;
 
-/* ===============================  SERGIO STRUCTURES  =============================== */
-typedef struct	s_player
+/* ==========================  SERGIO STRUCTURES  ========================== */
+typedef struct s_player
 {
 	float	px;
 	float	py;
@@ -87,9 +102,9 @@ typedef struct	s_player
 	float	fov;
 }				t_player;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
-	float		ra;			//int // ray angle in radians (in integer form, then divided by 100.0f)
+	float		ra;			//ray angle in radians
 	float		hx;			// horizontal line intersection point
 	float		hy;			// horizontal line intersection point
 	float		vx;			// vertical line intersection point
@@ -107,7 +122,7 @@ typedef struct	s_ray
 	int			color;		// definitive color
 }				t_ray;
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	*map;
 	int		mapH;		// map height in boxes/tiles
@@ -115,10 +130,9 @@ typedef struct	s_map
 	int		x;			// x coordinate of the map, in boxes/tiles
 	int		y;			// y coordinate of the map, in boxes/tiles
 	int		pos;		// position n the map = y * mapW + x
-}
-				t_map;
+}				t_map;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img_ptr;
 	char	*addr;		// array of pixels
@@ -129,11 +143,11 @@ typedef struct	s_img
 	int		line_len;	// line length in bytes of each line of the image
 }				t_img;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	t_img		img2;	// to be img2
 	t_img		img3;
-	// t_img		img_mini;
+	t_img		img22;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -152,7 +166,9 @@ void	set_rays(t_game *g);
 void	set_image(t_game *g);
 void	game_init(t_game *g);
 void	set_mlx(t_game *g);
-
+void	set_hcolor(t_game *g);
+float	squared_hlen(t_game *g);
+void	set_vcolor(t_game *g);
 void	calculate_ray_hlen(t_game *g);
 void	calculate_ray_vlen(t_game *g);
 
@@ -162,6 +178,7 @@ void	check_vertical_lines(t_game *g);
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
+int		ft_min(int a, int b);
 float	norm_angle(float angle);
 // int	cub_mouse(int x, int y, t_game *g);
 /********************** game_moves.c ****************************/
@@ -173,24 +190,25 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-void	bg_to_image(t_img *img,  int color);
-// void	bg_to_image(t_img *img, t_map *map, int color);
+void	bg_to_image(t_img *img, int color);
 void	floor_to_image(t_img *img, int color);
 void	ceiling_to_image(t_img *img, int color);
 void	grid_to_image(t_img *img, int color);
-// void	box_to_image(t_img *img, int x, int y, int color);
-// void	player_to_image(t_img *img, t_player *player, int color);
-void player_to_image(t_img *img, t_player *player, t_map *map, int color);
-void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
-void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
+// void	player_to_image(t_img *img, t_player *player, t_map *map, int color);
+void	player_to_image(t_img *img, t_player *player, int color);
+void	direction_to_image(t_game *g, int color);
+void	ray_to_image(t_game *g, int color);
+// void	map_to_image(t_img *img, t_map *map);
 void	map_to_image(t_img *img, t_map *map, int color);
 void	render_wall(t_game *g, int col);
-//void    load_textures(t_game *g);
-void    load_textures(t_game *g, t_elem *elem);
+void	load_textures(t_game *g, t_elem *elem);
+void calculate_visible_area(t_game *g, int *start_x, int *start_y);
+void extract_visible_area(t_img *src, t_img *dest, int start_x, int start_y);
+void display_minimap(t_game *g);
 
 /* =============================== PARSE =============================== */
-void	init_values(t_elem *elem, t_colors *colors, t_map_parse *map, char *av[]);
-void	parsing(t_elem *elem, t_colors *colors, t_map_parse *map, t_lmap **lmap);
+void	init_values(t_elem *el, t_colors *col, t_map_parse *map, char *av[]);
+void	parsing(t_elem *el, t_colors *col, t_map_parse *map, t_lmap **lmap);
 int		file_is_cub(char *av);
 int		open_map(char *av, t_map_parse *map);
 int		ft_errors(char *msg);
@@ -207,7 +225,7 @@ char	*ft_strtrim2(char const *s1, char const *set, char const *tabs);
 char	**ft_split2(const char *str);
 char	*ft_strncpy2(char *dest, const char *src, unsigned int n);
 int		looking_for_xpm(char **elements);
-int		save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem, t_colors *colors);
+int		save_path_elem(t_lmap *lmap, t_elem *elem, t_colors *col);
 void	remove_extra_spaces_or_tabs(t_lmap *lm);
 int		exist_elements_or_colors_anywhere(t_lmap *lmap);
 int		is_square_map(t_lmap *lm);
@@ -245,13 +263,12 @@ void	spaces_to_ones(t_map_parse *map);
 void	create_matrix_irregular(t_map_parse *map, t_lmap *lm);
 void	free_matrix(char **matrix, size_t rows);
 void	print_matrix(t_map_parse *map);
-// void	print_width_height(t_map_parse *map);
 int		space_exist_next_to_0(t_map_parse *m);
 void	load_map(t_game *g, t_map_parse *map);
 void	print_map(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
 void	render_wall(t_game *g, int col);
-
-int	is_empty_or_whitespace(const char *str);
+int		is_empty_or_whitespace(const char *str);
 void	remove_first_spaces(t_lmap *lm);
+
 #endif

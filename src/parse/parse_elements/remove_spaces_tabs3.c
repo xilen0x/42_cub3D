@@ -12,25 +12,6 @@
 
 #include "cub3d.h"
 
-void	remove_first_spaces(t_lmap *lm)
-{
-	printf("LM->CONT: %s\n", lm->cont);
-	// char	*line;
-
-	// while (ft_strnstr(lm->cont, "NO", ft_strlen(lm->cont)) || 
-	// 		ft_strnstr(lm->cont, "SO", ft_strlen(lm->cont)) || 
-	// 		ft_strnstr(lm->cont, "WE", ft_strlen(lm->cont)) || 
-	// 		ft_strnstr(lm->cont, "EA", ft_strlen(lm->cont)) || 
-	// 		ft_strnstr(lm->cont, "F", ft_strlen(lm->cont)) || 
-	// 		ft_strnstr(lm->cont, "C", ft_strlen(lm->cont)))
-	// {
-	// 	line = ft_strtrim2(lm->cont, " ", "\t");
-	// 	free(lm->cont);
-	// 	lm->cont = line;
-	// 	lm = lm->next;
-	// }
-}
-
 void	remove_extra_spaces_or_tabs(t_lmap *lm)
 {
 	char	*line;

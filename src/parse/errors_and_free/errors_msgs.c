@@ -15,8 +15,9 @@
 /*Funcion que muestra mensajes de error*/
 int	ft_errors(char *msg)
 {
-	write (2, "Error\n", 6);
-	write (2, msg, ft_strlen(msg));
+	// write (2, "Error\n", 6);
+	// write (2, msg, ft_strlen(msg));
+	ft_printf("Error\n%s", msg);
 	exit(1);
 }
 

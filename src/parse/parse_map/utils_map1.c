@@ -21,8 +21,9 @@ void	*p_malloc(size_t size)
 	ptr = malloc(size);
 	if (ptr == NULL)
 	{
-		write(2, "Error: memory allocation failure\n", 33);
-		exit (EXIT_FAILURE);
+		//write(2, "Error: memory allocation failure\n", 33);
+		ft_errors("Error: memory allocation failure\n");
+		// exit (EXIT_FAILURE);
 	}
 	return (ptr);
 }

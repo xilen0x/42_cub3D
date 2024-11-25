@@ -19,7 +19,6 @@ static void	save_path3(t_elem *elem, char *line, char *option)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
-
 	if (ft_strncmp(option, "NO", 2) == 0)
 		elem->no_path = ft_strdup(line);
 	else if (ft_strncmp(option, "SO", 2) == 0)
@@ -28,22 +27,8 @@ static void	save_path3(t_elem *elem, char *line, char *option)
 		elem->ea_path = ft_strdup(line);
 	else if (ft_strncmp(option, "WE", 2) == 0)
 		elem->we_path = ft_strdup(line);
-
 	free(line);
 }
-
-// static void	save_path3(t_elem *elem, char *line, char *option)
-// {
-// 	if (ft_strncmp(option, "NO", 2) == 0)
-// 		elem->no_path = ft_strdup(line);
-// 	else if (ft_strncmp(option, "SO", 2) == 0)
-// 		elem->so_path = ft_strdup(line);
-// 	else if (ft_strncmp(option, "EA", 2) == 0)
-// 		elem->ea_path = ft_strdup(line);
-// 	else if (ft_strncmp(option, "WE", 2) == 0)
-// 		elem->we_path = ft_strdup(line);
-// 	free(line);
-// }
 
 static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 {
@@ -81,7 +66,7 @@ void	save_colors_in_hx(t_lmap *lmap, t_colors *col)
 		col->c_color[2];
 }
 
-int	save_path_chain_to_elem_struct(t_lmap *lmap, t_elem *elem, t_colors *colors)
+int	save_path_elem(t_lmap *lmap, t_elem *elem, t_colors *colors)
 {
 	char	**elements;
 	int		i;

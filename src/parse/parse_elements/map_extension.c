@@ -22,8 +22,9 @@ int	file_is_cub(char *av)
 	len = ft_strlen(tmp[2]);
 	if (len < 5)
 	{
-		write (2, "Error\n", 6);
-		write (2, "The file does not have a name!\n", 31);
+		// write (2, "Error\n", 6);
+		// write (2, "The file does not have a name!\n", 31);
+		ft_errors("The file does not have a name!\n");
 		free_elements(tmp);
 		return (1);
 	}
