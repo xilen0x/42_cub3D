@@ -31,6 +31,8 @@
 #define	WY					768//512//32//64	// Side of 3D tiles in pixels
 #define	TL					64
 #define	PI					3.141592f
+#define MINIMAP_WIDTH 320//200  // Ancho en píxeles
+#define MINIMAP_HEIGHT 320//200 // Alto en píxeles
 
 typedef struct	s_player
 {
@@ -86,6 +88,7 @@ typedef struct	s_game
 {
 	t_img		img2;
 	t_img		img3;
+	t_img		img22;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -119,6 +122,7 @@ void	check_vertical_lines(t_game *g);
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
+int		ft_min(int a, int b);
 int		is_wall(t_game *g, int x, int y);
 void    load_textures(t_game *g);
 
@@ -140,10 +144,9 @@ void	player_to_image(t_img *img, t_player *player, int color);
 void	direction_to_image(t_game *g, int color);//(t_img *img, t_player *player, int color);
 void	ray_to_image(t_game *g, int color);//(t_img *img, t_ray *ray, t_player *player, int color);
 void	map_to_image(t_img *img, t_map *map, int color);
-//void	slice_to_image(t_game *g, int col, int top_px, int bottom_px);//, int color);
-//void	wall_to_image(t_game *g, int col);
-//void	draw_wall(t_game *g, int col, int top_pix, int bot_pix);	// draw the wall
 void	render_wall(t_game *g, int col);
-//int	get_texture_pixel(t_img *tex, int x, int y);//////////
-//void load_texture(t_img *tex, char *path, void *mlx);/////////
 void    load_textures(t_game *g);
+
+void calculate_visible_area(t_game *g, int *start_x, int *start_y);
+void extract_visible_area(t_img *src, t_img *dest, int start_x, int start_y);
+void display_minimap(t_game *g);

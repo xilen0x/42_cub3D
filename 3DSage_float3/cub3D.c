@@ -29,9 +29,9 @@ int	main(void)
 	//g.map.map =	strdup("1111111110100001101000011010000110000P01100001011000000111111111");
 	//g.map.map =	strdup("1111111110010001100100011001000110000P01100001011000000111111111");
 	//g.map.map =	strdup("1111111111111111100000011000000110000P01100000011111111111111111");
-	g.map.map =	strdup("1111111111111111110000111101001111000P11110100111111111111111111");
-	//g.map.map =	strdup("11111111100000011000000110000001100000011000000110000001100000011000000110000001110000111100001111000P11110000111011110111111111");
-	g.map.mapH = 8;	// map height in tiles
+	//g.map.map =	strdup("1111111111111111110000111101001111000P11110100111111111111111111");
+	g.map.map =	strdup("111111111000P0011000000110000001100000011000000110000001100000011000000110000001110000111100001111000011110000111011110111111111");
+	g.map.mapH = 16;	// map height in tiles
 	g.map.mapW = 8;	// map width in tiles
 
 	g.mlx = mlx_init();
@@ -47,6 +47,11 @@ int	main(void)
 	g.img3.img_ptr = mlx_new_image(g.mlx, g.img3.w, g.img3.h);
 	g.img3.addr = mlx_get_data_addr(g.img3.img_ptr, &(g.img3.bpp), &(g.img3.line_len), &(g.img3.endian));
 
+	g.img22.h = ft_min(g.img2.h, MINIMAP_HEIGHT);
+	g.img22.w = ft_min(g.img2.w, MINIMAP_WIDTH);
+	g.img22.img_ptr = mlx_new_image(g.mlx, g.img22.w, g.img22.h);
+	g.img22.addr = mlx_get_data_addr(g.img22.img_ptr, &(g.img22.bpp), &(g.img22.line_len), &(g.img22.endian));
+
 	load_textures(&g);
 
 	set_player(&g.map, &g.player);
@@ -54,7 +59,8 @@ int	main(void)
 	set_rays(&g);
 	mlx_clear_window(g.mlx, g.win);
 	mlx_put_image_to_window(g.mlx, g.win, g.img3.img_ptr, 0, 0);//g.img2.w, 0);
-	mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+	//mlx_put_image_to_window(g.mlx, g.win, g.img2.img_ptr, 0, 0);
+	display_minimap(&g);
 	mlx_hook(g.win, X_EVENT_KEY_PRESS, 1L << 0, &press_key, &g);
 	mlx_hook(g.win, X_EVENT_KEY_EXIT, 1L << 0, &exit_game, &g);
 	mlx_loop(g.mlx);
