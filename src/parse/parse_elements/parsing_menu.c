@@ -45,8 +45,8 @@ void	load_map(t_game *g, t_map_parse *map)
 
 	i = 0;
 	k = 0;
-	g->map.mapH = map->h;
-	g->map.mapW = map->w;
+	g->map.maph = map->h;
+	g->map.mapw = map->w;
 	g->map.map = (char *)p_malloc(sizeof(char) * (map->h * map->w + 1));
 	while (i < map->h)
 	{

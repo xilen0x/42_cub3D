@@ -26,7 +26,6 @@
 /* ===============================   MACROS  =============================== */
 # define MAX_COLOR_VALUE 	 255
 # define MIN_COLOR_VALUE 	 0
-
 # define X_EVENT_KEY_PRESS	 2
 # define X_EVENT_KEY_RELEASE 3
 # define X_EVENT_KEY_EXIT	 17
@@ -39,19 +38,10 @@
 # define KEY_RIGHT			 65363
 # define WX					 1280//1536//32//64	// Side of 2D tiles in pixels
 # define WY					 768//512//32//64	// Side of 3D tiles in pixels
-# define WX_SM				 384
-# define WY_SM				 192
 # define TL					 64
 # define PI					 3.141592f
-#define MINIMAP_WIDTH 320//200  // Ancho en píxeles
-#define MINIMAP_HEIGHT 320//200 // Alto en píxeles
-
 # define SPEED 				 4       // Velocidad del jugador
 # define MARGIN				 8      // Distancia mínima a las paredes
-
-// Escalar las dimensiones del minimapa
-// # define SCALE_X(mapW) ((float)WX_SM / (float)(mapW))
-// # define SCALE_Y(mapH) ((float)WY_SM / (float)(mapH))
 
 /* ============================= CARLOS STRUCTURES ====================== */
 typedef struct s_map_parse
@@ -114,6 +104,7 @@ typedef struct s_ray
 	float		hlen;		// length of the ray to horizontal hit
 	float		vlen;		// length of the ray to vertical hit
 	float		len;		// minimal of hlen and vlen
+	float		wall_h;		// height of the wall
 	int			hpath;
 	int			vpath;
 	int			path;
@@ -125,8 +116,8 @@ typedef struct s_ray
 typedef struct s_map
 {
 	char	*map;
-	int		mapH;		// map height in boxes/tiles
-	int		mapW;		// map width in boxes/tiles
+	int		maph;		// map height in boxes/tiles
+	int		mapw;		// map width in boxes/tiles
 	int		x;			// x coordinate of the map, in boxes/tiles
 	int		y;			// y coordinate of the map, in boxes/tiles
 	int		pos;		// position n the map = y * mapW + x
@@ -143,11 +134,21 @@ typedef struct s_img
 	int		line_len;	// line length in bytes of each line of the image
 }				t_img;
 
+typedef struct s_texture
+{
+	unsigned int	texture_x;
+	unsigned int	texture_y;
+	unsigned int	screen_y;
+	unsigned int	d;
+	unsigned int	tex_pos;
+	unsigned int	color;
+}				t_texture;
+
 typedef struct s_game
 {
-	t_img		img2;	// to be img2
+	// t_img		img2;	// to be img2
 	t_img		img3;
-	t_img		img22;
+	// t_img		img22;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -178,9 +179,10 @@ void	check_vertical_lines(t_game *g);
 /********************** game_utils.c *****************************/
 int		exit_game(t_game *g);
 int		press_key(int keycode, t_game *g);
-int		ft_min(int a, int b);
 float	norm_angle(float angle);
-// int	cub_mouse(int x, int y, t_game *g);
+void	inc_ray_h(t_ray *ray);
+void	inc_ray_v(t_ray *ray);
+
 /********************** game_moves.c ****************************/
 void	move_w(t_game *g);
 void	move_s(t_game *g);
@@ -190,21 +192,21 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-void	bg_to_image(t_img *img, int color);
+// void	bg_to_image(t_img *img, int color);
 void	floor_to_image(t_img *img, int color);
 void	ceiling_to_image(t_img *img, int color);
-void	grid_to_image(t_img *img, int color);
+// void	grid_to_image(t_img *img, int color);
 // void	player_to_image(t_img *img, t_player *player, t_map *map, int color);
-void	player_to_image(t_img *img, t_player *player, int color);
-void	direction_to_image(t_game *g, int color);
-void	ray_to_image(t_game *g, int color);
+// void	player_to_image(t_img *img, t_player *player, int color);
+// void	direction_to_image(t_game *g, int color);
+// void	ray_to_image(t_game *g, int color);
 // void	map_to_image(t_img *img, t_map *map);
-void	map_to_image(t_img *img, t_map *map, int color);
+// void	map_to_image(t_img *img, t_map *map, int color);
 void	render_wall(t_game *g, int col);
 void	load_textures(t_game *g, t_elem *elem);
-void calculate_visible_area(t_game *g, int *start_x, int *start_y);
-void extract_visible_area(t_img *src, t_img *dest, int start_x, int start_y);
-void display_minimap(t_game *g);
+// void calculate_visible_area(t_game *g, int *start_x, int *start_y);
+// void extract_visible_area(t_img *src, t_img *dest, int start_x, int start_y);
+// void display_minimap(t_game *g);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *el, t_colors *col, t_map_parse *map, char *av[]);
@@ -267,8 +269,7 @@ int		space_exist_next_to_0(t_map_parse *m);
 void	load_map(t_game *g, t_map_parse *map);
 void	print_map(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
-void	render_wall(t_game *g, int col);
 int		is_empty_or_whitespace(const char *str);
-void	remove_first_spaces(t_lmap *lm);
+// void	remove_first_spaces(t_lmap *lm);
 
 #endif

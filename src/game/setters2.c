@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   setters2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/26 10:43:36 by castorga          #+#    #+#             */
+/*   Updated: 2024/11/26 10:43:39 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 /* Set the colour of a given pixel in an array of pixels (i.e. the image) */
@@ -26,17 +38,14 @@ void	set_rays(t_game *g)
 		check_vertical_lines(g);
 		if (g->ray.hlen <= 0 || (g->ray.vlen > 0 && g->ray.vlen < g->ray.hlen))
 		{
-            g->ray.len = sqrtf(g->ray.vlen); // Usar la distancia vertical
-            g->ray.color = g->ray.vcolor;
-			g->ray.path = g->ray.vpath;///////////////
+			g->ray.len = sqrtf(g->ray.vlen);
+			g->ray.path = g->ray.vpath;
 		}
 		else
 		{
-            g->ray.len = sqrtf(g->ray.hlen); // Usar la distancia horizontal
-            g->ray.color = g->ray.hcolor;
-			g->ray.path = g->ray.hpath;///////////////
+			g->ray.len = sqrtf(g->ray.hlen);
+			g->ray.path = g->ray.hpath;
 		}
-		//ray_to_image(g, g->ray.color);
 		render_wall(g, rays);
 		g->ray.ra += angle_step;
 		rays++;
@@ -45,29 +54,25 @@ void	set_rays(t_game *g)
 
 void	set_hcolor(t_game *g)
 {
-	if (g->ray.ra > PI && g->ray.ra < (2 * PI))	// looking up
+	if (g->ray.ra > PI && g->ray.ra < (2 * PI))
 	{
-		g->ray.hcolor = 0x00C0C0C0;//0x00FFFFFF;// color of north wall
-		g->ray.hpath = 0;//"./textures/north.xpm";/////////////
+		g->ray.hpath = 0;
 	}
-	else if (g->ray.ra <= PI && g->ray.ra >= 0)	// looking down
+	else if (g->ray.ra <= PI && g->ray.ra >= 0)
 	{
-		g->ray.hcolor = 0x00FF00FF;// color of south wall
-		g->ray.hpath = 1;//"./textures/south.xpm";//////////////
+		g->ray.hpath = 1;
 	}
 }
 
 void	set_vcolor(t_game *g)// to be set_path
 {
-	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2)) // looking left
+	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2))
 	{
-		g->ray.vcolor = 0x00FFFF00;// color of east wall
-		g->ray.vpath = 2;//"./textures/east.xpm";
+		g->ray.vpath = 2;
 	}
-	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2)) // looking right
+	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2))
 	{
-		g->ray.vcolor = 0x0000FFFF;// color of west wall
-		g->ray.vpath = 3;//"./textures/west.xpm";
+		g->ray.vpath = 3;
 	}
 }
 
@@ -80,4 +85,3 @@ float	squared_hlen(t_game *g)
 	dy = g->player.py - g->ray.hy;
 	return (dx * dx + dy * dy);
 }
-

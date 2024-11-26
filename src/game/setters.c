@@ -24,7 +24,7 @@ int	check_and_initialize_player(t_map *map, t_player *player, int x, int y)
 {
 	char	tile;
 
-	tile = map->map[y * map->mapW + x];
+	tile = map->map[y * map->mapw + x];
 	if (tile == 'N')
 	{
 		initialize_player(player, x, y, 3 * PI / 2);
@@ -54,10 +54,10 @@ void	set_player(t_map *map, t_player *player)
 	int	y;
 
 	y = 0;
-	while (y < map->mapH)
+	while (y < map->maph)
 	{
 		x = 0;
-		while (x < map->mapW)
+		while (x < map->mapw)
 		{
 			if (check_and_initialize_player(map, player, x, y))
 				return ;
@@ -87,12 +87,6 @@ void	set_image(t_game *g)
 
 	color1 = g->cols.f_color_hex;
 	color2 = g->cols.c_color_hex;
-
 	floor_to_image(&g->img3, color2);
 	ceiling_to_image(&g->img3, color1);
-	bg_to_image(&g->img2, 0x00A9E2F3);
-	map_to_image(&g->img2, &g->map, 0x000000FF);
-	grid_to_image(&g->img2, 0x00FFFF00);
-	player_to_image(&g->img2, &g->player, 0x00FF0000);
-	direction_to_image(g, 0x00FFFFFF);
 }

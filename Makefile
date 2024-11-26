@@ -14,7 +14,7 @@ endif
 
 # Compilador y FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3#-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 -g -fsanitize=address
 
 # Makefile
 MKF := Makefile
@@ -67,8 +67,7 @@ SRC_FILES = main.c \
 			game/game_moves2.c \
 			game/put_to_image.c \
 			game/game_init.c \
-			game/minimap.c \
-			game/minimap2.c
+			game/map3d.c
 			
 # Archivos objeto
 OBJ_FILES = $(SRC_FILES:.c=.o)

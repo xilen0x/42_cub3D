@@ -1,43 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_msgs.c                                      :+:      :+:    :+:   */
+/*   map3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 15:19:54 by castorga          #+#    #+#             */
-/*   Updated: 2024/08/02 15:19:56 by castorga         ###   ########.fr       */
+/*   Created: 2024/11/26 10:19:16 by castorga          #+#    #+#             */
+/*   Updated: 2024/11/26 10:19:22 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*Funcion que muestra mensajes de error*/
-int	ft_errors(char *msg)
+void	floor_to_image(t_img *img, int color)
 {
-	ft_printf("Error\n%s", msg);
-	exit(1);
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < (img->h / 2))
+	{
+		x = 0;
+		while (x < img->w)
+		{
+			set_pixel_to_image(img, x, y, color);
+			x++;
+		}
+		y++;
+	}
 }
 
-void	print_map(t_game *g)
+void	ceiling_to_image(t_img *img, int color)
 {
-	int	i;
-	int	j;
-	int	k;
+	int	x;
+	int	y;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while (i < g->map.maph)
+	y = img->h / 2;
+	while (y < img->h)
 	{
-		j = 0;
-		while (j < g->map.mapw)
+		x = 0;
+		while (x < img->w)
 		{
-			ft_printf("%c", g->map.map[k]);
-			k++;
-			j++;
+			set_pixel_to_image(img, x, y, color);
+			x++;
 		}
-		ft_printf("\n");
-		i++;
+		y++;
 	}
 }

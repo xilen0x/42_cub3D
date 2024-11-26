@@ -17,9 +17,7 @@ int	exit_game(t_game *g)
 	if (g->mlx)
 		mlx_destroy_window(g->mlx, g->win);
 	free(g->map.map);
-	mlx_destroy_image(g->mlx, g->img2.img_ptr);
 	mlx_destroy_image(g->mlx, g->img3.img_ptr);
-	mlx_destroy_image(g->mlx, g->img22.img_ptr);
 	mlx_destroy_display(g->mlx);
 	free(g->mlx);
 	ft_printf("GOOD BYE!\n");
@@ -42,28 +40,32 @@ int	press_key(int keycode, t_game *g)
 		move_l(g);
 	else if (keycode == KEY_RIGHT)
 		move_r(g);
-	mlx_clear_window(g->mlx, g->win);
 	mlx_put_image_to_window(g->mlx, g->win, g->img3.img_ptr, 0, 0);
-	//mlx_put_image_to_window(g->mlx, g->win, g->img2.img_ptr, 0, 0);
-	display_minimap(g);
 	return (0);
 }
 
-int ft_min(int a, int b)
+// int	is_wall(t_game *g, int x, int y)
+// {
+// 	int	map_x;
+// 	int	map_y;
+// 	int	pos;
+
+// 	map_x = x >> 6;
+// 	map_y = y >> 6;
+// 	pos = map_y * g->map.mapw + map_x;
+// 	return (g->map.map[pos] == '1');
+// }
+
+void	inc_ray_h(t_ray *ray)
 {
-    return (a < b) ? a : b;
+	ray->hx += ray->x_step;
+	ray->hy += ray->y_step;
 }
 
-int	is_wall(t_game *g, int x, int y)
+void	inc_ray_v(t_ray *ray)
 {
-	int	map_x;
-	int	map_y;
-	int	pos;
-
-	map_x = x >> 6;
-	map_y = y >> 6;
-	pos = map_y * g->map.mapW + map_x;
-	return (g->map.map[pos] == '1');
+	ray->vx += ray->x_step;
+	ray->vy += ray->y_step;
 }
 
 void	load_textures(t_game *g, t_elem *elem)

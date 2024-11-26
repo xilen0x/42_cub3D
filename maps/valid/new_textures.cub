@@ -1,7 +1,7 @@
-EA ./textures/using/ventana.xpm
-NO ./textures/using/enredadera.xpm
-WE ./textures/using/brickrosa.xpm
-SO ./textures/using/brickamarillo.xpm
+NO ./textures/north.xpm
+WE ./textures/west.xpm
+SO ./textures/south.xpm
+EA ./textures/east.xpm
 
 F 214,194,133
 C 152,245,239

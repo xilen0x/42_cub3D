@@ -1,13 +1,9 @@
- NO ./textures/blue.xpm	
+NO ./textures/north.xpm
+WE ./textures/west.xpm
+SO ./textures/south.xpm
+EA ./textures/east.xpm
+
      F 0, 204, 153                	
-		WE ./textures/green.xpm
-
-
-EA ./textures/yellow.xpm   	  
-
- 
-            SO ./textures/red.xpm	
-
 	 C 0, 0, 153
 
         1111111111111111111111111  
