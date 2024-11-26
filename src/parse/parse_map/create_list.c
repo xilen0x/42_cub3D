@@ -64,3 +64,26 @@ int	is_square_map(t_lmap *lm)
 		return (1);
 	return (0);
 }
+
+int	check_map_nl(t_lmap **lmap)
+{
+	t_lmap	*lm;
+
+	lm = *lmap;
+	while (lm && (
+			(ft_strnstr2((lm)->cont, "NO", ft_strlen((lm)->cont)) != NULL) || \
+			(ft_strnstr2((lm)->cont, "SO", ft_strlen((lm)->cont)) != NULL) || \
+			(ft_strnstr2((lm)->cont, "WE", ft_strlen((lm)->cont)) != NULL) || \
+			(ft_strnstr2((lm)->cont, "EA", ft_strlen((lm)->cont)) != NULL) || \
+			(ft_strnstr2((lm)->cont, "F", ft_strlen((lm)->cont)) != NULL) || \
+			(ft_strnstr2((lm)->cont, "C", ft_strlen((lm)->cont)) != NULL) || \
+			((lm)->cont[0] == '\n')))
+		lm = (lm)->next;
+	while (lm)
+	{
+		if ((lm)->cont[0] == '\n')
+			ft_errors("New line inside the map!");
+		lm = (lm)->next;
+	}
+	return (0);
+}

@@ -110,9 +110,9 @@ int	is_one_player(t_map_parse *map)
 void	valid_map(t_map_parse *map)
 {
 	print_matrix(map);
+	spaces_to_ones(map);
 	if (space_exist_next_to_0(map) == 1)
 		ft_errors("Invalid map, there are spaces next to 0\n");
-	spaces_to_ones(map);
 	if (only_characters_allowed(map) == 1)
 		ft_errors("Invalid map, characters not allowed were found\n");
 	if (is_one_player(map) == 1)

@@ -64,6 +64,26 @@ int	rows_are_all_ones(t_lmap *lm)
 	return (0);
 }
 
+int	counter_of_char(const char *str)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	if (!str)
+		ft_errors("Error, the string is empty\n");
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '1')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	first_row_is_all_ones(t_lmap *lm)
 {
 	unsigned int	length_line;
@@ -84,24 +104,4 @@ int	first_row_is_all_ones(t_lmap *lm)
 	}
 	free(line);
 	return (0);
-}
-
-int	counter_of_char(const char *str)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	if (!str)
-		ft_errors("Error, the string is empty\n");
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '1')
-			count++;
-		i++;
-	}
-	return (count);
 }

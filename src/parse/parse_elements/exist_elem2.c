@@ -70,28 +70,39 @@ int	exist_elements2(t_lmap *lmap)
 	return (0);
 }
 
+static void	init_couters(t_counter *count)
+{
+	count->no = 0;
+	count->so = 0;
+	count->ea = 0;
+	count->we = 0;
+	count->f = 0;
+	count->c = 0;
+}
+
 int	exist_elements_or_colors_anywhere(t_lmap *lmap)
 {
-	int		count;
+	t_counter	count;
 
-	count = 0;
+	init_couters(&count);
 	while (lmap)
 	{
 		if (ft_strnstr(lmap->cont, "NO", ft_strlen(lmap->cont)))
-			count++;
+			count.no++;
 		else if (ft_strnstr(lmap->cont, "SO", ft_strlen(lmap->cont)))
-			count++;
+			count.so++;
 		else if (ft_strnstr(lmap->cont, "EA", ft_strlen(lmap->cont)))
-			count++;
+			count.ea++;
 		else if (ft_strnstr(lmap->cont, "WE", ft_strlen(lmap->cont)))
-			count++;
+			count.we++;
 		else if (ft_strnstr(lmap->cont, "F", ft_strlen(lmap->cont)))
-			count++;
+			count.f++;
 		else if (ft_strnstr(lmap->cont, "C", ft_strlen(lmap->cont)))
-			count++;
+			count.c++;
 		lmap = lmap->next;
 	}
-	if (count != 6)
-		ft_errors("Invalid number of elements or colors\n");
+	if (count.no != 1 || count.so != 1 || count.ea != 1 || count.we != 1 || \
+		count.f != 1 || count.c != 1)
+		ft_errors("Invalid number of paths or colors\n");
 	return (0);
 }

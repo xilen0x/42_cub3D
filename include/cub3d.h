@@ -44,6 +44,16 @@
 # define MARGIN				 8      // Distancia mínima a las paredes
 
 /* ============================= CARLOS STRUCTURES ====================== */
+typedef struct s_counter
+{
+	int		no;
+	int		so;
+	int		ea;
+	int		we;
+	int		f;
+	int		c;
+}				t_counter;
+
 typedef struct s_map_parse
 {
 	int				map_fd;
@@ -54,7 +64,6 @@ typedef struct s_map_parse
 	char			**matrix;//matriz donde se guarda el mapa
 	void			*mlx;
 	void			*mlx_win;
-	// t_img			imgs;
 }	t_map_parse;
 
 typedef struct s_list_x_map
@@ -146,9 +155,7 @@ typedef struct s_texture
 
 typedef struct s_game
 {
-	// t_img		img2;	// to be img2
 	t_img		img3;
-	// t_img		img22;
 	t_map		map;
 	t_player	player;
 	t_ray		ray;
@@ -259,5 +266,6 @@ void	load_map(t_game *g, t_map_parse *map);
 void	print_map(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
 int		is_empty_or_whitespace(const char *str);
+int		check_map_nl(t_lmap **lmap);
 
 #endif

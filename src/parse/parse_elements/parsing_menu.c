@@ -22,7 +22,7 @@ static void	hub_elements(t_lmap *lmap)
 			if (exist_elements(lmap))
 				ft_errors("Invalid elements\n");
 			if (exist_path_elements(lmap))
-				ft_errors("Invalid path 04\n");
+				ft_errors("Invalid path\n");
 		}
 		else if ((lmap->cont[0] == 'F') || (lmap->cont[0] == 'C'))
 		{
@@ -93,6 +93,7 @@ void	parsing(t_elem *elem, t_colors *colors, t_map_parse *map, t_lmap **lmap)
 	file_is_cub(elem->av[1]);
 	open_map(elem->av[1], map);
 	create_list(map, lmap);
+	check_map_nl(lmap);
 	remove_empty_lines(lmap);
 	parse_elems(elem, *lmap, colors);
 	parsing_map(map, lmap);

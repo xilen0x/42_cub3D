@@ -24,7 +24,7 @@ int	exist_path_colors2(char **line)
 		if (check_range_values(i, line) == 1)
 		{
 			free_elements(line);
-			ft_errors("Invalid color value 2\n");
+			ft_errors("Invalid color value\n");
 		}
 	}
 	else

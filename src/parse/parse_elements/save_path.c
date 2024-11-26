@@ -30,6 +30,7 @@ static void	save_path3(t_elem *elem, char *line, char *option)
 	free(line);
 }
 
+
 static void	save_path2(t_elem *elem, char **elements, int i, int temp)
 {
 	char	*line;

@@ -76,7 +76,7 @@ int	path_is_valid(char **elements)
 		{
 			remove_newline_char(elements[i]);
 			if (access(elements[i], R_OK) != 0)
-				ft_errors("Invalid path 01\n");
+				ft_errors("Invalid path\n");
 			temp++;
 		}
 		i++;
@@ -92,9 +92,9 @@ int	exist_path_elements(t_lmap *lmap)
 
 	elements = ft_split2(lmap->cont);
 	if (looking_for_xpm(elements) == 1)
-		ft_errors("Invalid path 02\n");
+		ft_errors("Invalid path\n");
 	if (path_is_valid(elements) == 1)
-		ft_errors("Invalid path 03\n");
+		ft_errors("Invalid path\n");
 	free_elements(elements);
 	return (0);
 }

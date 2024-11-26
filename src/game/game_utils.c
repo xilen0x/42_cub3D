@@ -18,6 +18,10 @@ int	exit_game(t_game *g)
 		mlx_destroy_window(g->mlx, g->win);
 	free(g->map.map);
 	mlx_destroy_image(g->mlx, g->img3.img_ptr);
+	mlx_destroy_image(g->mlx, g->tex[0].img_ptr);
+	mlx_destroy_image(g->mlx, g->tex[1].img_ptr);
+	mlx_destroy_image(g->mlx, g->tex[2].img_ptr);
+	mlx_destroy_image(g->mlx, g->tex[3].img_ptr);
 	mlx_destroy_display(g->mlx);
 	free(g->mlx);
 	ft_printf("GOOD BYE!\n");
