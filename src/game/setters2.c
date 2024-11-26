@@ -52,28 +52,20 @@ void	set_rays(t_game *g)
 	}
 }
 
-void	set_hcolor(t_game *g)
+void	set_hpath(t_game *g)
 {
 	if (g->ray.ra > PI && g->ray.ra < (2 * PI))
-	{
 		g->ray.hpath = 0;
-	}
 	else if (g->ray.ra <= PI && g->ray.ra >= 0)
-	{
 		g->ray.hpath = 1;
-	}
 }
 
-void	set_vcolor(t_game *g)// to be set_path
+void	set_vpath(t_game *g)// to be set_path
 {
 	if (g->ray.ra > (PI / 2) && g->ray.ra < (3 * PI / 2))
-	{
 		g->ray.vpath = 2;
-	}
 	else if (g->ray.ra < (PI / 2) || g->ray.ra > (3 * PI / 2))
-	{
 		g->ray.vpath = 3;
-	}
 }
 
 float	squared_hlen(t_game *g)

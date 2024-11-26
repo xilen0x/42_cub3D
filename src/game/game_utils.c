@@ -44,18 +44,6 @@ int	press_key(int keycode, t_game *g)
 	return (0);
 }
 
-// int	is_wall(t_game *g, int x, int y)
-// {
-// 	int	map_x;
-// 	int	map_y;
-// 	int	pos;
-
-// 	map_x = x >> 6;
-// 	map_y = y >> 6;
-// 	pos = map_y * g->map.mapw + map_x;
-// 	return (g->map.map[pos] == '1');
-// }
-
 void	inc_ray_h(t_ray *ray)
 {
 	ray->hx += ray->x_step;

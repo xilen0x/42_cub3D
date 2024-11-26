@@ -167,9 +167,9 @@ void	set_rays(t_game *g);
 void	set_image(t_game *g);
 void	game_init(t_game *g);
 void	set_mlx(t_game *g);
-void	set_hcolor(t_game *g);
+void	set_hpath(t_game *g);
 float	squared_hlen(t_game *g);
-void	set_vcolor(t_game *g);
+void	set_vpath(t_game *g);
 void	calculate_ray_hlen(t_game *g);
 void	calculate_ray_vlen(t_game *g);
 
@@ -192,21 +192,10 @@ void	move_l(t_game *g);
 void	move_r(t_game *g);
 
 /********************* put_to_image.c **************************/
-// void	bg_to_image(t_img *img, int color);
 void	floor_to_image(t_img *img, int color);
 void	ceiling_to_image(t_img *img, int color);
-// void	grid_to_image(t_img *img, int color);
-// void	player_to_image(t_img *img, t_player *player, t_map *map, int color);
-// void	player_to_image(t_img *img, t_player *player, int color);
-// void	direction_to_image(t_game *g, int color);
-// void	ray_to_image(t_game *g, int color);
-// void	map_to_image(t_img *img, t_map *map);
-// void	map_to_image(t_img *img, t_map *map, int color);
 void	render_wall(t_game *g, int col);
 void	load_textures(t_game *g, t_elem *elem);
-// void calculate_visible_area(t_game *g, int *start_x, int *start_y);
-// void extract_visible_area(t_img *src, t_img *dest, int start_x, int start_y);
-// void display_minimap(t_game *g);
 
 /* =============================== PARSE =============================== */
 void	init_values(t_elem *el, t_colors *col, t_map_parse *map, char *av[]);
@@ -270,6 +259,5 @@ void	load_map(t_game *g, t_map_parse *map);
 void	print_map(t_game *g);
 void	save_colors_in_hx(t_lmap *lmap, t_colors *colors);
 int		is_empty_or_whitespace(const char *str);
-// void	remove_first_spaces(t_lmap *lm);
 
 #endif

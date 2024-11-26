@@ -46,7 +46,7 @@ void	calculate_ray_hlen(t_game *g)
 		else
 			inc_ray_h(&g->ray);
 	}
-	set_hcolor(g);
+	set_hpath(g);
 	g->ray.hlen = squared_hlen(g);
 }
 
@@ -99,7 +99,7 @@ void	calculate_ray_vlen(t_game *g)
 		else
 			inc_ray_v(&g->ray);
 	}
-	set_vcolor(g);
+	set_vpath(g);
 	g->ray.vlen = squared_vlen(g);
 }
 
