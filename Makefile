@@ -14,7 +14,7 @@ endif
 
 # Compilador y FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 #-g -fsanitize=address
 
 # Makefile
 MKF := Makefile

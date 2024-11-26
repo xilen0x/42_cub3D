@@ -25,8 +25,8 @@ void	space_malloc(size_t rows, size_t cols, t_map_parse *map)
 	i++;
 	while (i < rows)
 	{
-		map->matrix[i] = p_malloc(sizeof(char) * (cols + 3));
-		ft_memset(map->matrix[i], ' ', cols + 3);
+		map->matrix[i] = p_malloc(sizeof(char) * (cols + 2));
+		ft_memset(map->matrix[i], ' ', cols + 2);
 		map->matrix[i][cols] = '\0';
 		i++;
 	}
