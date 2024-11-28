@@ -14,7 +14,7 @@ endif
 
 # Compilador y FLAGS
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -O3 #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -O3 -g #-fsanitize=address
 
 # Makefile
 MKF := Makefile
@@ -25,6 +25,7 @@ MLX_DIR = lib/mlx/
 SRCS_DIR = src/
 OBJS_DIR = .objs/
 DEP_DIR = .dep/
+CUB_HEADER = ./include/cub3d.h 
 
 # Archivos de bibliotecas
 LIBFT_FILE = libft.a
@@ -113,7 +114,7 @@ $(LIBFT):
 	@ranlib $(LIBFT)
 
 # Regla para crear el ejecutable
-$(NAME): subsystems $(OBJS_DIR) $(DEP_DIR) $(OBJS)
+$(NAME): subsystems $(OBJS_DIR) $(DEP_DIR) $(OBJS) $(CUB_HEADER)
 	@$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx $(MLXFLAGS) -o $@
 	@echo " "
 	@echo "$(GREEN)▉▉▉▉▉▉▉▉▉▉ Cub3D successfully compiled! ▉▉▉▉▉▉▉▉▉▉ $(RESET)"
@@ -128,7 +129,7 @@ $(DEP_DIR):
 	@mkdir -p $(DEP_DIR)
 
 # Regla para compilar archivos fuente en archivos objeto
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(MKF) | $(OBJS_DIR) $(DEP_DIR)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(MKF) $(CUB_HEADER) | $(OBJS_DIR) $(DEP_DIR)
 	@mkdir -p $(dir $@)
 	@echo "▶ Compiling... $<"
 	@$(CC) $(CFLAGS) -MMD -c $< -o $@ $(INCLUDE)

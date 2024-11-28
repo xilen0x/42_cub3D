@@ -19,7 +19,7 @@ int	file_is_cub(char *av)
 	char	**tmp;
 
 	tmp = ft_split(av, '/');
-	len = ft_strlen(tmp[2]);
+	len = ft_strlen(tmp[1]);
 	if (len < 5)
 	{
 		ft_errors("The file does not have a name!\n");
